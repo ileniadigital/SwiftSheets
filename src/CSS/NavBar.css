@@ -1,0 +1,35 @@
+/* @import url("/c:/Users/ileni/Desktop/swiftsheets/src/CSS/general.css"); */
+* {
+  box-sizing: border-box;
+}
+
+/* Styling for container for NavBar */
+.navbar-container {
+  margin: 0;
+  top: 0;
+  background-color: black;
+  width: 100%;
+  height: 7rem;
+  flex-shrink: 0;
+}
+
+/* Styling for navigation element */
+.navbar {
+  top: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Styling for navigation menu list */
+.navbar-menu {
+  margin: 2%;
+  display: flex;
+  list-style-type: none;
+  margin-left: auto;
+}
+.navbar-link {
+  color: white;
+  padding: 1rem;
+}
