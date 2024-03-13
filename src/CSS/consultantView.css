@@ -50,8 +50,14 @@ background: linear-gradient(white, white) padding-box,
   border-radius: 1rem;
   border: 0.1875rem solid transparent;
 }
+
 .hourBlock
 {
-    border-bottom: 0.1875rem solid rgba(119, 37, 189, 1);
     height: 4rem;
 }
+
+.addUnderline
+{
+    border-bottom: 0.1875rem solid rgba(119, 37, 189, 1);
+}
+

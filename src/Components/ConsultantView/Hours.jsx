@@ -1,11 +1,18 @@
 export default function Hours() {
 
     let hoursArray = []
-    for (let i = 0; i < 24; i ++)
+    for (let i = 0; i < 23; i ++)
     {
+        i < 22 ?(
         hoursArray.push(
-            <div className="hourBlock">
+            <div className="hourBlock addUnderline">
             </div>
+        )
+        ) : (
+            hoursArray.push(
+                <div className="hourBlock">
+                </div>
+            )
         )
     }
     return(
