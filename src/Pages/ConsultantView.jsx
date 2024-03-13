@@ -65,7 +65,7 @@ export default function ConsultantView() {
             </button>
 
             {/* Display AddEvent when button has been clicked*/}
-            {addEventClicked && <AddEvent/>} 
+            {addEventClicked && <AddEvent addEventHandler={addEventHandler}/>} 
         </div>
         <div id = 'weekContainer'>
             <WeekDay day='MON'/>

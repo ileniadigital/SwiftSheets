@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
-export default function AddEvent() {
+export default function AddEvent({addEventHandler}) {
 
     return(
         <div id='addEvent'>
-            hi im an event
+            <button className = "closeEvent" onClick={addEventHandler}>X</button>
         </div>
     )
 }
