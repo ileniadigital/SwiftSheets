@@ -5,12 +5,12 @@ export default function Hours() {
     {
         i < 22 ?(
         hoursArray.push(
-            <div className="hourBlock addUnderline">
+            <div key={i} className="hourBlock addUnderline">
             </div>
         )
         ) : (
             hoursArray.push(
-                <div className="hourBlock">
+                <div key = {i} className="hourBlock">
                 </div>
             )
         )

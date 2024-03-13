@@ -2,6 +2,8 @@
 import { VscAccount } from "react-icons/vsc";
 import { FaHome } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
+import fdmIcon from '../images/fdm-logo.svg';
+
 
 //Import Link component
 import Link from './Link';
@@ -14,7 +16,7 @@ function NavBar(){
         <div className="navbar-container">
             <nav className="navbar">
                 <figure className="navbar-logo">
-                    <img src='src/images/test.png' alt='FDM Group Logo'/>
+                    <img src= {fdmIcon} alt='FDM Group Logo'/>
                 </figure>
                 {/* Navigation menu icons */}
                 <ul className="navbar-menu">
