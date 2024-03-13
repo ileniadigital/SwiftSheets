@@ -54,6 +54,7 @@ export default function ConsultantView() {
          setViewedWeek(newViewedWeek)
     }
 
+    const resetWeek = () => {setViewedWeek(currentWeek)}
 
     const weekBeginning = getWeekDay(viewedWeek, 1)
     const weekEnd = getWeekDay(viewedWeek, 7)
@@ -65,6 +66,7 @@ export default function ConsultantView() {
         setAddEventClicked(!addEventClicked)
     }
 
+
     return(
     <div id = 'consultantView'>
         <div className='consultantViewContainer'>
@@ -75,7 +77,7 @@ export default function ConsultantView() {
                     <img src={previousWeekIcon} alt="" onClick={changeWeekPrevious}/>
                 </button>
                 <div className='currentWeek'>
-                    <h2>{weekBeginning} - {weekEnd}</h2>
+                    <h2 onClick={resetWeek}>{weekBeginning} - {weekEnd}</h2>
                 </div>
                 <button className='weekIcon'>
                     <img src={nextWeekIcon} alt="" onClick={changeWeekNext}/>
