@@ -99,8 +99,27 @@ button
     margin-top: 0.2rem;
 }
 
-.addEventButton:hover, .weekIcon:hover {
+.addEventButton:hover, .weekIcon:hover, .submitButton:hover {
     filter: grayscale(50%);
+}
+
+#statusContainer {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    gap: 4rem;
+}
+
+.submitButton {
+    background: linear-gradient(rgba(100, 42, 191, 1), rgba(44, 58, 197, 1));
+    font: Inter;
+    color: white;
+    padding: 0;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 0.4rem;
+    width: 6rem;
+    height: 2rem;
 }
 
 /* Code for AddEvent */
