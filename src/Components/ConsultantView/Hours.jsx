@@ -1,9 +1,9 @@
 export default function Hours({addEventHandler}) {
 
     let hoursArray = []
-    for (let i = 0; i < 23; i ++)
+    for (let i = 0; i < 24; i ++)
     {
-        i < 22 ?(
+        i < 23 ?(
         hoursArray.push(
             <button key={i} className="hourBlock addUnderline" onClick={addEventHandler}>
             </button>

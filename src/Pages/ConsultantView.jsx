@@ -2,12 +2,15 @@
 import '../CSS/consultantView.css';
 
 // Importing Icons
-import WeekDay from '../Components/ConsultantView/WeekDay';
 import previousWeekIcon from '../images/consultantView/previousWeekIcon.svg';
 import nextWeekIcon from '../images/consultantView/nextWeekIcon.svg';
 import addEventIcon from '../images/consultantView/addEventIcon.svg';
 
+// Importing Components
+import WeekDay from '../Components/ConsultantView/WeekDay';
 import AddEvent from '../Components/ConsultantView/AddEvent';
+import DailyHours from '../Components/ConsultantView/DailyHours';
+
 import { useState } from 'react';
 
 export default function ConsultantView() {
@@ -68,6 +71,7 @@ export default function ConsultantView() {
             {addEventClicked && <AddEvent addEventHandler={addEventHandler}/>} 
         </div>
         <div id = 'weekContainer'>
+            <DailyHours/>
             <WeekDay day='MON' addEventHandler={addEventHandler}/>
             <WeekDay day='TUE'addEventHandler={addEventHandler}/>
             <WeekDay day='WED' addEventHandler={addEventHandler}/>
