@@ -35,9 +35,28 @@ export default function ConsultantView() {
         return formattedDate 
     }
 
-    let currentWeek = new Date();
-    const weekBeginning = getWeekDay(currentWeek, 1)
-    const weekEnd = getWeekDay(currentWeek, 7)
+    const currentWeek = new Date()
+    const [viewedWeek, setViewedWeek] = useState(new Date());
+
+    const changeWeekPrevious = () => {
+
+        /* Create a temporary variable to store the date a week before*/
+        const newViewedWeek = new Date(viewedWeek);
+        newViewedWeek.setDate(viewedWeek.getDate() - 7)
+        setViewedWeek(newViewedWeek)
+    }
+
+    const changeWeekNext = () => {
+        // if (currentWeek !== changeWeekNext)
+         /* Create a temporary variable to store the date a week later*/
+         const newViewedWeek = new Date(viewedWeek);
+         newViewedWeek.setDate(viewedWeek.getDate() + 7)
+         setViewedWeek(newViewedWeek)
+    }
+
+
+    const weekBeginning = getWeekDay(viewedWeek, 1)
+    const weekEnd = getWeekDay(viewedWeek, 7)
     
 
     const [addEventClicked, setAddEventClicked] = useState(false);
@@ -53,13 +72,13 @@ export default function ConsultantView() {
             <h1 className='welcomeMessage'>Hi !</h1>
             <div className='weekNavigation'>
                 <button className='weekIcon'>
-                    <img src={previousWeekIcon} alt="" />
+                    <img src={previousWeekIcon} alt="" onClick={changeWeekPrevious}/>
                 </button>
                 <div className='currentWeek'>
                     <h2>{weekBeginning} - {weekEnd}</h2>
                 </div>
                 <button className='weekIcon'>
-                    <img src={nextWeekIcon} alt=""/>
+                    <img src={nextWeekIcon} alt="" onClick={changeWeekNext}/>
                 </button>
             </div>
             </div>
