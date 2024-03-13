@@ -32,6 +32,7 @@ export default function AddEvent({addEventHandler}) {
                     <option value="eventCategoryMeetig">Meeting</option>
                 </select>
             </div>
+            <input type="submit" value={"Add Event"}/>
         </form>
     )
 }
