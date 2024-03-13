@@ -1,11 +1,24 @@
-
-#consultantView
-{
+#consultantView {
   font-family: Inter;
 }
 
-.welcomeMessage, .currentWeek
-{
+.consultantViewContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.firstItem {
+    text-align: center;
+    flex: 1;
+    padding-left: 9rem;
+}
+
+.addEventButton {
+    padding-right: 4rem;
+}
+
+.welcomeMessage, .currentWeek h2{
   text-align: center;
   font-weight: 400;
 }
@@ -13,12 +26,11 @@
 .welcomeMessage {
     font-size: 3.125rem;
     margin-bottom: 0;
-    margin-top: 0;
+    margin-top: 1rem;
 }
 
-.currentWeek {
+.currentWeek h2 {
     font-size: 1.875rem;
-    margin-top: 7px;
 }
 
 #weekContainer
@@ -30,16 +42,14 @@
   margin-right: 100px;
 }
 
-#weekContainer h1
-{
+#weekContainer h1 {
   margin-top: 0;
   background-color: REDx;
   font-weight: 700;
   font-size: 1.5rem;
 }
 
-.hoursContainer
-{
+.hoursContainer {
     /* border: 0.1875rem solid;
     border-image: linear-gradient(to bottom, rgba(100, 42, 191, 1), rgba(44, 58, 197, 1)) 1;
     /* border-image-slice: 1; */
@@ -51,13 +61,37 @@ background: linear-gradient(white, white) padding-box,
   border: 0.1875rem solid transparent;
 }
 
-.hourBlock
-{
+.hourBlock {
     height: 4rem;
 }
 
-.addUnderline
-{
+.addUnderline {
     border-bottom: 0.1875rem solid rgba(119, 37, 189, 1);
 }
 
+.weekNavigation {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+/* Removing prior styling */
+button
+{
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.weekIcon
+{
+    margin-top: 0.2rem;
+}
+
+/* Code for AddEvent */
+#addEvent
+{
+    position: absolute;
+    background-color: pink;
+    
+}

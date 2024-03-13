@@ -1,5 +1,14 @@
-import'../CSS/consultantView.css';
+// Importing CSS
+import '../CSS/consultantView.css';
+
+// Importing Icons
 import WeekDay from '../Components/ConsultantView/WeekDay';
+import previousWeekIcon from '../images/consultantView/previousWeekIcon.svg';
+import nextWeekIcon from '../images/consultantView/nextWeekIcon.svg';
+import addEventIcon from '../images/consultantView/addEventIcon.svg';
+
+import AddEvent from '../Components/ConsultantView/AddEvent';
+import { useState } from 'react';
 
 export default function ConsultantView() {
 
@@ -23,22 +32,40 @@ export default function ConsultantView() {
         return formattedDate 
     }
 
-
     let currentWeek = new Date();
     const weekBeginning = getWeekDay(currentWeek, 1)
     const weekEnd = getWeekDay(currentWeek, 7)
     
 
+    const [addEventClicked, setAddEventClicked] = useState(false);
+
+    const addEventHandler = () => {
+        setAddEventClicked(!addEventClicked)
+    }
+
     return(
     <div id = 'consultantView'>
-        <div>
-            <div>
-                <img src="src/images/consultantView/previous.svg" alt="Previous" />
+        <div className='consultantViewContainer'>
+            <div className='firstItem'>
+            <h1 className='welcomeMessage'>Hi !</h1>
+            <div className='weekNavigation'>
+                <button className='weekIcon'>
+                    <img src={previousWeekIcon} alt="" />
+                </button>
+                <div className='currentWeek'>
+                    <h2>{weekBeginning} - {weekEnd}</h2>
+                </div>
+                <button className='weekIcon'>
+                    <img src={nextWeekIcon} alt=""/>
+                </button>
             </div>
-            <div className=''>
-                <h1 className='welcomeMessage'>Hi !</h1>
-                <h2 className='currentWeek'>{weekBeginning} - {weekEnd}</h2>
             </div>
+            <button className='addEventButton' onClick={addEventHandler}>
+                <img src={addEventIcon} alt="" />
+            </button>
+
+            {/* Display AddEvent when button has been clicked*/}
+            {addEventClicked && <AddEvent/>} 
         </div>
         <div id = 'weekContainer'>
             <WeekDay day='MON'/>
