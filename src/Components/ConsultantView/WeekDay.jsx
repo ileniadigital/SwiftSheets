@@ -1,10 +1,10 @@
 import Hours from './Hours';
 
-export default function WeekDay({day}) {
+export default function WeekDay({day, addEventHandler}) {
     return(
         <div>
             <h1>{day}</h1>
-            <Hours/>
+            <Hours addEventHandler={addEventHandler}/>
         </div>
     )
 }

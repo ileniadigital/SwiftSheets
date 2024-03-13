@@ -68,13 +68,13 @@ export default function ConsultantView() {
             {addEventClicked && <AddEvent addEventHandler={addEventHandler}/>} 
         </div>
         <div id = 'weekContainer'>
-            <WeekDay day='MON'/>
-            <WeekDay day='TUE'/>
-            <WeekDay day='WED'/>
-            <WeekDay day='THU'/>
-            <WeekDay day='FRI'/>
-            <WeekDay day='SAT'/>
-            <WeekDay day='SUN'/>
+            <WeekDay day='MON' addEventHandler={addEventHandler}/>
+            <WeekDay day='TUE'addEventHandler={addEventHandler}/>
+            <WeekDay day='WED' addEventHandler={addEventHandler}/>
+            <WeekDay day='THU' addEventHandler={addEventHandler}/>
+            <WeekDay day='FRI' addEventHandler={addEventHandler}/>
+            <WeekDay day='SAT' addEventHandler={addEventHandler}/>
+            <WeekDay day='SUN' addEventHandler={addEventHandler}/>
         </div>
     </div> 
     )

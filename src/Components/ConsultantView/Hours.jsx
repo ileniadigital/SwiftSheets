@@ -1,17 +1,17 @@
-export default function Hours() {
+export default function Hours({addEventHandler}) {
 
     let hoursArray = []
     for (let i = 0; i < 23; i ++)
     {
         i < 22 ?(
         hoursArray.push(
-            <div key={i} className="hourBlock addUnderline">
-            </div>
+            <button key={i} className="hourBlock addUnderline" onClick={addEventHandler}>
+            </button>
         )
         ) : (
             hoursArray.push(
-                <div key = {i} className="hourBlock">
-                </div>
+                <button key = {i} className="hourBlock" onClick={addEventHandler}>
+                </button>
             )
         )
     }
