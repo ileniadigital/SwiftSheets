@@ -42,7 +42,7 @@
   margin-right: 100px;
 }
 
-#weekContainer h1 {
+#weekContainer h1, .dailyHour {
   margin-top: 0;
   font-weight: 700;
   font-size: 1.5rem;
@@ -68,6 +68,12 @@ background: linear-gradient(white, white) padding-box,
 #dailyHours
 {
     margin-top: 4rem;
+}
+
+.dailyHour
+{
+    text-align: right;
+    margin-right: 1rem;
 }
 
 .addUnderline {
