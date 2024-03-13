@@ -106,8 +106,8 @@ export default function ConsultantView() {
         <div id='statusContainer'>
             <p>Submission Status {submissionStatus ? 'Submitted' : 'Unsubmitted'}</p>
             {/* change to button? */}
-            <p>Review Status {submissionStatus}</p>
-            <p>Payment Status {submissionStatus} </p>
+            <p>Review Status </p>
+            <p>Payment Status </p>
             <button className='submitButton' onClick={() => setSubmissionStatus(true)}>Submit</button>
         </div>
     </div> 
