@@ -88,6 +88,10 @@ button
     margin-top: 0.2rem;
 }
 
+button:hover {
+    filter: grayscale(100%);
+}
+
 /* Code for AddEvent */
 #addEvent
 {
