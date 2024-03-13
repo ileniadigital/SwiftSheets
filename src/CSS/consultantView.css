@@ -107,27 +107,32 @@ button
 #addEvent
 {
     position: absolute;
-    display: flex;
     background: linear-gradient(rgba(100, 42, 191, 1), rgba(44, 58, 197, 1));
     color: white;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
     top: 50%;
     transform: translateY(-50%);
     height: 50vh;
     width: 50vw;
     border-radius: 2rem;
-    display: grid;
+    display: flex;
+    flex-direction: column;
 }
 
 .closeEvent
 {
     color: white;
+    margin-top: 1.5rem;
+    margin-left: auto;
+    margin-right: 1.5rem;
+    font-size: 1.7rem;
+    font-weight: 600;
 }
 
-.input
-{
-    display: flex;
-    gap: 1rem;
+.closeEvent:hover {
+    color: red;
 }
+
+.addNewEvent
+{
+}
+
