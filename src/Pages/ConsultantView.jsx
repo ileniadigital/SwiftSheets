@@ -66,7 +66,7 @@ export default function ConsultantView() {
         setAddEventClicked(!addEventClicked)
     }
 
-    const [submissionStatus, setSubmissionStauts] = useState(false)
+    const [submissionStatus, setSubmissionStatus] = useState(false)
 
 
     return(
@@ -104,10 +104,11 @@ export default function ConsultantView() {
             <WeekDay day='SUN' addEventHandler={addEventHandler}/>
         </div>
         <div id='statusContainer'>
-            <p>Submission Status {submissionStatus}</p>
+            <p>Submission Status {submissionStatus ? 'Submitted' : 'Unsubmitted'}</p>
+            {/* change to button? */}
             <p>Review Status {submissionStatus}</p>
             <p>Payment Status {submissionStatus} </p>
-            <button className='submitButton' onClick={() => setSubmissionStauts(true)}>Submit</button>
+            <button className='submitButton' onClick={() => setSubmissionStatus(true)}>Submit</button>
         </div>
     </div> 
     )
