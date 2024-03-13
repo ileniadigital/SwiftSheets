@@ -125,3 +125,9 @@ button
 {
     color: white;
 }
+
+.input
+{
+    display: flex;
+    gap: 1rem;
+}
