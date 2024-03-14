@@ -9,8 +9,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 16.7rem;
-    width: 22rem;
+    height: 21rem;
+    width: 24rem;
     border-radius: 2rem;
     display: flex;
     flex-direction: column;
@@ -38,27 +38,39 @@
     flex-direction: column;
     align-items: center;
     text-align: left;
-    gap: 0.4rem;
+    gap: 0.7rem;
 }
 
 /* Styling input div */
 .input
 {
     display: flex;
-    gap: 2rem;
+    gap: 1.5rem;
     justify-content: space-between;
     margin-right: auto;
     align-items: center;
-    margin-left: 1rem;
+    margin-left: 2rem;
 }
 
 /* Setting input name width */
 label {
-    width: 7.48rem;
+    width: 7.9rem;
 }
 
-/* Styling input boxes */
-input {
+/* Styling input/select boxes */
+input, select {
     border: 0;
     background-color: white;
+    width: 8rem;
+    height: 1.3rem;
+}
+
+/* Styling add event button */
+#addNewEvent .addEventButton {
+    margin-top: 0.7rem;
+    margin-left: 2rem;
+}
+
+.input span {
+    margin-left: -1rem;
 }
