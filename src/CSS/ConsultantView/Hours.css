@@ -21,4 +21,17 @@
 .hourBlock {
     min-height: 6.5rem;
     display: flex;
+    justify-content: right;
+}
+
+/* Styling add event button when referenced from Hour component */
+.hourBlock .addEventButton {
+    margin-right: 0.1rem;
+}
+
+/* Styling add event button when referenced from Hour component */
+.hourBlock .addEventButton svg {
+    margin-right: 0.1rem;
+    height: 1rem;
+    margin-top: 0.2rem;
 }

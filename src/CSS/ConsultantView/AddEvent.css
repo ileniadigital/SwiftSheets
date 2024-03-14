@@ -41,6 +41,7 @@
     gap: 0.4rem;
 }
 
+/* Styling input div */
 .input
 {
     display: flex;
@@ -51,17 +52,13 @@
     margin-left: 1rem;
 }
 
+/* Setting input name width */
 label {
     width: 7.48rem;
 }
 
+/* Styling input boxes */
 input {
     border: 0;
     background-color: white;
-}
-
-#addNewEvent .addEventButton {
-    margin-top: 0.5rem;
-    margin-left: 1rem;
-
 }
