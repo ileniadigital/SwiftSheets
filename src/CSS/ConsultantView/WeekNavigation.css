@@ -1,0 +1,43 @@
+
+/* CSS Styling for WeeklyNavigation Component */
+
+/* Styling entire component */
+#weekNavigation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Styling viewed week div */
+.viewedWeek {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+/* Styling week range */ 
+.currentWeek h2 {
+    text-align: center;
+    font-weight: 400;
+    font-size: 1.875rem;
+    margin-bottom: 0;
+    text-align: center;
+    align-items: center;
+    margin-top: 0;
+}
+
+
+/* Adding hover colour */
+.resetButton:hover, .arrow:hover {
+    filter: grayscale(50%);
+}
+
+/* Styling arrow icons */
+.arrow svg {
+    height: 1.5rem;
+    width: auto;
+    filter: #642ABF;
+    filter: invert(19%) sepia(48%) saturate(4862%) hue-rotate(258deg) brightness(87%) contrast(97%);
+}
+
+

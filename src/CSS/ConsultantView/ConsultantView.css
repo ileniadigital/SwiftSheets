@@ -8,27 +8,8 @@
     justify-content: center;
 }
 
-.firstItem {
-    text-align: center;
-    flex: 1;
-    padding-left: 9rem;
-}
-
 .addEventButton {
     padding-right: 4rem;
-}
-
-.welcomeMessage, .currentWeek h2{
-  text-align: center;
-  font-weight: 400;
-}
-
-.currentWeek h2 {
-    font-size: 1.875rem;
-    margin-bottom: 0;
-    text-align: center;
-    align-items: center;
-    margin-top: 0;
 }
 
 #weekContainer
@@ -78,11 +59,6 @@ background: linear-gradient(white, white) padding-box,
     border-bottom: 0.1875rem solid rgba(119, 37, 189, 1);
 }
 
-.weekNavigation {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-}
 
 /* Removing prior styling */
 button
@@ -92,12 +68,7 @@ button
     padding: 0;
 }
 
-.weekIcon
-{
-    margin-top: 0.2rem;
-}
-
-.addEventButton:hover, .weekIcon:hover, .submitButton:hover, .resetButton:hover {
+.addEventButton:hover, .submitButton:hover {
     filter: grayscale(50%);
 }
 
