@@ -10,7 +10,20 @@
 
 .addEventButton {
     padding-right: 4rem;
+    filter: invert(19%) sepia(48%) saturate(4862%) hue-rotate(258deg) brightness(87%) contrast(97%);
 }
+
+.addEventButton:hover {
+    filter: invert(66%) sepia(13%) saturate(946%) hue-rotate(229deg) brightness(92%) contrast(99%);
+    filter: invert(12%) sepia(57%) saturate(6759%) hue-rotate(239deg) brightness(101%) contrast(88%);
+}
+
+/* Styling arrow icons */
+.addEventButton svg {
+    height: 3rem;
+    width: auto;
+}
+
 
 #weekContainer
 {
@@ -68,7 +81,7 @@ button
     padding: 0;
 }
 
-.addEventButton:hover, .submitButton:hover {
+.submitButton:hover {
     filter: grayscale(50%);
 }
 

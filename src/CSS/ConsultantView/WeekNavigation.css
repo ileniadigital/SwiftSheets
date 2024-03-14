@@ -36,7 +36,6 @@
 .arrow svg {
     height: 1.5rem;
     width: auto;
-    filter: #642ABF;
     filter: invert(19%) sepia(48%) saturate(4862%) hue-rotate(258deg) brightness(87%) contrast(97%);
 }
 

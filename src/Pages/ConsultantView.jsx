@@ -1,14 +1,10 @@
 // Importing CSS
 import '../CSS/ConsultantView/ConsultantView.css';
 
-// Importing Icons
-import addEventIcon from '../images/consultantView/addEventIcon.svg';
-import { FaCirclePlus } from "react-icons/fa6";
-
-
 // Importing Components
 import WeekNavigation from '../Components/ConsultantView/WeekNavigation';
 import WeekDay from '../Components/ConsultantView/WeekDay';
+import AddEventButton from '../Components/ConsultantView/AddEventButton';
 import AddEvent from '../Components/ConsultantView/AddEvent';
 import DailyHours from '../Components/ConsultantView/DailyHours';
 
@@ -16,12 +12,12 @@ import { useState } from 'react';
 
 export default function ConsultantView() {
 
-    /* Enables relevant screen to be displayed when the + button is clicked */
-    const [addEventClicked, setAddEventClicked] = useState(false);
+     /* Enables relevant screen to be displayed when the + button is clicked */
+     const [addEventClicked, setAddEventClicked] = useState(false);
 
-    const addEventHandler = () => {
-        setAddEventClicked(!addEventClicked)
-    }
+     const addEventHandler = () => {
+         setAddEventClicked(!addEventClicked)
+     }
 
     const [submissionStatus, setSubmissionStatus] = useState(false)
 
@@ -29,12 +25,7 @@ export default function ConsultantView() {
     <div id = 'consultantView'>
         <div className='consultantViewContainer'>
             <WeekNavigation/>
-            <button className='addEventButton' onClick={addEventHandler}>
-                <img src={addEventIcon} alt="" />
-            </button>
-
-            {/* Display AddEvent when button has been clicked*/}
-            {addEventClicked && <AddEvent addEventHandler={addEventHandler}/>} 
+            <AddEventButton addEventClicked = {addEventClicked} addEventHandler = {addEventHandler}/>
         </div>
         <div id = 'weekContainer'>
             <DailyHours/>
