@@ -1,3 +1,6 @@
+// Importing CSS
+import '../../CSS/ConsultantView/Hours.css';
+
 export default function Hours({addEventHandler}) {
 
     let hoursArray = []

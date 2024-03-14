@@ -8,70 +8,13 @@
     justify-content: center;
 }
 
-.addEventButton {
-    padding-right: 4rem;
-    filter: invert(19%) sepia(48%) saturate(4862%) hue-rotate(258deg) brightness(87%) contrast(97%);
-}
-
-.addEventButton:hover {
-    filter: invert(66%) sepia(13%) saturate(946%) hue-rotate(229deg) brightness(92%) contrast(99%);
-    filter: invert(12%) sepia(57%) saturate(6759%) hue-rotate(239deg) brightness(101%) contrast(88%);
-}
-
-/* Styling arrow icons */
-.addEventButton svg {
-    height: 3rem;
-    width: auto;
-}
-
-
-#weekContainer
+#timesheet
 {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  display: flex;
   text-align: center;
-  margin-left: 6.25rem;
-  margin-right: 100px;
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
-
-#weekContainer h1, .dailyHour {
-  margin-top: 0;
-  font-weight: 700;
-  font-size: 1.5rem;
-}
-
-.hoursContainer {
-    /* border: 0.1875rem solid;
-    border-image: linear-gradient(to bottom, rgba(100, 42, 191, 1), rgba(44, 58, 197, 1)) 1;
-    /* border-image-slice: 1; */
-    /* border-radius: 0.1875rem; */ 
-
-background: linear-gradient(white, white) padding-box,
-    linear-gradient(to bottom, rgba(100, 42, 191, 1), rgba(44, 58, 197, 1)) border-box;
-  border-radius: 1rem;
-  border: 0.1875rem solid transparent;
-  display: grid;
-}
-
-.hourBlock, .dailyHour {
-    height: 4rem;
-}
-
-#dailyHours
-{
-    margin-top: 4rem;
-}
-
-.dailyHour
-{
-    text-align: right;
-    margin-right: 1rem;
-}
-
-.addUnderline {
-    border-bottom: 0.1875rem solid rgba(119, 37, 189, 1);
-}
-
 
 /* Removing prior styling */
 button

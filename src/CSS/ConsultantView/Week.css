@@ -1,0 +1,7 @@
+/* Styling for Week Component */
+
+#week {
+    display: flex;
+    background-color: RED;
+    width: 100%;
+}
