@@ -3,5 +3,7 @@
 /* Taking up entirety of parent container so timesheet is spread */
 #week {
     display: flex;
-    width: 100%;
+    text-align: center;
+    margin-left: 2rem;
+    margin-right: 2rem;
 }

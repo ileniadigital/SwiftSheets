@@ -41,4 +41,14 @@
     filter: invert(19%) sepia(48%) saturate(4862%) hue-rotate(258deg) brightness(87%) contrast(97%);
 }
 
-
+/* Styling reset button */
+.resetButton {
+    background: linear-gradient(rgba(100, 42, 191, 1), rgba(44, 58, 197, 1));
+    color: white;
+    margin-top: 0;
+    height: 2rem;
+    width: 10rem;
+    border-radius: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}

@@ -1,21 +1,15 @@
 /* Styling for ConsultantView Component */
 
+/* Setting font family */
 #consultantView {
     font-family: Inter;
 }
 
-.consultantViewContainer {
+/* Setting flexbox */
+#consultantViewHeader {
     display: flex;
     align-items: center;
     justify-content: space-between;
-}
-
-#timesheet
-{
-  display: flex;
-  text-align: center;
-  margin-left: 2rem;
-  margin-right: 2rem;
 }
 
 /* Removing prior styling */
@@ -26,17 +20,38 @@ button
     padding: 0;
 }
 
+/* Styling hover */
 .submitButton:hover {
     filter: grayscale(50%);
 }
 
+/* Stying status container */
 #statusContainer {
     display: flex;
-    text-align: center;
+    align-items: center;
+    gap: 2rem;
     justify-content: center;
-    gap: 4rem;
+    margin-left: auto;
+
 }
 
+/* Centering buttons rightmost */
+.buttons {
+    display: flex;
+    gap: 1rem;
+    margin-left: auto;
+    margin-right: 2rem;
+}
+
+/* Ensuring the rest of the content in the div remains centered */
+.centered {
+    display: flex;
+    justify-content: center; /* Centering vertically */
+    gap: 2rem;
+    margin-left: auto;
+}
+
+/* Styling submit button */
 .submitButton {
     background: linear-gradient(rgba(100, 42, 191, 1), rgba(44, 58, 197, 1));
     font: Inter;
@@ -49,21 +64,28 @@ button
     height: 2rem;
 }
 
+/* Styling submit button when disabled */
 .submitButton:disabled {
     background: gray;
 }
 
-.resetButton {
-    background: linear-gradient(rgba(100, 42, 191, 1), rgba(44, 58, 197, 1));
-    color: white;
-    margin-top: 0;
-    height: 2rem;
-    width: 10rem;
-    border-radius: 1rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+
+/* Adding colours based on different timesheet statuses */
+.status.pending, .status.unsubmitted {
+    color: grey;
 }
 
+.status.approved, .status.submitted {
+    color: green;
+}
+
+.status.rejected {
+    color: red;
+}
+
+.status.saved { 
+    color: rgba(100, 42, 191, 1);
+}
 
 /* Code for AddEvent */
 #addEvent
