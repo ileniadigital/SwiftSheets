@@ -11,6 +11,7 @@ export default function AddEventButton({addEventClicked, addEventHandler}) {
 
     return(
     <div>
+        {/* Creating button */}
         <button id = 'addEventButton' onClick={addEventHandler}>
             <FaCirclePlus />
         </button>

@@ -6,6 +6,7 @@ import WeekDay from '../../Components/ConsultantView/WeekDay';
 
 export default function Week({addEventHandler}) {
 
+    // Creating array to store each week day
     let week = []
     const weekDays = ['MON','TUE','WED','THU','FRI','SAT','SUN'];
 
@@ -15,6 +16,7 @@ export default function Week({addEventHandler}) {
     }
 
     return(
+    // Weekdays all stored under a single week div
     <div id = "week">
         {week}
     </div> 
