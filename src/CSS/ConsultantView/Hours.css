@@ -19,7 +19,7 @@
 
 /* Adding minimum height to prevent addEventButton from overflowing when hovered over */
 .hourBlock {
-    min-height: 6.5rem;
+    min-height: 8rem;
     display: flex;
     justify-content: right;
 }
