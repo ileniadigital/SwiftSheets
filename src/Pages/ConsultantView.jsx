@@ -5,7 +5,6 @@ import '../CSS/ConsultantView/ConsultantView.css';
 import WeekNavigation from '../Components/ConsultantView/WeekNavigation';
 import Week from '../Components/ConsultantView/Week';
 import AddEventButton from '../Components/ConsultantView/AddEventButton';
-import DailyHours from '../Components/ConsultantView/DailyHours';
 
 import { useState } from 'react';
 
@@ -27,7 +26,6 @@ export default function ConsultantView() {
             <AddEventButton addEventClicked = {addEventClicked} addEventHandler = {addEventHandler}/>
         </div>
         <div id = 'timesheet'>
-            <DailyHours/>
             <Week addEventHandler = {addEventHandler}/>
         </div>
         <div id='statusContainer'>

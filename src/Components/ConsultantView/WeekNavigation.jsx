@@ -59,6 +59,8 @@ export default function WeekNavigation() {
     
     return(
     <div id='weekNavigation'>
+
+        {/* Div created to allow users to move back and forth between weeks */}
         <div className='viewedWeek'>
             <button className='arrow'>
                 <IoIosArrowBack onClick={changeWeekPrevious}/>
@@ -70,6 +72,8 @@ export default function WeekNavigation() {
                 <IoIosArrowForward onClick={changeWeekNext}/>
             </button>
         </div>
+
+        {/* Button created to allow user to return to current week */}
         <button className = 'resetButton' onClick={resetWeek}>Return to Current Week</button>
     </div>
     )

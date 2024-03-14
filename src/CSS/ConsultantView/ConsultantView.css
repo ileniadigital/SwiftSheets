@@ -1,3 +1,5 @@
+/* Styling for ConsultantView Component */
+
 #consultantView {
     font-family: Inter;
 }
@@ -5,7 +7,7 @@
 .consultantViewContainer {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 #timesheet
@@ -14,21 +16,6 @@
   text-align: center;
   margin-left: 2rem;
   margin-right: 2rem;
-}
-#dailyHours
-{
-    margin-top: 4rem;
-}
-
-.dailyHour
-{
-    text-align: right;
-    margin-right: 1rem;
-    margin-top: 0;
-    font-weight: 700;
-    font-size: 1.5rem;
-    height: 4rem;
-
 }
 
 /* Removing prior styling */
