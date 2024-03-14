@@ -9,8 +9,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 30rem;
-    width: 30rem;
+    height: 16.7rem;
+    width: 22rem;
     border-radius: 2rem;
     display: flex;
     flex-direction: column;
@@ -37,11 +37,31 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 6rem;
     text-align: left;
+    gap: 0.4rem;
 }
 
-input
+.input
 {
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+    margin-right: auto;
+    align-items: center;
     margin-left: 1rem;
+}
+
+label {
+    width: 7.48rem;
+}
+
+input {
+    border: 0;
+    background-color: white;
+}
+
+#addNewEvent .addEventButton {
+    margin-top: 0.5rem;
+    margin-left: 1rem;
+
 }

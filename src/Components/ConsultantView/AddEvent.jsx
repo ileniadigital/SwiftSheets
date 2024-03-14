@@ -45,7 +45,7 @@ export default function AddEvent({addEventHandler}) {
                     <label htmlFor="isRecurring">Recurring Event</label>
                     <input type="checkbox"/>
                 </div>
-                <input type="submit" value={"Add Event"}/>
+                <input type="submit" value={"Add Event"} className='addEventButton'/>
             </form>
         </div>
     )
