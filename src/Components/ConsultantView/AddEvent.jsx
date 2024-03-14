@@ -1,8 +1,16 @@
+// Importing CSS
+import '../../CSS/ConsultantView/AddEvent.css';
+
+// Importing icon
+import { IoClose } from "react-icons/io5";
+
 export default function AddEvent({addEventHandler}) {
 
     return(
         <div id='addEvent'>
-            <button className = "closeEvent" onClick={addEventHandler}>X</button>
+            <button className = "closeEvent" onClick={addEventHandler}><IoClose /></button>
+            
+            {/* Creating a form that represents the Consultant logging an event */}
             <form action="" id = "addNewEvent">
                 <div className="input">
                     <label htmlFor="eventName">Event Name</label>

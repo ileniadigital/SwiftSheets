@@ -1,0 +1,40 @@
+/* Code for AddEvent Component*/
+
+/* Styling which includes centering the component at the center of the page */
+#addEvent
+{
+    position: fixed;
+    background: linear-gradient(rgba(100, 42, 191, 1), rgba(44, 58, 197, 1));
+    color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 50vh;
+    width: 30rem;
+    border-radius: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Styling button used to close event */
+.closeEvent
+{
+    color: white;
+    margin-top: 1rem;
+    margin-left: auto;
+    margin-right: 1rem;
+    font-size: 2rem;
+}
+
+/* Styling button colour on close */
+.closeEvent:hover {
+    color: black;
+}
+
+#addNewEvent
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 6rem;
+}
