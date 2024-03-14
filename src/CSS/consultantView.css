@@ -31,6 +31,10 @@
 
 .currentWeek h2 {
     font-size: 1.875rem;
+    margin-bottom: 0;
+    text-align: center;
+    align-items: center;
+    margin-top: 0;
 }
 
 #weekContainer
@@ -99,7 +103,7 @@ button
     margin-top: 0.2rem;
 }
 
-.addEventButton:hover, .weekIcon:hover, .submitButton:hover {
+.addEventButton:hover, .weekIcon:hover, .submitButton:hover, .resetButton:hover {
     filter: grayscale(50%);
 }
 
@@ -126,8 +130,17 @@ button
     background: gray;
 }
 
-.submitButton:disabled:hover {
+.resetButton {
+    background: linear-gradient(rgba(100, 42, 191, 1), rgba(44, 58, 197, 1));
+    color: white;
+    margin-top: 0;
+    height: 2rem;
+    width: 10rem;
+    border-radius: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
+
 
 /* Code for AddEvent */
 #addEvent

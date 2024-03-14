@@ -33,6 +33,10 @@ export default function AddEvent({addEventHandler}) {
                         <option value="eventCategoryMeetig">Meeting</option>
                     </select>
                 </div>
+                <div className="input">
+                    <label htmlFor="isRecurring">Recurring Event</label>
+                    <input type="checkbox"/>
+                </div>
                 <input type="submit" value={"Add Event"}/>
             </form>
         </div>

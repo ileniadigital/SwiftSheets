@@ -77,18 +77,19 @@ export default function ConsultantView() {
     <div id = 'consultantView'>
         <div className='consultantViewContainer'>
             <div className='firstItem'>
-            <h1 className='welcomeMessage'>Hi !</h1>
-            <div className='weekNavigation'>
-                <button className='weekIcon'>
-                    <img src={previousWeekIcon} alt="" onClick={changeWeekPrevious}/>
-                </button>
-                <div className='currentWeek'>
-                    <h2 onClick={resetWeek}>{weekBeginning} - {weekEnd}</h2>
+                <h1 className='welcomeMessage'>Hi !</h1>
+                <div className='weekNavigation'>
+                    <button className='weekIcon'>
+                        <img src={previousWeekIcon} alt="" onClick={changeWeekPrevious}/>
+                    </button>
+                    <div className='currentWeek'>
+                        <h2>{weekBeginning} - {weekEnd}</h2>
+                    </div>
+                    <button className='weekIcon'>
+                        <img src={nextWeekIcon} alt="" onClick={changeWeekNext}/>
+                    </button>
                 </div>
-                <button className='weekIcon'>
-                    <img src={nextWeekIcon} alt="" onClick={changeWeekNext}/>
-                </button>
-            </div>
+                <button className = 'resetButton' onClick={resetWeek}>Return to Current Week</button>
             </div>
             <button className='addEventButton' onClick={addEventHandler}>
                 <img src={addEventIcon} alt="" />
@@ -108,7 +109,7 @@ export default function ConsultantView() {
             <WeekDay day='SUN' addEventHandler={addEventHandler}/>
         </div>
         <div id='statusContainer'>
-            <p>Submission Status {submissionStatus ? 'Submitted' : 'Unsubmitted'}</p>
+            <p>Status {submissionStatus ? 'Submitted' : 'Unsubmitted'}</p>
             {/* change to button? */}
             <p>Review Status</p>
             <p>Payment Status </p>
