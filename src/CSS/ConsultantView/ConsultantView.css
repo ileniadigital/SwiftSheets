@@ -15,6 +15,21 @@
   margin-left: 2rem;
   margin-right: 2rem;
 }
+#dailyHours
+{
+    margin-top: 4rem;
+}
+
+.dailyHour
+{
+    text-align: right;
+    margin-right: 1rem;
+    margin-top: 0;
+    font-weight: 700;
+    font-size: 1.5rem;
+    height: 4rem;
+
+}
 
 /* Removing prior styling */
 button
