@@ -17,11 +17,13 @@
     margin-right: 3rem;
 }
 
+/* Styling div when referenced from Hour component */
 .addEventButton.fromHours {
     position: relative;
     margin: 0;
 }
 
+/* Styling image when referenced from Hour component */
 .addEventButton.fromHours svg {
     height: 1rem;
     width: auto;
