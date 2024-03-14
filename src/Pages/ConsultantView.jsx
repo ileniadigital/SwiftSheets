@@ -110,9 +110,9 @@ export default function ConsultantView() {
         <div id='statusContainer'>
             <p>Submission Status {submissionStatus ? 'Submitted' : 'Unsubmitted'}</p>
             {/* change to button? */}
-            <p>Review Status </p>
+            <p>Review Status</p>
             <p>Payment Status </p>
-            <button className='submitButton' onClick={() => setSubmissionStatus(true)}>Submit</button>
+            <button className='submitButton' onClick={() => setSubmissionStatus(true)} disabled={submissionStatus === true}>Submit</button>
         </div>
     </div> 
     )

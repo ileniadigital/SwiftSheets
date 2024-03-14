@@ -122,6 +122,13 @@ button
     height: 2rem;
 }
 
+.submitButton:disabled {
+    background: gray;
+}
+
+.submitButton:disabled:hover {
+}
+
 /* Code for AddEvent */
 #addEvent
 {
