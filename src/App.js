@@ -22,6 +22,7 @@ function App() {
   return (
     <>
         <NavBar/>
+        <h1 id='welcomeMessage'>Hi !</h1>
         {page}
     </>
   )

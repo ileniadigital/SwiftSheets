@@ -5,6 +5,8 @@ import '../CSS/consultantView.css';
 import previousWeekIcon from '../images/consultantView/previousWeekIcon.svg';
 import nextWeekIcon from '../images/consultantView/nextWeekIcon.svg';
 import addEventIcon from '../images/consultantView/addEventIcon.svg';
+import { FaCirclePlus } from "react-icons/fa6";
+
 
 // Importing Components
 import WeekDay from '../Components/ConsultantView/WeekDay';
@@ -77,7 +79,6 @@ export default function ConsultantView() {
     <div id = 'consultantView'>
         <div className='consultantViewContainer'>
             <div className='firstItem'>
-                <h1 className='welcomeMessage'>Hi !</h1>
                 <div className='weekNavigation'>
                     <button className='weekIcon'>
                         <img src={previousWeekIcon} alt="" onClick={changeWeekPrevious}/>
