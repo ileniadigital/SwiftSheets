@@ -6,3 +6,5 @@ export default function Home() {
         </div>
     )
 }
+
+// Must add something that checks what type of user we have and then renders the correct home page
