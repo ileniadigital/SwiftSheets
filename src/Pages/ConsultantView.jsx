@@ -35,17 +35,19 @@ export default function ConsultantView() {
         return formattedDate 
     }
 
+    /* Storing the state of the viewed week, allows users to alternate between them */
     const currentWeek = new Date()
     const [viewedWeek, setViewedWeek] = useState(new Date());
 
+    /* Function that shows timesheets of the previous week */
     const changeWeekPrevious = () => {
-
         /* Create a temporary variable to store the date a week before*/
         const newViewedWeek = new Date(viewedWeek);
         newViewedWeek.setDate(viewedWeek.getDate() - 7)
         setViewedWeek(newViewedWeek)
     }
 
+    /* Function that shows timesheets of the next week */
     const changeWeekNext = () => {
         // if (currentWeek !== changeWeekNext)
          /* Create a temporary variable to store the date a week later*/
@@ -54,12 +56,14 @@ export default function ConsultantView() {
          setViewedWeek(newViewedWeek)
     }
 
+    /* Allows users to reset week to current week easily after navigating through diffeent weeks */
     const resetWeek = () => {setViewedWeek(currentWeek)}
 
+    /* Created to display the week shown */
     const weekBeginning = getWeekDay(viewedWeek, 1)
     const weekEnd = getWeekDay(viewedWeek, 7)
     
-
+    /* Enables relevant screen to be displayed when the + button is clicked */
     const [addEventClicked, setAddEventClicked] = useState(false);
 
     const addEventHandler = () => {

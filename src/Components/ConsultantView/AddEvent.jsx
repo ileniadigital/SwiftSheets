@@ -10,11 +10,11 @@ export default function AddEvent({addEventHandler}) {
                 </div>
                 <div className="input">
                     <label htmlFor="eventDate">Date</label>
-                    <input type="text" hame = "eventDate"/>
+                    <input type="date" hame = "eventDate"/>
                 </div>
                 <div className="input">
                     <label htmlFor="eventDuration">Event Duration</label>
-                    <input type="text" hame = "eventDuration"/>
+                    <input type="text" hame = "eventDuration "/>
                 </div>
                 <div className="input">
                     <label htmlFor="eventType">Event Type</label>
