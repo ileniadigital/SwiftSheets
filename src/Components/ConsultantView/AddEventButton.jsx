@@ -7,12 +7,12 @@ import { FaCirclePlus } from "react-icons/fa6";
 // Importing Component
 import AddEvent from '../../Components/ConsultantView/AddEvent';
 
-export default function AddEventButton({addEventClicked, addEventHandler}) {
+export default function AddEventButton({addEventClicked, addEventHandler, source}) {
 
     return(
     <div>
         {/* Creating button */}
-        <button id = 'addEventButton' onClick={addEventHandler}>
+        <button className = {`addEventButton ${source === 'fromHoursComponent' ? 'fromHours' : ''}`} onClick={addEventHandler} >
             <FaCirclePlus />
         </button>
 

@@ -12,8 +12,7 @@ export default function Week({addEventHandler}) {
     week.push(<DailyHours/>) // Adding daily hours as first column
     const weekDays = ['MON','TUE','WED','THU','FRI','SAT','SUN'];
 
-    for (let i = 0; i < weekDays.length; i++)
-    {
+    for (let i = 0; i < weekDays.length; i++) {
         week.push(<WeekDay day={weekDays[i]} addEventHandler = {addEventHandler}/>)
     }
 

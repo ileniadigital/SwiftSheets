@@ -29,7 +29,7 @@ export default function ConsultantView() {
         {/* Creating page header */}
         <div id='consultantViewHeader'>
             <WeekNavigation/>
-            <AddEventButton addEventClicked = {addEventClicked} addEventHandler = {addEventHandler}/>
+            <AddEventButton addEventClicked = {addEventClicked} addEventHandler = {addEventHandler} source={"no"}/>
         </div>
 
         {/* Displays currently viewed week, along with hours */}

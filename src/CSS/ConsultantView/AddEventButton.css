@@ -1,18 +1,31 @@
 /* Styling AddEventButton Component */
 
 /* Setting default button styling */
-#addEventButton svg {
+.addEventButton svg {
     height: 3rem;
     width: auto;
     filter: invert(19%) sepia(48%) saturate(4862%) hue-rotate(258deg) brightness(87%) contrast(97%);
 }
 
 /* Setting button colour on hover */
-#addEventButton svg:hover {
+.addEventButton svg:hover {
     filter: invert(19%) sepia(66%) saturate(4479%) hue-rotate(236deg) brightness(79%) contrast(96%);
 }
 
 /* Moving button closer to timesheet */
-#addEventButton {
+.addEventButton {
     margin-right: 3rem;
+}
+
+.addEventButton.fromHours {
+    position: relative;
+    margin: 0;
+}
+
+.addEventButton.fromHours svg {
+    height: 1rem;
+    width: auto;
+    margin-left: 8.4rem;
+    margin-right: 0;
+    margin-top: 0.1rem;
 }

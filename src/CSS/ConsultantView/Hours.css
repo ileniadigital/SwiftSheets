@@ -16,3 +16,8 @@
 .addUnderline {
     border-bottom: 0.1875rem solid rgba(119, 37, 189, 1);
 }
+
+.hourBlock {
+    min-height: 6.5rem;
+    display: flex;
+}
