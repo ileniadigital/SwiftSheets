@@ -7,7 +7,7 @@ import { IoIosArrowBack } from "react-icons/io";
 
 import { useState } from 'react';
 
-export default function WeekNavigation() {
+export default function WeekNavigation({viewedWeek, setViewedWeek}) {
 
     // Function that retrieves the first day of the week (assumed to be monday)
     function getWeekDay(currentWeek, dayToRetrieve)
@@ -31,7 +31,6 @@ export default function WeekNavigation() {
 
     /* Storing the state of the viewed week, allows users to alternate between them */
     const currentWeek = new Date()
-    const [viewedWeek, setViewedWeek] = useState(new Date());
 
     /* Function that shows timesheets of the previous week */
     const changeWeekPrevious = () => {

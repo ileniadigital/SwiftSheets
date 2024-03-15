@@ -4,19 +4,30 @@ import '../CSS/ConsultantView/ConsultantView.css';
 // Importing Components
 import WeekNavigation from '../Components/ConsultantView/WeekNavigation';
 import Week from '../Components/ConsultantView/Week';
-import AddEventButton from '../Components/ConsultantView/AddEventButton';
+import AddEvent from '../Components/ConsultantView/AddEvent';
+import { FaCirclePlus } from "react-icons/fa6";
 
-// Improting state
-import { useState } from 'react';
+// Importing useState and useEffect
+import { useState, useEffect } from 'react';
 
 export default function ConsultantView() {
 
-    // Enables relevant screen to be displayed when the + button is clicked 
-     const [addEventClicked, setAddEventClicked] = useState(false);
+    // Used to create and manage the week shown on the timesheet
+    const [viewedWeek, setViewedWeek] = useState(new Date());
+    const [componentCaller, setComponentCaller] = useState(null)
+    const [addEventViewedWeek, setAddEventViewedWeek] = useState(null)
 
-     const addEventHandler = () => {
-         setAddEventClicked(!addEventClicked)
-     }
+    // Enables relevant screen to be displayed when the + button is clicked 
+    const [addEventClicked, setAddEventClicked] = useState(false);
+
+    // When add event is clicked, add event screen is shown, with the details based on the component it is called by
+    const addEventHandler = (componentCaller1, addEventViewedWeek1) => {
+        if (!addEventClicked) {
+        setComponentCaller(componentCaller1)
+        setAddEventViewedWeek(addEventViewedWeek1)
+        }
+        setAddEventClicked(!addEventClicked)
+    }
 
     //  Used to control submission
     const [timesheetStatus, setTimesheetStatus] = useState("Unsubmitted")
@@ -28,12 +39,21 @@ export default function ConsultantView() {
 
         {/* Creating page header */}
         <div id='consultantViewHeader'>
-            <WeekNavigation/>
-            <AddEventButton addEventClicked = {addEventClicked} addEventHandler = {addEventHandler} source={"no"}/>
+            <WeekNavigation viewedWeek={viewedWeek} setViewedWeek={setViewedWeek}/>
+            <FaCirclePlus className='addEventButton' onClick={() => addEventHandler("ConsultantView", viewedWeek)}/>
         </div>
 
         {/* Displays currently viewed week, along with hours */}
-        <Week addEventHandler = {addEventHandler}/>
+        <Week viewedWeek = {viewedWeek} addEventHandler = {addEventHandler}/>
+
+        {/* Shows add event screen, with the arguments based on the component that called the method */}
+        {addEventClicked && (
+                <AddEvent
+                    componentCaller={componentCaller}
+                    addEventHandler={addEventHandler} 
+                    viewedWeek={addEventViewedWeek}
+                />
+            )}
 
         {/* Used to display the different statuses of the timesheet */}
         <div id='statusContainer'>

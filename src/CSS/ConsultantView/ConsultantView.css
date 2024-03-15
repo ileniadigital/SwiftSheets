@@ -86,3 +86,20 @@ button
 .status.saved { 
     color: rgba(100, 42, 191, 1);
 }
+
+/* Setting default button styling */
+#consultantViewHeader svg {
+    height: 3rem;
+    width: auto;
+    filter: invert(19%) sepia(48%) saturate(4862%) hue-rotate(258deg) brightness(87%) contrast(97%);
+}
+
+/* Setting button colour on hover */
+#consultantViewHeader svg:hover {
+    filter: invert(19%) sepia(66%) saturate(4479%) hue-rotate(236deg) brightness(79%) contrast(96%);
+}
+
+/* Moving button closer to timesheet */
+.addEventButton {
+    margin-right: 3rem;
+}

@@ -26,12 +26,15 @@
 
 /* Styling add event button when referenced from Hour component */
 .hourBlock .addEventButton {
-    margin-right: 0.1rem;
+    margin-right: 0.2rem;
+    margin-top: 0.2rem;
 }
 
-/* Styling add event button when referenced from Hour component */
-.hourBlock .addEventButton svg {
-    margin-right: 0.1rem;
-    height: 1rem;
-    margin-top: 0.2rem;
+.hourBlock svg {
+    filter: invert(19%) sepia(48%) saturate(4862%) hue-rotate(258deg) brightness(87%) contrast(97%);
+}
+
+/* Setting button colour on hover */
+.hourBlock svg:hover {
+    filter: invert(19%) sepia(66%) saturate(4479%) hue-rotate(236deg) brightness(79%) contrast(96%);
 }

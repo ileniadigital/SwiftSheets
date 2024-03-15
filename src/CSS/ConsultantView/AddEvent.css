@@ -9,8 +9,9 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 21rem;
-    width: 24rem;
+    width: 31.5rem;
+    width: 36rem;
+    padding-bottom: 2rem;
     border-radius: 2rem;
     display: flex;
     flex-direction: column;
@@ -37,40 +38,58 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: left;
-    gap: 0.7rem;
+    gap: 1.6rem;
+}
+
+/* Styling log event heading */
+.logEventHeading {
+    margin: auto;
+    margin-bottom: 2.5rem;
+}
+
+select .placeHolder {
+    color: gray;
 }
 
 /* Styling input div */
 .input
 {
     display: flex;
-    gap: 1.5rem;
-    justify-content: space-between;
-    margin-right: auto;
+    gap: 2.5rem;
     align-items: center;
-    margin-left: 2rem;
 }
 
-/* Setting input name width */
+/* Setting label name */
 label {
-    width: 7.9rem;
+    width: 11.3rem;
+    font-size: 1.5rem;
+    font-family: Inter;
+    text-align: left;
 }
 
 /* Styling input/select boxes */
 input, select {
     border: 0;
     background-color: white;
-    width: 8rem;
-    height: 1.3rem;
+    width: 10rem;
+    margin: auto;
+    height: 2rem;
+    border-radius: 0.3rem;
+    font-size: 1.3rem;
+    /* box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2); */
 }
 
 /* Styling add event button */
 #addNewEvent .addEventButton {
-    margin-top: 0.7rem;
-    margin-left: 2rem;
+    margin: auto;
+    margin-top: 0.1rem;
+    background-color: black;
+    color: white;
+    width: 7rem;
 }
 
-.input span {
-    margin-left: -1rem;
+/* Adding styling on hover */
+#addNewEvent .addEventButton:hover {
+    background-color: white;
+    color: black;
 }
