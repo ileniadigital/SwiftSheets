@@ -67,7 +67,7 @@ label {
 input, select {
     border: 0;
     background-color: white;
-    width: 10rem;
+    width: 14rem;
     margin: auto;
     height: 2rem;
     border-radius: 0.3rem;
@@ -95,9 +95,30 @@ input, select {
 .checkBoxContainer {
     margin-left: 1rem;
     gap: 6.9rem;
-    margin-right: 5rem;
+    margin-right: 7rem;
 }
 
 .checkBoxLabel {
-    width: 3rem;
+    width: 1rem;
+}
+
+/* Styling hours and minutes inputs */
+.eventDurationLength {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.eventDurationLengthItem {
+    width: 6.5rem;
+}
+
+.errorMessage {
+    color: white;
+    background-color: red;
+    padding: 0.4rem;
+    border-radius: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
