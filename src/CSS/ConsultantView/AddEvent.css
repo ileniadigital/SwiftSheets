@@ -47,10 +47,6 @@
     margin-bottom: 2.5rem;
 }
 
-select .placeHolder {
-    color: gray;
-}
-
 /* Styling input div */
 .input
 {
@@ -75,6 +71,7 @@ input, select {
     margin: auto;
     height: 2rem;
     border-radius: 0.3rem;
+    font-family: Inter;
     font-size: 1.3rem;
     /* box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2); */
 }
@@ -92,4 +89,15 @@ input, select {
 #addNewEvent .addEventButton:hover {
     background-color: white;
     color: black;
+}
+
+/* Code to move checkbox left */
+.checkBoxContainer {
+    margin-left: 1rem;
+    gap: 6.9rem;
+    margin-right: 5rem;
+}
+
+.checkBoxLabel {
+    width: 3rem;
 }
