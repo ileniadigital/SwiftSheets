@@ -41,29 +41,27 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek})
         }
     }
 
-    // eventDate stored for validation purposes
-    const {eventDate, setEventDate} = useState('');
+    // Determining date for start of week
+    let startOfWeek = new Date(viewedWeek); // Creates copy of current week
+    startOfWeek.setDate(viewedWeek.getDate() - viewedWeek.getDay() + 1)  // Adds 1 as function starts from Sunday (o)
 
-    function validateEventDate(event) {
-        /* Retrieves start of week (1 added since it starts from 0 as Sunday) */
-        let startOfWeek = new Date(viewedWeek); // Creates copy of current week
-        startOfWeek.setDate(viewedWeek.getDate() - viewedWeek.getDay() + 1) 
+    let startOfWeekDay = startOfWeek.getDate().toString().padStart(2, '0');
+    let startOfWeekMonth = (startOfWeek.getMonth() + 1).toString().padStart(2,'0'); // + 1 due to 0 indexing
+    let startOfWeekYear = startOfWeek.getFullYear();
 
-        // Retrives end of week by adding 6
-        let endOfWeek = new Date(startOfWeek); // Creates copy of current week
-        endOfWeek.setDate(endOfWeek.getDate() + 6)
-        
-        // Converts date entered from string into date, making it easier to compare
-        let eventDate = new Date(event.target.value)
+    // Converting into format for minimum date value
+    startOfWeek = `${startOfWeekYear}-${startOfWeekMonth}-${startOfWeekDay}`
 
-        // Ensures date entered is within week being logged for
-        if (eventDate.getDate() < startOfWeek.getDate() || eventDate.getDate() > endOfWeek.getDate()) {
-            event.target.setCustomValidity('Date must be within the current week')
-        }
-        else {
-            event.target.setCustomValidity('');
-        }
-    }
+    // Determinining date for end of week
+    let endOfWeek = new Date(startOfWeek); // Creates copy of current week
+    endOfWeek.setDate(endOfWeek.getDate() + 6) // Retrives end of week by adding 6
+    
+    let endOfWeekDay = endOfWeek.getDate().toString().padStart(2, '0');
+    let endOfWeekMonth = (endOfWeek.getMonth() + 1).toString().padStart(2,'0'); // + 1 due to 0 indexing
+    let endOfWeekYear = endOfWeek.getFullYear();
+
+    // Converting into format for maximum date value
+    endOfWeek = `${endOfWeekYear}-${endOfWeekMonth}-${endOfWeekDay}`
 
     return(
         <div id='addEvent'>
@@ -83,7 +81,9 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek})
                     <input type="date" name = "eventDate" value = {viewedWeek} readOnly required/>
                     ) : (
                     
-                    <input type="date" name = "eventDate" onChange={validateEventDate} required/>
+                    // Limiting days to choose from as days in current week
+                    <input type="date" name = "eventDate" min={startOfWeek} max={endOfWeek}
+                    required/>
                 )}
                 </div>
 

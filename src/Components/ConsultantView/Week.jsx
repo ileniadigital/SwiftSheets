@@ -22,12 +22,12 @@ export default function Week({viewedWeek, addEventHandler}) {
 
     // Creating array to store the week, with its corresponding hours
     let week = []
-    week.push(<DailyHours/>) // Adding daily hours as first column
+    week.push(<DailyHours key={0}/>) // Adding daily hours as first column
     const weekDays = ['MON','TUE','WED','THU','FRI','SAT','SUN'];
 
     // Creating WeekDay component for each day of the week and adding it to the array
     for (let i = 0; i < weekDays.length; i++) {
-        week.push(<WeekDay key={i} day = {weekDays[i]} date = {getDay(viewedWeek,i+1)} addEventHandler = {addEventHandler}/>)}
+        week.push(<WeekDay key={i+1} day = {weekDays[i]} date = {getDay(viewedWeek,i+1)} addEventHandler = {addEventHandler}/>)}
 
     return(
     // Weekdays all stored under a single week div
