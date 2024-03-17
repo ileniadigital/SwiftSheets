@@ -1,4 +1,4 @@
-function Link({href, children, ...props}){
+function Link({href, children}){
     return(
         <li className="navbar-item">
             <a href={href} className="navbar-link">{children}</a>

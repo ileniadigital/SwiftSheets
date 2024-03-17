@@ -1,17 +1,19 @@
+//Import CSS
+import '../CSS/NavBar.css';
+
 //Import icons
 import { VscAccount } from "react-icons/vsc";
 import { FaHome } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
-import fdmIcon from '../images/fdm-logo.svg';
 
+//Import FDM logo
+import fdmIcon from '../images/fdm-logo.svg';
 
 //Import Link component
 import Link from './Link';
-//Import CSS
-import '../CSS/NavBar.css';
+
 //Navigation bar component
-function NavBar(){
-    const path= window.location.pathname;
+export default function NavBar(){
     return(
         <div className="navbar-container">
             <nav className="navbar">
@@ -28,7 +30,4 @@ function NavBar(){
         </div>
     
     )
-
 };
-//Export NavBar component
-export default NavBar;

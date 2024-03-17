@@ -1,10 +1,13 @@
 import'../CSS/general.css';
 export default function Home() {
+    let name= 'Jane Smith';
     return (
-        <div>
-            <h1>Home</h1>
+        <div className='home-container'>
+            <div className='welcomeMessage'>
+                <h1>Hi {name} !</h1>
+            </div>
         </div>
     )
 }
 
-// Must add something that checks what type of user we have and then renders the correct home page
+//Add something that renders the right view based on user
