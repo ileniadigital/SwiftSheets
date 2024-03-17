@@ -1,0 +1,17 @@
+/* Styling for the timesheet containers */
+.linemanager-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+  width: 70rem;
+  height: 40rem;
+  background: linear-gradient(white, white) padding-box,
+    linear-gradient(to bottom, rgba(100, 42, 191, 1), rgba(44, 58, 197, 1))
+      border-box;
+  border-radius: 1.5rem;
+  border: 0.2rem solid transparent;
+  margin-left: 10rem;
+  margin-top: 3rem;
+}

@@ -7,7 +7,7 @@ import Account from './Pages/Account';
 import Settings from './Pages/Settings';
 import ConsultantView from './Pages/ConsultantView';
 import Home from './Pages/Home';
-
+import LineManagerView from './Pages/LineManagerView';
 // Main App component
 function App() {
   // Render page based on location
@@ -25,11 +25,13 @@ function App() {
     case "/consultantview":
       page = <ConsultantView/>
       break
+    case "/linemanagerview":
+      page = <LineManagerView/>
+      break
   }
   return (
     <>
         <NavBar/>
-        <h1 id='welcomeMessage'>Hi !</h1>
         {page}
     </>
   )

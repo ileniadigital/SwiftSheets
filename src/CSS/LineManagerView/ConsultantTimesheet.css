@@ -1,0 +1,38 @@
+/* General text styling */
+body {
+  color: #000;
+  font-family: Inter;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 400;
+}
+/* Styling for single timesheet */
+.consultantTimesheet-container {
+  display: flex;
+  flex-direction: row;
+  gap: 4rem;
+  align-items: center;
+  justify-content: center;
+  width: 60rem;
+  height: 4rem;
+  background: linear-gradient(white, white) padding-box,
+    linear-gradient(to bottom, rgba(100, 42, 191, 1), rgba(44, 58, 197, 1))
+      border-box;
+  border-radius: 1.5rem;
+  border: 0.2rem solid transparent;
+  position: relative;
+  margin: 2rem;
+}
+
+/* Styling for Status dropdown menus */
+.status-dropdown {
+  width: 12rem;
+  height: 2.5rem;
+  flex-shrink: 0;
+  background: linear-gradient(white, white) padding-box,
+    linear-gradient(to bottom, rgba(100, 42, 191, 1), rgba(44, 58, 197, 1))
+      border-box;
+  border-radius: 1.5rem;
+  border: 0.2rem solid transparent;
+  text-align: center;
+}
