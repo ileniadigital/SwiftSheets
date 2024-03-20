@@ -8,7 +8,22 @@ import ConsultantTimesheet from '../Components/LineManagerView/ConsultantTimeshe
 function LineManagerView() {
   return (
     <div className='linemanager-container'>
-      
+      {/* Categories */}
+      <div className="categories-container">
+        <div className="category">
+          <h2>Name</h2>
+        </div>
+        <div className="category">
+          <h2>Dates </h2>
+        </div>
+        <div className="category">
+          <h2>Review Status</h2>
+        </div>
+        <div className="category">
+          <h2>Payment Status</h2>
+        </div>
+      </div>
+      {/* Displaying consultant timesheets */}
       <div className='timesheet-container'>
         <ConsultantTimesheet/>
         <ConsultantTimesheet/>

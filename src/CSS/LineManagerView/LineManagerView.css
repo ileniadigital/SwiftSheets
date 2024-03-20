@@ -15,3 +15,16 @@
   margin-left: 10rem;
   margin-top: 3rem;
 }
+
+/* Styling for categories container */
+.categories-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10rem;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  font-size: 0.75rem;
+  margin: -7 0 -7 0;
+  color: grey;
+}

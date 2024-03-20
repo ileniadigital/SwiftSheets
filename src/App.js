@@ -8,11 +8,16 @@ import Settings from './Pages/Settings';
 import ConsultantView from './Pages/ConsultantView';
 import Home from './Pages/Home';
 import LineManagerView from './Pages/LineManagerView';
+import Name from './Components/Name';
+
 // Main App component
 function App() {
   // Render page based on location
   let page
   switch (window.location.pathname) {
+    default:
+      page= <Home/>
+      break
     case "/Home":
       page= <Home/>
       break
@@ -32,6 +37,7 @@ function App() {
   return (
     <>
         <NavBar/>
+        <Name/>
         {page}
     </>
   )

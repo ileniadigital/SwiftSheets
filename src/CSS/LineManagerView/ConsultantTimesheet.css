@@ -24,6 +24,11 @@ body {
   margin: 2rem;
 }
 
+/* Styling for Consultant Name */
+.consultantName {
+  font-weight: bold;
+}
+
 /* Styling for Status dropdown menus */
 .status-dropdown {
   width: 12rem;
