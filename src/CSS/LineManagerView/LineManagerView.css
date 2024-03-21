@@ -20,7 +20,7 @@
 .categories-container {
   display: flex;
   flex-direction: row;
-  gap: 10rem;
+  gap: 11rem;
   align-items: center;
   justify-content: center;
   position: relative;
