@@ -1,10 +1,10 @@
 // Importing CSS
-import '../CSS/ConsultantView/ConsultantView.css';
+import '../Components/ConsultantView/ConsultantView.css';
 
 // Importing Components
-import WeekNavigation from '../Components/ConsultantView/WeekNavigation';
-import Week from '../Components/ConsultantView/Week';
-import AddEvent from '../Components/ConsultantView/AddEvent';
+import WeekNavigation from '../Components/ConsultantView/WeekNavigation/WeekNavigation';
+import Week from '../Components/ConsultantView/Week/Week';
+import AddEvent from '../Components/ConsultantView/AddEvent/AddEvent';
 import { FaCirclePlus } from "react-icons/fa6";
 
 // Importing useState and useEffect

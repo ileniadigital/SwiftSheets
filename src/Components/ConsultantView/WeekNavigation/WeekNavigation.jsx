@@ -1,4 +1,4 @@
-import '../../CSS/ConsultantView/WeekNavigation.css';
+import './WeekNavigation.css';
 
 // Importing Icons
 import { IoIosArrowForward } from "react-icons/io";

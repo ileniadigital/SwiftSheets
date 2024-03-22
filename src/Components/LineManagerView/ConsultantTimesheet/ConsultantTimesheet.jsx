@@ -1,4 +1,4 @@
-import '../../CSS/LineManagerView/ConsultantTimesheet.css'; //Import styling
+import './ConsultantTimesheet.css'; //Import styling
 
 //Import components
 import Status from "./Status";

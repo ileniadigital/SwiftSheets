@@ -1,5 +1,5 @@
-import '../CSS/LineManagerView/LineManagerView.css'; //Import styling
-import ConsultantTimesheet from '../Components/LineManagerView/ConsultantTimesheet';
+import '../Components/LineManagerView/LineManagerView.css'; //Import styling
+import ConsultantTimesheet from '../Components/LineManagerView/ConsultantTimesheet/ConsultantTimesheet';
 
 //MODIFY TO MAKE SCROLLABLE PAGES
 //MODIFY TO HAVE FILTERS AT THE TOP

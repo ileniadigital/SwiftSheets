@@ -1,6 +1,4 @@
-import '../../CSS/LineManagerView/ConsultantTimesheet.css'; //Import styling
-
-
+import './ConsultantTimesheet.css'; //Import styling
 //Status component for Consultant Timesheet
 //For Review and Payment Component
 export default function Status() {
