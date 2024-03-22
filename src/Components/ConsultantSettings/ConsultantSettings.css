@@ -2,16 +2,19 @@
 
 /* Defining general layout of settings */
 .settings {
-    background-color: pink;
     height: 100vh;
 }
 
 /* Defining layout of settings items */
 .settings-items {
-    background-color: pink;
     margin-left: 1rem;
     margin-right: 1rem;
     margin-top: 1rem;
+    white-space: nowrap;
+    font-size: 1.5rem;
+    background: linear-gradient(rgba(100, 42, 191, 1), rgba(44, 58, 197, 1));
+    color: white;
+    border-radius: 1rem;
 }
 
 /* Styling header */
@@ -32,13 +35,21 @@
 /* Styling container for all days of week */
 .days-of-week {
     display: flex;
-    gap: 3rem;
+    gap: 1em;
 }
 
 /* Defining styling of each weekday button */
 .day-of-week {
-    font-size: 1.5rem;
-    border: 0.2rem solid blue;
+    font-size: 1rem;
     border-radius: 1rem;
-    padding: 1rem;
+    height: 3rem;
+    width: 3rem;
+    background: black;
+    color: white;
 }
+
+/* Defining hover colour */
+.day-of-week:hover, .worked-day {
+    border: 2px solid white;
+}
+
