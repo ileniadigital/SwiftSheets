@@ -78,3 +78,7 @@ This guide provides step-by-step instructions for installing Python, pip, and Dj
      ```
      python --version
      ```
+     
+     
+     
+Start a virtual environment first and then install all the things needed on there and then the django and everything else will be recognised from there
