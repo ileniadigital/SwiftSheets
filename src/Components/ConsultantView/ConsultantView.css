@@ -113,3 +113,11 @@ button {
     top: 10rem;
     right: 2rem;
 }
+
+/* Changing + button colour to grey so it's easier for users to understand that they cannot add a new event after submission */
+.consultant-view-header .add-event-button:disabled svg {
+    filter: invert(54%) sepia(4%) saturate(0%) hue-rotate(186deg) brightness(92%) contrast(86%);
+}
+
+
+

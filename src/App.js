@@ -9,6 +9,7 @@ import ConsultantView from './Pages/ConsultantView';
 import Home from './Pages/Home';
 import LineManagerView from './Pages/LineManagerView';
 import Name from './Components/NavBar/Name';
+import ConsultantSettings from './Pages/ConsultantSettings';
 
 // Main App component
 function App() {
@@ -32,6 +33,9 @@ function App() {
       break
     case "/linemanagerview":
       page = <LineManagerView/>
+      break
+    case "/consultantsettings":
+      page = <ConsultantSettings/>
       break
   }
   return (

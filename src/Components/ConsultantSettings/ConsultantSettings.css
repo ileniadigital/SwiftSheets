@@ -1,0 +1,44 @@
+/* Defining styles for ConsultantSettings page */
+
+/* Defining general layout of settings */
+.settings {
+    background-color: pink;
+    height: 100vh;
+}
+
+/* Defining layout of settings items */
+.settings-items {
+    background-color: pink;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: 1rem;
+}
+
+/* Styling header */
+.header {
+    text-align: center;
+    margin: 0;
+    font-family: Inter;
+}
+
+/* Defining layout of container for days of week worked */
+.days-of-week-worked {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+}
+
+/* Styling container for all days of week */
+.days-of-week {
+    display: flex;
+    gap: 3rem;
+}
+
+/* Defining styling of each weekday button */
+.day-of-week {
+    font-size: 1.5rem;
+    border: 0.2rem solid blue;
+    border-radius: 1rem;
+    padding: 1rem;
+}

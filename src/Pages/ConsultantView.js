@@ -6,6 +6,9 @@ import Week from '../Components/ConsultantView/Week/Week';
 import AddEvent from '../Components/ConsultantView/AddEvent/AddEvent';
 import { FaCirclePlus } from "react-icons/fa6";
 
+// Importing helper function
+import getDate from '../Components/ConsultantView/getDate'
+
 // Importing useState and useEffect
 import { useState, useEffect } from 'react';
 
@@ -14,7 +17,7 @@ export default function ConsultantView() {
     // Used to create and manage the week shown on the timesheet
     const [viewedWeek, setViewedWeek] = useState(new Date());
 
-    /* Created to keep track of the component thath has called the addEvent Component
+    /* Created to keep track of the component that has called the addEvent Component
        If the caller was the Hours component, the date for the add event input can be
        predefined as hours fall within a particular day. If the ConsultantView 
        Component called AddEvent, this input field will not be prefilled as it is a 
@@ -28,8 +31,18 @@ export default function ConsultantView() {
     // Enables relevant screen to be displayed when the + button is clicked 
     const [addEventClicked, setAddEventClicked] = useState(false);
 
+
+    //  Used to control timesheet submission
+    const [timesheetStatus, setTimesheetStatus] = useState("Unsubmitted") // Allows timesheet to become uneditable if submitted
+    const [timesheetReviewStatus, setTimesheetReviewStatus] = useState("Pending")
+    const [timesheetPaymentStatus, setTimesheetPaymentStatus] = useState("Pending")
+
     // When add event is clicked, add event screen is shown, with the details based on the component it is called by
     const addEventHandler = (componentCaller1, addEventViewedWeek1) => {
+        // Won't open the Add Event box as the timesheet is submitted
+        if (timesheetStatus === "Submitted") {
+            return
+        }
         if (!addEventClicked) {
             setComponentCaller(componentCaller1)
             setAddEventViewedWeek(addEventViewedWeek1)
@@ -37,44 +50,33 @@ export default function ConsultantView() {
         setAddEventClicked(!addEventClicked)
     }
 
-    //  Used to control timesheet submission
-    const [timesheetStatus, setTimesheetStatus] = useState("Unsubmitted")
-    const [timesheetReviewStatus, setTimesheetReviewStatus] = useState("Pending")
-    const [timesheetPaymentStatus, setTimesheetPaymentStatus] = useState("Pending")
 
-    // Retrieve week
-    // Function that retrieves the first day of the week (assumed to be monday)
-    const getWeekDay = (currentWeek, dayToRetrieve) => { 
-        let weekDay = new Date(currentWeek); // Creates copy of current week
+    // Function that formats the day of the week
+    const formatDate = (week, dayToRetrieve) => {
+        const date = getDate(week, dayToRetrieve)
 
-        /* Subtracts curent day of week to get 'Sunday' (start of the week)
-           Adds daysToRetrrieve to get the target day */
-           weekDay.setDate(weekDay.getDate() - weekDay.getDay() + dayToRetrieve) 
-        
-        /* Series of function calls to return the date in the desired format  
-           .padStart() used to add leading zeroes to the day & month */
-
-        let day = weekDay.getDate().toString().padStart(2, '0');
-        let month = (weekDay.getMonth() + 1).toString().padStart(2,'0'); // + 1 due to 0 indexing
-        let year = weekDay.getFullYear();
-
-        let formattedDate = `${day}/${month}/${year}`
-        return formattedDate 
+        return `${date[0]}/${date[1]}/${date[2]}`
     }
+
 
     return(
     <div className = 'consultant-view'>
         {/* Creating page header */}
         <div className='consultant-view-header'>
-            <p>{getWeekDay(viewedWeek, 1)} – {getWeekDay(viewedWeek, 7)}</p>
-            <FaCirclePlus className='add-event-button' onClick={() => addEventHandler("ConsultantView", viewedWeek)}/>
+            <p> 
+                {formatDate(viewedWeek, 1)} – {formatDate(viewedWeek, 7)}
+            </p>
+            <button className='add-event-button' disabled = {timesheetStatus === "Submitted"} onClick={() => addEventHandler("ConsultantView", viewedWeek)}> 
+                <FaCirclePlus /> {/* Button icon */}
+            </button>
         </div>
 
         {/* Displays currently viewed week, along with hours */}
-        <Week viewedWeek = {viewedWeek} addEventHandler = {addEventHandler}/>
+        <Week viewedWeek = {viewedWeek} addEventHandler = {addEventHandler} timesheetStatus = {timesheetStatus}/>
 
-        {/* Shows add event screen, with the arguments based on the component that called the method */}
-        {addEventClicked && (
+        {/* Shows add event screen, with the arguments based on the component that called the method 
+            Only allows logging events if timesheet has not been submitted */}
+        {addEventClicked && timesheetStatus !== "Submitted" && (
                 <AddEvent
                     componentCaller={componentCaller}
                     addEventHandler={addEventHandler} 

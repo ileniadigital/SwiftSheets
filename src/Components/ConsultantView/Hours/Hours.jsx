@@ -7,7 +7,7 @@ import { FaCirclePlus } from "react-icons/fa6";
 // Importing useState
 import { useState } from 'react';
 
-export default function Hours({addEventHandler, date}) {
+export default function Hours({addEventHandler, date, timesheetStatus}) {
 
     /* Whether hour has been clicked on stored to determine whether to show add event icon
     (makes it easier to identify which time slot is being clicked on) */
@@ -23,15 +23,21 @@ export default function Hours({addEventHandler, date}) {
     // Creating array to store each hour in day as a time slot
     let hoursArray = []
 
+    // Iterates through the hours of a day, creating a new button for each day (this will serve as a timesheet timeslot)
     for (let i = 0; i < 24; i++)
     {
-        /* If statement used to ensure last div does not have a line underneath; maintaining rounded
+        /* Ternary operator used to ensure last div does not have a line underneath; maintaining rounded
         edges of border */
         const addUnderlineClass = i < 23;
         hoursArray.push(
-            <button key={i} className={`hour-block ${addUnderlineClass ? 'add-underline' : ''}`} onClick={() => addEventHandler("Hours", date)} onMouseEnter={() => handleMouseEnter(i)} onMouseLeave={handleMouseLeave}>
-                <div className='add-event-button'> {hoveredHour === i && 
-                    <FaCirclePlus/>} {/* Show add event button if hour hovered over */}
+            <button key={i} 
+            className={`hour-block ${addUnderlineClass ? 'add-underline' : ''}`} 
+            onClick={() => addEventHandler("Hours", date)} 
+            onMouseEnter={() => handleMouseEnter(i)} 
+            onMouseLeave={handleMouseLeave}
+            disabled={timesheetStatus === "Submitted"}>
+                <div className='add-event-button'> 
+                    {hoveredHour === i && <FaCirclePlus/>} {/* Show add event button if hour hovered over */}
                 </div>
             </button>)
     }
