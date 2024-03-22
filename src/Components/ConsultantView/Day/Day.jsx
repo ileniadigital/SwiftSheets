@@ -1,13 +1,13 @@
 /* Importing CSS */
-import './WeekDay.css';
+import './Day.css';
 
 /* Importing Component */
 import Hours from '../Hours/Hours';
 
-export default function WeekDay({day, date, addEventHandler, addEventClicked}) {
+export default function Day({day, date, addEventHandler, addEventClicked}) {
     return(
         // Each weekday stored with its hours in a day
-        <div id='weekDay'>
+        <div id='weekday'>
             <h1 id='day'>{day}</h1>
             <Hours addEventHandler={addEventHandler} date = {date}/>
         </div>

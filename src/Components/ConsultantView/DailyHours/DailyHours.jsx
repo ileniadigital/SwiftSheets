@@ -8,7 +8,7 @@ export default function DailyHours() {
     for (let i = 0; i < 24; i++)
     {
         dailyHours.push(
-            <div key={i} className="dailyHour">
+            <div key={i} className="daily-hour">
                 {String(i).padStart(2,'0')}:00
             </div>
         )
@@ -16,7 +16,7 @@ export default function DailyHours() {
 
     // Hours in a day stored in a parent div
     return(
-        <div id='dailyHours'>
+        <div>
             {dailyHours}
         </div>
     )

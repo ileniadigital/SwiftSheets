@@ -1,33 +1,40 @@
 /* Styling for ConsultantView Component */
 
 /* Setting font family */
-#consultantView {
+.consultant-view {
     font-family: Inter;
+    padding-top: 0;
 }
-/*  */
 
 /* Setting flexbox */
-#consultantViewHeader {
+.consultant-view-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
+/* Aligning date */
+.consultant-view-header p {
+    margin: auto;
+    font-size: 1.875rem;
+    font-weight: 400;
+    padding: 0;
+}
+
 /* Removing prior styling */
-button
-{
+button {
     background: none;
     border: none;
     padding: 0;
 }
 
 /* Styling hover */
-.submitButton:hover {
+.submit-button:hover {
     filter: grayscale(50%);
 }
 
 /* Stying status container */
-#statusContainer {
+.status-container {
     display: flex;
     align-items: center;
     gap: 2rem;
@@ -44,7 +51,7 @@ button
     margin-right: 2rem;
 }
 
-/* Ensuring the rest of the content in the div remains centered */
+/* Ensuring the rest of the content in the div remains consultant-view-header */
 .centered {
     display: flex;
     justify-content: center; /* Centering vertically */
@@ -53,7 +60,7 @@ button
 }
 
 /* Styling submit button */
-.submitButton {
+.submit-button {
     background: linear-gradient(rgba(100, 42, 191, 1), rgba(44, 58, 197, 1));
     font: Inter;
     color: white;
@@ -66,7 +73,7 @@ button
 }
 
 /* Styling submit button when disabled */
-.submitButton:disabled {
+.submit-button:disabled {
     background: gray;
 }
 
@@ -89,18 +96,20 @@ button
 }
 
 /* Setting default button styling */
-#consultantViewHeader svg {
+.consultant-view-header svg {
     height: 3rem;
     width: auto;
     filter: invert(19%) sepia(48%) saturate(4862%) hue-rotate(258deg) brightness(87%) contrast(97%);
 }
 
 /* Setting button colour on hover */
-#consultantViewHeader svg:hover {
+.consultant-view-header svg:hover {
     filter: invert(19%) sepia(66%) saturate(4479%) hue-rotate(236deg) brightness(79%) contrast(96%);
 }
 
 /* Moving button closer to timesheet */
-.addEventButton {
-    margin-right: 3rem;
+.consultant-view-header .add-event-button {
+    position: absolute;
+    top: 10rem;
+    right: 2rem;
 }

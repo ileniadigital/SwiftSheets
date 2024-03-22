@@ -1,6 +1,5 @@
 /* Styling for DailyHour Component */
-.dailyHour
-{
+.daily-hour {
     text-align: right;
     margin-right: 1rem;
     font-weight: 700;

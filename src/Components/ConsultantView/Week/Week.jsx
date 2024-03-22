@@ -2,7 +2,7 @@
 import './Week.css';
 
 // Importing Component
-import WeekDay from '../WeekDay/WeekDay';
+import Day from '../Day/Day';
 import DailyHours from '../DailyHours/DailyHours';
 
 // Function retrieves the date of the current day of the week
@@ -25,13 +25,13 @@ export default function Week({viewedWeek, addEventHandler}) {
     week.push(<DailyHours key={0}/>) // Adding daily hours as first column
     const weekDays = ['MON','TUE','WED','THU','FRI','SAT','SUN'];
 
-    // Creating WeekDay component for each day of the week and adding it to the array
+    // Creating Day component for each day of the week and adding it to the array
     for (let i = 0; i < weekDays.length; i++) {
-        week.push(<WeekDay key={i+1} day = {weekDays[i]} date = {getDay(viewedWeek,i+1)} addEventHandler = {addEventHandler}/>)}
+        week.push(<Day key={i+1} day = {weekDays[i]} date = {getDay(viewedWeek,i+1)} addEventHandler = {addEventHandler}/>)}
 
     return(
     // Weekdays all stored under a single week div
-    <div id = "week">
+    <div className = "week">
         {week}
     </div> 
     )

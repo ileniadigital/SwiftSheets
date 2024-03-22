@@ -1,9 +1,6 @@
 // Importing CSS
 import './Hours.css';
 
-// Importing Component
-import AddEvent from '../AddEvent/AddEvent';
-
 // Importing icon
 import { FaCirclePlus } from "react-icons/fa6";
 
@@ -23,8 +20,6 @@ export default function Hours({addEventHandler, date}) {
     const handleMouseLeave = () => {
         setHoveredHour(null)}
 
-
-
     // Creating array to store each hour in day as a time slot
     let hoursArray = []
 
@@ -34,15 +29,16 @@ export default function Hours({addEventHandler, date}) {
         edges of border */
         const addUnderlineClass = i < 23;
         hoursArray.push(
-            <button key={i} className={`hourBlock ${addUnderlineClass ? 'addUnderline' : ''}`} onClick={() => addEventHandler("Hours", date)} onMouseEnter={() => handleMouseEnter(i)} onMouseLeave={handleMouseLeave}>
-            <span>{hoveredHour === i && 
-            <FaCirclePlus className='addEventButton'/>} {/* Show add event button if hour hovered over */}</span>
+            <button key={i} className={`hour-block ${addUnderlineClass ? 'add-underline' : ''}`} onClick={() => addEventHandler("Hours", date)} onMouseEnter={() => handleMouseEnter(i)} onMouseLeave={handleMouseLeave}>
+                <span> {hoveredHour === i && 
+                    <FaCirclePlus className='add-event-button'/>} {/* Show add event button if hour hovered over */}
+                </span>
             </button>)
     }
     
     return(
         // Stroing all hours in a container
-        <div id="hoursContainer">
+        <div className="hours-container">
             {hoursArray}
         </div>
     )

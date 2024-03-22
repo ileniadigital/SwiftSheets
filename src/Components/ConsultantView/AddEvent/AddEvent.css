@@ -1,25 +1,22 @@
 /* Code for AddEvent Component*/
 
 /* Styling which includes centering the component at the center of the page */
-#addEvent {
+.add-event {
     position: fixed;
     background: linear-gradient(rgba(100, 42, 191, 1), rgba(44, 58, 197, 1));
     color: white;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 31.5rem;
     width: 36rem;
     padding-bottom: 2rem;
     border-radius: 2rem;
     display: flex;
     flex-direction: column;
 }
-/*  */
 
 /* Styling button used to close event */
-.closeEvent
-{
+.close-event {
     color: white;
     margin-top: 1rem;
     margin-left: auto;
@@ -28,13 +25,12 @@
 }
 
 /* Styling button colour on close */
-.closeEvent:hover {
+.close-event:hover {
     color: black;
 }
 
 /* Styling addEvent inputs, centering on div */
-#addNewEvent
-{
+.add-new-event {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -42,14 +38,13 @@
 }
 
 /* Styling log event heading */
-.logEventHeading {
+.log-event-heading {
     margin: auto;
     margin-bottom: 2.5rem;
 }
 
 /* Styling input div */
-.input
-{
+.input {
     display: flex;
     gap: 2.5rem;
     align-items: center;
@@ -73,11 +68,11 @@ input, select {
     border-radius: 0.3rem;
     font-family: Inter;
     font-size: 1.3rem;
-    /* box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2); */
+    box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
 }
 
 /* Styling add event button */
-#addNewEvent .addEventButton {
+.add-new-event .add-event-button, .testing {
     margin: auto;
     margin-top: 0.1rem;
     background-color: black;
@@ -86,35 +81,41 @@ input, select {
 }
 
 /* Adding styling on hover */
-#addNewEvent .addEventButton:hover {
+.add-new-event .add-event-button:hover {
     background-color: white;
     color: black;
 }
 
 /* Code to move checkbox left */
-.checkBoxContainer {
+.checkbox-container {
     margin-left: 1rem;
     gap: 6.9rem;
     margin-right: 7rem;
 }
 
-.checkBoxLabel {
+/* Removing shadow from input */
+.checkbox-container input {
+    box-shadow: none;
+    background-color: blue;
+}
+
+.checkbox-label {
     width: 1rem;
 }
 
 /* Styling hours and minutes inputs */
-.eventDurationLength {
+.event-duration-length {
     display: flex;
     gap: 1rem;
     justify-content: center;
     align-items: center;
 }
 
-.eventDurationLengthItem {
+.event-duration-length-item {
     width: 6.5rem;
 }
 
-.errorMessage {
+.error-message {
     color: white;
     background-color: red;
     padding: 0.4rem;
