@@ -7,21 +7,24 @@ import { useState, useEffect } from 'react';
 export default function ConsultantSettings() {
 
     // Keeping track of the consultant's days workers
-    const [daysWorked, setDaysWorked] = useState([0, 1, 2, 3, 4, 5, 6])
+    const [daysWorked, setDaysWorked] = useState(JSON.parse(localStorage.getItem('daysWorked')) || [0, 1, 2, 3, 4, 5, 6])
 
-    // Initialising database with all days worked when the component mounts
+    // Initialising database with all days worked when the component mounts if no values exist
     useEffect(() => {
-        localStorage.setItem('daysWorked', JSON.stringify(daysWorked))
+        console.log(localStorage.getItem('daysWorked'))
+        if (!localStorage.getItem('daysWorked')) {
+            localStorage.setItem('daysWorked', JSON.stringify([0, 1, 2, 3, 4, 5, 6]))
+        }
     }, [])
 
     // Default is that all days in the week are worked to account for the flexibility in consultant work schedules
-    const [mondayWorked, setMondayWorked] = useState(true)
-    const [tuesdayWorked, setTuesdayWorked] = useState(true)
-    const [wednesdayWorked, setWednesdayWorked] = useState(true)
-    const [thursdayWorked, setThursdayWorked] = useState(true)
-    const [fridayWorked, setFridayWorked] = useState(true)
-    const [saturdayWorked, setSaturdayWorked] = useState(true)
-    const [sundayWorked, setSundayWorked] = useState(true)
+    const [mondayWorked, setMondayWorked] = useState(daysWorked.includes(0))
+    const [tuesdayWorked, setTuesdayWorked] = useState(daysWorked.includes(1))
+    const [wednesdayWorked, setWednesdayWorked] = useState(daysWorked.includes(2))
+    const [thursdayWorked, setThursdayWorked] = useState(daysWorked.includes(3))
+    const [fridayWorked, setFridayWorked] = useState(daysWorked.includes(4))
+    const [saturdayWorked, setSaturdayWorked] = useState(daysWorked.includes(5))
+    const [sundayWorked, setSundayWorked] = useState(daysWorked.includes(6))
 
     // Updates the value of the day worked
     const handleDayWorked = (dayIndex, dayWorked, setDayWorked) => {

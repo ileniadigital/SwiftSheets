@@ -13,7 +13,22 @@ export default function Week({viewedWeek, addEventHandler, timesheetStatus}) {
     // Creating array to store the week, with its corresponding hours
     let week = []
     week.push(<DailyHours key={0}/>) // Adding daily hours as first column
-    const weekDays = ['MON','TUE','WED','THU','FRI','SAT','SUN'];
+    
+    // Retrieving consultant's days worked
+    const daysWorked = JSON.parse(localStorage.getItem('daysWorked')) // Conversion from string to array
+
+    // Storing possible days of the week to choose from
+    const daysOfTheWeek = ['MON','TUE','WED','THU','FRI','SAT','SUN'];
+
+    // Will be appended to with the consultant's working days
+    let weekDays = []
+
+    // Adds day worked to weekday if it exists in daysWorked
+    for (let i = 0; i < daysOfTheWeek.length; i++) {
+        if (daysWorked.includes(i)) {
+            weekDays.push(daysOfTheWeek[i])
+        }
+    }
 
     // Function that formats the day of the week
     const formatDate = (week, dayToRetrieve) => {
