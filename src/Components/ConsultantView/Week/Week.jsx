@@ -1,9 +1,9 @@
 // Importing CSS
-import '../../CSS/ConsultantView/Week.css';
+import './Week.css';
 
 // Importing Component
-import WeekDay from '../../Components/ConsultantView/WeekDay';
-import DailyHours from '../../Components/ConsultantView/DailyHours';
+import WeekDay from '../WeekDay/WeekDay';
+import DailyHours from '../DailyHours/DailyHours';
 
 // Function retrieves the date of the current day of the week
 function getDay(week, day) {

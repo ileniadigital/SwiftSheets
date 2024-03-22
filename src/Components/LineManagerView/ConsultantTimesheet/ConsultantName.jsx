@@ -1,4 +1,4 @@
-import '../../CSS/LineManagerView/ConsultantTimesheet.css'; //Import styling
+import './ConsultantTimesheet.css'; //Import styling
 
 //ConsultantName component
 //To display the name of the consultant

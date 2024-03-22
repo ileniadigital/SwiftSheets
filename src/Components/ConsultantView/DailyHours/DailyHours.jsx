@@ -1,5 +1,5 @@
 // Importing CSS
-import '../../CSS/ConsultantView/DailyHours.css'
+import './DailyHours.css'
 
 export default function DailyHours() {
 

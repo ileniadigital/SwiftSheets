@@ -1,5 +1,5 @@
 // Importing CSS
-import '../../CSS/ConsultantView/AddEvent.css';
+import './AddEvent.css';
 
 // Importing icon
 import { IoClose } from "react-icons/io5";

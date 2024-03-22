@@ -1,5 +1,5 @@
 //Import CSS
-import '../CSS/NavBar.css';
+import './NavBar.css';
 
 //Import icons
 import { VscAccount } from "react-icons/vsc";
@@ -7,7 +7,7 @@ import { FaHome } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
 
 //Import FDM logo
-import fdmIcon from '../images/fdm-logo.svg';
+import fdmIcon from './logo/fdm-logo.svg';
 
 //Import Link component
 import Link from './Link';

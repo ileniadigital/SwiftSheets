@@ -1,4 +1,4 @@
-import '../../CSS/LineManagerView/ConsultantTimesheet.css'; //Import styling
+import './ConsultantTimesheet.css'; //Import styling
 
 //Date component
 //To display the date of the timesheet of the working week 

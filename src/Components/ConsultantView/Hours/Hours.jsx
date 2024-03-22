@@ -1,8 +1,8 @@
 // Importing CSS
-import '../../CSS/ConsultantView/Hours.css';
+import './Hours.css';
 
 // Importing Component
-import AddEvent from '../../Components/ConsultantView/AddEvent';
+import AddEvent from '../AddEvent/AddEvent';
 
 // Importing icon
 import { FaCirclePlus } from "react-icons/fa6";
