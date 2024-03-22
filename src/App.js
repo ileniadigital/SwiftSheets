@@ -1,14 +1,14 @@
 // Import stylesheets
-import './CSS/general.css';
+import './Components/general.css';
 
 // Import components 
-import NavBar from './Components/NavBar';
+import NavBar from './Components/NavBar/NavBar';
 import Account from './Pages/Account';
 import Settings from './Pages/Settings';
 import ConsultantView from './Pages/ConsultantView';
 import Home from './Pages/Home';
 import LineManagerView from './Pages/LineManagerView';
-import Name from './Components/Name';
+import Name from './Components/NavBar/Name';
 
 // Main App component
 function App() {

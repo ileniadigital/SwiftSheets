@@ -1,8 +1,8 @@
 /* Importing CSS */
-import '../../CSS/ConsultantView/WeekDay.css';
+import './WeekDay.css';
 
 /* Importing Component */
-import Hours from './Hours';
+import Hours from '../Hours/Hours';
 
 export default function WeekDay({day, date, addEventHandler, addEventClicked}) {
     return(

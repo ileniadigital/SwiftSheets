@@ -1,4 +1,4 @@
-import'../CSS/general.css';
+import '../Components/general.css';
 export default function Account() {
     return (
         <div>

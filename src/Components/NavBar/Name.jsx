@@ -1,4 +1,4 @@
-import'../CSS/general.css'; //Import general styling
+import'../general.css'; //Import general styling
 
 //Component to render Name and welcome message
 export default function Name() {
@@ -11,5 +11,3 @@ export default function Name() {
         </div>
     )
 }
-
-// TEST
