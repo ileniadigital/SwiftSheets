@@ -138,7 +138,7 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek})
                 {/* No need to show category if work is not Normal or Overtime e.g. if Consultants are sick */}
                 <div className="input">
                     <label htmlFor="eventCategory">Category</label>
-                    <select name="eventCategory" defaultValue={""} required onChange={handleEventType} disabled = {disableCategory}>
+                    <select name="eventCategory" defaultValue={""} required disabled = {disableCategory}>
                         <option value="" disabled hidden>Category</option> {/* Default value */}
                         <option value="Project">Project</option>
                         <option value="eventCategoryPlanning">Planning</option>

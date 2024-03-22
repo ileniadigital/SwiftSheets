@@ -16,7 +16,7 @@ export default function DailyHours() {
 
     // Hours in a day stored in a parent div
     return(
-        <div>
+        <div className='daily-hours'>
             {dailyHours}
         </div>
     )

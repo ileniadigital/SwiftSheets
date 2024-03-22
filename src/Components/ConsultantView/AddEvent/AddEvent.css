@@ -72,7 +72,7 @@ input, select {
 }
 
 /* Styling add event button */
-.add-new-event .add-event-button, .testing {
+.add-new-event .add-event-button {
     margin: auto;
     margin-top: 0.1rem;
     background-color: black;

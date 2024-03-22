@@ -30,9 +30,9 @@ export default function Hours({addEventHandler, date}) {
         const addUnderlineClass = i < 23;
         hoursArray.push(
             <button key={i} className={`hour-block ${addUnderlineClass ? 'add-underline' : ''}`} onClick={() => addEventHandler("Hours", date)} onMouseEnter={() => handleMouseEnter(i)} onMouseLeave={handleMouseLeave}>
-                <span> {hoveredHour === i && 
-                    <FaCirclePlus className='add-event-button'/>} {/* Show add event button if hour hovered over */}
-                </span>
+                <div className='add-event-button'> {hoveredHour === i && 
+                    <FaCirclePlus/>} {/* Show add event button if hour hovered over */}
+                </div>
             </button>)
     }
     

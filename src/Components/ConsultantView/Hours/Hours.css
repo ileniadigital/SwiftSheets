@@ -17,17 +17,23 @@
     border-bottom: 0.1875rem solid rgba(119, 37, 189, 1);
 }
 
-/* Adding minimum height to prevent addEventButton from overflowing when hovered over */
+/* Setting layout */
 .hour-block {
-    min-height: 8rem;
+    height: 6rem;
     display: flex;
-    justify-content: right;
+    width: 10rem;
 }
 
-/* Styling add event button when referenced from Hour component */
+/* Centering */
 .hour-block .add-event-button {
-    margin-right: 0.2rem;
-    margin-top: 0.2rem;
+    margin: auto;
+}
+
+/* Setting dimensions */
+.hour-block .add-event-button svg{
+    height: 3rem;
+    width: auto;
+    opacity: 50%;
 }
 
 .hour-block svg {

@@ -1,9 +1,22 @@
 /* Styling for DailyHour Component */
-.daily-hour {
-    text-align: right;
+
+.daily-hours {
+    display: flex;
+    flex-direction: column;
+    /* gap: 4.5rem; */
+    justify-content: space-around;
+    margin-top: 6rem;
+    height: 150rem;
+}
+
+.daily-hour 
+{
     margin-right: 1rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-weight: 700;
     font-size: 1.4rem;
-    height: 4rem;
-    margin-top: 4rem;
+    /* height: 6rem; */
 }
