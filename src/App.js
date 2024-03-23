@@ -12,7 +12,8 @@ import Name from './Components/NavBar/Name';
 import ConsultantSettings from './Pages/ConsultantSettings';
 
 // Main App component
-function App() {
+export default function App() {
+
   // Render page based on location
   let page
   switch (window.location.pathname) {
@@ -46,5 +47,3 @@ function App() {
     </>
   )
 }
-
-export default App;

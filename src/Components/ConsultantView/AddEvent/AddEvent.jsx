@@ -22,11 +22,6 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek})
         }
     }
 
-    // eventDuration stored for validation to take place
-    const [eventHours, setEventHours] = useState(null)
-    const [eventMinutes, setEventMinutes] = useState(null)
-
-
     /* Only needs to be rendered for ConsultantView component caller as its viewedWeek
     argument will be a Date, compared to Hours' string */
     let startOfWeek, startOfWeekDay, startOfWeekMonth, startOfWeekYear;
@@ -77,18 +72,10 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek})
     // Handles validation after submit button has abeen pressed
     function handleSubmit(event) {
         event.preventDefault(); // Prevent submission until validation is complete
-
-        // Return error if the start time is not greater than the end time
-        if ((startTime > endTime)) {
-            setErrorMessage('Start time must be before end time')
-            return
-        }
-        setErrorMessage(null)
     }
 
     /* Storing start and end time so they can be compared with one another and to ensure the start time is 
        before the end time */
-    
     const [startTime, setStartTime] = useState(null)
     const [endTime, setEndTime] = useState(null)
 
@@ -108,22 +95,22 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek})
                     {componentCaller === "Hours" ? (
 
                         // Date is preset as the day of the week is known from the time/dayslot click 
-                        <input type="date" name = "eventDate" value = {viewedWeek} readOnly required/>
+                        <input className = 'datetime' type="date" name = "eventDate" value = {viewedWeek} readOnly required/>
                         ) : (
                         
                         // Limiting days to choose from as days in current week
-                        <input type="date" name = "eventDate" min={startOfWeek} max={endOfWeek} required/>
+                        <input type="date" className='datetime' name = "eventDate" min={startOfWeek} max={endOfWeek} required/>
                     )}
                 </div>
 
                 <div className="input">
                     <label htmlFor="eventStartTime">Start Time</label>
-                    <input type="time" name = "eventStartTime" required onChange={(event) => setStartTime(event.target.value)}/>
+                    <input type="time" className='datetime' name = "eventStartTime" required onChange={(event) => setStartTime(event.target.value)}/>
                 </div>
 
                 <div className="input">
                     <label htmlFor="eventEndTime">End Time</label>
-                    <input type="time" name = "eventEndTime" required onChange={(event) => setEndTime(event.target.value)}/>
+                    <input className='datetime' type="time" name = "eventEndTime" required onChange={(event) => setEndTime(event.target.value)}/>
                 </div>
 
                 <div className="input">
@@ -153,14 +140,14 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek})
                     <input className ='is-recurring' type="checkbox"/>
                 </div>
 
+                <div className='note-container'>
+                    <label htmlFor="note"> Note </label>
+                    <textarea name="note" cols="30" rows="5" placeholder='Enter text'></textarea>
+                </div>
+
                 <input type="submit" value={"Add Event"} className='add-event-button'/>
 
                 {/* Show error message when it has a value */}
-                { (errorMessage !== null) && 
-                <span className='error-message'> 
-                    {errorMessage}
-                </span> 
-                }
             </form>
         </div>
     )

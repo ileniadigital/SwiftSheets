@@ -7,7 +7,6 @@ import DailyHours from '../DailyHours/DailyHours';
 import getDate from '../getDate'
 
 
-
 export default function Week({viewedWeek, addEventHandler, timesheetStatus}) {
 
     // Creating array to store the week, with its corresponding hours

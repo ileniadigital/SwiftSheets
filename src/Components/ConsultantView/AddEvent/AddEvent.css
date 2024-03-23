@@ -59,7 +59,7 @@ label {
 }
 
 /* Styling input/select boxes */
-input, select {
+input, select, textarea {
     border: 0;
     background-color: white;
     width: 14rem;
@@ -88,19 +88,34 @@ input, select {
 
 /* Code to move checkbox left */
 .checkbox-container {
-    margin-left: 1rem;
-    gap: 6.9rem;
-    margin-right: 7rem;
+    margin-right: auto;
+    margin-left: 4rem;
 }
 
-/* Removing shadow from input */
 .checkbox-container input {
-    box-shadow: none;
-    background-color: blue;
+    -webkit-appearance: none; /* Removing default box */
+    position: relative;
+    width: 2rem;
+    height: 2rem;
+    background: black;
+    box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    border-radius: 0.4rem;
 }
 
-.checkbox-label {
-    width: 1rem;
+/* Setting colour to white */
+.checkbox-container input:checked{
+    color: white;
+}
+
+/* Styling checkbox */
+.checkbox-container input::before{
+    position: absolute;
+    content:'\2713';
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
 }
 
 /* Styling hours and minutes inputs */
@@ -115,6 +130,7 @@ input, select {
     width: 6.5rem;
 }
 
+/* Styling error message */
 .error-message {
     color: white;
     background-color: red;
@@ -123,3 +139,48 @@ input, select {
     padding-left: 1rem;
     padding-right: 1rem;
 }
+
+/* Defining textarea styles */
+textarea {
+    font-family: Inter;
+    border: none;
+    resize: none;
+    height: 7rem;
+    width: 27.8rem;
+    font-size: 1rem;
+    overflow-y: auto;
+    margin-right: 20rem;
+    border-right: 0.3rem solid white;
+}
+
+/* Adding padding */
+.datetime, textarea {
+    padding: 0.5rem;
+}
+
+/* Defining container style */
+.note-container {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-right: auto;
+    margin-left: 4.05rem;
+    gap: 1rem;
+}
+
+::-webkit-scrollbar {
+    width: 0.7rem;
+    height: 6rem;
+    background-color: transparent;
+  }
+  
+  /* Making track transparent for a more seamless look */
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  
+  /* Setting colour for scrollbar thumb */
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(rgba(100, 42, 191, 1), rgba(44, 58, 197, 1));
+    border-radius: 0.6rem;
+  }
