@@ -41,19 +41,25 @@
     font-size: 1rem;
     border-radius: 1rem;
     height: 3rem;
-    background: linear-gradient(rgba(100, 42, 191, 1), rgba(44, 58, 197, 1));
+    background: gray;
     width: 3rem;
     box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
     color: white;
 }
 
-/* Defining hover colour */
+
+/* Defining hover colour/background colour for selected day */
 .day-of-week:hover, .worked-day {
-    border: 0.15rem solid red;
+    background: linear-gradient(rgba(100, 42, 191, 1), rgba(44, 58, 197, 1));
+}
+
+.worked-day:hover {
+    background: gray;
 }
 
 /* Styling line used to separate settings */
 br {
+    margin-top: 2rem;
     display: block; 
     content: ""; 
     height: 0.1rem;
@@ -68,6 +74,11 @@ br {
     text-align: center;
 }
 
+/* Styling container */
+.working-hours {
+    margin-top: 2rem;
+}
+
 /* Designing hours container */
 .hours {
     display: flex;
@@ -75,8 +86,29 @@ br {
     align-items: center;
 }
 
-.error-message {
+.error-message{
     font-size: 0.8rem;
     position: absolute;
     margin-top: 5rem;
+}
+
+.max-work-hours {
+    font-size: 1rem;
+    position: absolute;
+    margin-top: 5rem;
+    display: flex;
+    align-items: center;
+}
+
+.max-work-hours input {
+    box-shadow: none;
+    height: 1rem;
+    width: 1rem;
+    margin-left: 1rem;
+}
+
+/* Styling box when checked */
+.checkbox:checked {
+    background: linear-gradient(rgba(100, 42, 191, 1), rgba(44, 58, 197, 1));
+    /* accent-color: rgba(100, 42, 191, 1); */
 }

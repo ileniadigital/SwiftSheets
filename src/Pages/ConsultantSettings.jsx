@@ -28,6 +28,10 @@ export default function ConsultantSettings() {
         if (!localStorage.getItem('endWorkHours')) {
             localStorage.setItem('endWorkHours', "23:00")
         }
+
+        if (!localStorage.getItem('24HoursWorked')) {
+            localStorage.setItem('24HoursWorked', false)    
+        }
     }, [])
 
     // Default is that all days in the week are worked to account for the flexibility in consultant work schedules
@@ -59,27 +63,18 @@ export default function ConsultantSettings() {
     // Keeps track of any messages that need to be set
     const [errorMessage, setErrorMessage] = useState(null)
 
-    // Checks for changes in start time and outputs appropriate error message if start time < end time
     useEffect(() => {
-        // First part checks that the input is complete; no need to show error message if input hasn't been fully entered
-        if (startWorkHours !== '' && startWorkHours > endWorkHours) {
-            setErrorMessage('Start time must be before end time');
-        } else {
-            // Only update local storage when start hours < end hours
+        // Updating in database if ther is a value
+        if (startWorkHours !== '') {
             localStorage.setItem("startWorkHours", startWorkHours)
-            setErrorMessage(null);
         }
     }, [startWorkHours]);
 
-    // Checks for changes in start/end time and outputs appropriate error message if start time < end time
+    // Updating in database if ther is a value
     useEffect(() => {
         // First part checks that the input is complete; no need to show error message if input hasn't been fully entered
-        if (endWorkHours !== '' && startWorkHours > endWorkHours) {
-            setErrorMessage('Start time must be before end time');
-        } else {
-            // Only update local storage when start hours < end hours
+        if (endWorkHours !== '' ) {
             localStorage.setItem("endWorkHours", endWorkHours)
-            setErrorMessage(null);
         }
     }, [endWorkHours]);
 
@@ -91,9 +86,18 @@ export default function ConsultantSettings() {
             return
         } else {
             setWorkHours(event.target.value)
+            localStorage.setItem(databaseName, workHour)
             setErrorMessage(null)
         }
     }
+
+    // Storing whether working hours is 24
+    const [is24WorkingHours, setIs24WorkingHours] = useState(false)
+
+     // Checks for changes in start/end time and outputs appropriate error message if start time < end time
+     useEffect(() => {
+        localStorage.setItem('24HoursWorked', is24WorkingHours)
+    }, [is24WorkingHours]);
 
     return (
         <div className='settings'>
@@ -122,7 +126,14 @@ export default function ConsultantSettings() {
                             {""} – {""}
                             <input type="time" defaultValue={endWorkHours} onChange={(event) =>  handleWorkHours(event, endWorkHours, setEndWorkHours, "endWorkHours")}/>
                         </div>
-                        
+                        {startWorkHours.slice(0,2) === endWorkHours.slice(0,2) &&
+                            
+                        // If start and end time are the same, a worker may work less than 1, or 24 hours
+                        <div className='max-work-hours'>
+                            Maximum Working Hours is 24
+                            <input className = "checkbox" type="checkbox" defaultValue={endWorkHours} onChange={() => setIs24WorkingHours(!is24WorkingHours)}/>
+                        </div>
+                        }
                         {/* Display error message if available */}
                         { (errorMessage !== null) && 
                         <div className='error-message'> 

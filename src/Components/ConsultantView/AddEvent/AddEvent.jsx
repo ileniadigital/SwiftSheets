@@ -150,7 +150,7 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek})
 
                 <div className="input checkbox-container">
                     <label htmlFor="isRecurring" className='checkbox-label'>Recurring </label>
-                    <input type="checkbox"/>
+                    <input className ='is-recurring' type="checkbox"/>
                 </div>
 
                 <input type="submit" value={"Add Event"} className='add-event-button'/>

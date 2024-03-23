@@ -27,6 +27,12 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
     // Creating array to store each hour in day as a time slot
     let hoursArray = []
 
+    // Providing whole day as time slots if working hours extend across multiple days
+    if (localStorage.getItem('24HoursWorked') === true || startWorkHours > endWorkHours) {
+        startWorkHours = 0
+        endWorkHours = 23
+    }
+
     // Iterates through the hours of a day, creating a new button for each day (this will serve as a timesheet timeslot)
     for (let i = startWorkHours; i <= endWorkHours; i++)
     {

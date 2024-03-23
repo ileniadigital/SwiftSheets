@@ -4,7 +4,8 @@
 .daily-hours {
     display: flex;
     flex-direction: column;
-    margin-top: 3rem;
+    margin-top: 2.5rem;
+    justify-content: space-between;
 }
 
 /* Styling hour */
@@ -13,7 +14,7 @@
     margin-left: 1rem;
     justify-content: center;
     font-weight: 700;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     text-align: center;
-    margin-bottom: 1.16rem;
+    height: 3rem;
 }

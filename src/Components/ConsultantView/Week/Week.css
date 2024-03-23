@@ -5,7 +5,7 @@
     display: grid;
     text-align: center;
     justify-content: center;
-    margin-left: 4rem;
-    margin-right: 4rem;
-    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr))
+    margin-right: 5rem;
+    margin-bottom: 1rem;
+    grid-template-columns: 10rem repeat(auto-fit, minmax(10rem, 1fr))
 }

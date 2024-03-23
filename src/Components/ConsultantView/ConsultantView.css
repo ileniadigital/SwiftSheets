@@ -3,6 +3,7 @@
 /* Setting font family */
 .consultant-view {
     font-family: Inter;
+    margin-bottom: 1rem;
 }
 
 /* Aligning date */
@@ -39,14 +40,15 @@ button {
     display: flex;
     gap: 1rem;
     margin-left: auto;
-    margin-right: 2rem;
+    margin-right: 5rem;
 }
 
-/* Ensuring the rest of the content in the div remains consultant-view-header */
+/* Ensuring the rest of the content in the div remains centered */
 .centered {
     display: flex;
-    justify-content: center; /* Centering vertically */
+    justify-content: center; 
     gap: 2rem;
+    white-space: nowrap;
     margin-left: auto;
 }
 

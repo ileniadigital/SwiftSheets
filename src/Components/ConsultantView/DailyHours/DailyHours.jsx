@@ -4,20 +4,20 @@ import './DailyHours.css'
 export default function DailyHours() {
 
     // Retrieve start and end time from database 
-    let startWorkHours = parseInt(localStorage.getItem('startWorkHours').slice(0,3))
-    let endWorkHours = parseInt(localStorage.getItem('endWorkHours').slice(0,3))
+    let startWorkHours = parseInt(localStorage.getItem('startWorkHours').slice(0,2))
+    let endWorkHours = parseInt(localStorage.getItem('endWorkHours').slice(0,2))
+
+    // Providing whole day as time slots if working hours extend across multiple days
+    if (localStorage.getItem('24HoursWorked') === true || startWorkHours > endWorkHours) {
+        startWorkHours = 0
+        endWorkHours = 23
+    }
 
     console.log(startWorkHours, endWorkHours)
     // Array created to store hours in a day, represented as time
     let dailyHours = []
 
-    /* endworkhours adds 1 in the for the end time of the block, if it's 23 then 
-       there is no need for 24 to be shown as 00 is at the top */
-    if (endWorkHours === 23) {
-        endWorkHours = 22
-    }
-
-    for (let i = startWorkHours; i <= endWorkHours+1; i++) {
+    for (let i = startWorkHours; i <= endWorkHours; i++) {
         dailyHours.push(
             <div key={i} className="daily-hour">
                 {String(i).padStart(2,'0')}:00
