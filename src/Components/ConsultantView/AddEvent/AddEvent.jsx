@@ -71,7 +71,9 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek})
         }
     }
 
+    // Keeps track of any messages that need to be set
     const [errorMessage, setErrorMessage] = useState(null)
+    
     // Handles validation after submit button has abeen pressed
     function handleSubmit(event) {
         event.preventDefault(); // Prevent submission until validation is complete

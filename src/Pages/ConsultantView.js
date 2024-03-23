@@ -5,12 +5,13 @@ import '../Components/ConsultantView/ConsultantView.css';
 import Week from '../Components/ConsultantView/Week/Week';
 import AddEvent from '../Components/ConsultantView/AddEvent/AddEvent';
 import { FaCirclePlus } from "react-icons/fa6";
+import NoWorkingDaysError from '../Components/ConsultantView/NoWorkingDaysError/NoWorkingDaysError'
 
 // Importing helper function
 import getDate from '../Components/ConsultantView/getDate'
 
 // Importing useState and useEffect
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export default function ConsultantView() {
 
@@ -59,7 +60,8 @@ export default function ConsultantView() {
     }
 
 
-    return(
+    return (
+    localStorage.getItem('daysWorked') !== "[]" ? (
     <div className = 'consultant-view'>
         {/* Creating page header */}
         <div className='consultant-view-header'>
@@ -97,5 +99,9 @@ export default function ConsultantView() {
             </div>
         </div>
     </div> 
+    ) : (
+        // Display error if the user has selected 0 working days
+            <NoWorkingDaysError />
+    )
     )
 }

@@ -6,14 +6,27 @@ import { useState, useEffect } from 'react';
 // Defines the structure of the settings page for consultants
 export default function ConsultantSettings() {
 
-    // Keeping track of the consultant's days workers
+    // Keeping track of the consultant's days worked ; default is all days
     const [daysWorked, setDaysWorked] = useState(JSON.parse(localStorage.getItem('daysWorked')) || [0, 1, 2, 3, 4, 5, 6])
 
-    // Initialising database with all days worked when the component mounts if no values exist
+    // Keeping track of the consultant's maximum working hours to define the first grid's hours ; default is all hours
+    const [startWorkHours, setStartWorkHours] = useState(localStorage.getItem('startWorkHours') || "00:00")
+    const [endWorkHours, setEndWorkHours] = useState(localStorage.getItem('endWorkHours') || "23:00")
+
+
+    // Initialising database values on component mount if values do not exist
     useEffect(() => {
         console.log(localStorage.getItem('daysWorked'))
         if (!localStorage.getItem('daysWorked')) {
             localStorage.setItem('daysWorked', JSON.stringify([0, 1, 2, 3, 4, 5, 6]))
+        }
+
+        if (!localStorage.getItem('startWorkHours')) {
+            localStorage.setItem('startWorkHours', "00:00")
+        }
+
+        if (!localStorage.getItem('endWorkHours')) {
+            localStorage.setItem('endWorkHours', "23:00")
         }
     }, [])
 
@@ -43,12 +56,51 @@ export default function ConsultantSettings() {
         localStorage.setItem('daysWorked', JSON.stringify(newDaysWorked))
     }
 
+    // Keeps track of any messages that need to be set
+    const [errorMessage, setErrorMessage] = useState(null)
+
+    // Checks for changes in start time and outputs appropriate error message if start time < end time
+    useEffect(() => {
+        // First part checks that the input is complete; no need to show error message if input hasn't been fully entered
+        if (startWorkHours !== '' && startWorkHours > endWorkHours) {
+            setErrorMessage('Start time must be before end time');
+        } else {
+            // Only update local storage when start hours < end hours
+            localStorage.setItem("startWorkHours", startWorkHours)
+            setErrorMessage(null);
+        }
+    }, [startWorkHours]);
+
+    // Checks for changes in start/end time and outputs appropriate error message if start time < end time
+    useEffect(() => {
+        // First part checks that the input is complete; no need to show error message if input hasn't been fully entered
+        if (endWorkHours !== '' && startWorkHours > endWorkHours) {
+            setErrorMessage('Start time must be before end time');
+        } else {
+            // Only update local storage when start hours < end hours
+            localStorage.setItem("endWorkHours", endWorkHours)
+            setErrorMessage(null);
+        }
+    }, [endWorkHours]);
+
+    // Updates value in local storage when changed
+    const handleWorkHours = (event, workHour, setWorkHours, databaseName) => {
+        // Nothing to perform if the input is not complete
+        if (event.target.value == '') {
+            setErrorMessage('Enter a value')
+            return
+        } else {
+            setWorkHours(event.target.value)
+            setErrorMessage(null)
+        }
+    }
+
     return (
         <div className='settings'>
             <h1 className='header'>Settings</h1>
             <div className='settings-items'>
                 <div className='days-of-week-worked'>
-                    <p>Select Working Day(s)</p>
+                    <p>Working Day(s)</p>
                     <div className='days-of-week'>
                         {/* Worked days will be given a border so the user knows they are counted as such; hence the ternary operator the the class worked-day
                             Each time the button is clicked, it is counted as a worked day */}
@@ -59,6 +111,24 @@ export default function ConsultantSettings() {
                         <button className={`day-of-week ${fridayWorked ? 'worked-day' : ''}`} onClick={() => handleDayWorked(4, fridayWorked, setFridayWorked)}>F</button>
                         <button className={`day-of-week ${saturdayWorked ? 'worked-day' : ''}`} onClick={() => handleDayWorked(5, saturdayWorked, setSaturdayWorked)}>S</button>
                         <button className={`day-of-week ${sundayWorked ? 'worked-day' : ''}`} onClick={() => handleDayWorked(6, sundayWorked, setSundayWorked)}>S</button>
+                    </div>
+                </div>
+                <br />
+                <div className='working-hours'>
+                    <p>Maximum Working Hours</p>
+                    <div className='hours'>
+                        <div>
+                            <input type="time" defaultValue={startWorkHours} onChange={(event) => handleWorkHours(event, startWorkHours, setStartWorkHours, "startWorkHours")}/>
+                            {""} – {""}
+                            <input type="time" defaultValue={endWorkHours} onChange={(event) =>  handleWorkHours(event, endWorkHours, setEndWorkHours, "endWorkHours")}/>
+                        </div>
+                        
+                        {/* Display error message if available */}
+                        { (errorMessage !== null) && 
+                        <div className='error-message'> 
+                            {errorMessage}
+                        </div> 
+                        }
                     </div>
                 </div>
             </div>

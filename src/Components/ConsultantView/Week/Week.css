@@ -2,7 +2,10 @@
 
 /* Taking up entirety of parent container so timesheet is spread */
 .week {
-    display: flex;
+    display: grid;
     text-align: center;
     justify-content: center;
+    margin-left: 4rem;
+    margin-right: 4rem;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr))
 }

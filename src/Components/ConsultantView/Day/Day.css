@@ -2,7 +2,6 @@
 
 /* Ensuring div takes us the whole parent container */
 .weekday {
-  width: 100%;
   display: flex; 
   flex-direction: column; 
   align-items: flex-start; 
@@ -10,8 +9,8 @@
 
 /* Styling Day Header */
 .day {
-    margin-top: 0;
     font-weight: 700;
     font-size: 1.5rem;
     align-self: center;
+    margin-bottom: 0.5rem;
  }

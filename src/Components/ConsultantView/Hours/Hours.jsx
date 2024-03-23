@@ -9,6 +9,10 @@ import { useState } from 'react';
 
 export default function Hours({addEventHandler, date, timesheetStatus}) {
 
+    // Retrieve start and end time from database to determine hours displayed
+    let startWorkHours = parseInt(localStorage.getItem('startWorkHours').slice(0,3))
+    let endWorkHours = parseInt(localStorage.getItem('endWorkHours').slice(0,3))
+
     /* Whether hour has been clicked on stored to determine whether to show add event icon
     (makes it easier to identify which time slot is being clicked on) */
     const [hoveredHour, setHoveredHour]  = useState(null);
@@ -24,11 +28,11 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
     let hoursArray = []
 
     // Iterates through the hours of a day, creating a new button for each day (this will serve as a timesheet timeslot)
-    for (let i = 0; i < 24; i++)
+    for (let i = startWorkHours; i <= endWorkHours; i++)
     {
         /* Ternary operator used to ensure last div does not have a line underneath; maintaining rounded
         edges of border */
-        const addUnderlineClass = i < 23;
+        const addUnderlineClass = i < endWorkHours;
         hoursArray.push(
             <button key={i} 
             className={`hour-block ${addUnderlineClass ? 'add-underline' : ''}`} 

@@ -7,13 +7,11 @@
 
 /* Defining layout of settings items */
 .settings-items {
-    margin-left: 1rem;
-    margin-right: 1rem;
+    margin-left: 3rem;
+    margin-right: 3rem;
     margin-top: 1rem;
     white-space: nowrap;
     font-size: 1.5rem;
-    background: linear-gradient(rgba(100, 42, 191, 1), rgba(44, 58, 197, 1));
-    color: white;
     border-radius: 1rem;
 }
 
@@ -25,9 +23,9 @@
 }
 
 /* Defining layout of container for days of week worked */
-.days-of-week-worked {
+.days-of-week-worked, .working-hours {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     gap: 3rem;
 }
@@ -43,13 +41,42 @@
     font-size: 1rem;
     border-radius: 1rem;
     height: 3rem;
+    background: linear-gradient(rgba(100, 42, 191, 1), rgba(44, 58, 197, 1));
     width: 3rem;
-    background: black;
+    box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
     color: white;
 }
 
 /* Defining hover colour */
 .day-of-week:hover, .worked-day {
-    border: 2px solid white;
+    border: 0.15rem solid red;
 }
 
+/* Styling line used to separate settings */
+br {
+    display: block; 
+    content: ""; 
+    height: 0.1rem;
+    background: linear-gradient(rgba(100, 42, 191, 1), rgba(44, 58, 197, 1));
+}
+
+/* Styling input */
+.settings input {
+    background: linear-gradient(rgba(100, 42, 191, 1), rgba(44, 58, 197, 1));
+    color: white;
+    width: 6.5rem;
+    text-align: center;
+}
+
+/* Designing hours container */
+.hours {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error-message {
+    font-size: 0.8rem;
+    position: absolute;
+    margin-top: 5rem;
+}

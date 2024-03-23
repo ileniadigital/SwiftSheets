@@ -3,29 +3,20 @@
 /* Setting font family */
 .consultant-view {
     font-family: Inter;
-    padding-top: 0;
-}
-
-/* Setting flexbox */
-.consultant-view-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 }
 
 /* Aligning date */
 .consultant-view-header p {
-    margin: auto;
-    font-size: 1.875rem;
+    text-align: center;
+    font-size: 1.5rem;
     font-weight: 400;
-    padding: 0;
+    margin-bottom: 1.2rem;
 }
 
 /* Removing prior styling */
 button {
     background: none;
     border: none;
-    padding: 0;
 }
 
 /* Styling hover */

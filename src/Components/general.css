@@ -1,10 +1,7 @@
 /* Resetting default styles */
-body,
-html {
+* {
   margin: 0;
   padding: 0;
-}
-* {
   box-sizing: border-box;
 }
 
@@ -13,4 +10,6 @@ html {
   text-align: center;
   justify-content: center;
   align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
