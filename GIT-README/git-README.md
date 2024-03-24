@@ -1,5 +1,3 @@
-Certainly! Below is a README.md file content that provides instructions for common Git operations, specifically tailored for use on GitHub:
-
 ```markdown
 # My Project
 
