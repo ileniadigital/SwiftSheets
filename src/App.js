@@ -10,16 +10,19 @@ import Home from './Pages/Home';
 import LineManagerView from './Pages/LineManagerView';
 import Name from './Components/NavBar/Name';
 
+//ADD ROUTING BASED ON ROLE FROM DB
+const role='consultant';
+
 // Main App component
 function App() {
   // Render page based on location
   let page
   switch (window.location.pathname) {
-    default:
-      page= <Home/>
-      break
+    // default:
+    //   page= <LogIn/>
+    //   break
     case "/Home":
-      page= <Home/>
+      page= <Home view={role}/>
       break
     case "/Account":
       page= <Account/>
