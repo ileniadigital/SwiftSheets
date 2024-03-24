@@ -3,6 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Inter;
 }
 
 .name-container {
@@ -16,9 +17,8 @@
 
 
 ::-webkit-scrollbar {
-  width: 0.2rem;
-  height: 0.1rem;
-  margin: 3rem;
+  width: 0.7rem;
+  height: 1rem;
   background-color: transparent;
 }
 
@@ -30,6 +30,5 @@
 /* Setting colour for scrollbar thumb */
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(rgba(100, 42, 191, 1), rgba(44, 58, 197, 1));
-  border-radius: 0.2rem;
-  margin: 2rem;
+  border-radius: 0.6rem;
 }

@@ -1,26 +1,26 @@
 // Importing CSS
-import '../Components/ConsultantView/ConsultantView.css';
+import '../../Components/ConsultantView/Timesheet.css';
 
 // Importing Components
-import Week from '../Components/ConsultantView/Week/Week';
-import AddEvent from '../Components/ConsultantView/AddEvent/AddEvent';
+import Week from '../../Components/ConsultantView/Week/Week';
+import AddEvent from '../../Components/ConsultantView/AddEvent/AddEvent';
 import { FaCirclePlus } from "react-icons/fa6";
-import NoWorkingDaysError from '../Components/ConsultantView/NoWorkingDaysError/NoWorkingDaysError'
+import NoWorkingDaysError from '../../Components/ConsultantView/NoWorkingDaysError/NoWorkingDaysError'
 
 // Importing helper function
-import getDate from '../Components/ConsultantView/getDate'
+import getDate from '../../Components/ConsultantView/getDate'
 
 // Importing useState and useEffect
 import { useState } from 'react';
 
-export default function ConsultantView() {
+export default function Timesheet() {
 
     // Used to create and manage the week shown on the timesheet
     const [viewedWeek, setViewedWeek] = useState(new Date());
 
     /* Created to keep track of the component that has called the addEvent Component
        If the caller was the Hours component, the date for the add event input can be
-       predefined as hours fall within a particular day. If the ConsultantView 
+       predefined as hours fall within a particular day. If the Timesheet 
        Component called AddEvent, this input field will not be prefilled as it is a 
        general + icon that will be clicked, with no way of identifying the date of the
        event*/
@@ -59,6 +59,18 @@ export default function ConsultantView() {
         return `${date[0]}/${date[1]}/${date[2]}`
     }
 
+    // Testing retrieval of current timesheet
+    // Store the timesheet data in local storage
+    const event = {
+        name: 'test',
+        date: "2024-03-25",
+        type: "Project",
+        startTime: "17:00",
+        endTime: "20:30"
+    };
+  
+    localStorage.setItem('event', JSON.stringify(event));
+
 
     return (
     localStorage.getItem('daysWorked') !== "[]" ? (
@@ -68,7 +80,7 @@ export default function ConsultantView() {
             <p> 
                 {formatDate(viewedWeek, 1)} – {formatDate(viewedWeek, 7)}
             </p>
-            <button className='add-event-button' disabled = {timesheetStatus === "Submitted"} onClick={() => addEventHandler("ConsultantView", viewedWeek)}> 
+            <button className='add-event-button' disabled = {timesheetStatus === "Submitted"} onClick={() => addEventHandler("Timesheet", viewedWeek)}> 
                 <FaCirclePlus /> {/* Button icon */}
             </button>
         </div>

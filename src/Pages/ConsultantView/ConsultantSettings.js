@@ -1,6 +1,6 @@
 // Performing necessary imports
-import '../Components/general.css';
-import '../Components/ConsultantSettings/ConsultantSettings.css'
+import '../../Components/general.css';
+import '../../Components/ConsultantSettings/ConsultantSettings.css'
 import { useState, useEffect } from 'react';
 
 // Defines the structure of the settings page for consultants
@@ -13,26 +13,6 @@ export default function ConsultantSettings() {
     const [startWorkHours, setStartWorkHours] = useState(localStorage.getItem('startWorkHours') || "00:00")
     const [endWorkHours, setEndWorkHours] = useState(localStorage.getItem('endWorkHours') || "23:00")
 
-
-    // Initialising database values on component mount if values do not exist
-    useEffect(() => {
-        console.log(localStorage.getItem('daysWorked'))
-        if (!localStorage.getItem('daysWorked')) {
-            localStorage.setItem('daysWorked', JSON.stringify([0, 1, 2, 3, 4, 5, 6]))
-        }
-
-        if (!localStorage.getItem('startWorkHours')) {
-            localStorage.setItem('startWorkHours', "00:00")
-        }
-
-        if (!localStorage.getItem('endWorkHours')) {
-            localStorage.setItem('endWorkHours', "23:00")
-        }
-
-        if (!localStorage.getItem('24HoursWorked')) {
-            localStorage.setItem('24HoursWorked', false)    
-        }
-    }, [])
 
     // Default is that all days in the week are worked to account for the flexibility in consultant work schedules
     const [mondayWorked, setMondayWorked] = useState(daysWorked.includes(0))

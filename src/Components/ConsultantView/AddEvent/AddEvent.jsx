@@ -22,11 +22,11 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek})
         }
     }
 
-    /* Only needs to be rendered for ConsultantView component caller as its viewedWeek
+    /* Only needs to be rendered for Timesheet component caller as its viewedWeek
     argument will be a Date, compared to Hours' string */
     let startOfWeek, startOfWeekDay, startOfWeekMonth, startOfWeekYear;
     let endOfWeek, endOfWeekDay, endOfWeekMonth, endOfWeekYear;
-    if (componentCaller === "ConsultantView") {
+    if (componentCaller === "Timesheet") {
         // Determining date for start of week
          startOfWeek = new Date(viewedWeek); // Creates copy of current week
          startOfWeek.setDate(viewedWeek.getDate() - viewedWeek.getDay() + 1)  // Adds 1 as function starts from Sunday (o)
@@ -66,18 +66,14 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek})
         }
     }
 
-    // Keeps track of any messages that need to be set
-    const [errorMessage, setErrorMessage] = useState(null)
-    
+    // Retrieving values from local stroage - min and max values start/end time input can take
+    const startWorkHours = localStorage.getItem('startWorkHours')
+    const endWorkHours = localStorage.getItem('endWorkHours')
+
     // Handles validation after submit button has abeen pressed
     function handleSubmit(event) {
         event.preventDefault(); // Prevent submission until validation is complete
     }
-
-    /* Storing start and end time so they can be compared with one another and to ensure the start time is 
-       before the end time */
-    const [startTime, setStartTime] = useState(null)
-    const [endTime, setEndTime] = useState(null)
 
     return(
         <div className='add-event' onSubmit={handleSubmit}>
@@ -105,12 +101,12 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek})
 
                 <div className="input">
                     <label htmlFor="eventStartTime">Start Time</label>
-                    <input type="time" className='datetime' name = "eventStartTime" required onChange={(event) => setStartTime(event.target.value)}/>
+                    <input type="time" className='datetime' name = "eventStartTime" required min={startWorkHours} max={endWorkHours}/>
                 </div>
 
                 <div className="input">
                     <label htmlFor="eventEndTime">End Time</label>
-                    <input className='datetime' type="time" name = "eventEndTime" required onChange={(event) => setEndTime(event.target.value)}/>
+                    <input className='datetime' type="time" name = "eventEndTime" required min={startWorkHours} max={endWorkHours}/>
                 </div>
 
                 <div className="input">
@@ -146,8 +142,6 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek})
                 </div>
 
                 <input type="submit" value={"Add Event"} className='add-event-button'/>
-
-                {/* Show error message when it has a value */}
             </form>
         </div>
     )

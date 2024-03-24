@@ -10,8 +10,8 @@ import { useState } from 'react';
 export default function Hours({addEventHandler, date, timesheetStatus}) {
 
     // Retrieve start and end time from database to determine hours displayed
-    let startWorkHours = parseInt(localStorage.getItem('startWorkHours').slice(0,3))
-    let endWorkHours = parseInt(localStorage.getItem('endWorkHours').slice(0,3))
+    let startWorkHours = parseInt(localStorage.getItem('startWorkHours').slice(0,2))
+    let endWorkHours = parseInt(localStorage.getItem('endWorkHours').slice(0,2))
 
     /* Whether hour has been clicked on stored to determine whether to show add event icon
     (makes it easier to identify which time slot is being clicked on) */
@@ -33,6 +33,16 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
         endWorkHours = 23
     }
 
+
+    const event = JSON.parse(localStorage.getItem("event"))
+
+    const startTime = parseInt((JSON.parse(localStorage.getItem("event")).startTime).slice(0,2))
+    const startMinsTimeREM = parseInt((JSON.parse(localStorage.getItem("event")).startTime).slice(3,6))*0.05 || 60
+    const endTimeMinsREM = parseInt((JSON.parse(localStorage.getItem("event")).endTime).slice(3,6))*0.05
+    const endTime = parseInt((JSON.parse(localStorage.getItem("event")).endTime).slice(0,2))
+
+
+
     // Iterates through the hours of a day, creating a new button for each day (this will serve as a timesheet timeslot)
     for (let i = startWorkHours; i <= endWorkHours; i++)
     {
@@ -46,9 +56,36 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
             onMouseEnter={() => handleMouseEnter(i)} 
             onMouseLeave={handleMouseLeave}
             disabled={timesheetStatus === "Submitted"}>
+            {i === startTime && date === event.date ? 
+            (i === startWorkHours ? 
+                <div className={'add-event-button rounded-top'}
+                style={{ height: `${startMinsTimeREM}rem` }}
+                >
+
+                    {hoveredHour === i && <FaCirclePlus/>} {/* Show add event button if hour hovered over */}
+                    {i === startTime && date === event.date ? event.name : ''}
+                </div>
+                : 
+
+            (i === endWorkHours ? 
+                <div className={'add-event-button rounded-bottom'}
+                style={{ height: `${endTimeMinsREM}rem` }}>
+                    {hoveredHour === i && <FaCirclePlus/>} {/* Show add event button if hour hovered over */}
+                    {i === startTime && date === event.date ? event.name : ''}
+                </div>
+                : 
+                <div className='add-event-button event'> 
+                    {hoveredHour === i && <FaCirclePlus/>} {/* Show add event button if hour hovered over */}
+                    {i === startTime && date === event.date ? event.name : ''}
+                </div>
+
+            ))
+            : 
                 <div className='add-event-button'> 
                     {hoveredHour === i && <FaCirclePlus/>} {/* Show add event button if hour hovered over */}
+                    {i === startTime && date === event.date ? event.name : ''}
                 </div>
+            }
             </button>)
     }
     
