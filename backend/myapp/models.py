@@ -13,12 +13,6 @@ class User(models.Model):
 
     def __str__(self):
         return self.username
-    
-    def save(self, *args, **kwargs):
-        if not self.pk:  # Check if the object is being created (not updated)
-            self.password = 'pass' + self.username  
-        super().save(*args, **kwargs)
-
 class Timesheet(models.Model):
     REVIEW_STATUS_CHOICES = [
         ('Approved', 'Approved'),
@@ -80,9 +74,3 @@ class Notification(models.Model):
     notification_type = models.CharField(max_length=32, choices=NOTIFICATION_TYPE_CHOICES, default='Submitted')  # Default notification type
     created_at = models.DateTimeField(auto_now_add=True)
 
-# Additional methods for LineManager to fetch their specific timesheets
-class LineManager(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='line_manager_profile')
-
-    def get_unreviewed_timesheets(self):
-        return self.user.timesheets.filter(review_status='Pending')
