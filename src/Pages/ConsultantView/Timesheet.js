@@ -61,15 +61,25 @@ export default function Timesheet() {
 
     // Testing retrieval of current timesheet
     // Store the timesheet data in local storage
-    const event = {
+    const events = {
+        event1: {
         name: 'test',
         date: "2024-03-25",
         type: "Project",
-        startTime: "17:00",
-        endTime: "20:30"
+        startTime: "01:16",
+        endTime: "05:45"
+        },
+
+        // event2: {
+        //     name: 'test',
+        //     date: "2024-03-25",
+        //     type: "Project",
+        //     startTime: "10:20",
+        //     endTime: "11:30"
+        //     }
     };
   
-    localStorage.setItem('event', JSON.stringify(event));
+    localStorage.setItem('events', JSON.stringify(events))
 
 
     return (

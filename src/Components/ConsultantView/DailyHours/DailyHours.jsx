@@ -8,7 +8,7 @@ export default function DailyHours() {
     let endWorkHours = parseInt(localStorage.getItem('endWorkHours').slice(0,2))
 
     // Providing whole day as time slots if working hours extend across multiple days
-    if (localStorage.getItem('24HoursWorked') === true || startWorkHours > endWorkHours) {
+    if (localStorage.getItem('24HoursWorked') === "true" || startWorkHours > endWorkHours) {
         startWorkHours = 0
         endWorkHours = 23
     }
