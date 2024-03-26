@@ -30,9 +30,8 @@ export default function TimesheetDetails(timesheet) {
                 </div>
             </div>
             {/* Button redirects user to current timesheet */}
-            <button className='click'>
-                Click to View
-            </button>
+            <a className = 'click' href="/timesheet">Click to View</a>
+            
         </div>
     )
 }
