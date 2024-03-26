@@ -13,7 +13,16 @@ import fdmIcon from './logo/fdm-new-logo-green.svg';
 import Link from './Link';
 
 //Navigation bar component
-export default function NavBar(){
+export default function NavBar(props){
+    let view;
+    switch (props.view) {
+        case 'consultant':
+            view = '/consultantsettings';
+            break;
+        default:
+            view = '/settings';
+            break;
+    }
     return(
         <div className="navbar-container">
             <nav className="navbar">
@@ -23,8 +32,8 @@ export default function NavBar(){
                 {/* Navigation menu icons */}
                 <ul className="navbar-menu">
                     <Link href='/Home' className='navbar-link'><FaHome size={40}/></Link>
-                    <Link href='/Account' className='navbar-link'><VscAccount size={40} /></Link>                   
-                    <Link href='/Settings' className='navbar-link'><IoMdSettings size={40} /></Link>
+                    <Link href='/Account' className='navbar-link'><VscAccount size={40} /></Link> 
+                    <Link href={view} className='navbar-link'><IoMdSettings size={40} /></Link>
                 </ul>
             </nav>
         </div>

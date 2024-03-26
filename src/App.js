@@ -48,7 +48,7 @@ export default function App() {
   }
   return (
     <>
-        <NavBar/>
+        <NavBar view={role}/>
         <Name/>
         {page}
     </>
