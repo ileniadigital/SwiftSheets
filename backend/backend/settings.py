@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-a6b!m%)@)$id1!&yrjc0dgw)ql3c3vyai!mf57!@x8vqgc+4qo'
+SECRET_KEY = 'django-insecure-bs)myop02d=b(k+i*2jmzu-ujpug*$=xpk%sh$wnl+ckyt=sjz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -29,8 +29,8 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
 INSTALLED_APPS = [
+    'myapp.apps.MyappConfig', # added the my app
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -73,13 +73,23 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# SECRET_KEY=django-insecure-bs)myop02d=b(k+i*2jmzu-ujpug*$=xpk%sh$wnl+ckyt=sjz
+# DB_NAME=SwiftSheets-db
+# DB_USER=postgres
+# DB_PASSWORD=gugu@gaga21
+# DB_HOST=localhost
+# DB_PORT=5432
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'SwiftSheets-db', #name it this
+        'USER': 'postgres', #default
+        'PASSWORD': 'gugu@gaga21', #change to yours
+        'HOST': 'localhost', #defualt
+        'PORT': '5432', #default
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
