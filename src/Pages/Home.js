@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import '../Components/general.css'; //Import Styling
 
 //Import componentts
-import ConsultantView from './ConsultantView';
+import ConsultantHome from '././ConsultantView/ConsultantHome';
 import LineManagerView from './LineManagerView';
 import FinanceTeamView from './FinanceTeamView';
 
@@ -13,7 +13,7 @@ export default function Home(props) {
     let view;
     switch (props.view) {
         case 'consultant':
-            view = <ConsultantView />;
+            view = <ConsultantHome />;
             break;
         case 'linemanager':
             view = <LineManagerView />;
