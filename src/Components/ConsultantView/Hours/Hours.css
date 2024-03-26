@@ -17,6 +17,7 @@
 /* Setting layout */
 .hour-block {
     display: flex;
+    position: relative;
     height: 3rem;
 }
 

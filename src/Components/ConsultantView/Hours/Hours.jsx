@@ -16,7 +16,7 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
     let endWorkMins = parseInt(localStorage.getItem('endWorkHours').slice(3,5))
 
     /* Whether hour has been clicked on stored to determine whether to show add event icon
-    (makes it easier to identify which time slot is being clicked on) */
+       (makes it easier to identify which time slot is being clicked on) */
     const [hoveredHour, setHoveredHour]  = useState(null);
 
     const handleMouseEnter = (hour) => {
@@ -40,12 +40,50 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
         endWorkHours-=1
     }
 
+    let events = JSON.parse(localStorage.getItem('events'))
+
+    
     // Iterates through the hours of a day, creating a new button for each day (this will serve as a timesheet timeslot)
     for (let i = startWorkHours; i <= endWorkHours; i++)
     {
         /* Ternary operator used to ensure last div does not have a line underneath; maintaining rounded
         edges of border */
         const addUnderlineClass = i < endWorkHours;
+
+        let eventsPerHour = []
+        for (const e in events) {
+            let className = ''
+            let top = 0
+            let height = 0
+
+            let event = events[e]
+            let eventStartHour = parseInt(event.startTime.slice(0,2))
+            let eventEndHour = parseInt(event.endTime.slice(0,2))
+            // Ensures event is logged on the same day
+            if (event.date === date) {
+                let eventStartMin = parseInt(event.startTime.slice(3,5))
+                let eventEndMin = parseInt(event.endTime.slice(3,5))
+
+                // Performing checks where the event does not last more than a day
+                if (eventStartHour <= eventEndHour && i >= eventStartHour && i <= eventEndHour) {
+                    // Checks when start and end time are within the same hour and sets height accordingly
+                    if (eventStartHour === eventEndHour && i === eventStartHour) {
+                        className = 'event'
+                        height = 0.05 * (eventEndMin-eventStartMin)
+                        top = 0.05 * eventStartMin
+                        if (eventStartHour === startWorkHours && top < 0.9) {
+                            className += ' rounded-top'
+                        }
+                    }
+                }
+            }
+            eventsPerHour.push (
+                <div className={className}
+                style= {{top: `${top}rem`, height: `${height}rem`}}> 
+                </div>
+            )
+        }
+
         hoursArray.push(
             <button key={i} 
             className={`hour-block ${addUnderlineClass ? 'add-underline' : ''}`} 
@@ -53,8 +91,9 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
             onMouseEnter={() => handleMouseEnter(i)} 
             onMouseLeave={handleMouseLeave}
             disabled={timesheetStatus === "Submitted"}>
-                <div className='add-event-button'> 
-                    {hoveredHour === i && <FaCirclePlus/>} {/* Show add event button if hour hovered over */}
+                <div className= 'add-event-button event-container'>
+                    {eventsPerHour.length === 0 && hoveredHour === i && <FaCirclePlus/>} {/* Show add event button if hour hovered over */}
+                    {eventsPerHour}
                 </div>
             </button>)
     }

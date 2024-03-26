@@ -199,10 +199,21 @@ textarea {
     gap: 1rem;
 }
 
+/* Setting container */
+.event-container {
+    position: relative;
+    top: 0;
+    background-color: transparent;
+    height: 100%;
+    width: 100%;
+}
+
 /* Displaying event */
 .event {
-    background-color: #C5FF00;
+    /* background-color: #C5FF00; */
+    background-color: pink;
     width: 100%;
+    position: absolute;
 }
 
 /* Roudning border if event is at beginning/end */

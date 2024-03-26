@@ -64,19 +64,19 @@ export default function Timesheet() {
     const events = {
         event1: {
         name: 'test',
-        date: "2024-03-25",
+        date: "2024-03-26",
         type: "Project",
-        startTime: "01:16",
-        endTime: "05:45"
+        startTime: "06:16",
+        endTime: "06:30"
         },
 
-        // event2: {
-        //     name: 'test',
-        //     date: "2024-03-25",
-        //     type: "Project",
-        //     startTime: "10:20",
-        //     endTime: "11:30"
-        //     }
+        event2: {
+            name: 'yaf',
+            date: "2024-03-26",
+            type: "Project",
+            startTime: "06:40",
+            endTime: "06:57"
+            }
     };
   
     localStorage.setItem('events', JSON.stringify(events))
