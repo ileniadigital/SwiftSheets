@@ -10,14 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
-import environ
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-env = environ.Env()
-environ.Env.read_env()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -76,14 +73,21 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# SECRET_KEY=django-insecure-bs)myop02d=b(k+i*2jmzu-ujpug*$=xpk%sh$wnl+ckyt=sjz
+# DB_NAME=SwiftSheets-db
+# DB_USER=postgres
+# DB_PASSWORD=gugu@gaga21
+# DB_HOST=localhost
+# DB_PORT=5432
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env("DB_NAME"),
-        'USER': env("DB_USER"),
-        'PASSWORD': env("DB_PASSWORD"),
-        'HOST': env("DB_HOST"),
-        'PORT': env("DB_PORT"),
+        'NAME': 'SwiftSheets-db', #name it this
+        'USER': 'postgres', #default
+        'PASSWORD': 'gugu@gaga21', #change to yours
+        'HOST': 'localhost', #defualt
+        'PORT': '5432', #default
     }
 }
 
