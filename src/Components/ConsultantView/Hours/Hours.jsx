@@ -42,7 +42,7 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
 
     let events = JSON.parse(localStorage.getItem('events'))
 
-    let eventKey = 0
+    let eventKey = 0 // Unique key for each element of the array
     // Iterates through the hours of a day, creating a new button for each day (this will serve as a timesheet timeslot)
     for (let i = startWorkHours; i <= endWorkHours; i++)
     {
