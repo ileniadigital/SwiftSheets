@@ -89,7 +89,6 @@ export default function Timesheet() {
         <div className='consultant-view-header'>
             <p> 
                 {formatDate(viewedWeek, 1)} – {formatDate(viewedWeek, 7)}
-                
             </p>
             <button className='add-event-button' disabled = {timesheetStatus === "Submitted"} onClick={() => addEventHandler("Timesheet", viewedWeek)}> 
                 <FaCirclePlus /> {/* Button icon */}

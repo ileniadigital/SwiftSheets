@@ -15,6 +15,11 @@ export default function DailyHours() {
         endWorkHours = 23
     }
 
+    // No need to show hour block for hour that ends
+    if (endWorkMins == 0) {
+        endWorkHours-=1
+    }
+
     console.log(startWorkHours, endWorkHours)
     // Array created to store hours in a day, represented as time
     let dailyHours = []

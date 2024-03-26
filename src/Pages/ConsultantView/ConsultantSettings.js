@@ -1,6 +1,6 @@
 // Performing necessary imports
 import '../../Components/general.css';
-import '../../Components/ConsultantSettings/ConsultantSettings.css'
+import '../../Components/ConsultantView/ConsultantSettings/ConsultantSettings.css'
 import { useState, useEffect } from 'react';
 
 // Defines the structure of the settings page for consultants

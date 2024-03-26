@@ -70,18 +70,34 @@ label {
 }
 
 /* Styling input/select boxes */
-input, select, textarea {
+input, select {
     border: 0;
-    background-color: white;
     width: 14rem;
     margin: auto;
-    color: #1E1E1E;
-    background: #C5FF00;
+    color: white;
     height: 2rem;
     border-radius: 0.3rem;
     font-family: Inter;
     font-size: 1.3rem;
     box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Changing icon colour */
+.add-event ::-webkit-calendar-picker-indicator {
+    filter: invert(98%) sepia(2%) saturate(660%) hue-rotate(226deg) brightness(118%) contrast(100%);
+}
+
+/* Adding padding */
+select {
+    padding-left: 0.2rem;
+    padding-right: 4rem; 
+    border-right: 0.8rem solid transparent;
+}
+
+/* Adding padding */
+.event-name input{
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
 }
 
 /* Styling add event button */
@@ -110,16 +126,16 @@ input, select, textarea {
     position: relative;
     width: 2rem;
     height: 2rem;
-    background: white;
+    background: #1E1E1E;
     box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
     cursor: pointer;
     border-radius: 0.4rem;
-    color: white;
+    color: #1E1E1E;
 }
 
 /* Setting colour to white */
 .checkbox-container input:checked{
-    color: #1E1E1E;
+    color: white;
 }
 
 /* Styling checkbox */
@@ -161,9 +177,10 @@ textarea {
     resize: none;
     height: 7rem;
     width: 27.8rem;
+    border-radius: 0.3rem;
     font-size: 1rem;
     overflow-y: auto;
-    border-right: 0.3rem solid white;
+    border-right: 0.3rem solid #1E1E1E;
 }
 
 /* Adding padding */
@@ -188,7 +205,6 @@ textarea {
     width: 100%;
 }
 
-
 /* Roudning border if event is at beginning/end */
 .rounded-top {
     border-top-left-radius: 1.3rem;
@@ -198,12 +214,4 @@ textarea {
 .rounded-bottom {
     border-bottom-left-radius: 1.3rem;
     border-bottom-right-radius: 1.3rem;
-}
-
-/* Adding margin to ensure start time with minutes != 0 are moved up/down */
-.late-start {
-}
-
-.early-end {
-    margin-bottom: auto;
 }

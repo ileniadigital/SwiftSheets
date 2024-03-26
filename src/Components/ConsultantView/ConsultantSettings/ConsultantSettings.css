@@ -86,6 +86,16 @@ br {
     align-items: center;
 }
 
+/* Setting colour */
+.working-hours input {
+    color: #1E1E1E;
+}
+
+/* Changing icon colour */
+::-webkit-calendar-picker-indicator {
+    filter: invert(0%) sepia(34%) saturate(5951%) hue-rotate(125deg) brightness(118%) contrast(76%);
+}
+
 .error-message{
     font-size: 0.8rem;
     position: absolute;
@@ -119,8 +129,7 @@ br {
 
 /* Setting colour to white */
 .checkbox:checked {
-    color: black;
-
+    color: #1E1E1E;
 }
 
 /* Styling checkbox */

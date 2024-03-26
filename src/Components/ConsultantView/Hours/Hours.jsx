@@ -35,6 +35,10 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
         endWorkHours = 23
     }
 
+    // No need to show hour block for hour that ends
+    if (endWorkMins == 0) {
+        endWorkHours-=1
+    }
 
     // Iterates through the hours of a day, creating a new button for each day (this will serve as a timesheet timeslot)
     for (let i = startWorkHours; i <= endWorkHours; i++)
