@@ -1,7 +1,6 @@
 // Importing CSS
-import '../../Components/ConsultantView/Timesheet.css'
 import './ConsultantHome.css'
-import '../../Components/general.css'
+import '../../../Components/general.css'
 
 // Importing dropdown menu icons
 import { IoIosArrowDropupCircle } from "react-icons/io";
@@ -9,8 +8,8 @@ import { IoIosArrowDropdownCircle } from "react-icons/io";
 
 
 // Importing Components
-import TimesheetDetails from '../../Components/ConsultantView/TimesheetDetails/TimesheetDetails'
-import PastTimesheets from '../../Components/ConsultantView/PastTimesheets/PastTimesheets'
+import TimesheetDetails from '../../../Components/ConsultantView/TimesheetDetails/TimesheetDetails'
+import PastTimesheets from '../../../Components/ConsultantView/PastTimesheets/PastTimesheets'
 
 // Importing useState and useEffect
 import { useState, useEffect } from 'react';

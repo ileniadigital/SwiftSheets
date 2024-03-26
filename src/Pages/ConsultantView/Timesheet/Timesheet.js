@@ -1,14 +1,14 @@
 // Importing CSS
-import '../../Components/ConsultantView/Timesheet.css';
+import './Timesheet.css';
 
 // Importing Components
-import Week from '../../Components/ConsultantView/Week/Week';
-import AddEvent from '../../Components/ConsultantView/AddEvent/AddEvent';
+import Week from '../../../Components/ConsultantView/Week/Week';
+import AddEvent from '../../../Components/ConsultantView/AddEvent/AddEvent';
 import { FaCirclePlus } from "react-icons/fa6";
-import NoWorkingDaysError from '../../Components/ConsultantView/NoWorkingDaysError/NoWorkingDaysError'
+import NoWorkingDaysError from '../../../Components/ConsultantView/NoWorkingDaysError/NoWorkingDaysError'
 
 // Importing helper function
-import getDate from '../../Components/ConsultantView/getDate'
+import getDate from '../../../Components/ConsultantView/getDate'
 
 // Importing useState and useEffect
 import { useState } from 'react';

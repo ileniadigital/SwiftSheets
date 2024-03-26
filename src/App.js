@@ -5,12 +5,12 @@ import './Components/general.css';
 import NavBar from './Components/NavBar/NavBar';
 import Account from './Pages/Account';
 import Settings from './Pages/Settings';
-import ConsultantHome from './Pages/ConsultantView/ConsultantHome'
-import Timesheet from './Pages/ConsultantView/Timesheet';
+import ConsultantHome from './Pages/ConsultantView/ConsultantHome/ConsultantHome'
+import Timesheet from './Pages/ConsultantView/Timesheet/Timesheet';
 import Home from './Pages/Home';
 import LineManagerView from './Pages/LineManagerView';
 import Name from './Components/NavBar/Name';
-import ConsultantSettings from './Pages/ConsultantView/ConsultantSettings';
+import ConsultantSettings from './Pages/ConsultantView/ConsultantSettings/ConsultantSettings';
 
 //ADD ROUTING BASED ON ROLE FROM DB
 const role='consultant';
