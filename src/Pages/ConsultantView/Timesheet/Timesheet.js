@@ -105,7 +105,6 @@ export default function Timesheet() {
   
     localStorage.setItem('events', JSON.stringify(events))
 
-
     return (
     localStorage.getItem('daysWorked') !== "[]" ? (
     <div className = 'consultant-view'>
