@@ -99,7 +99,7 @@ export default function Timesheet() {
             date: "2024-03-27",
             type: "Project",
             startTime: "15:01",
-            endTime: "01:30"
+            endTime: "15:00"
             },
     };
   

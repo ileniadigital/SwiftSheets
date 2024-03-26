@@ -131,6 +131,7 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
                             className += ' rounded-top'
                         } 
                     } else if (i < eventEndHour) {
+                        className = 'event'
                         height = 3
                         if (i === startWorkHours) {
                             className = 'event rounded-top'
