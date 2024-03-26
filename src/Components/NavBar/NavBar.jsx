@@ -7,7 +7,7 @@ import { FaHome } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
 
 //Import FDM logo
-import fdmIcon from './logo/fdm-logo.svg';
+import fdmIcon from './logo/fdm-new-logo-green.svg';
 
 //Import Link component
 import Link from './Link';
