@@ -3,7 +3,7 @@
 /* Styling which includes centering the component at the center of the page */
 .add-event {
     position: fixed;
-    background: linear-gradient(rgba(100, 42, 191, 1), rgba(44, 58, 197, 1));
+    background-color: #C5FF00;
     color: white;
     top: 50%;
     left: 50%;
@@ -75,8 +75,8 @@ input, select, textarea {
 .add-new-event .add-event-button {
     margin: auto;
     margin-top: 0.1rem;
-    background-color: black;
-    color: white;
+    background-color:white;
+    color: black;
     width: 7rem;
 }
 
@@ -97,15 +97,16 @@ input, select, textarea {
     position: relative;
     width: 2rem;
     height: 2rem;
-    background: black;
+    background: white;
     box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
     cursor: pointer;
     border-radius: 0.4rem;
+    color: white;
 }
 
 /* Setting colour to white */
 .checkbox-container input:checked{
-    color: white;
+    color: black;
 }
 
 /* Styling checkbox */
@@ -170,7 +171,7 @@ textarea {
 
 /* Displaying event */
 .event {
-    background: rgba(119, 37, 189, 1);
+    background-color: #C5FF00;
     width: 100%;
 }
 

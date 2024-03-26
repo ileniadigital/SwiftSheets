@@ -54,7 +54,7 @@ button {
 
 /* Styling submit button */
 .submit-button {
-    background: linear-gradient(rgba(100, 42, 191, 1), rgba(44, 58, 197, 1));
+    background-color: #C5FF00;
     font: Inter;
     color: white;
     padding: 0;
@@ -92,12 +92,12 @@ button {
 .consultant-view-header svg {
     height: 3rem;
     width: auto;
-    filter: invert(19%) sepia(48%) saturate(4862%) hue-rotate(258deg) brightness(87%) contrast(97%);
+    filter: invert(95%) sepia(94%) saturate(2126%) hue-rotate(15deg) brightness(100%) contrast(103%);
 }
 
 /* Setting button colour on hover */
 .consultant-view-header svg:hover {
-    filter: invert(19%) sepia(66%) saturate(4479%) hue-rotate(236deg) brightness(79%) contrast(96%);
+    filter: invert(100%) sepia(95%) saturate(19%) hue-rotate(329deg) brightness(105%) contrast(104%);
 }
 
 /* Moving button closer to timesheet */

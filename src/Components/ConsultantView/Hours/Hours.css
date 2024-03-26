@@ -2,10 +2,8 @@
 
 /* Styling border */
 .hours-container {
-    background: linear-gradient(white, white) padding-box,
-        linear-gradient(to bottom, rgba(100, 42, 191, 1), rgba(44, 58, 197, 1)) border-box;
     border-radius: 1.563rem;
-    border: 0.1875rem solid transparent;
+    border: 0.1875rem solid #C5FF00;
     display: grid;
     width: 100%;
     height: 100%;
@@ -13,7 +11,7 @@
 
 /* Adding underline to separate time slots */
 .add-underline {
-    border-bottom: 0.1875rem solid rgba(119, 37, 189, 1);
+    border: 0.1875rem solid #C5FF00;
 }
 
 /* Setting layout */
@@ -35,10 +33,10 @@
 }
 
 .hour-block svg {
-    filter: invert(19%) sepia(48%) saturate(4862%) hue-rotate(258deg) brightness(87%) contrast(97%);
+    filter: invert(95%) sepia(94%) saturate(2126%) hue-rotate(15deg) brightness(100%) contrast(103%);
 }
 
 /* Setting button colour on hover */
 .hour-block svg:hover {
-    filter: invert(19%) sepia(66%) saturate(4479%) hue-rotate(236deg) brightness(79%) contrast(96%);
+    filter: invert(100%) sepia(95%) saturate(19%) hue-rotate(329deg) brightness(105%) contrast(104%);
 }

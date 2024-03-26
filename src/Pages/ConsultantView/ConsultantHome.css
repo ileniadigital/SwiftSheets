@@ -26,12 +26,12 @@
 .dropdown svg {
     height: 1.5rem;
     width: auto;
-    filter: invert(19%) sepia(48%) saturate(4862%) hue-rotate(258deg) brightness(87%) contrast(97%);
+    filter: invert(95%) sepia(94%) saturate(2126%) hue-rotate(15deg) brightness(100%) contrast(103%);
 }
 
 /* Setting dropdown hover colour */
 .dropdown svg:hover {
-    filter: invert(19%) sepia(66%) saturate(4479%) hue-rotate(236deg) brightness(79%) contrast(96%);
+    filter: invert(100%) sepia(95%) saturate(19%) hue-rotate(329deg) brightness(105%) contrast(104%);
 }
 
 /* Centering dropdown icons */

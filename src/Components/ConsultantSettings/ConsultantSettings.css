@@ -44,17 +44,16 @@
     background: gray;
     width: 3rem;
     box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
-    color: white;
 }
 
 
 /* Defining hover colour/background colour for selected day */
 .day-of-week:hover, .worked-day {
-    background: linear-gradient(rgba(100, 42, 191, 1), rgba(44, 58, 197, 1));
+    background: #C5FF00;
 }
 
 .worked-day:hover {
-    background: gray;
+    background: white;
 }
 
 /* Styling line used to separate settings */
@@ -63,13 +62,12 @@ br {
     display: block; 
     content: ""; 
     height: 0.1rem;
-    background: linear-gradient(rgba(100, 42, 191, 1), rgba(44, 58, 197, 1));
+    background: #C5FF00;
 }
 
 /* Styling input */
 .settings input {
-    background: linear-gradient(rgba(100, 42, 191, 1), rgba(44, 58, 197, 1));
-    color: white;
+    background: #C5FF00;
     width: 6.5rem;
     text-align: center;
 }
@@ -107,8 +105,31 @@ br {
     margin-left: 1rem;
 }
 
-/* Styling box when checked */
-.checkbox:checked {
-    background: linear-gradient(rgba(100, 42, 191, 1), rgba(44, 58, 197, 1));
-    /* accent-color: rgba(100, 42, 191, 1); */
+.checkbox {
+    -webkit-appearance: none; /* Removing default box */
+    position: relative;
+    width: 2rem;
+    height: 2rem;
+    background: white;
+    box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    border-radius: 0.4rem;
+    color: #C5FF00;
+    font-size: 1rem;
+}
+
+/* Setting colour to white */
+.checkbox:checked{
+    color: black;
+
+}
+
+/* Styling checkbox */
+.checkbox::before{
+    position: absolute;
+    content:'\2713';
+    top: 50%;
+    left: 50%;    
+    transform: translate(-50%, -50%);
+    pointer-events: none;
 }
