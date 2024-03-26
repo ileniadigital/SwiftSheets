@@ -50,7 +50,7 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
         edges of border */
         const addUnderlineClass = i < endWorkHours;
 
-        let eventsPerHour = []
+        let eventsPerHour = [] // Creating array to store event hours
         for (const e in events) {
             let className = ''
             let top = 0
