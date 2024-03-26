@@ -11,7 +11,7 @@
 
 /* Adding underline to separate time slots */
 .add-underline {
-    border: 0.1875rem solid #C5FF00;
+    border-bottom: 0.1875rem solid #C5FF00;
 }
 
 /* Setting layout */
@@ -33,10 +33,10 @@
 }
 
 .hour-block svg {
-    filter: invert(95%) sepia(94%) saturate(2126%) hue-rotate(15deg) brightness(100%) contrast(103%);
+    fill: #C5FF00;
 }
 
 /* Setting button colour on hover */
 .hour-block svg:hover {
-    filter: invert(100%) sepia(95%) saturate(19%) hue-rotate(329deg) brightness(105%) contrast(104%);
+    fill: white;
 }

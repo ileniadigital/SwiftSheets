@@ -11,7 +11,9 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
 
     // Retrieve start and end time from database to determine hours displayed
     let startWorkHours = parseInt(localStorage.getItem('startWorkHours').slice(0,2))
+    let startWorkMins = parseInt(localStorage.getItem('startWorkHours').slice(3,5))
     let endWorkHours = parseInt(localStorage.getItem('endWorkHours').slice(0,2))
+    let endWorkMins = parseInt(localStorage.getItem('endWorkHours').slice(3,5))
 
     /* Whether hour has been clicked on stored to determine whether to show add event icon
     (makes it easier to identify which time slot is being clicked on) */
@@ -28,7 +30,7 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
     let hoursArray = []
 
     // Providing whole day as time slots if working hours extend across multiple days
-    if (localStorage.getItem('24HoursWorked') === "true" || startWorkHours > endWorkHours) {
+    if (localStorage.getItem('24HoursWorked') === "true" || startWorkHours > endWorkHours || (startWorkHours === endWorkHours && startWorkMins > endWorkMins)) {
         startWorkHours = 0
         endWorkHours = 23
     }

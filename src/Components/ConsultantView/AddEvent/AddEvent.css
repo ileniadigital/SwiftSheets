@@ -4,7 +4,6 @@
 .add-event {
     position: fixed;
     background-color: #C5FF00;
-    color: white;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -17,16 +16,22 @@
 
 /* Styling button used to close event */
 .close-event {
-    color: white;
+    fill: white;
     margin-top: 1rem;
     margin-left: auto;
     margin-right: 1rem;
     font-size: 2rem;
 }
 
+.close-event svg{
+    fill: #1E1E1E;
+    background-color: #C5FF00;
+}
+
 /* Styling button colour on close */
-.close-event:hover {
-    color: black;
+.close-event svg:hover {
+    background-color: #C5FF00;
+    fill: white;
 }
 
 /* Styling addEvent inputs, centering on div */
@@ -34,19 +39,23 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: #C5FF00;
     gap: 1.6rem;
 }
 
 /* Styling log event heading */
 .log-event-heading {
     margin: auto;
+    background: #C5FF00;
     margin-bottom: 2.5rem;
+    color: #1E1E1E;
 }
 
 /* Styling input div */
 .input {
     display: flex;
     gap: 2.5rem;
+    background: #C5FF00;
     align-items: center;
 }
 
@@ -55,6 +64,8 @@ label {
     width: 11.3rem;
     font-size: 1.5rem;
     font-family: Inter;
+    color: #1E1E1E;
+    background: #C5FF00;
     text-align: left;
 }
 
@@ -64,6 +75,8 @@ input, select, textarea {
     background-color: white;
     width: 14rem;
     margin: auto;
+    color: #1E1E1E;
+    background: #C5FF00;
     height: 2rem;
     border-radius: 0.3rem;
     font-family: Inter;
@@ -74,16 +87,16 @@ input, select, textarea {
 /* Styling add event button */
 .add-new-event .add-event-button {
     margin: auto;
-    margin-top: 0.1rem;
-    background-color:white;
-    color: black;
+    margin-top: 0.1rem;    
+    background-color:#1E1E1E;
+    color: white;
     width: 7rem;
 }
 
 /* Adding styling on hover */
 .add-new-event .add-event-button:hover {
     background-color: white;
-    color: black;
+    color: #1E1E1E;
 }
 
 /* Code to move checkbox left */
@@ -106,7 +119,7 @@ input, select, textarea {
 
 /* Setting colour to white */
 .checkbox-container input:checked{
-    color: black;
+    color: #1E1E1E;
 }
 
 /* Styling checkbox */
@@ -150,7 +163,6 @@ textarea {
     width: 27.8rem;
     font-size: 1rem;
     overflow-y: auto;
-    margin-right: 20rem;
     border-right: 0.3rem solid white;
 }
 
@@ -166,6 +178,7 @@ textarea {
     align-items: start;
     margin-right: auto;
     margin-left: 4.05rem;
+    background: #C5FF00;
     gap: 1rem;
 }
 

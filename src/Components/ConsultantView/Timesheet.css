@@ -2,7 +2,6 @@
 
 /* Setting font family */
 .consultant-view {
-    font-family: Inter;
     margin-bottom: 1rem;
 }
 
@@ -56,7 +55,7 @@ button {
 .submit-button {
     background-color: #C5FF00;
     font: Inter;
-    color: white;
+    color: #1E1E1E;
     padding: 0;
     padding-left: 1rem;
     padding-right: 1rem;
@@ -85,19 +84,19 @@ button {
 }
 
 .status.saved { 
-    color: rgba(100, 42, 191, 1);
+    color: #C5FF00;
 }
 
 /* Setting default button styling */
 .consultant-view-header svg {
     height: 3rem;
     width: auto;
-    filter: invert(95%) sepia(94%) saturate(2126%) hue-rotate(15deg) brightness(100%) contrast(103%);
+    fill: #C5FF00;
 }
 
 /* Setting button colour on hover */
 .consultant-view-header svg:hover {
-    filter: invert(100%) sepia(95%) saturate(19%) hue-rotate(329deg) brightness(105%) contrast(104%);
+    fill: white;
 }
 
 /* Moving button closer to timesheet */
@@ -109,7 +108,7 @@ button {
 
 /* Changing + button colour to grey so it's easier for users to understand that they cannot add a new event after submission */
 .consultant-view-header .add-event-button:disabled svg {
-    filter: invert(54%) sepia(4%) saturate(0%) hue-rotate(186deg) brightness(92%) contrast(86%);
+    fill: gray;
 }
 
 

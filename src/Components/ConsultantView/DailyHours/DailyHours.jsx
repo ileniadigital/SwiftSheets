@@ -5,10 +5,12 @@ export default function DailyHours() {
 
     // Retrieve start and end time from database 
     let startWorkHours = parseInt(localStorage.getItem('startWorkHours').slice(0,2))
+    let startWorkMins = parseInt(localStorage.getItem('startWorkHours').slice(3,5))
     let endWorkHours = parseInt(localStorage.getItem('endWorkHours').slice(0,2))
+    let endWorkMins = parseInt(localStorage.getItem('endWorkHours').slice(3,5))
 
     // Providing whole day as time slots if working hours extend across multiple days
-    if (localStorage.getItem('24HoursWorked') === "true" || startWorkHours > endWorkHours) {
+    if (localStorage.getItem('24HoursWorked') === "true" || startWorkHours > endWorkHours || startWorkHours === endWorkHours && startWorkMins > endWorkMins) {
         startWorkHours = 0
         endWorkHours = 23
     }

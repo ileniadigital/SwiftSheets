@@ -50,10 +50,12 @@
 /* Defining hover colour/background colour for selected day */
 .day-of-week:hover, .worked-day {
     background: #C5FF00;
+    color: #1E1E1E;
 }
 
 .worked-day:hover {
-    background: white;
+    background: gray;
+    color: white;
 }
 
 /* Styling line used to separate settings */
@@ -108,18 +110,15 @@ br {
 .checkbox {
     -webkit-appearance: none; /* Removing default box */
     position: relative;
-    width: 2rem;
-    height: 2rem;
     background: white;
     box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
     cursor: pointer;
-    border-radius: 0.4rem;
     color: #C5FF00;
     font-size: 1rem;
 }
 
 /* Setting colour to white */
-.checkbox:checked{
+.checkbox:checked {
     color: black;
 
 }
