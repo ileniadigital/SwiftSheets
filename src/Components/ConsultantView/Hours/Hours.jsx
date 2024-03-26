@@ -42,7 +42,7 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
 
     let events = JSON.parse(localStorage.getItem('events'))
 
-    
+    let eventKey = 0
     // Iterates through the hours of a day, creating a new button for each day (this will serve as a timesheet timeslot)
     for (let i = startWorkHours; i <= endWorkHours; i++)
     {
@@ -59,13 +59,12 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
             let event = events[e]
             let eventStartHour = parseInt(event.startTime.slice(0,2))
             let eventEndHour = parseInt(event.endTime.slice(0,2))
+            let eventStartMin = parseInt(event.startTime.slice(3,5))
+            let eventEndMin = parseInt(event.endTime.slice(3,5))
             // Ensures event is logged on the same day
             if (event.date === date) {
-                let eventStartMin = parseInt(event.startTime.slice(3,5))
-                let eventEndMin = parseInt(event.endTime.slice(3,5))
-
                 // Performing checks where the event does not last more than a day
-                if (eventStartHour <= eventEndHour && i >= eventStartHour && i <= eventEndHour) {
+                if (((eventStartHour < eventEndHour) || (eventStartHour === eventEndHour && eventStartMin < eventEndMin)) && i >= eventStartHour && i <= eventEndHour) {
                     // Checks when start and end time are within the same hour and sets height accordingly
                     if (eventStartHour === eventEndHour && i === eventStartHour) {
                         className = 'event'
@@ -73,15 +72,78 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
                         top = 0.05 * eventStartMin
                         if (eventStartHour === startWorkHours && top < 0.9) {
                             className += ' rounded-top'
+                        } else if (eventStartHour === endWorkHours && top+height > 2) {
+                            className += ' rounded-bottom'
                         }
+                    } else {
+                        // Checks when start time is below end time
+                        if (i === eventStartHour) {
+                            className = 'event'
+                            top = 0.05 * eventStartMin
+                            height = 3-top
+                            if (eventStartHour === startWorkHours && top < 0.9) {
+                                className += ' rounded-top' 
+                            }
+                        } else if (i === eventEndHour) {
+                            className = 'event'
+                            height = 0.05 * eventEndMin
+                            // No need for top as it is a continutation of the above
+                            if (i === endWorkHours && top+height > 2) {
+                                className += ' rounded-bottom'
+                            }
+                        } else {
+                            className = 'event'
+                            height = 3 // Take up full hour block
+
+                            if (((eventEndHour === endWorkHours+1 && eventEndMin === 0) && i === eventEndHour-1) && top+height > 2) {
+                                className += ' rounded-bottom'
+                            }
+
+                        }
+                    }
+                } else if (eventStartHour > eventEndHour || (eventStartHour === eventEndHour) && eventStartMin > eventEndMin) {
+                    // Handling the case where worker works for over 2 days
+                    if (i === eventStartHour) {
+                        className = 'event'
+                        top = 0.05 * eventStartMin
+                        height = 3-top
+                        if (eventStartHour === startWorkHours && top < 0.9) {
+                            className += ' rounded-top' 
+                        }
+                    } else if (i > eventStartHour && i > eventEndHour) {
+                        // Regular hour blocks
+                        className = 'event'
+                        height = 3
+                        if (i === endWorkHours && top < 0.9) {
+                            className += ' rounded-bottom' 
+                        }
+                    } 
+                }
+            } else if (eventStartHour > eventEndHour || (eventStartHour === eventEndHour) && eventStartMin > eventEndMin) {
+                const nextEventDay = new Date(event.date).getDate()+1
+                const dateDay = new Date(date).getDate()
+                if (nextEventDay === dateDay) {
+                    // Considering next day
+                    if (i === eventEndHour && eventEndMin !== 0) {
+                        height = 0.05*eventEndMin
+                        className = 'event'
+                        if (i === startWorkHours) {
+                            className += ' rounded-top'
+                        } 
+                    } else if (i < eventEndHour) {
+                        height = 3
+                        if (i === startWorkHours) {
+                            className = 'event rounded-top'
+                        } 
                     }
                 }
             }
             eventsPerHour.push (
-                <div className={className}
+                <div className={className} key={eventKey}
                 style= {{top: `${top}rem`, height: `${height}rem`}}> 
                 </div>
             )
+            eventKey++
         }
 
         hoursArray.push(

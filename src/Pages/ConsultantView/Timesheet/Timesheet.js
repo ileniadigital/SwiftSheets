@@ -63,20 +63,44 @@ export default function Timesheet() {
     // Store the timesheet data in local storage
     const events = {
         event1: {
-        name: 'test',
-        date: "2024-03-26",
-        type: "Project",
-        startTime: "06:16",
-        endTime: "06:30"
+            name: 'test',
+            date: "2024-03-26",
+            type: "Project",
+            startTime: "15:16",
+            endTime: "15:50"
         },
 
         event2: {
             name: 'yaf',
             date: "2024-03-26",
             type: "Project",
-            startTime: "06:40",
-            endTime: "06:57"
-            }
+            startTime: "00:10",
+            endTime: "02:00"
+            },
+
+        event3: {
+            name: 'erer',
+            date: "2024-03-28",
+            type: "Project",
+            startTime: "14:57",
+            endTime: "15:16"
+            },
+
+        event4: {
+            name: 'erer',
+            date: "2024-03-25",
+            type: "Project",
+            startTime: "06:00",
+            endTime: "16:00"
+            },
+
+        event5: {
+            name: '5',
+            date: "2024-03-27",
+            type: "Project",
+            startTime: "15:01",
+            endTime: "01:30"
+            },
     };
   
     localStorage.setItem('events', JSON.stringify(events))
