@@ -28,8 +28,8 @@
 
 /* Styling button */
 .click {
-    background-color: black;
-    color: white;
+    background-color: #C5FF00;
+    color: #1e1e1e;
     font-size: 1rem;
     padding: 0.5rem;
     border-radius: 1rem;
@@ -37,6 +37,5 @@
 
 /* Styling hover colour */
 .click:hover {
-    color: black;
     background-color: white;
 }
