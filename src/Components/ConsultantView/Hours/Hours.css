@@ -27,14 +27,15 @@
 }
 
 /* Setting dimensions */
-.hour-block .add-event-button svg{
+.hour-block svg {
     height: 2rem;
     width: auto;
     opacity: 50%;
-}
-
-.hour-block svg {
     fill: #C5FF00;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 /* Setting button colour on hover */

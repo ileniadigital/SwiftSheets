@@ -51,8 +51,10 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
         const addUnderlineClass = i < endWorkHours;
 
         let eventsPerHour = [] // Creating array to store event hours
+        let numberOfEvents = 0
+        
         for (const e in events) {
-            let className = ''
+            let className = 'add-event-button'
             let top = 0
             let height = 0
 
@@ -75,6 +77,7 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
                         } else if (eventStartHour === endWorkHours && top+height > 2) {
                             className += ' rounded-bottom'
                         }
+                        numberOfEvents++
                     } else {
                         // Checks when start time is below end time
                         if (i === eventStartHour) {
@@ -84,21 +87,23 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
                             if (eventStartHour === startWorkHours && top < 0.9) {
                                 className += ' rounded-top' 
                             }
-                        } else if (i === eventEndHour) {
+                            numberOfEvents++
+                        } else if (i === eventEndHour && eventEndMin !== 0) {
                             className = 'event'
                             height = 0.05 * eventEndMin
                             // No need for top as it is a continutation of the above
                             if (i === endWorkHours && top+height > 2) {
                                 className += ' rounded-bottom'
                             }
-                        } else {
+                            numberOfEvents++
+                        } else if (!(i === eventEndHour && eventEndMin === 0)){
                             className = 'event'
                             height = 3 // Take up full hour block
 
                             if (((eventEndHour === endWorkHours+1 && eventEndMin === 0) && i === eventEndHour-1) && top+height > 2) {
                                 className += ' rounded-bottom'
                             }
-
+                            numberOfEvents++
                         }
                     }
                 } else if (eventStartHour > eventEndHour || (eventStartHour === eventEndHour) && eventStartMin > eventEndMin) {
@@ -110,6 +115,7 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
                         if (eventStartHour === startWorkHours && top < 0.9) {
                             className += ' rounded-top' 
                         }
+                        numberOfEvents++
                     } else if (i > eventStartHour && i > eventEndHour) {
                         // Regular hour blocks
                         className = 'event'
@@ -117,6 +123,7 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
                         if (i === endWorkHours && top < 0.9) {
                             className += ' rounded-bottom' 
                         }
+                        numberOfEvents++
                     } 
                 }
             } else if (eventStartHour > eventEndHour || (eventStartHour === eventEndHour) && eventStartMin > eventEndMin) {
@@ -130,12 +137,14 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
                         if (i === startWorkHours) {
                             className += ' rounded-top'
                         } 
+                        numberOfEvents++
                     } else if (i < eventEndHour) {
                         className = 'event'
                         height = 3
                         if (i === startWorkHours) {
-                            className = 'event rounded-top'
+                            className += ' rounded-top'
                         } 
+                        numberOfEvents++
                     }
                 }
             }
@@ -154,8 +163,8 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
             onMouseEnter={() => handleMouseEnter(i)} 
             onMouseLeave={handleMouseLeave}
             disabled={timesheetStatus === "Submitted"}>
-                <div className= 'add-event-button event-container'>
-                    {eventsPerHour.length === 0 && hoveredHour === i && <FaCirclePlus/>} {/* Show add event button if hour hovered over */}
+                <div className= 'event-container'>
+                    {numberOfEvents === 0 && hoveredHour === i && <FaCirclePlus/>} {/* Show add event button if hour hovered over */}
                     {eventsPerHour}
                 </div>
             </button>)
