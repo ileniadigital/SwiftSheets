@@ -1,4 +1,4 @@
-import '../Components/LineManagerView/LineManagerView.css'; //Import styling
+import '../Components/TimesheetListView/TimesheetListView.css'; //Import styling
 import ConsultantTimesheet from '../Components/LineManagerView/ConsultantTimesheet/ConsultantTimesheet';
 
 //MODIFY TO MAKE SCROLLABLE PAGES
@@ -54,7 +54,7 @@ const timesheets=[
   },
 ]
 //LineManagerView component
-export default function LineManagerView() {
+export default function TimesheetListView() {
   return (
     <div className='linemanager-container'>
       {/* Categories */}

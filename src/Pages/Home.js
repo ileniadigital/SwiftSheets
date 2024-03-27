@@ -4,8 +4,7 @@ import '../Components/general.css'; //Import Styling
 
 //Import componentts
 import ConsultantView from './ConsultantView';
-import LineManagerView from './LineManagerView';
-import FinanceTeamView from './FinanceTeamView';
+import TimesheetListView from './TimesheetListView';
 
 
 export default function Home(props) {
@@ -16,10 +15,10 @@ export default function Home(props) {
             view = <ConsultantView />;
             break;
         case 'linemanager':
-            view = <LineManagerView />;
+            view = <TimesheetListView />;
             break;
         case 'financeteam':
-            view = <FinanceTeamView />;
+            view = <TimesheetListView  />;
             break;
     }
     return (
@@ -28,19 +27,3 @@ export default function Home(props) {
         </div>
     );
 }
-
-// function View1() {
-//     return <h1>View 1</h1>;
-// }
-
-// function View2() {
-//     return <h1>View 2</h1>;
-// }
-
-// function View3() {
-//     return <h1>View 3</h1>;
-// }
-
-// function DefaultView() {
-//     return <h1>Default View</h1>;
-// }
