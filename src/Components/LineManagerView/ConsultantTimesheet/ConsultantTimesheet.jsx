@@ -6,13 +6,16 @@ import Date from './Date';
 import ConsultantName from './ConsultantName';
 
 // Consultant Timesheet component for Line Manager and Finance Team Member
-export default function ConsultantTimesheet() {
+export default function ConsultantTimesheet(props) {
+    const {name, dates, reviewStatus, paymentStatus} = props;
     return (
         <div className="consultantTimesheet-container">
-            <ConsultantName/>
-            <Date/>
-            <Status/>
-            <Status/>
+            <ConsultantName name={name}/>
+            <Date dates={dates}/>
+            {/* Review status */}
+            <Status status={reviewStatus}/>
+            {/* Payment status */}
+            <Status status={paymentStatus}/>
         </div>
     )
 }

@@ -49,3 +49,7 @@
   margin-top: 1rem;
   text-align: center;
 }
+
+#welcomeMessage h1 {
+  color: white;
+}

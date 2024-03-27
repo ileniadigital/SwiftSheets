@@ -7,11 +7,8 @@
   justify-content: center;
   width: 70rem;
   height: 40rem;
-  background: linear-gradient(white, white) padding-box,
-    linear-gradient(to bottom, rgba(100, 42, 191, 1), rgba(44, 58, 197, 1))
-      border-box;
   border-radius: 1.5rem;
-  border: 0.2rem solid transparent;
+  border: 0.2rem solid #c5ff00;
   margin-left: 10rem;
   margin-top: 3rem;
 }
@@ -28,3 +25,5 @@
   margin: -7 0 -7 0;
   color: grey;
 }
+
+/* Styling for timesheets container */

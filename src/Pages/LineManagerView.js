@@ -3,9 +3,58 @@ import ConsultantTimesheet from '../Components/LineManagerView/ConsultantTimeshe
 
 //MODIFY TO MAKE SCROLLABLE PAGES
 //MODIFY TO HAVE FILTERS AT THE TOP
-
+const timesheets=[
+  {
+    "name": "John Doe",
+    "dates": "01/01/2021 - 01/07/2021",
+    "reviewStatus": "Pending",
+    "paymentStatus": "Pending"
+  },
+  {
+    "name": "Jane Smith",
+    "dates": "01/01/2021 - 01/07/2021",
+    "reviewStatus": "Pending",
+    "paymentStatus": "Rejected"
+  },
+  {
+    "name": "John Smith",
+    "dates": "01/01/2021 - 01/07/2021",
+    "reviewStatus": "Approved",
+    "paymentStatus": "Pending"
+  },
+  {
+    "name": "Jonny Smith",
+    "dates": "01/01/2021 - 01/07/2021",
+    "reviewStatus": "Pending",
+    "paymentStatus": "Rejected"
+  },
+  {
+    "name": "John Doe",
+    "dates": "01/01/2021 - 01/07/2021",
+    "reviewStatus": "Pending",
+    "paymentStatus": "Pending"
+  },
+  {
+    "name": "Jane Smith",
+    "dates": "01/01/2021 - 01/07/2021",
+    "reviewStatus": "Pending",
+    "paymentStatus": "Rejected"
+  },
+  {
+    "name": "John Doe",
+    "dates": "01/01/2021 - 01/07/2021",
+    "reviewStatus": "Pending",
+    "paymentStatus": "Pending"
+  },
+  {
+    "name": "Jane Smith",
+    "dates": "01/01/2021 - 01/07/2021",
+    "reviewStatus": "Pending",
+    "paymentStatus": "Rejected"
+  },
+]
 //LineManagerView component
-function LineManagerView() {
+export default function LineManagerView() {
   return (
     <div className='linemanager-container'>
       {/* Categories */}
@@ -25,14 +74,10 @@ function LineManagerView() {
       </div>
       {/* Displaying consultant timesheets */}
       <div className='timesheet-container'>
-        <ConsultantTimesheet/>
-        <ConsultantTimesheet/>
-        <ConsultantTimesheet/>
-        <ConsultantTimesheet/>
+        {timesheets.map((timesheet, index) => (
+          <ConsultantTimesheet key={index} name={timesheet.name} dates={timesheet.dates} reviewStatus={timesheet.reviewStatus} paymentStatus={timesheet.paymentStatus}/>
+        ))}
       </div>
     </div>
   );
 }
-
-//Export LineManagerView component
-export default LineManagerView;

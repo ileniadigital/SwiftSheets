@@ -14,3 +14,7 @@ html {
   justify-content: center;
   align-items: center;
 }
+
+body {
+  background-color: #1e1e1e;
+}
