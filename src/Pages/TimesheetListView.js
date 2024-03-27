@@ -1,5 +1,5 @@
 import '../Components/TimesheetListView/TimesheetListView.css'; //Import styling
-import ConsultantTimesheet from '../Components/LineManagerView/ConsultantTimesheet/ConsultantTimesheet';
+import ConsultantTimesheet from '../Components/TimesheetListView/ConsultantTimesheet/ConsultantTimesheet';
 
 //MODIFY TO MAKE SCROLLABLE PAGES
 //MODIFY TO HAVE FILTERS AT THE TOP

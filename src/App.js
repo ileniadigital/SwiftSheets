@@ -22,6 +22,7 @@ function App() {
     //   page= <LogIn/>
     //   break
     case "/Home":
+    case "/":
       page= <Home view={role}/>
       break
     case "/Account":
