@@ -4,8 +4,6 @@ import '../Components/general.css'; //Import Styling
 
 //Import componentts
 import ConsultantHome from './ConsultantView/ConsultantHome/ConsultantHome';
-import LineManagerView from './LineManagerView';
-import FinanceTeamView from './FinanceTeamView';
 import TimesheetListView from './TimesheetListView';
 
 

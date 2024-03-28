@@ -37,15 +37,6 @@
 }
 
 .navbar-link {
-<<<<<<< HEAD
-  color: white;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-.navbar-logo {
-  margin-left: 1rem;
-=======
   color: black;
   padding: 1rem;
   text-decoration: none;
@@ -53,7 +44,6 @@
 
 .navbar-link:hover {
   color: #c5ff00;
->>>>>>> origin
 }
 
 /* Adding styling for 'Hi' message */

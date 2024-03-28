@@ -28,15 +28,9 @@ export default function NavBar(props){
                 </figure>
                 {/* Navigation menu icons */}
                 <ul className="navbar-menu">
-<<<<<<< HEAD
-                    <Link href='/Home' className='navbar-link'><FaHome size={40}/></Link>
-                    <Link href='/Account' className='navbar-link'><VscAccount size={40} /></Link> 
-                    <Link href={view} className='navbar-link'><IoMdSettings size={40} /></Link>
-=======
                     <Link href='/Home' className='navbar-link'>Home</Link>
                     <Link href='/Account' className='navbar-link'>Account</Link>                   
                     <Link href='/Settings' className='navbar-link'>Settings</Link>
->>>>>>> origin
                 </ul>
                 {/* Language menu */}
                 <LanguageMenu/>
