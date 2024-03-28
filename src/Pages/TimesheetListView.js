@@ -56,7 +56,7 @@ const timesheets=[
 //LineManagerView component
 export default function TimesheetListView() {
   return (
-    <div className='linemanager-container'>
+    <div className='list-container'>
       {/* Categories */}
       <div className="categories-container">
         <div className="category">
