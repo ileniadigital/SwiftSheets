@@ -1,3 +1,8 @@
+body {
+    background-color: #1e1e1e;
+    color: white;
+}
+
 /* Defining page styling */
 .consultant-home { 
     display: flex;
@@ -12,6 +17,7 @@
 .current-timesheet-container {
     width: 71rem;
     margin-bottom: 3rem;
+    color:  white
 }
 
 /* Setting layout */
@@ -54,4 +60,5 @@
     width: 71rem;
     overflow-y: auto;
     max-height: 33rem;
+    color:  white
 }

@@ -3,6 +3,7 @@ import './Hours.css';
 
 // Importing icon
 import { FaCirclePlus } from "react-icons/fa6";
+import { IoClose } from "react-icons/io5";
 
 // Importing useState
 import { useState } from 'react';
@@ -41,6 +42,7 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
     }
 
     let events = JSON.parse(localStorage.getItem('events'))
+    let num = 0
 
     let eventKey = 0 // Unique key for each element of the array
     // Iterates through the hours of a day, creating a new button for each day (this will serve as a timesheet timeslot)
@@ -51,8 +53,9 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
         const addUnderlineClass = i < endWorkHours;
 
         let eventsPerHour = [] // Creating array to store event hours
-        let numberOfEvents = 0
-        
+        let numberOfEvents = 0 // Track number of events to determine if + event button should appear
+        let startHour = false // Only show x button for start hour
+
         for (const e in events) {
             let className = 'add-event-button'
             let top = 0
@@ -65,6 +68,7 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
             let eventEndMin = parseInt(event.endTime.slice(3,5))
             // Ensures event is logged on the same day
             if (event.date === date) {
+             console.log(date, event.date, event.name, i)
                 // Performing checks where the event does not last more than a day
                 if (((eventStartHour < eventEndHour) || (eventStartHour === eventEndHour && eventStartMin < eventEndMin)) && i >= eventStartHour && i <= eventEndHour) {
                     // Checks when start and end time are within the same hour and sets height accordingly
@@ -78,6 +82,7 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
                             className += ' rounded-bottom'
                         }
                         numberOfEvents++
+                        startHour = true
                     } else {
                         // Checks when start time is below end time
                         if (i === eventStartHour) {
@@ -88,6 +93,7 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
                                 className += ' rounded-top' 
                             }
                             numberOfEvents++
+                            startHour = true
                         } else if (i === eventEndHour && eventEndMin !== 0) {
                             className = 'event'
                             height = 0.05 * eventEndMin
@@ -116,6 +122,7 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
                             className += ' rounded-top' 
                         }
                         numberOfEvents++
+                        startHour = true
                     } else if (i > eventStartHour && i > eventEndHour) {
                         // Regular hour blocks
                         className = 'event'
@@ -150,7 +157,9 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
             }
             eventsPerHour.push (
                 <div className={className} key={eventKey}
-                style= {{top: `${top}rem`, height: `${height}rem`}}> 
+                style= {{top: `${top}rem`, height: `${height}rem`}} onClick={(event) => event.stopPropagation()}> 
+                {startHour ? <div className = "delete-event" onClick={(event) => {event.stopPropagation()}}><IoClose /></div> : ''}
+
                 </div>
             )
             eventKey++

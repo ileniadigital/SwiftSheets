@@ -3,6 +3,8 @@
 /* Setting font family */
 .consultant-view {
     margin-bottom: 1rem;
+    background-color: #EFECEA;
+    color: #1e1e1e;
 }
 
 /* Aligning date */
