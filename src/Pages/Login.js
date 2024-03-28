@@ -5,12 +5,15 @@ import '../CSS/Login.css';
 const Login = () => {
   return (
     <div className="login-container">
-      <h1>Welcome!</h1>
+      <div className="top-bar">
+        <img src="../images/fdm-group=logo-vector.svg" alt="Logo" className="top-logo"/>
+      </div>
+      <h1 className = 'welcome-text'>Welcome!</h1>
       <div className="login-box">
-        <input type="email" placeholder="Email" className="login-input" />
-        <input type="password" placeholder="Password" className="login-input" />
-        <a href="#" className="forgot-password">Forgot Password?</a>
+        <input type="email" placeholder="Email" className="email-input" />
+        <input type="password" placeholder="Password" className="password-input" />
         <button className="login-button">Login</button>
+        <a href="#" className="forgot-password">Forgot Password?</a>
       </div>
     </div>
   );
