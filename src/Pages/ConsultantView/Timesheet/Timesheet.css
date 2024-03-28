@@ -1,32 +1,33 @@
-/* Styling for ConsultantView Component */
+/* Styling for Timesheet Component */
 
 /* Setting font family */
-#consultantView {
-    font-family: Inter;
+.consultant-view {
+    margin-bottom: 1rem;
+    background-color: #EFECEA;
+    color: #1e1e1e;
 }
 
-/* Setting flexbox */
-#consultantViewHeader {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+/* Aligning date */
+.consultant-view-header p {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 1.2rem;
 }
 
 /* Removing prior styling */
-button
-{
+button {
     background: none;
     border: none;
-    padding: 0;
 }
 
 /* Styling hover */
-.submitButton:hover {
+.submit-button:hover {
     filter: grayscale(50%);
 }
 
 /* Stying status container */
-#statusContainer {
+.status-container {
     display: flex;
     align-items: center;
     gap: 2rem;
@@ -40,22 +41,23 @@ button
     display: flex;
     gap: 1rem;
     margin-left: auto;
-    margin-right: 2rem;
+    margin-right: 5rem;
 }
 
 /* Ensuring the rest of the content in the div remains centered */
 .centered {
     display: flex;
-    justify-content: center; /* Centering vertically */
+    justify-content: center; 
     gap: 2rem;
+    white-space: nowrap;
     margin-left: auto;
 }
 
 /* Styling submit button */
-.submitButton {
-    background: linear-gradient(rgba(100, 42, 191, 1), rgba(44, 58, 197, 1));
+.submit-button {
+    background-color: #C5FF00;
     font: Inter;
-    color: white;
+    color: #1E1E1E;
     padding: 0;
     padding-left: 1rem;
     padding-right: 1rem;
@@ -65,7 +67,7 @@ button
 }
 
 /* Styling submit button when disabled */
-.submitButton:disabled {
+.submit-button:disabled {
     background: gray;
 }
 
@@ -84,22 +86,32 @@ button
 }
 
 .status.saved { 
-    color: rgba(100, 42, 191, 1);
+    color: #C5FF00;
 }
 
 /* Setting default button styling */
-#consultantViewHeader svg {
+.consultant-view-header svg {
     height: 3rem;
     width: auto;
-    filter: invert(19%) sepia(48%) saturate(4862%) hue-rotate(258deg) brightness(87%) contrast(97%);
+    fill: #C5FF00;
 }
 
 /* Setting button colour on hover */
-#consultantViewHeader svg:hover {
-    filter: invert(19%) sepia(66%) saturate(4479%) hue-rotate(236deg) brightness(79%) contrast(96%);
+.consultant-view-header svg:hover {
+    fill: white;
 }
 
 /* Moving button closer to timesheet */
-.addEventButton {
-    margin-right: 3rem;
+.consultant-view-header .add-event-button {
+    position: absolute;
+    top: 10rem;
+    right: 2rem;
 }
+
+/* Changing + button colour to grey so it's easier for users to understand that they cannot add a new event after submission */
+.consultant-view-header .add-event-button:disabled svg {
+    fill: gray;
+}
+
+
+

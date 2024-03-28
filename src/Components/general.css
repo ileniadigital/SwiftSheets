@@ -1,11 +1,10 @@
 /* Resetting default styles */
-body,
-html {
+* {
   margin: 0;
   padding: 0;
-}
-* {
   box-sizing: border-box;
+  font-family: Inter;
+  text-decoration: none;
 }
 
 .name-container {
@@ -13,8 +12,26 @@ html {
   text-align: center;
   justify-content: center;
   align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
+::-webkit-scrollbar {
+  width: 0.7rem;
+  height: 1rem;
+  background-color: transparent;
+}
+
+/* Making track transparent for a more seamless look */
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+/* Setting colour for scrollbar thumb */
+::-webkit-scrollbar-thumb {
+  background-color: #C5FF00;
+  border-radius: 0.6rem;
+}
 body {
   background-color: #1e1e1e;
 }

@@ -9,7 +9,16 @@ import Link from './Link';
 import LanguageMenu from './LanguageMenu';
 
 //Navigation bar component
-export default function NavBar(){
+export default function NavBar(props){
+    let view;
+    switch (props.view) {
+        case 'consultant':
+            view = '/consultantsettings';
+            break;
+        default:
+            view = '/settings';
+            break;
+    }
     return(
         <div className="navbar-container">
             <nav className="navbar">

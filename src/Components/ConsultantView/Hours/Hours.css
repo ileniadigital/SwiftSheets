@@ -1,40 +1,44 @@
 /* Styling for Hours Component */
 
 /* Styling border */
-#hoursContainer {
-    background: linear-gradient(white, white) padding-box,
-        linear-gradient(to bottom, rgba(100, 42, 191, 1), rgba(44, 58, 197, 1)) border-box;
-    border-radius: 1rem;
-    border: 0.1875rem solid transparent;
+.hours-container {
+    border-radius: 1.563rem;
+    border: 0.1875rem solid #C5FF00;
     display: grid;
-    min-height: 150rem;
     width: 100%;
-    margin-bottom: 1rem;
+    height: 100%;
 }
 
 /* Adding underline to separate time slots */
-.addUnderline {
-    border-bottom: 0.1875rem solid rgba(119, 37, 189, 1);
+.add-underline {
+    border-bottom: 0.1875rem solid #C5FF00;
 }
 
-/* Adding minimum height to prevent addEventButton from overflowing when hovered over */
-.hourBlock {
-    min-height: 8rem;
+/* Setting layout */
+.hour-block {
     display: flex;
-    justify-content: right;
+    position: relative;
+    height: 3rem;
 }
 
-/* Styling add event button when referenced from Hour component */
-.hourBlock .addEventButton {
-    margin-right: 0.2rem;
-    margin-top: 0.2rem;
+/* Centering */
+.hour-block .add-event-button {
+    margin: auto;
 }
 
-.hourBlock svg {
-    filter: invert(19%) sepia(48%) saturate(4862%) hue-rotate(258deg) brightness(87%) contrast(97%);
+/* Setting dimensions */
+.hour-block svg {
+    height: 2rem;
+    width: auto;
+    opacity: 50%;
+    fill: #C5FF00;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 /* Setting button colour on hover */
-.hourBlock svg:hover {
-    filter: invert(19%) sepia(66%) saturate(4479%) hue-rotate(236deg) brightness(79%) contrast(96%);
+.hour-block svg:hover {
+    fill: white;
 }
