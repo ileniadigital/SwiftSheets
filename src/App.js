@@ -8,9 +8,9 @@ import Settings from './Pages/Settings';
 import ConsultantHome from './Pages/ConsultantView/ConsultantHome/ConsultantHome'
 import Timesheet from './Pages/ConsultantView/Timesheet/Timesheet';
 import Home from './Pages/Home';
-import LineManagerView from './Pages/LineManagerView';
 import Name from './Components/NavBar/Name';
 import ConsultantSettings from './Pages/ConsultantView/ConsultantSettings/ConsultantSettings';
+import TimesheetListView from './Pages/TimesheetListView';
 
 //ADD ROUTING BASED ON ROLE FROM DB
 const role='consultant';
@@ -25,6 +25,7 @@ export default function App() {
     //   page= <LogIn/>
     //   break
     case "/Home":
+    case "/":
       page= <Home view={role}/>
       break
     case "/Account":
@@ -40,7 +41,10 @@ export default function App() {
       page = <Timesheet/>
       break
     case "/linemanagerview":
-      page = <LineManagerView/>
+      page = <TimesheetListView/>
+      break
+    case "/financeteamview":
+      page = <TimesheetListView/>
       break
     case "/consultantsettings":
       page = <ConsultantSettings/>

@@ -32,3 +32,20 @@
   background-color: #C5FF00;
   border-radius: 0.6rem;
 }
+body {
+  background-color: #1e1e1e;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+select,
+option,
+input,
+button {
+  font-family: "Inter", sans-serif;
+}

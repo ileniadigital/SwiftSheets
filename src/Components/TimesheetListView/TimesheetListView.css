@@ -1,5 +1,5 @@
 /* Styling for the timesheet containers */
-.linemanager-container {
+.list-container {
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -7,24 +7,27 @@
   justify-content: center;
   width: 70rem;
   height: 40rem;
-  background: linear-gradient(white, white) padding-box,
-    linear-gradient(to bottom, rgba(100, 42, 191, 1), rgba(44, 58, 197, 1))
-      border-box;
   border-radius: 1.5rem;
-  border: 0.2rem solid transparent;
+  border: 0.2rem solid #c5ff00;
   margin-left: 10rem;
-  margin-top: 3rem;
+  margin-top: 1rem;
 }
 
 /* Styling for categories container */
 .categories-container {
   display: flex;
   flex-direction: row;
-  gap: 11rem;
+  gap: 10rem;
   align-items: center;
   justify-content: center;
   position: relative;
   font-size: 0.75rem;
   margin: -7 0 -7 0;
   color: grey;
+}
+
+/* Styling for timesheets container */
+.timesheet-container {
+  max-height: 30rem;
+  overflow-y: auto;
 }
