@@ -7,8 +7,8 @@ import Account from './Pages/Account';
 import Settings from './Pages/Settings';
 import ConsultantView from './Pages/ConsultantView';
 import Home from './Pages/Home';
-import LineManagerView from './Pages/LineManagerView';
 import Name from './Components/NavBar/Name';
+import TimesheetListView from './Pages/TimesheetListView';
 
 //ADD ROUTING BASED ON ROLE FROM DB
 const role='consultant';
@@ -22,6 +22,7 @@ function App() {
     //   page= <LogIn/>
     //   break
     case "/Home":
+    case "/":
       page= <Home view={role}/>
       break
     case "/Account":
@@ -34,7 +35,10 @@ function App() {
       page = <ConsultantView/>
       break
     case "/linemanagerview":
-      page = <LineManagerView/>
+      page = <TimesheetListView/>
+      break
+    case "/financeteamview":
+      page = <TimesheetListView/>
       break
   }
   return (
