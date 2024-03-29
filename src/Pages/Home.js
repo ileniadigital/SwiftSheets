@@ -6,6 +6,7 @@ import '../Components/general.css'; //Import Styling
 import ConsultantView from './ConsultantView';
 import LineManagerView from './LineManagerView';
 import FinanceTeamView from './FinanceTeamView';
+import SystemAdminView from './SystemAdminView';
 
 
 export default function Home(props) {
@@ -20,6 +21,9 @@ export default function Home(props) {
             break;
         case 'financeteam':
             view = <FinanceTeamView />;
+            break;
+        case 'systemadmin':
+            view = <SystemAdminView />;
             break;
     }
     return (

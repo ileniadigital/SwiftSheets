@@ -9,9 +9,10 @@ import ConsultantView from './Pages/ConsultantView';
 import Home from './Pages/Home';
 import LineManagerView from './Pages/LineManagerView';
 import Name from './Components/NavBar/Name';
+import SystemAdminView from './Pages/SystemAdminView';
 
 //ADD ROUTING BASED ON ROLE FROM DB
-const role='consultant';
+const role='systemadmin';
 
 // Main App component
 function App() {
@@ -35,6 +36,9 @@ function App() {
       break
     case "/linemanagerview":
       page = <LineManagerView/>
+      break
+    case "/systemadminview":
+      page = <SystemAdminView/>
       break
   }
   return (
