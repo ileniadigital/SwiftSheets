@@ -47,8 +47,9 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
     const [isRecurring, setIsRecurring] = useState(false)
     const [eventNote, setEventNote] = useState('')
 
-    const [eventType, setEventType] = useState('')
-    const [disableCategory, setDisableCategory] = useState(eventType === 'Normal' || eventType === 'Overtime' ? false : true)
+    const [eventType, setEventType] = useState(componentCaller === 'Hours1' ? event.type : '')
+    console.log(eventType)
+    const [disableCategory, setDisableCategory] = useState(componentCaller === 'Hours1' && (eventType !== 'eventTypeNormal' && eventType !== 'eventTypeOvertime') ? true : false)
 
     // Ensuring empty string is not entered
     const validateEventName = (event) =>  {

@@ -1,3 +1,4 @@
+/* Styling container to add background colour to popup */
 .popup-container {
     position: fixed;
     width: 100vw;
@@ -10,6 +11,7 @@
     color: #EFECEA;
 }
 
+/* Styling container */
 .popup {
     padding: 1rem;
     top: 50%;
@@ -25,6 +27,7 @@
     font-size: x-large;
 }
 
+/* Styling buttons */
 .popup button {
     background-color: #C5FF00;
     font-size: x-large;
@@ -32,10 +35,12 @@
     border-radius: 1rem;
 }
 
+/* Setting hover colour */
 .popup button:hover {
     background-color: #5d7804;
 }
 
+/* Styling button container */
 .popup-buttons {
     display: flex;
     justify-content: center;
