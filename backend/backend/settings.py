@@ -76,6 +76,10 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
 ]
 
+CORS_ALLOWED_ORIGINS =  [
+  'http://localhost:8000',
+]
+
 ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES = [
@@ -109,12 +113,8 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'SwiftSheets-db',
-        'USER': 'postgres',
-        'PASSWORD': '14200435',
-        'HOST': 'localhost',
-        'PORT': 5432,
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 

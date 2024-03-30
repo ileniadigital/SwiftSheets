@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from myapp.views import CreateUserView, TimesheetListView
+from myapp.views import SystemUserViewSet, TimesheetViewSet, EventViewset
 from rest_framework_simplejwt.views import TokenObtainPairView,  TokenRefreshView
 from rest_framework.routers import DefaultRouter
 
@@ -24,7 +24,7 @@ from myapp.views import EventViewset
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("myapp/user/register/", CreateUserView.as_view(), name="register"),
+    # path("myapp/user/register/", CreateUserView.as_view(), name="register"),
     # path("myapp/token/", TokenObtainPairView.as_view(), name="get_token"),
     # path("myapp/token/refresh/", TokenRefreshView.as_view(), name="refresh"),
     path("myapp-auth/", include("rest_framework.urls")),
@@ -34,4 +34,7 @@ urlpatterns = [
 
 router = DefaultRouter()
 router.register('event', EventViewset, basename='event')
+router.register('timesheet', TimesheetViewSet , basename='timesheet')
+router.register('system', SystemUserViewSet , basename='system')
+
 urlpatterns += router.urls
