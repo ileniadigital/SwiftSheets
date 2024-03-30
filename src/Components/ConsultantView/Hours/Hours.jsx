@@ -8,6 +8,9 @@ import { IoClose } from "react-icons/io5";
 // Importing useState
 import { useState } from 'react';
 
+// Importing component to display event on click
+import AddEvent from '../AddEvent/AddEvent';
+
 export default function Hours({addEventHandler, date, timesheetStatus}) {
 
     // Retrieve start and end time from database to determine hours displayed
@@ -41,8 +44,9 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
         endWorkHours-=1
     }
 
+    const [openEvent, setOpenEvent] = useState(false);
+
     let events = JSON.parse(localStorage.getItem('events'))
-    let num = 0
 
     let eventKey = 0 // Unique key for each element of the array
     // Iterates through the hours of a day, creating a new button for each day (this will serve as a timesheet timeslot)
@@ -55,7 +59,6 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
         let eventsPerHour = [] // Creating array to store event hours
         let numberOfEvents = 0 // Track number of events to determine if + event button should appear
         let startHour = false // Only show x button for start hour
-        let addedEvent = false // Determines if event has been added or not - no need to add to div if there is no event
 
         for (const e in events) {
             let className = 'add-event-button'
@@ -165,11 +168,17 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
                     }
                 }
             }
+
+            const event1 = event
             eventsPerHour.push (
                 className !== 'add-event-button' &&
                 <div className={className} key={eventKey}
-                style= {{top: `${top}rem`, height: `${height}rem`}} onClick={(event) => event.stopPropagation()}> 
-                {startHour ? <div className = "delete-event" onClick={(event) => {event.stopPropagation()}}><IoClose /></div> : ''}
+                style= {{top: `${top}rem`, height: `${height}rem`}} 
+                onClick={(event) => {
+                        event.stopPropagation();
+                        addEventHandler("Hours1", date, event1)
+                    }}> 
+                    {startHour ? <div className = "delete-event" onClick={(event) => {event.stopPropagation()}}><IoClose /></div> : ''}
                 </div>
             )
             eventKey++
@@ -178,7 +187,7 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
         hoursArray.push(
             <button key={i} 
             className={`hour-block ${addUnderlineClass ? 'add-underline' : ''}`} 
-            onClick={() => addEventHandler("Hours", date)} 
+            onClick={() => addEventHandler("Hours", date, null)} 
             onMouseEnter={() => handleMouseEnter(i)} 
             onMouseLeave={handleMouseLeave}
             disabled={timesheetStatus === "Submitted"}>
