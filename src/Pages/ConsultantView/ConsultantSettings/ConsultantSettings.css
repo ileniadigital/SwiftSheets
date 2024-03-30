@@ -75,12 +75,12 @@ br {
 }
 
 /* Styling container */
-.working-hours {
+.working-hours, .reminder {
     margin-top: 2rem;
 }
 
 /* Designing hours container */
-.hours {
+.hours, .reminder-inputs {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -140,4 +140,9 @@ br {
     left: 50%;    
     transform: translate(-50%, -50%);
     pointer-events: none;
+}
+
+/* Styling container */
+.reminder {
+    display: flex;
 }

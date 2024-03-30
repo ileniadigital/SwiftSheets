@@ -4,17 +4,22 @@ import './Timesheet.css';
 // Importing Components
 import Week from '../../../Components/ConsultantView/Week/Week';
 import AddEvent from '../../../Components/ConsultantView/AddEvent/AddEvent';
-import { FaCirclePlus } from "react-icons/fa6";
 import NoWorkingDaysError from '../../../Components/ConsultantView/NoWorkingDaysError/NoWorkingDaysError'
+
+// Importing icons
+import { IoIosNotifications } from "react-icons/io";
+import { IoIosNotificationsOff } from "react-icons/io";
+import { FaCirclePlus } from "react-icons/fa6";
+import { IoClose } from "react-icons/io5";
 
 // Importing helper function
 import getDate from '../../../Components/ConsultantView/getDate'
 
 // Importing useState and useEffect
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import exportPdf from './exportPdf';
 
-export default function Timesheet() {
+export default function Timesheet({completionReminderDate, setCompletionReminderDate, completionReminderTime, setCompletionReminderTime, timesheetCompletionReminder, setTimesheetCompletionReminder}) {
 
     // Getting current timesheet
     // let currentTimesheet = TimeshgetCurrentTimesheet()
@@ -57,7 +62,6 @@ export default function Timesheet() {
         setAddEventClicked(!addEventClicked)
     }
 
-
     // Function that formats the day of the week
     const formatDate = (week, dayToRetrieve) => {
         const date = getDate(week, dayToRetrieve)
@@ -65,6 +69,38 @@ export default function Timesheet() {
         return `${date[0]}/${date[1]}/${date[2]}`
     }
 
+
+    // Store whether timesheet completion reminder has been set
+    const [reminder, setReminder] = useState(false);
+
+
+    const updateCompletionReminder = () => {
+        setReminder(true)
+    }
+
+    let startOfWeek, startOfWeekDay, startOfWeekMonth, startOfWeekYear;
+    let endOfWeek, endOfWeekDay, endOfWeekMonth, endOfWeekYear;
+    // Determining date for start of week
+    startOfWeek = new Date(viewedWeek); // Creates copy of current week
+    startOfWeek.setDate(viewedWeek.getDate() - viewedWeek.getDay() + 1)  // Adds 1 as function starts from Sunday (o)
+
+    startOfWeekDay = startOfWeek.getDate().toString().padStart(2, '0');
+    startOfWeekMonth = (startOfWeek.getMonth() + 1).toString().padStart(2,'0'); // + 1 due to 0 indexing
+    startOfWeekYear = startOfWeek.getFullYear();
+
+   // Converting into format for minimum date value
+   startOfWeek = `${startOfWeekYear}-${startOfWeekMonth}-${startOfWeekDay}`
+
+   // Determinining date for end of week
+   endOfWeek = new Date(startOfWeek); // Creates copy of current week
+   endOfWeek.setDate(endOfWeek.getDate() + 6) // Retrives end of week by adding 6
+   
+    endOfWeekDay = endOfWeek.getDate().toString().padStart(2, '0');
+    endOfWeekMonth = (endOfWeek.getMonth() + 1).toString().padStart(2,'0'); // + 1 due to 0 indexing
+    endOfWeekYear = endOfWeek.getFullYear();
+
+   // Converting into format for maximum date value
+   endOfWeek = `${endOfWeekYear}-${endOfWeekMonth}-${endOfWeekDay}`
 
     return (
     localStorage.getItem('daysWorked') !== "[]" ? (
@@ -77,6 +113,36 @@ export default function Timesheet() {
             <button className='add-event-button' disabled = {timesheetStatus === "Submitted"} onClick={() => addEventHandler("Timesheet", viewedWeek)}> 
                 <FaCirclePlus /> {/* Button icon */}
             </button>
+            <button className='completion-reminder' onClick={updateCompletionReminder}>
+                {timesheetCompletionReminder ? <IoIosNotifications /> : <IoIosNotificationsOff />}
+            </button>
+            {reminder && (
+                <div className='reminder-container'>
+                    <div className='reminder-setting'>
+                        <button onClick={() => setReminder(false)}>
+                            <IoClose />
+                        </button>
+                        <p>
+                            Timesheet Completion Reminder
+                        </p>
+                        
+                        <div className='inputs'>
+                            <input type="time" value={completionReminderTime}
+                            onChange={(event) => setCompletionReminderTime(event.target.value)}/>
+
+                            <input type="date" className='datetime' value={completionReminderDate} name = "eventDate" min={startOfWeek} max={endOfWeek} 
+                            onChange={(event) => setCompletionReminderDate(event.target.value)}/>
+                        </div>
+                        <button className='reminder-toggle' onClick={() => {
+                            setReminder(false);
+                            setTimesheetCompletionReminder(false)
+                            setCompletionReminderDate('')
+                            setCompletionReminderTime('')}}>
+                            Turn Off
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
 
         {/* Displays currently viewed week, along with hours */}

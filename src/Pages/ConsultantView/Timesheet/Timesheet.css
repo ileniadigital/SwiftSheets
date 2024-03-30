@@ -107,7 +107,7 @@ button {
 .consultant-view-header .add-event-button {
     position: absolute;
     top: 10rem;
-    right: 2rem;
+    right: 10rem;
 }
 
 /* Changing + button colour to grey so it's easier for users to understand that they cannot add a new event after submission */
@@ -116,4 +116,64 @@ button {
 }
 
 
+.completion-reminder{
+    position: absolute;
+    top: 10rem;
+    right: 5rem;
+}
 
+.reminder-setting {
+    position: absolute;
+    background-color: #1E1E1E;
+    border: 0.1rem solid #C5FF00;
+    border-radius: 1rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 14rem;
+    width: 30rem;
+}
+
+.reminder-setting button {
+    margin-left: auto;
+    padding-right: 0.6rem;
+    margin-bottom: 1rem;
+}
+
+.reminder-setting button svg {
+    height: 2rem;
+    width: 2rem;
+}
+
+.reminder-setting .inputs {
+    display: flex;
+    gap: 2rem;
+    width: 24rem;
+}
+
+.reminder-container {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000000000;
+    background-color: rgb(239, 236, 234, 0.5);
+    color: #EFECEA;
+    z-index: 1000000000000000;
+}
+
+.reminder-toggle {
+    background-color: #C5FF00;
+    font-size: large;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1.4rem;
+}
