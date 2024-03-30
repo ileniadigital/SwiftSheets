@@ -1,6 +1,7 @@
 from django.db import models
+# from django.contrib.auth.models import User
 
-class User(models.Model):
+class SystemUser(models.Model):
     USER_TYPE_CHOICES = [
         ('Consultant', 'Consultant'),
         ('LineManager', 'LineManager'),
@@ -13,6 +14,7 @@ class User(models.Model):
 
     def __str__(self):
         return self.username
+
 class Timesheet(models.Model):
     REVIEW_STATUS_CHOICES = [
         ('Approved', 'Approved'),
@@ -24,16 +26,20 @@ class Timesheet(models.Model):
         ('Inprogress', 'Inprogress'),
         ('Rejected', 'Rejected'),
     ]
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='timesheets')
-    submission_time = models.DateTimeField(auto_now_add=True)  # Default submission time
-    review_status = models.CharField(max_length=20, choices=REVIEW_STATUS_CHOICES, default='Pending')  # Default review status
-    payment_status = models.CharField(max_length=20, choices=PAYMENT_STATUS_CHOICES, default='Inprogress')  # Default payment status
+    user = models.ForeignKey(SystemUser, on_delete=models.CASCADE, related_name='timesheets')
+    submission_time = models.DateTimeField(auto_now_add=True)
+    review_status = models.CharField(max_length=20, choices=REVIEW_STATUS_CHOICES, default='Pending')
+    payment_status = models.CharField(max_length=20, choices=PAYMENT_STATUS_CHOICES, default='Inprogress')
     auto_submit = models.BooleanField(default=False)
     is_submitted = models.BooleanField(default=False)
     completion_reminder = models.DateTimeField(null=True, blank=True)
     last_edited = models.DateTimeField(null=True, blank=True)
     last_reviewed = models.DateTimeField(null=True, blank=True)
 
+    # Ensure your __str__ method accounts for SystemUser attributes correctly
+    def __str__(self):
+        return f"{self.user.username} - {self.submission_time.strftime('%Y-%m-%d %H:%M')}"
+    
 class Event(models.Model):
     EVENT_TYPE_CHOICES = [
         ('Overtime', 'Overtime'),
@@ -53,7 +59,10 @@ class Event(models.Model):
     type = models.CharField(max_length=20, choices=EVENT_TYPE_CHOICES, default='Normal')  # Default type
     category = models.CharField(max_length=20, choices=EVENT_CATEGORY_CHOICES, default='Planning')  # Default category
     is_recurring = models.BooleanField(default=False)
-    note = models.TextField(blank=True, default='')  # Default note
+    #note = models.TextField(blank=True, default='')  # Default note
+
+    def __str__(self):
+        return self.name
 
 class Comment(models.Model):
     timesheet = models.ForeignKey(Timesheet, on_delete=models.CASCADE, related_name='comments')
@@ -70,7 +79,7 @@ class Notification(models.Model):
         ('Processed_Payment', 'Processed Payment'),
         ('Rejected_Payment', 'Rejected Payment'),
     ]
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notifications')
+    user = models.ForeignKey(SystemUser, on_delete=models.CASCADE, related_name='notifications')
     notification_type = models.CharField(max_length=32, choices=NOTIFICATION_TYPE_CHOICES, default='Submitted')  # Default notification type
     created_at = models.DateTimeField(auto_now_add=True)
 
