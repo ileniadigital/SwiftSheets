@@ -3,9 +3,10 @@
 /* Setting font family */
 .consultant-view {
     margin-bottom: 1rem;
-    background-color: #EFECEA;
-    color: #1e1e1e;
+    background-color: #1E1E1E;
+    color: #efecea;
 }
+
 
 /* Aligning date */
 .consultant-view-header p {
@@ -33,7 +34,6 @@ button {
     gap: 2rem;
     justify-content: center;
     margin-left: auto;
-
 }
 
 /* Centering buttons rightmost */

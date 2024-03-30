@@ -3,6 +3,7 @@ import './NavBar.css';
 
 //Import FDM logo
 import fdmIcon from './logo/fdm-new-logo-green.svg';
+import fdmIconBlack from './logo/fdm-new-logo.svg';
 
 //Import Link component
 import Link from './Link';
@@ -19,12 +20,24 @@ export default function NavBar(props){
             view = '/settings';
             break;
     }
+
+    {/* Changing FDM logo colour based on page theme */}
+    let fdmLogo;
+    switch (window.location.pathname) {
+        // case "/timesheet":
+        //     fdmLogo = fdmIconBlack;
+        //     break
+        default:
+            fdmLogo = fdmIcon;
+            break
+    }
+
     return(
         <div className="navbar-container">
             <nav className="navbar">
                 {/* Logo */}
                 <figure className="navbar-logo">
-                    <img src= {fdmIcon} alt='FDM Group Logo'/>
+                    <img src= {fdmLogo} alt='FDM Group Logo'/>
                 </figure>
                 {/* Navigation menu icons */}
                 <ul className="navbar-menu">

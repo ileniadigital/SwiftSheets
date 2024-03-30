@@ -55,6 +55,7 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
         let eventsPerHour = [] // Creating array to store event hours
         let numberOfEvents = 0 // Track number of events to determine if + event button should appear
         let startHour = false // Only show x button for start hour
+        let addedEvent = false // Determines if event has been added or not - no need to add to div if there is no event
 
         for (const e in events) {
             let className = 'add-event-button'
@@ -68,7 +69,6 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
             let eventEndMin = parseInt(event.endTime.slice(3,5))
             // Ensures event is logged on the same day
             if (event.date === date) {
-             console.log(date, event.date, event.name, i)
                 // Performing checks where the event does not last more than a day
                 if (((eventStartHour < eventEndHour) || (eventStartHour === eventEndHour && eventStartMin < eventEndMin)) && i >= eventStartHour && i <= eventEndHour) {
                     // Checks when start and end time are within the same hour and sets height accordingly
@@ -83,6 +83,7 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
                         }
                         numberOfEvents++
                         startHour = true
+                        className += ' complete-event'
                     } else {
                         // Checks when start time is below end time
                         if (i === eventStartHour) {
@@ -94,6 +95,7 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
                             }
                             numberOfEvents++
                             startHour = true
+                            className += ' start-event hours-event'
                         } else if (i === eventEndHour && eventEndMin !== 0) {
                             className = 'event'
                             height = 0.05 * eventEndMin
@@ -102,14 +104,18 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
                                 className += ' rounded-bottom'
                             }
                             numberOfEvents++
+                            className += ' end-event hours-event'
                         } else if (!(i === eventEndHour && eventEndMin === 0)){
                             className = 'event'
                             height = 3 // Take up full hour block
 
                             if (((eventEndHour === endWorkHours+1 && eventEndMin === 0) && i === eventEndHour-1) && top+height > 2) {
-                                className += ' rounded-bottom'
+                                className += ' rounded-bottom end-event'
+                            } else if (eventEndHour === endWorkHours+1) {
+                                className += ' end-event'
                             }
                             numberOfEvents++
+                            className += ' hours-event'
                         }
                     }
                 } else if (eventStartHour > eventEndHour || (eventStartHour === eventEndHour) && eventStartMin > eventEndMin) {
@@ -123,6 +129,7 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
                         }
                         numberOfEvents++
                         startHour = true
+                        className += ' start-event hours-event'
                     } else if (i > eventStartHour && i > eventEndHour) {
                         // Regular hour blocks
                         className = 'event'
@@ -131,6 +138,7 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
                             className += ' rounded-bottom' 
                         }
                         numberOfEvents++
+                        className += ' hours-event'
                     } 
                 }
             } else if (eventStartHour > eventEndHour || (eventStartHour === eventEndHour) && eventStartMin > eventEndMin) {
@@ -145,6 +153,7 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
                             className += ' rounded-top'
                         } 
                         numberOfEvents++
+                        className += ' end-event hours-event'
                     } else if (i < eventEndHour) {
                         className = 'event'
                         height = 3
@@ -152,14 +161,15 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
                             className += ' rounded-top'
                         } 
                         numberOfEvents++
+                        className += ' hours-event'
                     }
                 }
             }
             eventsPerHour.push (
+                className !== 'add-event-button' &&
                 <div className={className} key={eventKey}
                 style= {{top: `${top}rem`, height: `${height}rem`}} onClick={(event) => event.stopPropagation()}> 
                 {startHour ? <div className = "delete-event" onClick={(event) => {event.stopPropagation()}}><IoClose /></div> : ''}
-
                 </div>
             )
             eventKey++

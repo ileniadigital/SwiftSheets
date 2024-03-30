@@ -63,6 +63,7 @@ export default function Timesheet() {
     // Store the timesheet data in local storage
     const events = {
         event1: {
+            id: 0,
             name: 'test1',
             date: "2024-03-26",
             type: "Project",
@@ -71,6 +72,7 @@ export default function Timesheet() {
         },
 
         event2: {
+            id: 1,
             name: 'yaf',
             date: "2024-03-26",
             type: "Project",
@@ -79,14 +81,16 @@ export default function Timesheet() {
             },
 
         event3: {
+            id: 2,
             name: '3',
             date: "2024-03-28",
             type: "Project",
-            startTime: "14:57",
-            endTime: "15:16"
+            startTime: "16:00",
+            endTime: "19:30"
             },
 
         event4: {
+            id: 3,
             name: '4',
             date: "2024-03-25",
             type: "Project",
@@ -95,6 +99,7 @@ export default function Timesheet() {
             },
 
         event5: {
+            id: 4,
             name: '5',
             date: "2024-03-27",
             type: "Project",
