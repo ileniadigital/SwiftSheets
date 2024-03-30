@@ -3,8 +3,8 @@
 /* Styling which includes centering the component at the center of the page */
 .add-event {
     position: fixed;
-    /* background-color: #C5FF00; */
-    background-color: white;
+    background-color: #1E1E1E;
+    border: 0.3rem solid #C5FF00;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -13,12 +13,11 @@
     border-radius: 2rem;
     display: flex;
     flex-direction: column;
-
 }
 
 /* Styling button used to close event */
 .close-event {
-    fill: white;
+    fill: #EFECEA;
     margin-top: 1rem;
     margin-left: auto;
     margin-right: 1rem;
@@ -26,14 +25,14 @@
 }
 
 .close-event svg{
-    fill: #1E1E1E;
-    background-color: white;
+    fill: #EFECEA;
+    background-color: #1E1E1E;
 }
 
 /* Styling button colour on close */
 .close-event svg:hover {
-    background-color: white;
-    fill: black;
+    background-color: #1E1E1E;
+    fill: red;
 }
 
 /* Styling addEvent inputs, centering on div */
@@ -41,24 +40,25 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: white;
+    background: #1E1E1E;
     gap: 1.6rem;
 }
 
 /* Styling log event heading */
 .log-event-heading {
     margin: auto;
-    background: white;
+    background: #1E1E1E;
     margin-bottom: 2.5rem;
-    color: #1E1E1E;
+    color: #EFECEA;
 }
 
 /* Styling input div */
 .input {
     display: flex;
     gap: 2.5rem;
-    background: white;
+    background: #1E1E1E;
     align-items: center;
+    color: #EFECEA;
 }
 
 /* Setting label name */
@@ -66,8 +66,8 @@ label {
     width: 11.3rem;
     font-size: 1.5rem;
     font-family: Inter;
-    color: #1E1E1E;
-    background: white;
+    color: #efefef;
+    background: #1E1E1E;
     text-align: left;
 }
 
@@ -76,7 +76,7 @@ input, select {
     border: 0;
     width: 14rem;
     margin: auto;
-    color: white;
+    color: #1E1E1E;
     height: 2rem;
     border-radius: 0.3rem;
     font-family: Inter;
@@ -86,7 +86,8 @@ input, select {
 
 /* Changing icon colour */
 .add-event ::-webkit-calendar-picker-indicator {
-    filter: invert(98%) sepia(2%) saturate(660%) hue-rotate(226deg) brightness(118%) contrast(100%);
+    filter: invert(0%) sepia(6%) saturate(1473%) hue-rotate(332deg) brightness(96%) contrast(76%);
+    /* filter: invert(98%) sepia(2%) saturate(660%) hue-rotate(226deg) brightness(118%) contrast(100%); */
 }
 
 /* Adding padding */
@@ -106,14 +107,14 @@ select {
 .add-new-event .add-event-button {
     margin: auto;
     margin-top: 0.1rem;    
-    background-color:#1E1E1E;
-    color: white;
+    background-color:#C5FF00;
+    color: #1E1E1E;
     width: 7rem;
 }
 
 /* Adding styling on hover */
 .add-new-event .add-event-button:hover {
-    background-color: white;
+    background-color: #EFECEA;
     color: #1E1E1E;
 }
 
@@ -128,16 +129,16 @@ select {
     position: relative;
     width: 2rem;
     height: 2rem;
-    background: #1E1E1E;
+    background: #EFECEA;
     box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
     cursor: pointer;
     border-radius: 0.4rem;
-    color: #1E1E1E;
+    color: #EFECEA;
 }
 
-/* Setting colour to white */
+/* Setting colour to #EFECEA */
 .checkbox-container input:checked{
-    color: white;
+    color: #1E1E1E;
 }
 
 /* Styling checkbox */
@@ -164,7 +165,7 @@ select {
 
 /* Styling error message */
 .error-message {
-    color: white;
+    color: #EFECEA;
     background-color: red;
     padding: 0.4rem;
     border-radius: 1rem;
@@ -182,7 +183,8 @@ textarea {
     border-radius: 0.3rem;
     font-size: 1rem;
     overflow-y: auto;
-    border-right: 0.3rem solid #1E1E1E;
+    background-color: #EFECEA;
+    border-right: 0.3rem solid #EFECEA;
 }
 
 /* Adding padding */
@@ -197,7 +199,7 @@ textarea {
     align-items: start;
     margin-right: auto;
     margin-left: 4.05rem;
-    background: white;
+    background: #1E1E1E;
     gap: 1rem;
 }
 
@@ -212,9 +214,8 @@ textarea {
 
 /* Displaying event */
 .event {
-    /* background-color: #EFECEA; white */
+    background-color: #EFECEA;
     /* background-color: #FF4E48; red */
-    background-color: #FF4E48;
     width: 100%;
     position: absolute;
 }
@@ -230,13 +231,33 @@ textarea {
     border-bottom-right-radius: 1.3rem;
 }
 
-.delete-event {
-    display: flex;
-}
-
+/* Styling icon */
 .delete-event svg {
     fill: #1E1E1E;
-    background-color: red;
-    height: 1rem;
-    width: 1rem;
+    height: 1.4rem;
+    width: 1.4rem;
+    height: 3rem;
+    position: relative;
+    margin-left: auto;
+    margin-top: 0.7rem;
+    margin-right: 0.5rem;
+    z-index: 1000000;
+}
+
+/* Setting hover colour */
+.delete-event svg:hover {
+    fill: red;
+}
+
+/* Adding underline to signify end of event */
+.end-event {
+}
+
+.complete-event {
+}
+
+.start-event {
+}
+
+.hours-event {
 }

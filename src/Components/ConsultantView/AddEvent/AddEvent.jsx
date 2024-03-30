@@ -7,7 +7,7 @@ import { IoClose } from "react-icons/io5";
 // Importing useState
 import { useEffect, useState } from 'react';
 
-export default function AddEvent({componentCaller, addEventHandler, viewedWeek}) {
+export default function AddEvent({componentCaller, addEventHandler, viewedWeek, event}) {
 
     /* Only needs to be rendered for Timesheet component caller as its viewedWeek
     argument will be a Date, compared to Hours' string */
@@ -40,15 +40,15 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek})
 
     // String all inputs
     const [eventName, setEventName] = useState('')
-    const [eventDate, setEventDate] = useState(componentCaller === 'Hours' ? viewedWeek : '') // Set default if an event is clicked, otherwise find it
+    const [eventDate, setEventDate] = useState(componentCaller !== 'Hours' ? '' : viewedWeek) // Set default if an event is clicked, otherwise find it
     const [eventStartTime, setEventStartTime] = useState('')
     const [eventEndTime, setEventEndTime] = useState('')
-    const [eventCategory, setEventCategory] = useState('')
+    const [eventCategory, setEventCategory] = useState(componentCaller === 'Hours1' ? event.category : '')
     const [isRecurring, setIsRecurring] = useState(false)
     const [eventNote, setEventNote] = useState('')
 
-    const [eventType, setEventType] = useState('')
-    const [disableCategory, setDisableCategory] = useState(false)
+    const [eventType, setEventType] = useState(componentCaller === 'Hours1' ? event.type : '')
+    const [disableCategory, setDisableCategory] = useState(componentCaller === 'Hours1' && (eventType !== 'eventTypeNormal' && eventType !== 'eventTypeOvertime') ? true : false)
 
     // Ensuring empty string is not entered
     const validateEventName = (event) =>  {
@@ -162,8 +162,21 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek})
 
     // Handles validation after submit button has abeen pressed
     function handleSubmit(event) {
-        event.preventDefault(); // Prevent submission until validation is complete
-        
+        const events = JSON.parse(localStorage.getItem("events")) || {}
+        const newEventId = Object.keys(events).length; // Get the length of current events to generate a new ID
+        const newEvent = {
+            id: newEventId,
+            name: eventName,
+            date: eventDate,
+            startTime: eventStartTime,
+            endTime: eventEndTime,
+            type: eventType,
+            category: eventCategory,
+            recurring: isRecurring,
+            note: eventNote
+        };
+        events[newEventId] = newEvent; // Add the new event to the existing events object
+        localStorage.setItem("events", JSON.stringify(events)); // Save the updated events back to localStorage
         // Values to be added to database
         //     eventName,
         //     eventDate,
@@ -173,17 +186,6 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek})
         //     eventCategory,
         //     isRecurring,
         //     eventNote
-
-        // console.log(
-        //     eventName,
-        //     eventDate,
-        //     eventStartTime,
-        //     eventEndTime,
-        //     eventType,
-        //     eventCategory,
-        //     isRecurring,
-        //     eventNote
-        // )
     }
 
     return(
@@ -194,12 +196,13 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek})
             <form action="" className = "add-new-event">
                 <div className="input event-name">
                     <label htmlFor="eventName">Name</label>
-                    <input type="text" name = "eventName" required onChange={validateEventName}/>
+                    <input type="text" name = "eventName" required onChange={validateEventName}
+                    defaultValue={componentCaller === 'Hours1' ? event.name : ''}/>
                 </div>
 
                 <div className="input">
                     <label htmlFor="eventDate">Date</label>
-                    {componentCaller === "Hours" ? (
+                    {componentCaller === "Hours" || "Hours1" ? (
 
                         // Date is preset as the day of the week is known from the time/dayslot click 
                         <input className = 'datetime' type="date" name = "eventDate" value = {viewedWeek} readOnly required/>
@@ -212,17 +215,20 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek})
 
                 <div className="input">
                     <label htmlFor="eventStartTime">Start Time</label>
-                    <input type="time" className='datetime' name = "eventStartTime" required onChange={validateStartTime}/>
+                    <input type="time" className='datetime' name = "eventStartTime" required onChange={validateStartTime}
+                    defaultValue={componentCaller === 'Hours1' ? event.startTime : ''}/>
                 </div>
 
                 <div className="input">
                     <label htmlFor="eventEndTime">End Time</label>
-                    <input className='datetime' type="time" name = "eventEndTime" required onChange={validateEndTime}/>
+                    <input className='datetime' type="time" name = "eventEndTime" required onChange={validateEndTime}
+                    defaultValue={componentCaller === 'Hours1' ? event.endTime : ''}/>
                 </div>
 
                 <div className="input">
                     <label htmlFor="eventType">Type</label>
-                    <select name="eventType" defaultValue={""} onChange={handleEventType} required>
+                    <select name="eventType" onChange={handleEventType} required
+                    defaultValue={componentCaller === 'Hours1' ? event.type : ''}>
                         <option value="" disabled hidden>Type</option> {/* Default value */}
                         <option value="eventTypeNormal">Normal</option>
                         <option value="eventTypeOvertime">Overtime</option>
@@ -234,7 +240,8 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek})
                 {/* No need to show category if work is not Normal or Overtime e.g. if Consultants are sick */}
                 <div className="input">
                     <label htmlFor="eventCategory">Category</label>
-                    <select name="eventCategory" defaultValue={""} required onChange = {(event) => setEventCategory(event.target.value)} disabled = {disableCategory}>
+                    <select name="eventCategory" required onChange = {(event) => setEventCategory(event.target.value)} disabled = {disableCategory}
+                    defaultValue={componentCaller === 'Hours1' ? event.category : ''}>
                         <option value="" disabled hidden>Category</option> {/* Default value */}
                         <option value="Project">Project</option>
                         <option value="eventCategoryPlanning">Planning</option>
@@ -244,15 +251,22 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek})
 
                 <div className="input checkbox-container">
                     <label htmlFor="isRecurring" className='checkbox-label'>Recurring </label>
-                    <input className ='is-recurring' type="checkbox" onChange={() => setIsRecurring(!isRecurring)}/>
+                    <input className ='is-recurring' type="checkbox" onChange={() => setIsRecurring(!isRecurring)}
+                    defaultValue={componentCaller === 'Hours1' ? event.recurring : ''}/>
                 </div>
 
                 <div className='note-container'>
                     <label htmlFor="note"> Note </label>
-                    <textarea name="note" cols="30" rows="5" placeholder='Enter text' onChange = {(event) => setEventNote(event.target.value.trim())} ></textarea>
+                    <textarea name="note" cols="30" rows="5" placeholder='Enter text' onChange = {(event) => setEventNote(event.target.value.trim())}
+                    defaultValue={componentCaller === 'Hours1' ? event.note : ''}>
+                    </textarea>
                 </div>
 
-                <input type="submit" value={"Add Event"} className='add-event-button'/>
+                {componentCaller === 'Hours1' ? (
+                <input type="submit" value={"Edit Event"} className='add-event-button'/> 
+                )
+                : (
+                <input type="submit" value={"Add Event"} className='add-event-button'/> ) }
             </form>
         </div>
     )

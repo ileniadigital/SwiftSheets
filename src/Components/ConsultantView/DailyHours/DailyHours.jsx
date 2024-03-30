@@ -20,7 +20,6 @@ export default function DailyHours() {
         endWorkHours-=1
     }
 
-    console.log(startWorkHours, endWorkHours)
     // Array created to store hours in a day, represented as time
     let dailyHours = []
 

@@ -12,8 +12,12 @@ import getDate from '../../../Components/ConsultantView/getDate'
 
 // Importing useState and useEffect
 import { useState } from 'react';
+import exportPdf from './exportPdf';
 
 export default function Timesheet() {
+
+    // Getting current timesheet
+    // let currentTimesheet = TimeshgetCurrentTimesheet()
 
     // Used to create and manage the week shown on the timesheet
     const [viewedWeek, setViewedWeek] = useState(new Date());
@@ -28,6 +32,7 @@ export default function Timesheet() {
     const [componentCaller, setComponentCaller] = useState(null)
 
     const [addEventViewedWeek, setAddEventViewedWeek] = useState(null)
+    const [event, setEvent] = useState(null)
 
     // Enables relevant screen to be displayed when the + button is clicked 
     const [addEventClicked, setAddEventClicked] = useState(false);
@@ -39,7 +44,7 @@ export default function Timesheet() {
     const [timesheetPaymentStatus, setTimesheetPaymentStatus] = useState("Pending")
 
     // When add event is clicked, add event screen is shown, with the details based on the component it is called by
-    const addEventHandler = (componentCaller1, addEventViewedWeek1) => {
+    const addEventHandler = (componentCaller1, addEventViewedWeek1, event) => {
         // Won't open the Add Event box as the timesheet is submitted
         if (timesheetStatus === "Submitted") {
             return
@@ -47,6 +52,7 @@ export default function Timesheet() {
         if (!addEventClicked) {
             setComponentCaller(componentCaller1)
             setAddEventViewedWeek(addEventViewedWeek1)
+            setEvent(event)
         }
         setAddEventClicked(!addEventClicked)
     }
@@ -59,51 +65,6 @@ export default function Timesheet() {
         return `${date[0]}/${date[1]}/${date[2]}`
     }
 
-    // Testing retrieval of current timesheet
-    // Store the timesheet data in local storage
-    const events = {
-        event1: {
-            name: 'test1',
-            date: "2024-03-26",
-            type: "Project",
-            startTime: "15:16",
-            endTime: "15:50"
-        },
-
-        event2: {
-            name: 'yaf',
-            date: "2024-03-26",
-            type: "Project",
-            startTime: "00:10",
-            endTime: "02:00"
-            },
-
-        event3: {
-            name: '3',
-            date: "2024-03-28",
-            type: "Project",
-            startTime: "14:57",
-            endTime: "15:16"
-            },
-
-        event4: {
-            name: '4',
-            date: "2024-03-25",
-            type: "Project",
-            startTime: "06:00",
-            endTime: "16:00"
-            },
-
-        event5: {
-            name: '5',
-            date: "2024-03-27",
-            type: "Project",
-            startTime: "15:01",
-            endTime: "15:00"
-            },
-    };
-  
-    localStorage.setItem('events', JSON.stringify(events))
 
     return (
     localStorage.getItem('daysWorked') !== "[]" ? (
@@ -128,6 +89,7 @@ export default function Timesheet() {
                     componentCaller={componentCaller}
                     addEventHandler={addEventHandler} 
                     viewedWeek={addEventViewedWeek}
+                    event={event}
                 />
             )}
 
@@ -141,6 +103,7 @@ export default function Timesheet() {
             <div className='buttons'>
                 <button className='submit-button' onClick={() => setTimesheetStatus("Submitted")} disabled = {timesheetStatus === "Submitted"} >{timesheetStatus === "Submitted" ? "Submitted" : "Submit"}</button>
                 <button className='submit-button' onClick={() => setTimesheetStatus("Saved")} disabled = {timesheetStatus === "Submitted"}>Save</button>
+                <button className='submit-button' onClick={() => exportPdf(document.querySelector('body'))}>Export as PDF</button>
             </div>
         </div>
     </div> 

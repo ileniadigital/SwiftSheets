@@ -15,8 +15,9 @@ export default function Week({viewedWeek, addEventHandler, timesheetStatus}) {
     // Retrieving consultant's days worked
     const daysWorked = JSON.parse(localStorage.getItem('daysWorked')) // Conversion from string to array
 
-    // Storing possible days of the week to choose from
+    // Storing possible days and their dates of the week to choose from
     const daysOfTheWeek = ['MON','TUE','WED','THU','FRI','SAT','SUN'];
+    const weekDates = []
 
     // Will be appended to with the consultant's working days
     let weekDays = []
@@ -28,16 +29,25 @@ export default function Week({viewedWeek, addEventHandler, timesheetStatus}) {
         }
     }
 
-    // Adding daily hours as first column if there are days that the consultant works for
-    if (weekDays.length > 0) {
-        week.push(<DailyHours key={0}/>) 
-    }
-
     // Function that formats the day of the week
     const formatDate = (week, dayToRetrieve) => {
         const date = getDate(week, dayToRetrieve)
         return `${date[2]}-${date[1]}-${date[0]}`
     }
+    
+    // Adds day worked to weekday if it exists in daysWorked
+    for (let i = 0; i < daysOfTheWeek.length; i++) {
+        if (daysWorked.includes(i)) {
+            weekDates.push(formatDate(viewedWeek,i+1))
+        }
+    }
+
+    // Adding daily hours as first column if there are days that the consultant works for
+    if (weekDays.length > 0) {
+        week.push(<DailyHours key={0}/>) 
+    }
+
+    
 
     // Creating Day component for each day of the week and adding it to the array
     for (let i = 0; i < weekDays.length; i++) {
@@ -45,7 +55,7 @@ export default function Week({viewedWeek, addEventHandler, timesheetStatus}) {
             <Day 
                 key={i+1} 
                 day = {weekDays[i]} 
-                date = {formatDate(viewedWeek,i+1)} 
+                date = {weekDates[i]} 
                 addEventHandler = {addEventHandler} 
                 timesheetStatus = {timesheetStatus}
             />
