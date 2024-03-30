@@ -162,18 +162,21 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
 
     // Handles validation after submit button has abeen pressed
     function handleSubmit(event) {
-        const events = JSON.parse(localStorage.getItem("events"));
-        const newEvents = JSON.stringify({...events,
-            eventX: {
-                name: eventName,
-                date: eventDate,
-                startTime: eventStartTime,
-                endTime: eventEndTime,
-                type: eventType,
-                category: eventCategory,
-                recurring: isRecurring,
-                note: eventNote}})
-        localStorage.setItem("events",newEvents);
+        const events = JSON.parse(localStorage.getItem("events")) || {}
+        const newEventId = Object.keys(events).length; // Get the length of current events to generate a new ID
+        const newEvent = {
+            id: newEventId,
+            name: eventName,
+            date: eventDate,
+            startTime: eventStartTime,
+            endTime: eventEndTime,
+            type: eventType,
+            category: eventCategory,
+            recurring: isRecurring,
+            note: eventNote
+        };
+        events[newEventId] = newEvent; // Add the new event to the existing events object
+        localStorage.setItem("events", JSON.stringify(events)); // Save the updated events back to localStorage
         // Values to be added to database
         //     eventName,
         //     eventDate,
