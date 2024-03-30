@@ -105,14 +105,11 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # DB_HOST=localhost
 # DB_PORT=5432
 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'SwiftSheets-db',
-        'USER': 'postgres',
-        'PASSWORD': 'gugu@gaga21',
-        'HOST': 'localhost',
-        'PORT': 5432,
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 

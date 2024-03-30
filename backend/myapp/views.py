@@ -10,7 +10,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 class CreateUserView(generics.CreateAPIView):
   queryset = SystemUser.objects.all()
   serializer_class = SystemUserSerializer
-  permission_classes =  [AllowAny]
+  permission_classes = [AllowAny]
 
 
 class TimesheetCreate(generics.CreateAPIView):
