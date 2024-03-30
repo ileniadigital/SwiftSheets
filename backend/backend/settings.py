@@ -110,7 +110,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'SwiftSheets-db',
         'USER': 'postgres',
-        'PASSWORD': 'gugu@gaga21',
+        'PASSWORD': '14200435',
         'HOST': 'localhost',
         'PORT': 5432,
     }
