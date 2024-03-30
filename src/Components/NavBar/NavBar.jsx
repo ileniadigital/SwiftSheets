@@ -43,7 +43,7 @@ export default function NavBar(props){
                 <ul className="navbar-menu">
                     <Link href='/Home' className='navbar-link'>Home</Link>
                     <Link href='/Account' className='navbar-link'>Account</Link>                   
-                    <Link href='/Settings'className='navbar-link'>Settings</Link>
+                    <Link href='/Settings' className='navbar-link'>Settings</Link>
                 </ul>
                 {/* Language menu */}
                 <LanguageMenu/>

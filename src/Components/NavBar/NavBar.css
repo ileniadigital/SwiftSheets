@@ -20,6 +20,7 @@
   margin: 0 0 0 2rem;
   padding: 0;
   margin-right: auto;
+  text-decoration: none;
 }
 .navbar-logo img {
   width: 7rem;
@@ -31,7 +32,7 @@
   margin: 2%;
   display: flex;
   list-style-type: none;
-  background-color: #EFECEA;
+  background-color: #efecea;
   border-radius: 10rem;
   padding: 1rem;
 }
@@ -47,7 +48,7 @@
 }
 
 /* Adding styling for 'Hi' message */
-.welcome-message{
+.welcome-message {
   font-weight: 400;
   font-family: Inter;
   font-size: 1rem;
@@ -56,12 +57,12 @@
 
 /* Setting font colour */
 .welcome-message h1 {
-  color: #EFECEA;
+  color: #efecea;
 }
 
 /* Setting svg colour */
 .language-menu svg {
-  color: #EFECEA;
+  color: #efecea;
 }
 
 /* Styling for language menu */
