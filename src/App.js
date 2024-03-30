@@ -39,14 +39,16 @@ export default function App() {
   });
   const [timesheetCompletionReminder, setTimesheetCompletionReminder] = useState(completionReminderDate !== '' && completionReminderTime !== '');
 
+  // Updating local storage values on change
   useEffect(() => {
         setTimesheetCompletionReminder(completionReminderDate !== '' && completionReminderTime !== '');
         localStorage.setItem('completionReminderDate', completionReminderDate);
         localStorage.setItem('completionReminderTime', completionReminderTime);
     }, [completionReminderDate, completionReminderTime]);
 
-  // Calculates time until timesheet completion reminder
+  // Provides timesheet completion to reminder if set up
   useEffect(() => {
+    let timeoutId;
     if (timesheetCompletionReminder && role === 'consultant') {
             // Function to trigger the alert
             function timesheetCompletionReminderStart(completionReminderTimeHours, completionReminderTimeMins) {
@@ -58,19 +60,20 @@ export default function App() {
                 - new Date().getTime();
 
                 if (timeDifference > 0) {
-                    const timeoutId = setTimeout(function() {
-                        alert("Complete Timesheet!");
+                    timeoutId = setTimeout(function() {
+                        alert("Don't forget to complete your timesheet!");
                     }, timeDifference);
-
-                    // Clear timeout when component unmounts or reminder turns off
-                    return () => clearTimeout(timeoutId);
                 } 
             }
 
             const completionReminderTimeHours = parseInt(completionReminderTime.slice(0,2))
             const completionReminderTimeMins = parseInt(completionReminderTime.slice(3,5))
-            console.log(completionReminderTimeHours, completionReminderTimeMins)
+            
+            // Setting reminder so works no matter what page consultant is on
             timesheetCompletionReminderStart(completionReminderTimeHours, completionReminderTimeMins);
+
+            // Clear timeout when component unmounts or reminder turns off; prevents same timeout displaying multiple times
+            return () => clearTimeout(timeoutId);
     }}, [timesheetCompletionReminder, completionReminderDate, completionReminderTime])
 
   // Render page based on location

@@ -115,13 +115,14 @@ button {
     fill: gray;
 }
 
-
+/* Defining container style */
 .completion-reminder{
     position: absolute;
     top: 10rem;
     right: 5rem;
 }
 
+/* Defining container style */
 .reminder-setting {
     position: absolute;
     background-color: #1E1E1E;
@@ -134,7 +135,8 @@ button {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 14rem;
+    height: auto;
+    padding: 1rem;
     width: 30rem;
 }
 
@@ -173,7 +175,28 @@ button {
     font-size: large;
     border-radius: 1rem;
     padding: 0.5rem;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 1.4rem;
+    height: 2.5rem;
+    width: 6rem;
+}
+
+.reminder-toggle:hover {
+    background-color: #7ca005;
+}
+
+.reminder-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.turn-off:hover {
+    background-color: rgba(255, 0, 0, 0.341);
+    color: #EFECEA;
+}
+
+/* Styling error message */
+.reminder-error {
+    color: red;
+    font-size: 1rem;
+    margin-top: 1rem;
 }
