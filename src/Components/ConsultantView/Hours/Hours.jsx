@@ -50,7 +50,6 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
     // Delete event
     const deleteEvent = (eventId) => {
         setDeleteEventID(eventId)
-        console.log(deleteEventID, eventId)
     }
 
     let events = JSON.parse(localStorage.getItem('events'))

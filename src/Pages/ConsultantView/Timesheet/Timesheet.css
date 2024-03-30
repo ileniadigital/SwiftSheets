@@ -51,6 +51,7 @@ button {
     gap: 2rem;
     white-space: nowrap;
     margin-left: auto;
+    margin: auto;
 }
 
 /* Styling submit button */
@@ -62,8 +63,9 @@ button {
     padding-left: 1rem;
     padding-right: 1rem;
     border-radius: 0.4rem;
-    width: 6rem;
+    width: 8rem;
     height: 2rem;
+    white-space: nowrap;
 }
 
 /* Styling submit button when disabled */

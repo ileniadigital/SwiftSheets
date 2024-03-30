@@ -14,7 +14,6 @@ export default function DeleteEventConfirmation({event, setOpenPopup}) {
                 }
             }
         localStorage.setItem('events', JSON.stringify(newEvents))
-        console.log(newEvents, event)
         setOpenPopup(false)
     }
 
