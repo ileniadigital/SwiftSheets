@@ -18,6 +18,9 @@ from django.contrib import admin
 from django.urls import path, include
 from myapp.views import CreateUserView, TimesheetListView
 from rest_framework_simplejwt.views import TokenObtainPairView,  TokenRefreshView
+from rest_framework.routers import DefaultRouter
+
+from myapp.views import EventViewset
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,3 +31,7 @@ urlpatterns = [
     path("myapp/", include("myapp.urls")),
     # path('myapp/timesheets/not-reviewed/', TimesheetListView.as_view(), name='timesheet-not-reviewed-list'),
 ]
+
+router = DefaultRouter()
+router.register('event', EventViewset, basename='event')
+urlpatterns += router.urls

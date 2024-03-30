@@ -178,7 +178,7 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek})
         //     eventNote
 
         // Handle data using axios
-        AxiosInstance.post('events/', {
+        AxiosInstance.post('event/', {
             name: eventName,
             date: eventDate,
             startTime: eventStartTime,
