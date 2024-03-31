@@ -23,7 +23,7 @@ export default function ConsultantHome() {
         submissionStatus: "Unsubmitted",
         reviewStatus: "Approved",
         paymentStatus: "Pending",
-        isSubmitted: false,
+        isSubmitted: true,
         submissionTime: null,
         events: {
             event1: {

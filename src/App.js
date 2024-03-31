@@ -14,6 +14,7 @@ import ConsultantSettings from './Pages/ConsultantView/ConsultantSettings/Consul
 import TimesheetListView from './Pages/TimesheetListView';
 
 import { useState, useEffect } from 'react';
+import getDate from './Components/ConsultantView/getDate';
 //ADD ROUTING BASED ON ROLE FROM DB
 const role='consultant';
 
@@ -79,6 +80,91 @@ export default function App() {
             // Clear timeout when component unmounts or reminder turns off; prevents same timeout displaying multiple times
             return () => clearTimeout(timeoutId);
     }}, [timesheetCompletionReminder, completionReminderDate, completionReminderTime])
+
+    useEffect(() => {
+      let endOfWeek1 = getDate(new Date(), 7)
+
+      // Setting reminder for Sunday 00:00
+      let endOfWeekReminder = new Date(`${endOfWeek1[2]}-${endOfWeek1[1]}-${endOfWeek1[0]}`)
+
+      // Setting automatic submission for end of week 23:59:59
+      let automaticSubmissionTime = new Date(endOfWeekReminder)
+      automaticSubmissionTime.setHours(23);
+      automaticSubmissionTime.setMinutes(59);
+      automaticSubmissionTime.setSeconds(59);
+
+      automaticSubmissionTime.setHours(19);
+      automaticSubmissionTime.setMinutes(39);
+      automaticSubmissionTime.setSeconds(20);
+
+      // Set reminder for consultant to submit timesheet at Sunday 11am
+      const submissionReminderTime = endOfWeekReminder.getTime() - new Date().getTime();
+      
+      // Dummy data - delete
+      const timesheetData = {
+        week: "25/03/24 – 31/03/24",
+        submissionStatus: "Unsubmitted",
+        reviewStatus: "Approved",
+        paymentStatus: "Pending",
+        isSubmitted: false,
+        submissionTime: null,
+        events: {
+            event1: {
+                startTime: '13:00',
+                endTime: '15:00',
+            },
+            event2: {
+                startTime: '13:00',
+                endTime: '15:00',
+            },
+            event3: {
+                startTime: '13:24',
+                endTime: '15:36',
+            },
+            event4: {
+                startTime: '13:00',
+                endTime: '15:00',
+            },
+            event5: {
+                startTime: '13:00',
+                endTime: '15:00',
+            },
+            event6: {
+                startTime: '13:00',
+                endTime: '15:00',
+            },
+            event7: {
+                startTime: '13:00',
+                endTime: '11:00',
+            },
+        }
+    };
+
+    localStorage.setItem('currentTimesheet', JSON.stringify(timesheetData));
+    const currentTimesheet = JSON.parse(localStorage.getItem('currentTimesheet'))
+
+    if (submissionReminderTime > 0) {
+    setTimeout(function() {
+            if (!currentTimesheet.isSubmitted) {
+                alert("Don't forget to complete your timesheet!");
+            }
+        }, submissionReminderTime);
+    } 
+
+    const autoSubmit = automaticSubmissionTime.getTime() - new Date().getTime();
+
+    if (autoSubmit > 0) {
+        setTimeout(function() {
+                const numberOfEvents = Object.keys(JSON.parse(localStorage.getItem('events'))).length
+                if (numberOfEvents === 0 && !currentTimesheet.isSubmitted) {
+                    // Storing date and time of timesehet submission
+                    const timesheetSubmissionDateandTime = new Date() 
+                    // setTimesheetStatus('Submitted') // Update value in database
+                    alert("Timesheet submitted!");
+                }
+            }, autoSubmit);
+        } 
+    }, []);
 
   // Render page based on location
   let page
