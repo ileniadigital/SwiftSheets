@@ -45,7 +45,7 @@ export default function ConsultantDashboard() {
                 <p>Weekly Hours Logged </p>
                 <span className='hours'>{getWeeklyHours()}</span>
             </div>
-            <div>
+            <div className='container'>
                 <div className='dropdown-menu'>
                     <p>Payments Received</p>
                     <button className='dropdown' onClick={() => setIsPaymentsReceived(!isPaymentsReceived)}>
@@ -59,7 +59,7 @@ export default function ConsultantDashboard() {
                 }
             </div>
 
-            <div>
+            <div className='container'>
                 <div className='dropdown-menu'>
                     <p>Pending Timesheet Approvals</p>
                     <button className='dropdown' onClick={() => setIsPendingApprovals(!isPendingApprovals)}>
