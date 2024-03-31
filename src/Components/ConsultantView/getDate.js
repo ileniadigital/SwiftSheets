@@ -2,12 +2,12 @@
 export default function getDate(week, dayToRetrieve) {
     let tempDay = new Date(week)
 
-    if (week.getDay() === 0) {
-        tempDay.setDate(week.getDate()-1 - 6 + dayToRetrieve)
+    if (tempDay.getDay() === 0) {
+        tempDay.setDate(tempDay.getDate()-1 - 6 + dayToRetrieve)
     } else {
          /* Subtracts curent day of week to get 'Sunday' (start of the week)
        Adds dayToRetrrieve to get the target day */
-        tempDay.setDate(week.getDate() - week.getDay() + dayToRetrieve)  
+        tempDay.setDate(tempDay.getDate() - tempDay.getDay() + dayToRetrieve)  
     }
 
    

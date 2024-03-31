@@ -63,6 +63,9 @@ export default function App() {
                 if (timeDifference > 0) {
                     timeoutId = setTimeout(function() {
                         alert("Don't forget to complete your timesheet!");
+                        // Refresh completion reminder time/date
+                        setCompletionReminderDate('')
+                        setCompletionReminderTime('')
                     }, timeDifference);
                 } 
             }

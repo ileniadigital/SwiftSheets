@@ -123,13 +123,10 @@ export default function Timesheet({completionReminderDate, setCompletionReminder
     // Converting into format for maximum date value
     let endOfWeek = `${endDate[0]}/${endDate[1]}/${endDate[2]}`
 
-   let recurringEvents;
-
    //  Initialising recurring events
    if (!localStorage.getItem('recurringEvents')) {
-    localStorage.setItem('recurringEvents', {})
+    localStorage.setItem('recurringEvents', JSON.stringify({}))
    }
-   recurringEvents = localStorage.getItem('recurringEvents')
 
     return (
         localStorage.getItem('daysWorked') !== "[]" ? (

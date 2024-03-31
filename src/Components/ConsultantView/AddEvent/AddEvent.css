@@ -136,8 +136,8 @@ select {
     color: #EFECEA;
 }
 
-/* Setting colour to #EFECEA */
-.checkbox-container input:checked{
+/* Setting colour to when event is recurring */
+.checkbox-container .recur{
     color: #1E1E1E;
 }
 

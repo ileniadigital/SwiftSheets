@@ -19,12 +19,12 @@ export default function DeleteEventConfirmation({event, setOpenPopup}) {
             <div className='popup'>
                 <p>Are you sure you want to delete this event? This action cannot be undone. </p>
                 <div className='popup-buttons'>
-                    <button onClick={deleteEvent}>
+                    <div className='button' onClick={deleteEvent}>
                         Yes
-                    </button>
-                    <button onClick={() => setOpenPopup(false)}>
+                    </div>
+                    <div className='button' onClick={() => setOpenPopup(false)}>
                         No
-                    </button>
+                    </div>
                 </div>    
             </div>
         </div>

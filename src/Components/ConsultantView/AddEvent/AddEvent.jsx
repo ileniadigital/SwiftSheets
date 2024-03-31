@@ -13,28 +13,26 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
     /* Only needs to be rendered for Timesheet component caller as its viewedWeek
     argument will be a Date, compared to Hours' string */
 
-    let startOfWeek, endOfWeek;
-    if (componentCaller === "Timesheet") {
 
-        // Determinining date for start of week
-        const startDate = getDate(viewedWeek, 1)
-        // Converting into format for minimum date value
-        startOfWeek = `${startDate[2]}-${startDate[1]}-${startDate[0]}`
+    // Determinining date for start of week
+    const startDate = getDate(viewedWeek, 1)
+    // Converting into format for minimum date value
+    let startOfWeek = `${startDate[2]}-${startDate[1]}-${startDate[0]}`
 
-        // Determinining date for end of week
-        const endDate = getDate(viewedWeek, 7)
-        // Converting into format for maximum date value
-        endOfWeek = `${endDate[2]}-${endDate[1]}-${endDate[0]}`
-} 
+    // Determinining date for end of week
+    const endDate = getDate(viewedWeek, 7)
+    // Converting into format for maximum date value
+    let endOfWeek = `${endDate[2]}-${endDate[1]}-${endDate[0]}`
+
 
     // String all inputs
-    const [eventName, setEventName] = useState('')
-    const [eventDate, setEventDate] = useState(componentCaller !== 'Hours' ? '' : viewedWeek) // Set default if an event is clicked, otherwise find it
-    const [eventStartTime, setEventStartTime] = useState('')
-    const [eventEndTime, setEventEndTime] = useState('')
+    const [eventName, setEventName] = useState(componentCaller === 'Hours1' ? event.name : '')
+    const [eventDate, setEventDate] = useState(componentCaller === 'Hours1' ? event.date : '') // Set default if an event is clicked, otherwise find it
+    const [eventStartTime, setEventStartTime] = useState(componentCaller === 'Hours1' ? event.startTime : '')
+    const [eventEndTime, setEventEndTime] = useState(componentCaller === 'Hours1' ? event.endTime : '')
     const [eventCategory, setEventCategory] = useState(componentCaller === 'Hours1' ? event.category : '')
-    const [isRecurring, setIsRecurring] = useState(false)
-    const [eventNote, setEventNote] = useState('')
+    const [isRecurring, setIsRecurring] = useState(componentCaller === 'Hours1' ? event.recurring : false)
+    const [eventNote, setEventNote] = useState(componentCaller === 'Hours1' ? event.note : '')
 
     const [eventType, setEventType] = useState(componentCaller === 'Hours1' ? event.type : '')
     const [disableCategory, setDisableCategory] = useState(componentCaller === 'Hours1' && (eventType !== 'eventTypeNormal' && eventType !== 'eventTypeOvertime') ? true : false)
@@ -150,11 +148,54 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
         event.target.setCustomValidity('');
     }
 
+    let event1 = event
+
     // Handles validation after submit button has abeen pressed
     function handleSubmit(event) {
-        // Check if event is recurring and add it to reccuring events if so
-        console.log(isRecurring)
+        event.preventDefault();
+
         const events = JSON.parse(localStorage.getItem("events")) || {}
+
+        if (componentCaller === 'Hours1') {
+            for (const e in events) {
+                // When event has been found
+                if (events[e].id === event1.id) {
+                    const editedEvent = event1
+
+                    // Updating edited values
+                    if (eventName !== event1.name) {
+                        event1['name'] = eventName
+                    }
+                    if (eventDate !== event1.date) {
+                        event1['date'] = eventDate
+                    }
+                    if (eventStartTime !== event1.startTime) {
+                        event1['startTime'] = eventStartTime
+                    }
+                    if (eventEndTime !== event1.endTime) {
+                        event1['endTime'] = eventEndTime
+                    }
+                    if (eventType !== event1.type) {
+                        event1['type'] = eventType
+                    } 
+                    if (eventCategory !== event1.category) {
+                        event1['category'] = eventCategory
+                    }
+                    if (isRecurring !== event1.recurring) {
+                        event1['recurring'] = isRecurring
+                    }
+                    if (eventNote !== event1.note) {
+                        event1['note'] = eventNote
+                    }
+                    console.log(event1.recurring, event1.note)
+                    events[event1.id] = editedEvent
+                    localStorage.setItem("events", JSON.stringify(events)); // Save the updated events back to localStorage
+                    return
+                }
+            }
+        }
+
+        // Check if event is recurring and add it to reccuring events if so
         const newEventId = Object.keys(events).length; // Get the length of current events to generate a new ID
         const newEvent = {
             id: newEventId,
@@ -169,6 +210,25 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
         };
         events[newEventId] = newEvent; // Add the new event to the existing events object
         localStorage.setItem("events", JSON.stringify(events)); // Save the updated events back to localStorage
+
+        // Add event to recurring events
+        if (isRecurring) {
+            const recurringEvents = JSON.parse(localStorage.getItem('recurringEvents'))
+            // Doesn't add event if it is already there
+            let found = false
+            for(const e in recurringEvents) {
+                console.log(e, newEvent.id)
+                if (e === newEvent.id) {
+                    found = true
+                    break
+                }
+            }
+            if (!found) {
+                const newRecurringEventId = Object.keys(recurringEvents).length; // Get the length of current events to generate a new ID
+                recurringEvents[newRecurringEventId] = newEvent; // Add the new event to the existing events object
+                localStorage.setItem("recurringEvents", JSON.stringify(recurringEvents)); // Save the updated events back to localStorage
+            }
+        }
         // Values to be added to database
         //     eventName,
         //     eventDate,
@@ -189,38 +249,31 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
                 <div className="input event-name">
                     <label htmlFor="eventName">Name</label>
                     <input type="text" name = "eventName" required onChange={validateEventName}
-                    defaultValue={componentCaller === 'Hours1' ? event.name : ''}/>
+                    defaultValue={eventName}/>
                 </div>
 
                 <div className="input">
                     <label htmlFor="eventDate">Date</label>
-                    {componentCaller === "Hours" || componentCaller === "Hours1" ? (
-
-                        // Date is preset as the day of the week is known from the time/dayslot click 
-                        <input className = 'datetime' type="date" name = "eventDate" value = {viewedWeek} readOnly required/>
-                        ) : (
-                        
-                        // Limiting days to choose from as days in current week
-                        <input type="date" className='datetime' name = "eventDate" min={startOfWeek} max={endOfWeek} onChange={(event) => setEventDate(event.target.value)} required/>
-                    )}
+                        {/* // Limiting days to choose from as days in current week */}
+                        <input className = 'datetime' type="date" name = "eventDate" defaultValue = {viewedWeek} min={startOfWeek} max={endOfWeek} onChange={(event) => setEventDate(event.target.value)} required/>
                 </div>
 
                 <div className="input">
                     <label htmlFor="eventStartTime">Start Time</label>
                     <input type="time" className='datetime' name = "eventStartTime" required onChange={validateStartTime}
-                    defaultValue={componentCaller === 'Hours1' ? event.startTime : ''}/>
+                    defaultValue={eventStartTime}/>
                 </div>
 
                 <div className="input">
                     <label htmlFor="eventEndTime">End Time</label>
                     <input className='datetime' type="time" name = "eventEndTime" required onChange={validateEndTime}
-                    defaultValue={componentCaller === 'Hours1' ? event.endTime : ''}/>
+                    defaultValue={eventEndTime}/>
                 </div>
 
                 <div className="input">
                     <label htmlFor="eventType">Type</label>
                     <select name="eventType" onChange={handleEventType} required
-                    defaultValue={componentCaller === 'Hours1' ? event.type : ''}>
+                    defaultValue={eventType}>
                         <option value="" disabled hidden>Type</option> {/* Default value */}
                         <option value="eventTypeNormal">Normal</option>
                         <option value="eventTypeOvertime">Overtime</option>
@@ -233,7 +286,7 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
                 <div className="input">
                     <label htmlFor="eventCategory">Category</label>
                     <select name="eventCategory" required onChange = {(event) => setEventCategory(event.target.value)} disabled = {disableCategory}
-                    defaultValue={componentCaller === 'Hours1' ? event.category : ''}>
+                    defaultValue={eventCategory}>
                         <option value="" disabled hidden>Category</option> {/* Default value */}
                         <option value="Project">Project</option>
                         <option value="eventCategoryPlanning">Planning</option>
@@ -243,14 +296,14 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
 
                 <div className="input checkbox-container">
                     <label htmlFor="isRecurring" className='checkbox-label'>Recurring </label>
-                    <input className ='is-recurring' type="checkbox" onChange={() => setIsRecurring(!isRecurring)}
-                    defaultValue={componentCaller === 'Hours1' ? event.recurring : ''}/>
+                    <input className = {`is-recurring ${isRecurring ? 'recur' : ''}`} type="checkbox" onChange={() => setIsRecurring(!isRecurring)}
+                    defaultValue={isRecurring}/>
                 </div>
 
                 <div className='note-container'>
                     <label htmlFor="note"> Note </label>
                     <textarea name="note" cols="30" rows="5" placeholder='Enter text' onChange = {(event) => setEventNote(event.target.value.trim())}
-                    defaultValue={componentCaller === 'Hours1' ? event.note : ''}>
+                    defaultValue={eventNote}>
                     </textarea>
                 </div>
 
