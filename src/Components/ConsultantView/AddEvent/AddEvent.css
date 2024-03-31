@@ -261,3 +261,8 @@ textarea {
 
 .hours-event {
 }
+
+/* Styling error message */
+.concur-error {
+    color: red;
+}

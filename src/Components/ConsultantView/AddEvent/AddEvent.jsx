@@ -27,7 +27,7 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
 
     // String all inputs
     const [eventName, setEventName] = useState(componentCaller === 'Hours1' ? event.name : '')
-    const [eventDate, setEventDate] = useState(componentCaller === 'Hours1' ? event.date : '') // Set default if an event is clicked, otherwise find it
+    const [eventDate, setEventDate] = useState(componentCaller === 'Hours1' ? event.date : componentCaller === 'Hours' ? viewedWeek : '') // Set default if an event is clicked, otherwise find it
     const [eventStartTime, setEventStartTime] = useState(componentCaller === 'Hours1' ? event.startTime : '')
     const [eventEndTime, setEventEndTime] = useState(componentCaller === 'Hours1' ? event.endTime : '')
     const [eventCategory, setEventCategory] = useState(componentCaller === 'Hours1' ? event.category : '')
@@ -130,7 +130,6 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
             if (eventStartTime !== '') {
                 const startTimeHours = parseInt(eventStartTime.slice(0,2)); 
                 const startTimeMins = parseInt(eventStartTime.slice(3,5));
-                console.log(localStorage.getItem('24HoursWorked')) 
                 if (localStorage.getItem('24HoursWorked') === 'false') {
                     // Ensuring end time is not before start time
                     if (startTimeHours === endTimeHours) {
@@ -149,6 +148,7 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
     }
 
     let event1 = event
+    const [concurrentEvent, setConcurrentEvent] = useState(false)
 
     // Handles validation after submit button has abeen pressed
     function handleSubmit(event) {
@@ -229,16 +229,24 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
                 recurring: isRecurring,
                 note: eventNote
             };
-            events[newEventId] = newEvent; // Add the new event to the existing events object
-            localStorage.setItem("events", JSON.stringify(events)); // Save the updated events back to localStorage 
+            
 
-            if (isRecurring) {
-                // No need for check as this is the first time the event has been added
-                const recurringEvents = JSON.parse(localStorage.getItem('recurringEvents'))
-                recurringEvents[newEvent.id] = newEvent
-                localStorage.setItem("recurringEvents", JSON.stringify(recurringEvents)); // Save the updated events back to localStorage
+            // Continue with adding event if it doesn't already exit
+            if (!concurrentEvent) {
+                events[newEventId] = newEvent; // Add the new event to the existing events object
+                localStorage.setItem("events", JSON.stringify(events)); // Save the updated events back to localStorage 
+
+                if (isRecurring) {
+                    // No need for check as this is the first time the event has been added
+                    const recurringEvents = JSON.parse(localStorage.getItem('recurringEvents'))
+                    recurringEvents[newEvent.id] = newEvent
+                    localStorage.setItem("recurringEvents", JSON.stringify(recurringEvents)); // Save the updated events back to localStorage
+                }
+            } else {
+                event.preventDefault() // Prevent addition of event
             }
         }
+
 
         // Values to be added to database
         //     eventName,
@@ -250,6 +258,76 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
         //     isRecurring,
         //     eventNote
     }
+
+    // Checking for when values change to let user know times overlap
+
+    // COMPLETE VALIDATION
+    useEffect(() => {
+        let isConcurrent = false
+
+        if (eventDate !== '' && eventStartTime !== '' && eventEndTime !== '') {
+            // Retrieve all events
+            const events = JSON.parse(localStorage.getItem("events")); 
+            
+            // Ensuring event does not already exist 
+            for (const e in events) {
+                let eventObserved = events[e]
+                let eventObservedDate = eventObserved.date
+                
+                let eventObservedStartTime = eventObserved.startTime
+                let eventObservedStartHours = parseInt(eventObservedStartTime.slice(0,2))
+                let eventObservedStartMins = parseInt(eventObservedStartTime.slice(3,5))
+
+                let eventObservedEndTime = eventObserved.endTime
+                let eventObservedEndHours = parseInt(eventObservedEndTime.slice(0,2))
+                let eventObservedEndMins = parseInt(eventObservedEndTime.slice(3,5))
+
+
+                let startTimeHours = parseInt(eventStartTime.slice(0,2))
+                let startTimeMins = parseInt(eventStartTime.slice(3,5))
+
+                let endTimeHours = parseInt(eventEndTime.slice(0,2))
+                let endTimeMins = parseInt(eventEndTime.slice(3,5))
+
+                if (eventDate === eventObservedDate) {
+
+                    if (eventStartTime === eventObservedStartTime &&
+                    eventEndTime === eventObservedEndTime) {
+                        // Prevent event addition
+                        isConcurrent = true
+                        break
+                    } 
+                    // Considering events that last one day
+                     else if (eventObservedStartHours <= eventObservedEndHours) {
+                        if (eventObservedStartHours === eventObservedEndHours) {
+                            if (startTimeHours === eventObservedStartHours) {
+                                if (startTimeMins >= eventObservedStartMins && startTimeMins <= eventObservedEndMins) {
+                                    isConcurrent = true
+                                    break
+                                }
+                            }
+                        } else {
+                            if (startTimeHours === eventObservedStartHours) {
+                                if (startTimeMins >= eventObservedStartMins) {
+                                    isConcurrent = true
+                                    break
+                                }
+                            } else if (endTimeHours === eventObservedEndHours) {
+                                if (endTimeMins <= eventObservedEndMins) {
+                                    isConcurrent = true
+                                    break
+                                }
+                            } else if ((startTimeHours > eventObservedStartHours) && (startTimeHours < eventObservedEndHours)) {
+                                    isConcurrent = true
+                                    break
+                            }
+                        }
+                    }
+                } 
+            }
+        }
+        setConcurrentEvent(isConcurrent)
+    }, [eventDate, eventStartTime, eventEndTime])
 
     return(
         <div className='add-event' onSubmit={handleSubmit}>
@@ -318,6 +396,8 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
                     </textarea>
                 </div>
 
+                {concurrentEvent && 
+                <p className='concur-error'>Event is Overlapping</p>}
                 {componentCaller === 'Hours1' ? (
                 <input type="submit" value={"Edit Event"} className='add-event-button'/> 
                 )

@@ -20,7 +20,6 @@ export default function ConsultantDashboard() {
         const timesheet = JSON.parse(localStorage.getItem('currentTimesheet')).events
         for (const event in timesheet) {
             const currentEvent = timesheet[event];
-            console.log("->",currentEvent)
             let startTimeHours = parseInt(currentEvent.startTime.slice(0,2))
             let startTimeMins = parseInt(currentEvent.startTime.slice(3,5))
             let startTimeInMins = (startTimeHours*60) + startTimeMins 
