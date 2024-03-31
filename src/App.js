@@ -41,141 +41,150 @@ export default function App() {
   });
   const [timesheetCompletionReminder, setTimesheetCompletionReminder] = useState(completionReminderDate !== '' && completionReminderTime !== '');
 
-  // Keeps track of whether timesheet reminder was sent
-  if (localStorage.getItem('reminderSent') === null) {
-    localStorage.setItem('reminderSent', 'false')
+  if (role === 'consultant') {
+    // Keeps track of whether timesheet reminder was sent
+    if (localStorage.getItem('reminderSent') === null) {
+      localStorage.setItem('reminderSent', 'false')
+    }
   }
 
   // Updating local storage values on change
   useEffect(() => {
-        setTimesheetCompletionReminder(completionReminderDate !== '' && completionReminderTime !== '');
-        localStorage.setItem('completionReminderDate', completionReminderDate);
-        localStorage.setItem('completionReminderTime', completionReminderTime);
+      if (role === 'consultant') { 
+          setTimesheetCompletionReminder(completionReminderDate !== '' && completionReminderTime !== '');
+          localStorage.setItem('completionReminderDate', completionReminderDate);
+          localStorage.setItem('completionReminderTime', completionReminderTime);
+      }
     }, [completionReminderDate, completionReminderTime]);
 
   // Provides timesheet completion to reminder if set up
   useEffect(() => {
-    let timeoutId;
-    if (timesheetCompletionReminder && role === 'consultant') {
-            // Function to trigger the alert
-            function timesheetCompletionReminderStart(completionReminderTimeHours, completionReminderTimeMins) {
-                const completionReminderDate1 = new Date(completionReminderDate)
-                
-                // Time difference calculated to delay time between now and the timesheet completion reminder
-                const timeDifference = new Date(completionReminderDate1.getFullYear(), 
-                completionReminderDate1.getMonth(), completionReminderDate1.getDate(), completionReminderTimeHours, completionReminderTimeMins).getTime() 
-                - new Date().getTime();
-
-                if (timeDifference > 0) {
-                    timeoutId = setTimeout(function() {
-                        alert("Don't forget to complete your timesheet!");
-                        // Refresh completion reminder time/date
-                        setCompletionReminderDate('')
-                        setCompletionReminderTime('')
-                    }, timeDifference);
-                } 
-            }
-
-            const completionReminderTimeHours = parseInt(completionReminderTime.slice(0,2))
-            const completionReminderTimeMins = parseInt(completionReminderTime.slice(3,5))
+    if (role === 'consultant') { 
+      let timeoutId;
+      if (timesheetCompletionReminder && role === 'consultant') {
+        // Function to trigger the alert
+        function timesheetCompletionReminderStart(completionReminderTimeHours, completionReminderTimeMins) {
+            const completionReminderDate1 = new Date(completionReminderDate)
             
-            // Setting reminder so works no matter what page consultant is on
-            timesheetCompletionReminderStart(completionReminderTimeHours, completionReminderTimeMins);
+            // Time difference calculated to delay time between now and the timesheet completion reminder
+            const timeDifference = new Date(completionReminderDate1.getFullYear(), 
+            completionReminderDate1.getMonth(), completionReminderDate1.getDate(), completionReminderTimeHours, completionReminderTimeMins).getTime() 
+            - new Date().getTime();
 
-            // Clear timeout when component unmounts or reminder turns off; prevents same timeout displaying multiple times
-            return () => clearTimeout(timeoutId);
+            if (timeDifference > 0) {
+                timeoutId = setTimeout(function() {
+                    alert("Don't forget to complete your timesheet!");
+                    // Refresh completion reminder time/date
+                    setCompletionReminderDate('')
+                    setCompletionReminderTime('')
+                }, timeDifference);
+            } 
+        }
+
+        const completionReminderTimeHours = parseInt(completionReminderTime.slice(0,2))
+        const completionReminderTimeMins = parseInt(completionReminderTime.slice(3,5))
+        
+        // Setting reminder so works no matter what page consultant is on
+        timesheetCompletionReminderStart(completionReminderTimeHours, completionReminderTimeMins);
+
+        // Clear timeout when component unmounts or reminder turns off; prevents same timeout displaying multiple times
+        return () => clearTimeout(timeoutId);
+      }
     }}, [timesheetCompletionReminder, completionReminderDate, completionReminderTime])
 
     // Setting up timesheet completion reminder (if unsubmitted) and autosubmission
     useEffect(() => {
-      let endOfWeek1 = getDate(new Date(), 7)
+      if (role === 'consultant') { 
 
-      // Setting reminder for Sunday 00:00
-      let endOfWeekReminder = new Date(`${endOfWeek1[2]}-${endOfWeek1[1]}-${endOfWeek1[0]}`)
+        let endOfWeek1 = getDate(new Date(), 7)
+
+        // Setting reminder for Sunday 00:00
+        let endOfWeekReminder = new Date(`${endOfWeek1[2]}-${endOfWeek1[1]}-${endOfWeek1[0]}`)
+
+        
+          // Dummy data - delete
+          const timesheetData = {
+            week: "25/03/24 – 31/03/24",
+            submissionStatus: "Unsubmitted",
+            reviewStatus: "Approved",
+            paymentStatus: "Pending",
+            isSubmitted: false,
+            submissionTime: null,
+            events: {
+                event1: {
+                    startTime: '13:00',
+                    endTime: '15:00',
+                },
+                event2: {
+                    startTime: '13:00',
+                    endTime: '15:00',
+                },
+                event3: {
+                    startTime: '13:24',
+                    endTime: '15:36',
+                },
+                event4: {
+                    startTime: '13:00',
+                    endTime: '15:00',
+                },
+                event5: {
+                    startTime: '13:00',
+                    endTime: '15:00',
+                },
+                event6: {
+                    startTime: '13:00',
+                    endTime: '15:00',
+                },
+                event7: {
+                    startTime: '13:00',
+                    endTime: '11:00',
+                },
+            }
+        };
+
+        localStorage.setItem('currentTimesheet', JSON.stringify(timesheetData));
+        const currentTimesheet = JSON.parse(localStorage.getItem('currentTimesheet'))
 
       
-        // Dummy data - delete
-        const timesheetData = {
-          week: "25/03/24 – 31/03/24",
-          submissionStatus: "Unsubmitted",
-          reviewStatus: "Approved",
-          paymentStatus: "Pending",
-          isSubmitted: false,
-          submissionTime: null,
-          events: {
-              event1: {
-                  startTime: '13:00',
-                  endTime: '15:00',
-              },
-              event2: {
-                  startTime: '13:00',
-                  endTime: '15:00',
-              },
-              event3: {
-                  startTime: '13:24',
-                  endTime: '15:36',
-              },
-              event4: {
-                  startTime: '13:00',
-                  endTime: '15:00',
-              },
-              event5: {
-                  startTime: '13:00',
-                  endTime: '15:00',
-              },
-              event6: {
-                  startTime: '13:00',
-                  endTime: '15:00',
-              },
-              event7: {
-                  startTime: '13:00',
-                  endTime: '11:00',
-              },
+      // Set reminder for consultant to submit timesheet on Sunday whenever they open the app
+      if (new Date().getDay() === 0 &&localStorage.getItem('reminderSent') !== 'true') {
+        const time = new Date()
+        time.setSeconds(new Date().getSeconds()+1)
+        const submissionReminderTime = time.getTime() - new Date().getTime(); // Remind consultant when they open the app
+          
+        if (submissionReminderTime > 0) {
+        const timeoutId = setTimeout(function() {
+                if (!currentTimesheet.isSubmitted) {
+                    alert("Don't forget to complete your timesheet!");
+                    localStorage.setItem('reminderSent', 'true')
+                }
+            }, submissionReminderTime);
+            return () => clearTimeout(timeoutId);
+
+        } 
+      }
+
+        // Setting automatic submission for end of week 23:59:59
+        let automaticSubmissionTime = new Date(endOfWeekReminder)
+        automaticSubmissionTime.setHours(23);
+        automaticSubmissionTime.setMinutes(59);
+        automaticSubmissionTime.setSeconds(59);
+
+        const autoSubmit = automaticSubmissionTime.getTime() - new Date().getTime();
+
+        if (autoSubmit > 0) {
+            const timeoutId = setTimeout(function() {
+                    const numberOfEvents = Object.keys(JSON.parse(localStorage.getItem('events'))).length
+                    if (numberOfEvents === 0 && !currentTimesheet.isSubmitted) {
+                        // Storing date and time of timesehet submission
+                        const timesheetSubmissionDateandTime = new Date() 
+                        // setTimesheetStatus('Submitted') // Update value in database
+                        alert("Timesheet submitted!");
+                    }
+                }, autoSubmit);
+            return () => clearTimeout(timeoutId);
+            } 
           }
-      };
-
-      localStorage.setItem('currentTimesheet', JSON.stringify(timesheetData));
-      const currentTimesheet = JSON.parse(localStorage.getItem('currentTimesheet'))
-
-    
-    // Set reminder for consultant to submit timesheet on Sunday whenever they open the app
-    if (new Date().getDay() === 0 &&localStorage.getItem('reminderSent') !== 'true') {
-      const time = new Date()
-      time.setSeconds(new Date().getSeconds()+1)
-      const submissionReminderTime = time.getTime() - new Date().getTime(); // Remind consultant when they open the app
-        
-      if (submissionReminderTime > 0) {
-      const timeoutId = setTimeout(function() {
-              if (!currentTimesheet.isSubmitted) {
-                  alert("Don't forget to complete your timesheet!");
-                  localStorage.setItem('reminderSent', 'true')
-              }
-          }, submissionReminderTime);
-          return () => clearTimeout(timeoutId);
-
-      } 
-    }
-
-      // Setting automatic submission for end of week 23:59:59
-      let automaticSubmissionTime = new Date(endOfWeekReminder)
-      automaticSubmissionTime.setHours(23);
-      automaticSubmissionTime.setMinutes(59);
-      automaticSubmissionTime.setSeconds(59);
-
-      const autoSubmit = automaticSubmissionTime.getTime() - new Date().getTime();
-
-      if (autoSubmit > 0) {
-          const timeoutId = setTimeout(function() {
-                  const numberOfEvents = Object.keys(JSON.parse(localStorage.getItem('events'))).length
-                  if (numberOfEvents === 0 && !currentTimesheet.isSubmitted) {
-                      // Storing date and time of timesehet submission
-                      const timesheetSubmissionDateandTime = new Date() 
-                      // setTimesheetStatus('Submitted') // Update value in database
-                      alert("Timesheet submitted!");
-                  }
-              }, autoSubmit);
-          return () => clearTimeout(timeoutId);
-          } 
     }, []);
 
   // Render page based on location
