@@ -6,14 +6,13 @@ from rest_framework import generics, viewsets, permissions
 from .models import SystemUser, Timesheet, Event, Comment, Notification
 from .serializers import SystemUserSerializer, TimesheetSerializer, EventSerializer, CommentSerializer, NotificationSerializer 
 from rest_framework.permissions import IsAuthenticated, AllowAny
+from django.utils import timezone
 
-<<<<<<< HEAD
-=======
 class CreateUserView(generics.CreateAPIView):
   queryset = SystemUser.objects.all()
   serializer_class = SystemUserSerializer
   permission_classes = [AllowAny]
->>>>>>> 24fb59e26cd58dd8884575fe2ee8be2e1cbd98cc
+
 
 class SystemUserViewSet(viewsets.ViewSet):
     permission_classes = [permissions.AllowAny]
@@ -61,6 +60,24 @@ class TimesheetViewSet(viewsets.ViewSet):
         queryset = self.queryset
         serializer = self.serializer_class(queryset, many=True)
         return Response(serializer.data)
+
+    # def list(self, request):
+    #     user_email = request.query_params.get('user_email')
+    #     print(f"User email: {user_email}")  # Debug print
+
+    #     if user_email is not None:
+    #         user = SystemUser.objects.filter(username=user_email).first()
+    #         print(f"User: {user}")  # Debug print
+
+    #         if user:
+    #             queryset = self.queryset.filter(user=user, end_date__lt=timezone.now().date())
+    #         else:
+    #             queryset = self.queryset.none()  # Handle as appropriate
+    #     else:
+    #         queryset = self.queryset.none()
+
+    #     serializer = self.serializer_class(queryset, many=True)
+    #     return Response(serializer.data)
 
     def create(self, request):
         serializer = self.serializer_class(data=request.data)

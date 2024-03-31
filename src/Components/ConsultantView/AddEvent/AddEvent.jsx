@@ -7,10 +7,7 @@ import { IoClose } from "react-icons/io5";
 // Importing useState
 import { useEffect, useState } from 'react';
 
-// Importing axios instance for backend handling
-import AxiosInstance from '../../Axios';
-
-export default function AddEvent({componentCaller, addEventHandler, viewedWeek}) {
+export default function AddEvent({componentCaller, addEventHandler, viewedWeek, event}) {
 
     /* Only needs to be rendered for Timesheet component caller as its viewedWeek
     argument will be a Date, compared to Hours' string */
@@ -189,29 +186,6 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek})
         //     eventCategory,
         //     isRecurring,
         //     eventNote
-
-        // Handle data using axios
-        AxiosInstance.post('event/', {
-            name: eventName,
-            date: eventDate,
-            startTime: eventStartTime,
-            endTime: eventEndTime,
-            type: eventType,
-            category: eventCategory,
-            recurring: isRecurring,
-            note: eventNote
-        })
-
-        // console.log(
-        //     eventName,
-        //     eventDate,
-        //     eventStartTime,
-        //     eventEndTime,
-        //     eventType,
-        //     eventCategory,
-        //     isRecurring,
-        //     eventNote
-        // )
     }
 
     return(
