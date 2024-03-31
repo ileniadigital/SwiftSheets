@@ -259,8 +259,6 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
     }
 
     // Checking for when values change to let user know times overlap
-
-    // COMPLETE VALIDATION
     useEffect(() => {
         let isConcurrent = false
 
@@ -270,6 +268,11 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
             
             // Ensuring event does not already exist 
             for (const e in events) {
+                // No need to compare edited event against itself
+                if (componentCaller === 'Hours1' && events[e].id === event.id) {
+                    continue
+                }
+
                 let eventObserved = events[e]
                 let eventObservedDate = eventObserved.date
                 
@@ -289,7 +292,6 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
                 let endTimeMins = parseInt(eventEndTime.slice(3,5))
 
                 if (eventDate === eventObservedDate) {
-
                     if (eventStartTime === eventObservedStartTime &&
                     eventEndTime === eventObservedEndTime) {
                         // Prevent event addition
@@ -297,28 +299,54 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
                         break
                     } 
                     // Considering events that last one day
-                     else if (eventObservedStartHours <= eventObservedEndHours) {
+                    else if (eventObservedStartHours <= eventObservedEndHours) {
                         if (eventObservedStartHours === eventObservedEndHours) {
                             if (startTimeHours === eventObservedStartHours) {
                                 if (startTimeMins >= eventObservedStartMins && startTimeMins <= eventObservedEndMins) {
                                     isConcurrent = true
                                     break
                                 }
-                            }
+                            } else if (startTimeHours <= endTimeHours && endTimeHours === eventObservedStartHours) {
+                                if (endTimeMins >= eventObservedStartMins && endTimeMins <= eventObservedEndMins) {
+                                    isConcurrent = true
+                                    break
+                                }
+                            } 
                         } else {
                             if (startTimeHours === eventObservedStartHours) {
                                 if (startTimeMins >= eventObservedStartMins) {
                                     isConcurrent = true
                                     break
                                 }
-                            } else if (endTimeHours === eventObservedEndHours) {
+                            } 
+                            if (startTimeHours === eventObservedEndHours) {
+                                if (startTimeMins <= eventObservedEndMins) {
+                                    isConcurrent = true
+                                    break
+                                }
+                            } 
+                            if (endTimeHours === eventObservedEndHours) {
                                 if (endTimeMins <= eventObservedEndMins) {
                                     isConcurrent = true
                                     break
                                 }
-                            } else if ((startTimeHours > eventObservedStartHours) && (startTimeHours < eventObservedEndHours)) {
+                            } 
+                            if (endTimeHours === eventObservedStartHours) {
+                                if (endTimeMins >= eventObservedStartMins) {
                                     isConcurrent = true
                                     break
+                                }
+                            }
+                            if ((startTimeHours > eventObservedStartHours) && (startTimeHours < eventObservedEndHours)) {
+                                isConcurrent = true
+                                break
+                            } 
+                            if (startTimeHours <= eventObservedStartHours) {
+                                if ((endTimeHours === eventObservedEndHours && endTimeMins <= eventObservedEndMins) ||
+                                    (endTimeHours > eventObservedEndHours)) {
+                                    isConcurrent = true
+                                    break
+                                } 
                             }
                         }
                     }

@@ -183,10 +183,10 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
                         event.stopPropagation();
                         addEventHandler("Hours1", date, event1)
                     }}> 
-                    {startHour ? <div className = "delete-event" 
-                    onClick={(event) => {
-                        event.stopPropagation()
-                        deleteEvent(event1.id)}}><IoClose /></div> : ''}
+                    {startHour ? <div className = "delete-event">
+                        <IoClose onClick={(event) => {
+                            event.stopPropagation()
+                            deleteEvent(event1.id)}}/></div> : ''}
                         {startHour && deleteEventID === event1.id && <DeleteEventConfirmation event = {event1.id} setOpenPopup = {setDeleteEventID}/>}
                 </div>
             )
