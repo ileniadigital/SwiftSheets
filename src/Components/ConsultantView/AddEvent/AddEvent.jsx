@@ -152,11 +152,10 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
 
     // Handles validation after submit button has abeen pressed
     function handleSubmit(event) {
-        event.preventDefault();
-
         const events = JSON.parse(localStorage.getItem("events")) || {}
 
         if (componentCaller === 'Hours1') {
+            // Edit event
             for (const e in events) {
                 // When event has been found
                 if (events[e].id === event1.id) {
@@ -187,48 +186,60 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
                     if (eventNote !== event1.note) {
                         event1['note'] = eventNote
                     }
-                    console.log(event1.recurring, event1.note)
                     events[event1.id] = editedEvent
                     localStorage.setItem("events", JSON.stringify(events)); // Save the updated events back to localStorage
-                    return
+
+                    const recurringEvents = JSON.parse(localStorage.getItem('recurringEvents'))
+                       
+                    // Updating/Deleting recurring event
+                    for (const e in events) {
+                        // Find current event
+                        if (events[e].id === event1.id) {
+                            // Check if event is in recurring events
+                            let found = false
+                            for (const r in recurringEvents) {
+                                if (recurringEvents[r].id === event1.id)
+                                found = true
+                                break
+                            }
+
+                            // Add to recurring events if not in already
+                            if (!found && isRecurring) {
+                                recurringEvents[event1.id] = event1
+                                localStorage.setItem("recurringEvents", JSON.stringify(recurringEvents)); // Save the updated events back to localStorage
+                            } else if (found && !isRecurring) {
+                                delete recurringEvents[event1.id]
+                                localStorage.setItem("recurringEvents", JSON.stringify(recurringEvents)); // Save the updated events back to localStorage
+                            }
+                        }
+                    }
                 }
             }
-        }
+        } else {
+            // Add event
+            const newEventId = Object.keys(events).length; // Get the length of current events to generate a new ID
+            const newEvent = {
+                id: newEventId,
+                name: eventName,
+                date: eventDate,
+                startTime: eventStartTime,
+                endTime: eventEndTime,
+                type: eventType,
+                category: eventCategory,
+                recurring: isRecurring,
+                note: eventNote
+            };
+            events[newEventId] = newEvent; // Add the new event to the existing events object
+            localStorage.setItem("events", JSON.stringify(events)); // Save the updated events back to localStorage 
 
-        // Check if event is recurring and add it to reccuring events if so
-        const newEventId = Object.keys(events).length; // Get the length of current events to generate a new ID
-        const newEvent = {
-            id: newEventId,
-            name: eventName,
-            date: eventDate,
-            startTime: eventStartTime,
-            endTime: eventEndTime,
-            type: eventType,
-            category: eventCategory,
-            recurring: isRecurring,
-            note: eventNote
-        };
-        events[newEventId] = newEvent; // Add the new event to the existing events object
-        localStorage.setItem("events", JSON.stringify(events)); // Save the updated events back to localStorage
-
-        // Add event to recurring events
-        if (isRecurring) {
-            const recurringEvents = JSON.parse(localStorage.getItem('recurringEvents'))
-            // Doesn't add event if it is already there
-            let found = false
-            for(const e in recurringEvents) {
-                console.log(e, newEvent.id)
-                if (e === newEvent.id) {
-                    found = true
-                    break
-                }
-            }
-            if (!found) {
-                const newRecurringEventId = Object.keys(recurringEvents).length; // Get the length of current events to generate a new ID
-                recurringEvents[newRecurringEventId] = newEvent; // Add the new event to the existing events object
+            if (isRecurring) {
+                // No need for check as this is the first time the event has been added
+                const recurringEvents = JSON.parse(localStorage.getItem('recurringEvents'))
+                recurringEvents[newEvent.id] = newEvent
                 localStorage.setItem("recurringEvents", JSON.stringify(recurringEvents)); // Save the updated events back to localStorage
             }
         }
+
         // Values to be added to database
         //     eventName,
         //     eventDate,
