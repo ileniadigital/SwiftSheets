@@ -62,12 +62,6 @@ export default function Timesheet({completionReminderDate, setCompletionReminder
         setAddEventClicked(!addEventClicked)
     }
 
-    // Function that formats the day of the week
-    const formatDate = (week, dayToRetrieve) => {
-        const date = getDate(week, dayToRetrieve)
-        return `${date[0]}/${date[1]}/${date[2]}`
-    }
-
 
     // Store whether timesheet completion reminder has been set
     const [reminder, setReminder] = useState(false);
@@ -128,6 +122,20 @@ export default function Timesheet({completionReminderDate, setCompletionReminder
     localStorage.setItem('recurringEvents', JSON.stringify({}))
    }
 
+   const [emptyTimesheetError, setEmptyTimesheetError] = useState(false)
+    // Function that handles timesheet submission
+    const handleSubmission = () => {
+        // Include iteration that checks the length of the events; if theres more than 1 the timesheet can be submitted
+        const numberOfEvents = Object.keys(JSON.parse(localStorage.getItem('events'))).length > 0
+        if (numberOfEvents > 0 ) {
+            // Storing date and time of timesehet submission
+            const timesheetSubmissionDateandTime = new Date() 
+            setTimesheetStatus('Submitted')
+        } else {
+            setEmptyTimesheetError(true)
+        }
+    }
+
     return (
         localStorage.getItem('daysWorked') !== "[]" ? (
         <div className = 'consultant-view'>
@@ -139,7 +147,7 @@ export default function Timesheet({completionReminderDate, setCompletionReminder
                 <button className='add-event-button' disabled = {timesheetStatus === "Submitted"} onClick={() => addEventHandler("Timesheet", viewedWeek)}> 
                     <FaCirclePlus /> {/* Button icon */}
                 </button>
-                <button className='completion-reminder' onClick={updateCompletionReminder}>
+                <button className='completion-reminder' disabled = {timesheetStatus === "Submitted"} onClick={updateCompletionReminder}>
                     {timesheetCompletionReminder ? <IoIosNotifications /> : <IoIosNotificationsOff />}
                 </button>
                 {reminder && (
@@ -202,11 +210,22 @@ export default function Timesheet({completionReminderDate, setCompletionReminder
                     <p>Payment Status <span className={"status " + timesheetPaymentStatus.toLowerCase()}>{timesheetPaymentStatus}</span></p>
                 </div>
                 <div className='buttons'>
-                    <button className='submit-button' onClick={() => setTimesheetStatus("Submitted")} disabled = {timesheetStatus === "Submitted"} >{timesheetStatus === "Submitted" ? "Submitted" : "Submit"}</button>
+                    <button className='submit-button' onClick={handleSubmission} disabled = {timesheetStatus === "Submitted"} >{timesheetStatus === "Submitted" ? "Submitted" : "Submit"}</button>
                     <button className='submit-button' onClick={() => setTimesheetStatus("Saved")} disabled = {timesheetStatus === "Submitted"}>Save</button>
                     <button className='submit-button' onClick={() => exportPdf(document.querySelector('body'))}>Export as PDF</button>
                 </div>
             </div>
+
+            {/* Display error if user attempts to submit empty timesheet */}
+            {emptyTimesheetError && 
+            <div className='empty-error-container'>
+                <div className='empty-error'>
+                    <button>
+                        <IoClose onClick={() => setEmptyTimesheetError(false)}/>
+                    </button>
+                    <p>You cannot submit an empty timesheet</p>
+                </div>
+            </div>}
         </div> 
         ) : (
             // Display error if the user has selected 0 working days

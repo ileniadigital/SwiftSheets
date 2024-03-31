@@ -111,7 +111,7 @@ button {
 }
 
 /* Changing + button colour to grey so it's easier for users to understand that they cannot add a new event after submission */
-.consultant-view-header .add-event-button:disabled svg {
+.consultant-view-header .add-event-button:disabled svg, .completion-reminder:disabled svg {
     fill: gray;
 }
 
@@ -164,7 +164,6 @@ button {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 1000000000;
     background-color: rgb(239, 236, 234, 0.5);
     color: #EFECEA;
     z-index: 1000000000000000;
@@ -199,4 +198,59 @@ button {
     color: red;
     font-size: 1rem;
     margin-top: 1rem;
+}
+
+.empty-error-container {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(239, 236, 234, 0.5);
+    z-index: 1000000000000000;
+}
+
+/* Styling button used to close event */
+.empty-error {
+    padding-top: 1rem;
+    padding-right: 1rem;
+    background-color: #1E1E1E;
+    width: 36rem;
+    border-radius: 2rem;
+    border: 0.3rem solid #C5FF00;
+    fill: #EFECEA;
+    padding-bottom: 2rem;
+    margin-top: 1rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-left: auto;
+    margin-right: 1rem;
+    font-size: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Styling text */
+.empty-error p {
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.empty-error svg:hover {
+    fill: #C5FF00;
+}
+
+/* Styling button */
+.empty-error svg {
+    height: 2rem;
+    width: 2rem;
+    fill: #EFECEA;
+}
+
+/* Styling container */
+.empty-error button {
+    margin-left: auto;
 }

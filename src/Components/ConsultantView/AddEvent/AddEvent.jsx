@@ -247,7 +247,6 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
             }
         }
 
-
         // Values to be added to database
         //     eventName,
         //     eventDate,
