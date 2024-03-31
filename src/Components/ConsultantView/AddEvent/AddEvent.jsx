@@ -329,12 +329,69 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
         setConcurrentEvent(isConcurrent)
     }, [eventDate, eventStartTime, eventEndTime])
 
+    
+    const [recurringEvents, setRecurringEvents] = useState(
+        localStorage.getItem('recurringEvents') && 
+        Object.keys(JSON.parse(localStorage.getItem('recurringEvents'))).length > 0
+    )
+
+    const [dropdown, setDropdown] = useState([])
+
+    useEffect(() => {
+        // Creating dropdown menu with recurring events
+        if (recurringEvents) {
+            let recEvents = JSON.parse(localStorage.getItem('recurringEvents'))
+            let options = []
+            for (const re in recEvents) {
+                options.push(
+                    <option key={recEvents[re].id}>
+                        {recEvents[re].name}
+                    </option>
+                )
+            }
+            setDropdown(options)
+        }
+    }, [localStorage.getItem('recurringEvents')])
+
+    const handleChange = (event) => {
+        // Find event and update input values
+        let recEvents = JSON.parse(localStorage.getItem('recurringEvents'))
+        let event1;
+        for (const re in recEvents) {
+            if (recEvents[re].name === event.target.value) {
+                event1 = recEvents[re]
+            }
+        }
+
+        // Updating all values (apart from date as this will change)
+        setEventName(event1.name)
+        setEventStartTime(event1.startTime)
+        setEventEndTime(event1.endTime)
+        setEventType(event1.type)
+        setEventCategory(event1.category)
+        setIsRecurring(event1.recurring)
+        setEventNote(event1.note)
+    }
+
     return(
         <div className='add-event' onSubmit={handleSubmit}>
             <button className = "close-event" onClick={addEventHandler}><IoClose /></button>
             <h1 className='log-event-heading'>Log Event</h1>
             {/* Creating a form that represents the Consultant logging an event */}
             <form action="" className = "add-new-event">
+
+                {/* Show dropdown menu for recurring event upon selection */}
+                {componentCaller !== 'Hours1' && recurringEvents &&
+                
+                <div className='input'>
+                    <label>Select Event</label>
+                    <select onChange={handleChange} defaultValue={''}>
+                        <option value="" disabled hidden>Select Event</option> {/* Default value */}
+                        {dropdown}
+                    </select>
+                </div>
+                }
+
                 <div className="input event-name">
                     <label htmlFor="eventName">Name</label>
                     <input type="text" name = "eventName" required onChange={validateEventName}
@@ -362,7 +419,7 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
                 <div className="input">
                     <label htmlFor="eventType">Type</label>
                     <select name="eventType" onChange={handleEventType} required
-                    defaultValue={eventType}>
+                    value={eventType}>
                         <option value="" disabled hidden>Type</option> {/* Default value */}
                         <option value="eventTypeNormal">Normal</option>
                         <option value="eventTypeOvertime">Overtime</option>
@@ -375,7 +432,7 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
                 <div className="input">
                     <label htmlFor="eventCategory">Category</label>
                     <select name="eventCategory" required onChange = {(event) => setEventCategory(event.target.value)} disabled = {disableCategory}
-                    defaultValue={eventCategory}>
+                    value={eventCategory}>
                         <option value="" disabled hidden>Category</option> {/* Default value */}
                         <option value="Project">Project</option>
                         <option value="eventCategoryPlanning">Planning</option>
