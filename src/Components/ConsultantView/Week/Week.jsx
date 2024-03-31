@@ -47,8 +47,6 @@ export default function Week({viewedWeek, addEventHandler, timesheetStatus}) {
         week.push(<DailyHours key={0}/>) 
     }
 
-    
-
     // Creating Day component for each day of the week and adding it to the array
     for (let i = 0; i < weekDays.length; i++) {
         week.push(

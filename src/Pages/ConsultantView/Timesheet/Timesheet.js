@@ -117,7 +117,11 @@ export default function Timesheet({completionReminderDate, setCompletionReminder
     let endOfWeek, endOfWeekDay, endOfWeekMonth, endOfWeekYear;
     // Determining date for start of week
     startOfWeek = new Date(viewedWeek); // Creates copy of current week
-    startOfWeek.setDate(viewedWeek.getDate() - viewedWeek.getDay() + 1)  // Adds 1 as function starts from Sunday (0 indexed)
+    if (viewedWeek.getDay() === 0) {
+        startOfWeek.setDate(viewedWeek.getDate()-1 - 5)
+    } else {
+        startOfWeek.setDate(viewedWeek.getDate() - viewedWeek.getDay())  // Adds 1 as function starts from Sunday (0 indexed)
+    }
 
     startOfWeekDay = startOfWeek.getDate().toString().padStart(2, '0');
     startOfWeekMonth = (startOfWeek.getMonth() + 1).toString().padStart(2,'0'); // + 1 due to 0 indexing
@@ -125,6 +129,7 @@ export default function Timesheet({completionReminderDate, setCompletionReminder
 
    // Converting into format for minimum date value
    startOfWeek = `${startOfWeekYear}-${startOfWeekMonth}-${startOfWeekDay}`
+   let startOfWeek1 = `${startOfWeekDay}/${startOfWeekMonth}/${startOfWeekYear}`
 
    // Determinining date for end of week
    endOfWeek = new Date(startOfWeek); // Creates copy of current week
@@ -136,6 +141,7 @@ export default function Timesheet({completionReminderDate, setCompletionReminder
 
    // Converting into format for maximum date value
    endOfWeek = `${endOfWeekYear}-${endOfWeekMonth}-${endOfWeekDay}`
+   let endOfWeek1 = `${endOfWeekDay}/${endOfWeekMonth}/${endOfWeekYear}`
 
    let recurringEvents;
 
@@ -145,14 +151,13 @@ export default function Timesheet({completionReminderDate, setCompletionReminder
    }
    recurringEvents = localStorage.getItem('recurringEvents')
 
-
     return (
         localStorage.getItem('daysWorked') !== "[]" ? (
         <div className = 'consultant-view'>
             {/* Creating page header */}
             <div className='consultant-view-header'>
                 <p> 
-                    {formatDate(viewedWeek, 1)} – {formatDate(viewedWeek, 7)}
+                    {startOfWeek1} – {endOfWeek1}
                 </p>
                 <button className='add-event-button' disabled = {timesheetStatus === "Submitted"} onClick={() => addEventHandler("Timesheet", viewedWeek)}> 
                     <FaCirclePlus /> {/* Button icon */}
