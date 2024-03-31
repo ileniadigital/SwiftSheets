@@ -1,0 +1,79 @@
+<!-- timesheet_events.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Timesheet Events</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        select, button {
+            font-size: 16px;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Select a Timesheet</h1>
+    <form action="{% url 'timesheet_events' %}" method="post">
+        {% csrf_token %}
+        <select name="timesheet_id">
+            {% for timesheet in timesheets %}
+                <option value="{{ timesheet.id }}">{{ timesheet }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Show Events</button>
+    </form>
+    {% if events %}
+        <h2>Events for {{ timesheet }}</h2>
+        <ul>
+            {% for event in events %}
+                <li>{{ event.name }} - {{ event.date }} - {{ event.duration }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>
+</body>
+</html>

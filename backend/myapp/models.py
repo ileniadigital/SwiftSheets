@@ -36,14 +36,14 @@ class Timesheet(models.Model):
     review_status = models.CharField(max_length=20, choices=REVIEW_STATUS_CHOICES, default='Pending')
     payment_status = models.CharField(max_length=20, choices=PAYMENT_STATUS_CHOICES, default='Inprogress')
     auto_submit = models.BooleanField(default=False)
-    is_submitted = models.BooleanField(default=False)
     completion_reminder = models.DateTimeField(null=True, blank=True)
     last_edited = models.DateTimeField(null=True, blank=True)
     last_reviewed = models.DateTimeField(null=True, blank=True)
+    is_submitted = models.BooleanField(default=False)
 
     # Ensure your __str__ method accounts for SystemUser attributes correctly
     def __str__(self):
-        return f"{self.user.username} - {self.submission_time.strftime('%Y-%m-%d %H:%M')}"
+        return f"{self.id} - {self.user.username} - {self.submission_time.strftime('%Y-%m-%d %H:%M')}"
     
 class Event(models.Model):
     EVENT_TYPE_CHOICES = [
@@ -67,12 +67,16 @@ class Event(models.Model):
     #note = models.TextField(blank=True, default='')  # Default note
 
     def __str__(self):
-        return self.name
+        return f"{self.id} - {self.name} - {self.type} - {self.duration}"
 
 class Comment(models.Model):
     timesheet = models.ForeignKey(Timesheet, on_delete=models.CASCADE, related_name='comments')
     comment_text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Comment by {self.timesheet.user.username} on timesheet {self.timesheet.id}: {self.comment_text}"
+
 
 class Notification(models.Model):
     NOTIFICATION_TYPE_CHOICES = [
@@ -87,4 +91,7 @@ class Notification(models.Model):
     user = models.ForeignKey(SystemUser, on_delete=models.CASCADE, related_name='notifications')
     notification_type = models.CharField(max_length=32, choices=NOTIFICATION_TYPE_CHOICES, default='Submitted')  # Default notification type
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Notification for {self.user.username}: {self.get_notification_type_display()} ({self.timesheet})"
 
