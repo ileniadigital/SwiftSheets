@@ -7,6 +7,7 @@ import Account from './Pages/Account';
 import Settings from './Pages/Settings';
 import ConsultantHome from './Pages/ConsultantView/ConsultantHome/ConsultantHome'
 import Timesheet from './Pages/ConsultantView/Timesheet/Timesheet';
+import ConsultantDashboard from './Pages/ConsultantView/ConsultantDashboard/ConsultantDashboard';
 import Home from './Pages/Home';
 import Name from './Components/NavBar/Name';
 import ConsultantSettings from './Pages/ConsultantView/ConsultantSettings/ConsultantSettings';
@@ -104,6 +105,9 @@ export default function App() {
       timesheetCompletionReminder = {timesheetCompletionReminder}
       setTimesheetCompletionReminder={setTimesheetCompletionReminder}
       />
+      break
+    case "/consultantdashboard":
+      page = <ConsultantDashboard/>
       break
     case "/linemanagerview":
       page = <TimesheetListView/>

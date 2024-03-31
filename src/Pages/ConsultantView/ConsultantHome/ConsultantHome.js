@@ -6,7 +6,6 @@ import '../../../Components/general.css'
 import { IoIosArrowDropupCircle } from "react-icons/io";
 import { IoIosArrowDropdownCircle } from "react-icons/io";
 
-
 // Importing Components
 import TimesheetDetails from '../../../Components/ConsultantView/TimesheetDetails/TimesheetDetails'
 import PastTimesheets from '../../../Components/ConsultantView/PastTimesheets/PastTimesheets'
@@ -26,7 +25,36 @@ export default function ConsultantHome() {
         paymentStatus: "Pending",
         isSubmitted: false,
         submissionTime: null,
-        events: {}
+        events: {
+            event1: {
+                startTime: '13:00',
+                endTime: '15:00',
+            },
+            event2: {
+                startTime: '13:00',
+                endTime: '15:00',
+            },
+            event3: {
+                startTime: '13:24',
+                endTime: '15:36',
+            },
+            event4: {
+                startTime: '13:00',
+                endTime: '15:00',
+            },
+            event5: {
+                startTime: '13:00',
+                endTime: '15:00',
+            },
+            event6: {
+                startTime: '13:00',
+                endTime: '15:00',
+            },
+            event7: {
+                startTime: '13:00',
+                endTime: '11:00',
+            },
+        }
     };
   
     localStorage.setItem('currentTimesheet', JSON.stringify(timesheetData));
@@ -43,55 +71,55 @@ export default function ConsultantHome() {
             week: "18/02/30 – 25/02/30",
             submissionStatus: "saved",
             reviewStatus: "Approved",
-            paymentStatus: "Pending"
+            paymentStatus: "Approved"
         },
 
         timesheetData3: {
             week: "18/02/30 – 25/02/30",
             submissionStatus: "saved",
             reviewStatus: "Approved",
-            paymentStatus: "Pending"
+            paymentStatus: "Approved"
         },
 
         timesheetData4: {
             week: "18/02/30 – 25/02/30",
             submissionStatus: "saved",
-            reviewStatus: "Approved",
-            paymentStatus: "Pending"
+            reviewStatus: "Pending",
+            paymentStatus: "Approved"
         },
 
         timesheetData5: {
             week: "18/02/30 – 25/02/30",
             submissionStatus: "saved",
-            reviewStatus: "Approved",
-            paymentStatus: "Pending"
+            reviewStatus: "Pending",
+            paymentStatus: "Approved"
         },
 
         timesheetData6: {
             week: "18/02/30 – 25/02/30",
             submissionStatus: "saved",
-            reviewStatus: "Approved",
-            paymentStatus: "Pending"
+            reviewStatus: "Pending",
+            paymentStatus: "Approved"
         },
 
         timesheetData7: {
             week: "18/02/30 – 25/02/30",
             submissionStatus: "saved",
-            reviewStatus: "Approved",
-            paymentStatus: "Pending"
+            reviewStatus: "Pending",
+            paymentStatus: "Approved"
         },
 
         timesheetData8: {
             week: "18/02/30 – 25/02/30",
             submissionStatus: "saved",
-            reviewStatus: "Approved",
-            paymentStatus: "Pending"
+            reviewStatus: "Pending",
+            paymentStatus: "Approved"
         },
 
         timesheetData9: {
             week: "18/02/30 – 25/02/30",
             submissionStatus: "saved",
-            reviewStatus: "Approved",
+            reviewStatus: "Pending",
             paymentStatus: "Pending"
         }
     };
@@ -151,7 +179,9 @@ export default function ConsultantHome() {
                         {isPastTimesheetsClicked ? <IoIosArrowDropupCircle/> : <IoIosArrowDropdownCircle /> }
                     </button>
                 </div>
-                {isPastTimesheetsClicked && <PastTimesheets/>}
+                <div className='past-timesheet'>
+                    {isPastTimesheetsClicked && <PastTimesheets/>}
+                </div>
             </div>
         </div>
 
