@@ -15,6 +15,8 @@
     text-align: center;
     margin: 0;
     font-family: Inter;
+    margin-bottom: 2rem;
+    font-size: 2.3rem;
 }
 
 /* Defining layout of container for days of week worked */
