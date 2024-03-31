@@ -142,7 +142,8 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
             }
             if (eventStartTime !== '') {
                 const startTimeHours = parseInt(eventStartTime.slice(0,2)); 
-                const startTimeMins = parseInt(eventStartTime.slice(3,5)); 
+                const startTimeMins = parseInt(eventStartTime.slice(3,5));
+                console.log(localStorage.getItem('24HoursWorked')) 
                 if (localStorage.getItem('24HoursWorked') === 'false') {
                     // Ensuring end time is not before start time
                     if (startTimeHours === endTimeHours) {

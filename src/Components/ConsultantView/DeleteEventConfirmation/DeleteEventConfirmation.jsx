@@ -7,14 +7,11 @@ export default function DeleteEventConfirmation({event, setOpenPopup}) {
     // Delete event
     const deleteEvent = () => {
         const events = JSON.parse(localStorage.getItem('events'))
-        const newEvents = {}; // Initialize an empty object for updated events
-            for (const key in events) {
-                if (events[key].id !== event) { // Exclude the event to delete
-                    newEvents[key] = events[key]; // Copy non-deleted events to the updated object
-                }
-            }
+        const newEvents = { ...events}; // Copying events
+        delete newEvents[event]
         localStorage.setItem('events', JSON.stringify(newEvents))
         setOpenPopup(false)
+        window.location.reload(); // Reload screen to update events
     }
 
     return (

@@ -76,7 +76,7 @@ export default function ConsultantSettings() {
 
      // Checks for changes in start/end time and outputs appropriate error message if start time < end time
      useEffect(() => {
-        localStorage.setItem('24HoursWorked', is24WorkingHours)
+        localStorage.setItem('24HoursWorked', is24WorkingHours || startWorkHours > endWorkHours)
     }, [is24WorkingHours]);
 
     return (

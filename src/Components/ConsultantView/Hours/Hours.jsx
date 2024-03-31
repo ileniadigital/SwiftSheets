@@ -6,10 +6,9 @@ import { FaCirclePlus } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
 
 // Importing useState
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // Importing component to display event on click
-import AddEvent from '../AddEvent/AddEvent';
 import DeleteEventConfirmation from '../DeleteEventConfirmation/DeleteEventConfirmation';
 
 export default function Hours({addEventHandler, date, timesheetStatus}) {
