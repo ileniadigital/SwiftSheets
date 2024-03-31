@@ -138,7 +138,7 @@ export default function App() {
       const currentTimesheet = JSON.parse(localStorage.getItem('currentTimesheet'))
 
     
-    // Set reminder for consultant to submit timesheet on Sunday 12pm
+    // Set reminder for consultant to submit timesheet on Sunday whenever they open the app
     if (new Date().getDay() === 0 &&localStorage.getItem('reminderSent') !== 'true') {
       const time = new Date()
       time.setSeconds(new Date().getSeconds()+1)
