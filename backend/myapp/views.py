@@ -98,6 +98,7 @@ class TimesheetViewSet(viewsets.ViewSet):
             return Response(serializer.data)
         else:
             return Response(serializer.errors, status=400)
+    
 
     # Delete a timesheet
     def destroy(self, request, pk=None):
@@ -125,6 +126,13 @@ class EventViewset(viewsets.ViewSet):
             return Response(serializer.data)
         else:
             return Response(serializer.errors, status=400)
+        
+    # def post(self, request, format=None):
+    #     serializer = EventSerializer(data=request.data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     # Retrieve a specific event
     def retrieve(self, request, pk=None):

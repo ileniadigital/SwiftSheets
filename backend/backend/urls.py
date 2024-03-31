@@ -34,9 +34,9 @@ urlpatterns = [
 ]
 
 router = DefaultRouter()
-router.register('event', EventViewset, basename='event')
+router.register('systemuser', SystemUserViewSet , basename='systemuser')
 router.register('timesheet', TimesheetViewSet , basename='timesheet')
-router.register('system', SystemUserViewSet , basename='system')
+router.register('event', EventViewset, basename='event')
 router.register('comment', CommentViewSet , basename='comment')
 router.register('notification', NotificationViewSet , basename='notification')
 urlpatterns += router.urls
