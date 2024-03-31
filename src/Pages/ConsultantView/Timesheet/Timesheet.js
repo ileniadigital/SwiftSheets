@@ -65,7 +65,6 @@ export default function Timesheet({completionReminderDate, setCompletionReminder
     // Function that formats the day of the week
     const formatDate = (week, dayToRetrieve) => {
         const date = getDate(week, dayToRetrieve)
-
         return `${date[0]}/${date[1]}/${date[2]}`
     }
 
@@ -137,6 +136,15 @@ export default function Timesheet({completionReminderDate, setCompletionReminder
 
    // Converting into format for maximum date value
    endOfWeek = `${endOfWeekYear}-${endOfWeekMonth}-${endOfWeekDay}`
+
+   let recurringEvents;
+
+   //  Initialising recurring events
+   if (!localStorage.getItem('recurringEvents')) {
+    localStorage.setItem('recurringEvents', {})
+   }
+   recurringEvents = localStorage.getItem('recurringEvents')
+
 
     return (
         localStorage.getItem('daysWorked') !== "[]" ? (

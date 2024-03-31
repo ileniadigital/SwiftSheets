@@ -1,10 +1,5 @@
 /* Defining styles for ConsultantSettings page */
 
-/* Defining general layout of settings */
-.settings {
-    height: 100vh;
-}
-
 /* Defining layout of settings items */
 .settings-items {
     margin-left: 3rem;

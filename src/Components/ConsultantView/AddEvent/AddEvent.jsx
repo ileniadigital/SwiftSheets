@@ -162,6 +162,8 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
 
     // Handles validation after submit button has abeen pressed
     function handleSubmit(event) {
+        // Check if event is recurring and add it to reccuring events if so
+        console.log(isRecurring)
         const events = JSON.parse(localStorage.getItem("events")) || {}
         const newEventId = Object.keys(events).length; // Get the length of current events to generate a new ID
         const newEvent = {
@@ -202,7 +204,7 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
 
                 <div className="input">
                     <label htmlFor="eventDate">Date</label>
-                    {componentCaller === "Hours" || "Hours1" ? (
+                    {componentCaller === "Hours" || componentCaller === "Hours1" ? (
 
                         // Date is preset as the day of the week is known from the time/dayslot click 
                         <input className = 'datetime' type="date" name = "eventDate" value = {viewedWeek} readOnly required/>
