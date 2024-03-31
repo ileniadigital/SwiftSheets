@@ -7,6 +7,13 @@ from .models import SystemUser, Timesheet, Event, Comment, Notification
 from .serializers import SystemUserSerializer, TimesheetSerializer, EventSerializer, CommentSerializer, NotificationSerializer 
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
+<<<<<<< HEAD
+=======
+class CreateUserView(generics.CreateAPIView):
+  queryset = SystemUser.objects.all()
+  serializer_class = SystemUserSerializer
+  permission_classes = [AllowAny]
+>>>>>>> 24fb59e26cd58dd8884575fe2ee8be2e1cbd98cc
 
 class SystemUserViewSet(viewsets.ViewSet):
     permission_classes = [permissions.AllowAny]

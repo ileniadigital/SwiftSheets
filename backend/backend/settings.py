@@ -111,6 +111,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # DB_HOST=localhost
 # DB_PORT=5432
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',

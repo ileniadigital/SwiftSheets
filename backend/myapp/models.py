@@ -1,3 +1,5 @@
+from datetime import timedelta, timezone
+from django.utils import timezone
 from django.db import models
 # from django.contrib.auth.models import User
 
@@ -27,7 +29,10 @@ class Timesheet(models.Model):
         ('Rejected', 'Rejected'),
     ]
     user = models.ForeignKey(SystemUser, on_delete=models.CASCADE, related_name='timesheets')
-    submission_time = models.DateTimeField(auto_now_add=True)
+    start_date = models.DateField(default=timezone.now().date() - timedelta(days=timezone.now().weekday()))#start default is moday
+    end_date = models.DateField(default=timezone.now().date() + timedelta(days=6 - timezone.now().weekday()))#end default is sunday 
+    submission_date = models.DateField(auto_now_add=True, blank=True, null=True)  # Changed auto_now_add to blank=True, null=True
+    submission_time = models.DateTimeField(auto_now_add=True, blank=True)    
     review_status = models.CharField(max_length=20, choices=REVIEW_STATUS_CHOICES, default='Pending')
     payment_status = models.CharField(max_length=20, choices=PAYMENT_STATUS_CHOICES, default='Inprogress')
     auto_submit = models.BooleanField(default=False)
