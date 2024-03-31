@@ -41,6 +41,11 @@ export default function App() {
   });
   const [timesheetCompletionReminder, setTimesheetCompletionReminder] = useState(completionReminderDate !== '' && completionReminderTime !== '');
 
+  // Keeps track of whether timesheet reminder was sent
+  if (localStorage.getItem('reminderSent') === null) {
+    localStorage.setItem('reminderSent', 'false')
+  }
+
   // Updating local storage values on change
   useEffect(() => {
         setTimesheetCompletionReminder(completionReminderDate !== '' && completionReminderTime !== '');
@@ -81,11 +86,75 @@ export default function App() {
             return () => clearTimeout(timeoutId);
     }}, [timesheetCompletionReminder, completionReminderDate, completionReminderTime])
 
+    // Setting up timesheet completion reminder (if unsubmitted) and autosubmission
     useEffect(() => {
       let endOfWeek1 = getDate(new Date(), 7)
 
       // Setting reminder for Sunday 00:00
       let endOfWeekReminder = new Date(`${endOfWeek1[2]}-${endOfWeek1[1]}-${endOfWeek1[0]}`)
+
+      
+        // Dummy data - delete
+        const timesheetData = {
+          week: "25/03/24 – 31/03/24",
+          submissionStatus: "Unsubmitted",
+          reviewStatus: "Approved",
+          paymentStatus: "Pending",
+          isSubmitted: false,
+          submissionTime: null,
+          events: {
+              event1: {
+                  startTime: '13:00',
+                  endTime: '15:00',
+              },
+              event2: {
+                  startTime: '13:00',
+                  endTime: '15:00',
+              },
+              event3: {
+                  startTime: '13:24',
+                  endTime: '15:36',
+              },
+              event4: {
+                  startTime: '13:00',
+                  endTime: '15:00',
+              },
+              event5: {
+                  startTime: '13:00',
+                  endTime: '15:00',
+              },
+              event6: {
+                  startTime: '13:00',
+                  endTime: '15:00',
+              },
+              event7: {
+                  startTime: '13:00',
+                  endTime: '11:00',
+              },
+          }
+      };
+
+      localStorage.setItem('currentTimesheet', JSON.stringify(timesheetData));
+      const currentTimesheet = JSON.parse(localStorage.getItem('currentTimesheet'))
+
+    
+    // Set reminder for consultant to submit timesheet on Sunday 12pm
+    if (new Date().getDay() === 0 &&localStorage.getItem('reminderSent') !== 'true') {
+      const time = new Date()
+      time.setSeconds(new Date().getSeconds()+1)
+      const submissionReminderTime = time.getTime() - new Date().getTime(); // Remind consultant when they open the app
+        
+      if (submissionReminderTime > 0) {
+      const timeoutId = setTimeout(function() {
+              if (!currentTimesheet.isSubmitted) {
+                  alert("Don't forget to complete your timesheet!");
+                  localStorage.setItem('reminderSent', 'true')
+              }
+          }, submissionReminderTime);
+          return () => clearTimeout(timeoutId);
+
+      } 
+    }
 
       // Setting automatic submission for end of week 23:59:59
       let automaticSubmissionTime = new Date(endOfWeekReminder)
@@ -93,77 +162,20 @@ export default function App() {
       automaticSubmissionTime.setMinutes(59);
       automaticSubmissionTime.setSeconds(59);
 
-      automaticSubmissionTime.setHours(19);
-      automaticSubmissionTime.setMinutes(39);
-      automaticSubmissionTime.setSeconds(20);
+      const autoSubmit = automaticSubmissionTime.getTime() - new Date().getTime();
 
-      // Set reminder for consultant to submit timesheet at Sunday 11am
-      const submissionReminderTime = endOfWeekReminder.getTime() - new Date().getTime();
-      
-      // Dummy data - delete
-      const timesheetData = {
-        week: "25/03/24 – 31/03/24",
-        submissionStatus: "Unsubmitted",
-        reviewStatus: "Approved",
-        paymentStatus: "Pending",
-        isSubmitted: false,
-        submissionTime: null,
-        events: {
-            event1: {
-                startTime: '13:00',
-                endTime: '15:00',
-            },
-            event2: {
-                startTime: '13:00',
-                endTime: '15:00',
-            },
-            event3: {
-                startTime: '13:24',
-                endTime: '15:36',
-            },
-            event4: {
-                startTime: '13:00',
-                endTime: '15:00',
-            },
-            event5: {
-                startTime: '13:00',
-                endTime: '15:00',
-            },
-            event6: {
-                startTime: '13:00',
-                endTime: '15:00',
-            },
-            event7: {
-                startTime: '13:00',
-                endTime: '11:00',
-            },
-        }
-    };
-
-    localStorage.setItem('currentTimesheet', JSON.stringify(timesheetData));
-    const currentTimesheet = JSON.parse(localStorage.getItem('currentTimesheet'))
-
-    if (submissionReminderTime > 0) {
-    setTimeout(function() {
-            if (!currentTimesheet.isSubmitted) {
-                alert("Don't forget to complete your timesheet!");
-            }
-        }, submissionReminderTime);
-    } 
-
-    const autoSubmit = automaticSubmissionTime.getTime() - new Date().getTime();
-
-    if (autoSubmit > 0) {
-        setTimeout(function() {
-                const numberOfEvents = Object.keys(JSON.parse(localStorage.getItem('events'))).length
-                if (numberOfEvents === 0 && !currentTimesheet.isSubmitted) {
-                    // Storing date and time of timesehet submission
-                    const timesheetSubmissionDateandTime = new Date() 
-                    // setTimesheetStatus('Submitted') // Update value in database
-                    alert("Timesheet submitted!");
-                }
-            }, autoSubmit);
-        } 
+      if (autoSubmit > 0) {
+          const timeoutId = setTimeout(function() {
+                  const numberOfEvents = Object.keys(JSON.parse(localStorage.getItem('events'))).length
+                  if (numberOfEvents === 0 && !currentTimesheet.isSubmitted) {
+                      // Storing date and time of timesehet submission
+                      const timesheetSubmissionDateandTime = new Date() 
+                      // setTimesheetStatus('Submitted') // Update value in database
+                      alert("Timesheet submitted!");
+                  }
+              }, autoSubmit);
+          return () => clearTimeout(timeoutId);
+          } 
     }, []);
 
   // Render page based on location
