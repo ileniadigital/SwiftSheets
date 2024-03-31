@@ -6,41 +6,25 @@ import { IoClose } from "react-icons/io5";
 
 // Importing useState
 import { useEffect, useState } from 'react';
+import getDate from '../getDate';
 
 export default function AddEvent({componentCaller, addEventHandler, viewedWeek, event}) {
 
     /* Only needs to be rendered for Timesheet component caller as its viewedWeek
     argument will be a Date, compared to Hours' string */
-    let startOfWeek, startOfWeekDay, startOfWeekMonth, startOfWeekYear;
-    let endOfWeek, endOfWeekDay, endOfWeekMonth, endOfWeekYear;
 
+    let startOfWeek, endOfWeek;
     if (componentCaller === "Timesheet") {
-        // Determining date for start of week
-         startOfWeek = new Date(viewedWeek); // Creates copy of current week
-         
-         if (viewedWeek.getDay() === 0) {
-            startOfWeek.setDate(viewedWeek.getDate()-1 - 5)
-        } else {
-            startOfWeek.setDate(viewedWeek.getDate() - viewedWeek.getDay())  // Adds 1 as function starts from Sunday (0 indexed)
-        }
 
-         startOfWeekDay = startOfWeek.getDate().toString().padStart(2, '0');
-         startOfWeekMonth = (startOfWeek.getMonth() + 1).toString().padStart(2,'0'); // + 1 due to 0 indexing
-         startOfWeekYear = startOfWeek.getFullYear();
-
+        // Determinining date for start of week
+        const startDate = getDate(viewedWeek, 1)
         // Converting into format for minimum date value
-        startOfWeek = `${startOfWeekYear}-${startOfWeekMonth}-${startOfWeekDay}`
+        startOfWeek = `${startDate[2]}-${startDate[1]}-${startDate[0]}`
 
         // Determinining date for end of week
-        endOfWeek = new Date(startOfWeek); // Creates copy of current week
-        endOfWeek.setDate(endOfWeek.getDate() + 6) // Retrives end of week by adding 6
-        
-         endOfWeekDay = endOfWeek.getDate().toString().padStart(2, '0');
-         endOfWeekMonth = (endOfWeek.getMonth() + 1).toString().padStart(2,'0'); // + 1 due to 0 indexing
-         endOfWeekYear = endOfWeek.getFullYear();
-
+        const endDate = getDate(viewedWeek, 7)
         // Converting into format for maximum date value
-        endOfWeek = `${endOfWeekYear}-${endOfWeekMonth}-${endOfWeekDay}`
+        endOfWeek = `${endDate[2]}-${endDate[1]}-${endDate[0]}`
 } 
 
     // String all inputs

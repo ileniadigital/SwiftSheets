@@ -113,35 +113,15 @@ export default function Timesheet({completionReminderDate, setCompletionReminder
         }
     }, [completionReminderTime, completionReminderDate])
     
-    let startOfWeek, startOfWeekDay, startOfWeekMonth, startOfWeekYear;
-    let endOfWeek, endOfWeekDay, endOfWeekMonth, endOfWeekYear;
-    // Determining date for start of week
-    startOfWeek = new Date(viewedWeek); // Creates copy of current week
-    if (viewedWeek.getDay() === 0) {
-        startOfWeek.setDate(viewedWeek.getDate()-1 - 5)
-    } else {
-        startOfWeek.setDate(viewedWeek.getDate() - viewedWeek.getDay())  // Adds 1 as function starts from Sunday (0 indexed)
-    }
+    // Determinining date for start of week
+    const startDate = getDate(viewedWeek, 1)
+    // Converting into format for minimum date value
+    let startOfWeek = `${startDate[0]}/${startDate[1]}/${startDate[2]}`
 
-    startOfWeekDay = startOfWeek.getDate().toString().padStart(2, '0');
-    startOfWeekMonth = (startOfWeek.getMonth() + 1).toString().padStart(2,'0'); // + 1 due to 0 indexing
-    startOfWeekYear = startOfWeek.getFullYear();
-
-   // Converting into format for minimum date value
-   startOfWeek = `${startOfWeekYear}-${startOfWeekMonth}-${startOfWeekDay}`
-   let startOfWeek1 = `${startOfWeekDay}/${startOfWeekMonth}/${startOfWeekYear}`
-
-   // Determinining date for end of week
-   endOfWeek = new Date(startOfWeek); // Creates copy of current week
-   endOfWeek.setDate(endOfWeek.getDate() + 6) // Retrives end of week by adding 6
-   
-    endOfWeekDay = endOfWeek.getDate().toString().padStart(2, '0');
-    endOfWeekMonth = (endOfWeek.getMonth() + 1).toString().padStart(2,'0'); // + 1 due to 0 indexing
-    endOfWeekYear = endOfWeek.getFullYear();
-
-   // Converting into format for maximum date value
-   endOfWeek = `${endOfWeekYear}-${endOfWeekMonth}-${endOfWeekDay}`
-   let endOfWeek1 = `${endOfWeekDay}/${endOfWeekMonth}/${endOfWeekYear}`
+    // Determinining date for end of week
+    const endDate = getDate(viewedWeek, 7)
+    // Converting into format for maximum date value
+    let endOfWeek = `${endDate[0]}/${endDate[1]}/${endDate[2]}`
 
    let recurringEvents;
 
@@ -157,7 +137,7 @@ export default function Timesheet({completionReminderDate, setCompletionReminder
             {/* Creating page header */}
             <div className='consultant-view-header'>
                 <p> 
-                    {startOfWeek1} – {endOfWeek1}
+                    {startOfWeek} – {endOfWeek}
                 </p>
                 <button className='add-event-button' disabled = {timesheetStatus === "Submitted"} onClick={() => addEventHandler("Timesheet", viewedWeek)}> 
                     <FaCirclePlus /> {/* Button icon */}
