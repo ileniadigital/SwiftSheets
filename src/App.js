@@ -11,7 +11,7 @@ import ConsultantSettings from './Pages/ConsultantView/ConsultantSettings/Consul
 import TimesheetListView from './Pages/TimesheetListView';
 
 //ADD ROUTING BASED ON ROLE FROM DB
-const role='financeteam';
+const role='linemanager';
 
 // Main App component
 export default function App() {
