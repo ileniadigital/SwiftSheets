@@ -161,7 +161,7 @@ export default function Timesheet({completionReminderDate, setCompletionReminder
                             </p>
                             
                             <div className='inputs'>
-                                <input type="time" value={completionReminderTime}
+                                <input className="time" type="time" value={completionReminderTime}
                                 onChange={(event) => {
                                     setReminderTime(event.target.value);
                                     setCompletionReminderTime(event.target.value)}}/>
