@@ -66,23 +66,23 @@ export default function AddUser({ addUserMenuHandler, handleAddUserSubmit }) {
 
     return (
         <div id='addUserMenu' onSubmit={handleSubmitValidation}>
-            <button className = "closeEvent" onClick={() => addUserMenuHandler()}><IoClose /></button>
+            <button className = "closeWindow" onClick={() => addUserMenuHandler()}><IoClose /></button>
             <h1 className='addUserHeading'>Add User</h1>
             <form action="" id='addUserForm'>
                 {/* Name text input*/}
                 <div className="input">
                     <label htmlFor="name">Full Name</label>
-                    <input type="text" name="name" id='name' required onChange={validateName}/>
+                    <input type="text" name="name" id='name' class='inputBox' required onChange={validateName}/>
                 </div>
                 {/* Username text input*/}
                 <div className="input">
                     <label htmlFor="username">Email</label>
-                    <input type="text" name="username" id='username' required onChange={validateUsername}/>
+                    <input type="text" name="username" id='username' class='inputBox' required onChange={validateUsername}/>
                 </div>
                 {/* User role dropdown*/}
                 <div className="input">
                     <label htmlFor="userType">Role</label>
-                    <select name="userType" id='userType' defaultValue={""} required onChange={setType}>
+                    <select name="userType" id='userType' defaultValue={""} class='inputBox' required onChange={setType}>
                         <option value="" selected disabled hidden>Role</option>
                         <option value="Consultant">Consultant</option>
                         <option value="LineManager">Line Manager</option>
@@ -91,7 +91,7 @@ export default function AddUser({ addUserMenuHandler, handleAddUserSubmit }) {
                     </select>
                 </div>
                 {/* Submit button*/}
-                <input type="submit" value={"Add User"} className='addUserButton'/>
+                <input type="submit" value={"Add User"} class='addUserButton'/>
                 { (errorMessage !== null) && <span className='errorMessage'>{errorMessage}</span> }
             </form>
         </div>

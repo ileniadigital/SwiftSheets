@@ -3,9 +3,6 @@ import React, { useState } from 'react';
 import '../Components/general.css'; //Import Styling
 
 //Import componentts
-import ConsultantView from './ConsultantView';
-import LineManagerView from './LineManagerView';
-import FinanceTeamView from './FinanceTeamView';
 import SystemAdminView from './SystemAdminView';
 import ConsultantHome from './ConsultantView/ConsultantHome/ConsultantHome';
 import TimesheetListView from './TimesheetListView';

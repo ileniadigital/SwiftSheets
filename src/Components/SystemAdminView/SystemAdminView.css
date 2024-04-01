@@ -1,14 +1,6 @@
 /* Styling for the add use button */
 #addUserStyle {
-    font-family: Inter;
     font-size: 24px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    background: linear-gradient(90deg, #000 0%, #666 100%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
 }
 
 #addUser {
