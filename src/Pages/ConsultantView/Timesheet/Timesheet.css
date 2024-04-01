@@ -154,7 +154,7 @@ button {
 .reminder-setting .inputs {
     display: flex;
     gap: 2rem;
-    width: 24rem;
+    justify-content: center;
 }
 
 .reminder-container {
@@ -167,6 +167,19 @@ button {
     background-color: rgb(239, 236, 234, 0.5);
     color: #EFECEA;
     z-index: 1000000000000000;
+}
+
+/* Styling input */
+.inputs input {
+    font-size: 1rem;
+    border-radius: 0.4rem;   
+    width: 10rem;
+    border: none;
+}
+
+/* Adding padding */
+.inputs .time {
+    padding-left: 0.5rem;
 }
 
 .reminder-toggle {
