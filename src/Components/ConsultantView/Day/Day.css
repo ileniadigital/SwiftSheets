@@ -1,17 +1,16 @@
-/* Styling WeekDay Component */
+/* Styling Day Component */
 
 /* Ensuring div takes us the whole parent container */
-#weekDay {
-  width: 100%;
+.weekday {
   display: flex; 
   flex-direction: column; 
   align-items: flex-start; 
 }
 
 /* Styling Day Header */
-#day {
-    margin-top: 0;
+.day {
     font-weight: 700;
     font-size: 1.5rem;
     align-self: center;
-  }
+    margin-bottom: 0.5rem;
+ }

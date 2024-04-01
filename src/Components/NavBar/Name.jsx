@@ -5,7 +5,7 @@ export default function Name() {
     let name= 'Jane Smith';
     return (
         <div className='name-container'>
-            <div className='welcomeMessage'>
+            <div className='welcome-message'>
                 <h1>Hi {name} !</h1>
             </div>
         </div>

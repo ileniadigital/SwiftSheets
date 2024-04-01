@@ -1,0 +1,64 @@
+body {
+    background-color: #1e1e1e;
+    color: white;
+}
+
+/* Defining page styling */
+.consultant-home { 
+    display: flex;
+    flex-direction: column;
+    margin-left: 4rem;
+    justify-content: center;
+    align-items: center;
+    margin-right: 4rem;
+}
+
+/* Setting margin */
+.current-timesheet-container {
+    width: 71rem;
+    margin-bottom: 3rem;
+    color:  white
+}
+
+/* Setting layout */
+.current-timesheet { 
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    text-align: center;
+}
+
+/* Styling dropdown */
+.dropdown svg {
+    height: 1.5rem;
+    width: auto;
+    fill: #C5FF00;
+}
+
+/* Setting hover colour */
+.dropdown svg:hover {
+    fill: white;
+}
+
+/* Centering dropdown icons */
+.dropdown {
+    display: flex;
+    align-items: center;
+}
+
+/* Styling dropdown menu */
+.dropdown-menu {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: sticky;
+    top: 0;
+}
+
+/* Setting overflow */
+.past-timesheets {
+    width: 71rem;
+    overflow-y: auto;
+    max-height: 33rem;
+    color:  white
+}
