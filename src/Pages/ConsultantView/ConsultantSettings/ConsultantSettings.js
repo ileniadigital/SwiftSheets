@@ -76,12 +76,11 @@ export default function ConsultantSettings() {
 
      // Checks for changes in start/end time and outputs appropriate error message if start time < end time
      useEffect(() => {
-        localStorage.setItem('24HoursWorked', is24WorkingHours)
+        localStorage.setItem('24HoursWorked', is24WorkingHours || startWorkHours > endWorkHours)
     }, [is24WorkingHours]);
 
     return (
         <div className='settings'>
-            <h1 className='header'>Settings</h1>
             <div className='settings-items'>
                 <div className='days-of-week-worked'>
                     <p>Working Day(s)</p>
@@ -111,7 +110,7 @@ export default function ConsultantSettings() {
                         // If start and end time are the same, a worker may work less than 1, or 24 hours
                         <div className='max-work-hours'>
                             Maximum Working Hours is 24
-                            <input className = "checkbox" type="checkbox" defaultValue={endWorkHours} onChange={() => setIs24WorkingHours(!is24WorkingHours)}/>
+                            <input type="checkbox" defaultValue={endWorkHours} onChange={() => setIs24WorkingHours(!is24WorkingHours)}/>
                         </div>
                         }
                         {/* Display error message if available */}

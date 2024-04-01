@@ -17,6 +17,7 @@ export default function exportPdf(body) {
     const navbar = clone.querySelector('.navbar-container');
     const addEventButton = clone.querySelector('.add-event-button');
     const buttons = clone.querySelector('.buttons');
+    const reminder = clone.querySelector('.completion-reminder')
     if (navbar) {
         navbar.remove();
     }
@@ -25,6 +26,9 @@ export default function exportPdf(body) {
     } 
     if (buttons) {
         buttons.remove()
+    }
+    if (reminder) {
+        reminder.remove()
     }
 
     const options = {

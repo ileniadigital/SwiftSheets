@@ -107,13 +107,150 @@ button {
 .consultant-view-header .add-event-button {
     position: absolute;
     top: 10rem;
-    right: 2rem;
+    right: 10rem;
 }
 
 /* Changing + button colour to grey so it's easier for users to understand that they cannot add a new event after submission */
-.consultant-view-header .add-event-button:disabled svg {
+.consultant-view-header .add-event-button:disabled svg, .completion-reminder:disabled svg {
     fill: gray;
 }
 
+/* Defining container style */
+.completion-reminder{
+    position: absolute;
+    top: 10rem;
+    right: 5rem;
+}
 
+/* Defining container style */
+.reminder-setting {
+    position: absolute;
+    background-color: #1E1E1E;
+    border: 0.1rem solid #C5FF00;
+    border-radius: 1rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    padding: 1rem;
+    width: 30rem;
+}
 
+.reminder-setting button {
+    margin-left: auto;
+    padding-right: 0.6rem;
+    margin-bottom: 1rem;
+}
+
+.reminder-setting button svg {
+    height: 2rem;
+    width: 2rem;
+}
+
+.reminder-setting .inputs {
+    display: flex;
+    gap: 2rem;
+    width: 24rem;
+}
+
+.reminder-container {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(239, 236, 234, 0.5);
+    color: #EFECEA;
+    z-index: 1000000000000000;
+}
+
+.reminder-toggle {
+    background-color: #C5FF00;
+    font-size: large;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    height: 2.5rem;
+    width: 6rem;
+}
+
+.reminder-toggle:hover {
+    background-color: #7ca005;
+}
+
+.reminder-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.turn-off:hover {
+    background-color: rgba(255, 0, 0, 0.341);
+    color: #EFECEA;
+}
+
+/* Styling error message */
+.reminder-error {
+    color: red;
+    font-size: 1rem;
+    margin-top: 1rem;
+}
+
+.empty-error-container {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(239, 236, 234, 0.5);
+    z-index: 1000000000000000;
+}
+
+/* Styling button used to close event */
+.empty-error {
+    padding-top: 1rem;
+    padding-right: 1rem;
+    background-color: #1E1E1E;
+    width: 36rem;
+    border-radius: 2rem;
+    border: 0.3rem solid #C5FF00;
+    fill: #EFECEA;
+    padding-bottom: 2rem;
+    margin-top: 1rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-left: auto;
+    margin-right: 1rem;
+    font-size: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Styling text */
+.empty-error p {
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.empty-error svg:hover {
+    fill: #C5FF00;
+}
+
+/* Styling button */
+.empty-error svg {
+    height: 2rem;
+    width: 2rem;
+    fill: #EFECEA;
+}
+
+/* Styling container */
+.empty-error button {
+    margin-left: auto;
+}
