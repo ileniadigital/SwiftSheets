@@ -1,0 +1,117 @@
+/* Styling for Timesheet Component */
+
+/* Setting font family */
+.consultant-view {
+    margin-bottom: 1rem;
+    background-color: #EFECEA;
+    color: #1e1e1e;
+}
+
+/* Aligning date */
+.consultant-view-header p {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 1.2rem;
+}
+
+/* Removing prior styling */
+button {
+    background: none;
+    border: none;
+}
+
+/* Styling hover */
+.submit-button:hover {
+    filter: grayscale(50%);
+}
+
+/* Stying status container */
+.status-container {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    justify-content: center;
+    margin-left: auto;
+
+}
+
+/* Centering buttons rightmost */
+.buttons {
+    display: flex;
+    gap: 1rem;
+    margin-left: auto;
+    margin-right: 5rem;
+}
+
+/* Ensuring the rest of the content in the div remains centered */
+.centered {
+    display: flex;
+    justify-content: center; 
+    gap: 2rem;
+    white-space: nowrap;
+    margin-left: auto;
+}
+
+/* Styling submit button */
+.submit-button {
+    background-color: #C5FF00;
+    font: Inter;
+    color: #1E1E1E;
+    padding: 0;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 0.4rem;
+    width: 6rem;
+    height: 2rem;
+}
+
+/* Styling submit button when disabled */
+.submit-button:disabled {
+    background: gray;
+}
+
+
+/* Adding colours based on different timesheet statuses */
+.status.pending, .status.unsubmitted {
+    color: grey;
+}
+
+.status.approved, .status.submitted {
+    color: green;
+}
+
+.status.rejected {
+    color: red;
+}
+
+.status.saved { 
+    color: #C5FF00;
+}
+
+/* Setting default button styling */
+.consultant-view-header svg {
+    height: 3rem;
+    width: auto;
+    fill: #C5FF00;
+}
+
+/* Setting button colour on hover */
+.consultant-view-header svg:hover {
+    fill: white;
+}
+
+/* Moving button closer to timesheet */
+.consultant-view-header .add-event-button {
+    position: absolute;
+    top: 10rem;
+    right: 2rem;
+}
+
+/* Changing + button colour to grey so it's easier for users to understand that they cannot add a new event after submission */
+.consultant-view-header .add-event-button:disabled svg {
+    fill: gray;
+}
+
+
+

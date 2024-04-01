@@ -1,0 +1,17 @@
+/* Defining styles for NoWorkingDaysError Component */
+
+/* Defining message style */
+.error-container {
+    background-color: #C5FF00;
+    color: #1e1e1e;
+    padding: 3rem;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}

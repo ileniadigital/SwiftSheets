@@ -1,0 +1,20 @@
+/* Styling for DailyHour Component */
+
+/* Setting entire container to flex */
+.daily-hours {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2.5rem;
+    justify-content: space-between;
+}
+
+/* Styling hour */
+.daily-hour {
+    text-align: left;
+    margin-left: 1rem;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.4rem;
+    text-align: center;
+    height: 3rem;
+}

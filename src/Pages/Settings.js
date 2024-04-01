@@ -1,4 +1,3 @@
-import'../CSS/general.css';
 export default function Settings() {
     return (
         <div>

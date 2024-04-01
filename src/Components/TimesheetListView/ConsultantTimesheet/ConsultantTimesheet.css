@@ -1,0 +1,38 @@
+/* General text styling */
+body {
+  color: white;
+  font-family: Inter;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 400;
+}
+/* Styling for single timesheet */
+.consultantTimesheet-container {
+  display: flex;
+  flex-direction: row;
+  gap: 4rem;
+  align-items: center;
+  justify-content: center;
+  width: 60rem;
+  height: 4rem;
+  border-radius: 1.5rem;
+  border: 0.2rem solid #c5ff00;
+  position: relative;
+  margin: 2rem;
+}
+
+/* Styling for Consultant Name */
+.consultantName {
+  font-weight: bold;
+}
+
+/* Styling for Status dropdown menus */
+.status-dropdown {
+  width: 12rem;
+  height: 2.5rem;
+  flex-shrink: 0;
+  border-radius: 1.5rem;
+  border: 0.2rem solid #c5ff00;
+  text-align: center;
+  background-color: #c5ff00;
+}

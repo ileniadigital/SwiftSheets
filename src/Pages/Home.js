@@ -1,10 +1,29 @@
-import'../CSS/general.css';
-export default function Home() {
-    return (
-        <div>
-            <h1>Home</h1>
-        </div>
-    )
-}
+import React, { useState } from 'react';
 
-// Must add something that checks what type of user we have and then renders the correct home page
+import '../Components/general.css'; //Import Styling
+
+//Import componentts
+import ConsultantHome from './ConsultantView/ConsultantHome/ConsultantHome';
+import TimesheetListView from './TimesheetListView';
+
+
+export default function Home(props) {
+    // const [view, setView] = useState('default');
+    let view;
+    switch (props.view) {
+        case 'consultant':
+            view = <ConsultantHome />;
+            break;
+        case 'linemanager':
+            view = <TimesheetListView />;
+            break;
+        case 'financeteam':
+            view = <TimesheetListView  />;
+            break;
+    }
+    return (
+        <div className='home-container'>
+            {view}
+        </div>
+    );
+}

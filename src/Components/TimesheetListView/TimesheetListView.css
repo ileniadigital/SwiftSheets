@@ -1,0 +1,33 @@
+/* Styling for the timesheet containers */
+.list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+  width: 70rem;
+  height: 40rem;
+  border-radius: 1.5rem;
+  border: 0.2rem solid #c5ff00;
+  margin-left: 10rem;
+  margin-top: 1rem;
+}
+
+/* Styling for categories container */
+.categories-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10rem;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  font-size: 0.75rem;
+  margin: -7 0 -7 0;
+  color: grey;
+}
+
+/* Styling for timesheets container */
+.timesheet-container {
+  max-height: 30rem;
+  overflow-y: auto;
+}

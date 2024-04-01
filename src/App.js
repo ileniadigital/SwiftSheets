@@ -1,13 +1,32 @@
-import NavBar from './Components/NavBar';
+// Import stylesheets
+import './Components/general.css';
+
+// Import components 
+import NavBar from './Components/NavBar/NavBar';
 import Account from './Pages/Account';
 import Settings from './Pages/Settings';
-import ConsultantView from './Pages/ConsultantView';
+import ConsultantHome from './Pages/ConsultantView/ConsultantHome/ConsultantHome'
+import Timesheet from './Pages/ConsultantView/Timesheet/Timesheet';
 import Home from './Pages/Home';
-function App() {
+import Name from './Components/NavBar/Name';
+import ConsultantSettings from './Pages/ConsultantView/ConsultantSettings/ConsultantSettings';
+import TimesheetListView from './Pages/TimesheetListView';
+
+//ADD ROUTING BASED ON ROLE FROM DB
+const role='consultant';
+
+// Main App component
+export default function App() {
+
+  // Render page based on location
   let page
   switch (window.location.pathname) {
+    // default:
+    //   page= <LogIn/>
+    //   break
+    case "/Home":
     case "/":
-      page= <Home/>
+      page= <Home view={role}/>
       break
     case "/Account":
       page= <Account/>
@@ -15,17 +34,27 @@ function App() {
     case "/Settings":
       page= <Settings/>
       break
-    case "/consultantview":
-      page = <ConsultantView/>
+    case "/consultanthome":
+      page = <ConsultantHome/>
+      break
+    case "/timesheet":
+      page = <Timesheet/>
+      break
+    case "/linemanagerview":
+      page = <TimesheetListView/>
+      break
+    case "/financeteamview":
+      page = <TimesheetListView/>
+      break
+    case "/consultantsettings":
+      page = <ConsultantSettings/>
       break
   }
   return (
     <>
-        <NavBar/>
-        <h1 id='welcomeMessage'>Hi !</h1>
+        <NavBar view={role}/>
+        <Name/>
         {page}
     </>
   )
 }
-
-export default App;

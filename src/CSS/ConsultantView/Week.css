@@ -1,9 +1,0 @@
-/* Styling for Week Component */
-
-/* Taking up entirety of parent container so timesheet is spread */
-#week {
-    display: flex;
-    text-align: center;
-    margin-left: 2rem;
-    margin-right: 2rem;
-}

@@ -1,0 +1,82 @@
+/* Styling for container for NavBar */
+.navbar-container {
+  margin: 0;
+  top: 0;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+/* Styling for navigation element */
+.navbar {
+  top: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Styling for logo */
+.navbar-logo {
+  margin: 0 0 0 2rem;
+  padding: 0;
+  margin-right: auto;
+}
+.navbar-logo img {
+  width: 7rem;
+  height: 7rem;
+}
+
+/* Styling for navigation menu list */
+.navbar-menu {
+  margin: 2%;
+  display: flex;
+  list-style-type: none;
+  background-color: #efecea;
+  border-radius: 10rem;
+  padding: 1rem;
+}
+
+.navbar-link {
+  color: black;
+  padding: 1rem;
+  text-decoration: none;
+}
+
+.navbar-link:hover {
+  color: #c5ff00;
+}
+
+/* Adding styling for 'Hi' message */
+.welcome-message{
+  font-weight: 400;
+  font-family: Inter;
+  font-size: 1rem;
+  text-align: center;
+}
+
+#welcomeMessage h1 {
+  color: white;
+}
+
+/* Styling for language menu */
+.language-menu {
+  margin: 0 2rem 0 auto;
+  display: flex;
+  gap: 1rem;
+  list-style-type: none;
+  padding: 1rem;
+}
+
+.language-select {
+  outline: none;
+  background: transparent;
+  color: white;
+  width: 6rem;
+}
+
+.language-select:hover {
+  color: #c5ff00;
+}
+.language-select option {
+  background-color: #1e1e1e;
+}
