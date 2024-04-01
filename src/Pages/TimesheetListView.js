@@ -2,100 +2,94 @@ import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 import ConsultantTimesheet from '../Components/TimesheetListView/ConsultantTimesheet/ConsultantTimesheet';
 import '../Components/TimesheetListView/TimesheetListView.css'; // Import styling
-
 import Filters from '../Components/TimesheetListView/Filters/Filters';
+import { fetchTimesheetsAndUsers } from '../Components/Data/TimesheetData'; // Adjust the path as necessary
 
 export default function TimesheetListView({ role }) {
   const [timesheets, setTimesheets] = useState([]);
-  const [userDetails, setUserDetails] = useState({});
-  const [error, setError] = useState("");
+  const [users, setUsers] = useState({});
+  const [filter, setFilter] = useState("pending");
 
   useEffect(() => {
-    const userEmail = 'elizabeth@email.com'; // Replace with dynamic user email if necessary
-    fetchTimesheets(userEmail); 
-  }, []); // The dependency array is empty so this will run only once on mount
+    fetchTimesheetsAndUsers(setTimesheets, setUsers, filter);
+  }, [filter]);
 
-  const fetchTimesheets = (email) => {
-    Axios.get(`http://localhost:8000/timesheet/?user_email=${encodeURIComponent(email)}`)
-      .then(response => {
-        setTimesheets(response.data);
-        if (response.data.length > 0) {
-          // Assuming the user email is the same as the one we fetched the timesheets with
-          fetchUserDetails(email);
-        }
-      })
-      .catch(error => {
-        console.error('Error fetching timesheets:', error);
-        setError("An error occurred while fetching the timesheets.");
-      });
+  const handleFilterChange = (selectedFilter) => {
+    setFilter(selectedFilter);
   };
 
-  const fetchUserDetails = (email) => {
-    Axios.get(`http://localhost:8000/systemuser/?email=${encodeURIComponent(email)}`)
-      .then(response => {
-        const user = response.data.find(u => u.username === email);
-        setUserDetails(user || {});
-      })
-      .catch(error => {
-        console.error('Error fetching user details:', error);
-        setError("An error occurred while fetching user details.");
-      });
-  };
+  //old fetch
+// export default function TimesheetListView({ role }) {
+//   const [timesheets, setTimesheets] = useState([]);
+//   const [users, setUsers] = useState({});
+//   const [filter, setFilter] = useState("pending"); // Default filter
 
-  const formatDate = (dateString) => {
-    const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
-    return new Date(dateString).toLocaleDateString('en-GB', options);
-  };
+//   useEffect(() => {
+//     fetchTimesheets();
+//   }, [filter]); // Re-fetch timesheets when the filter changes
 
-  const renderContent = () => {
-    if (error) {
-      return <div>{error}</div>;
-    }
-    if (timesheets.length === 0) {
-      return <div>No timesheets found.</div>;
-    }
-    return timesheets.map(timesheet => (
-      <ConsultantTimesheet
-        key={timesheet.id}
-        name={`${userDetails.firstname} ${userDetails.lastname}`} 
-        dates={`${formatDate(timesheet.start_date)} - ${formatDate(timesheet.end_date)}`}
-        reviewStatus={timesheet.review_status}
-        paymentStatus={timesheet.payment_status}
-        role={role}
-      />
-    ));
-  };
+//   const fetchTimesheets = () => {
+//     let url = 'http://localhost:8000/timesheet/';
+//     if (filter !== 'all') {
+//       url += `?review_status=${filter}`;
+//     }
+
+//     Axios.get(url)
+//       .then(response => {
+//         setTimesheets(response.data);
+//         // After fetching timesheets, fetch user details for each timesheet
+//         fetchUserDetails(response.data);
+//       })
+//       .catch(error => {
+//         console.error('Error fetching timesheets:', error);
+//       });
+//   };
+
+//   const fetchUserDetails = (timesheets) => {
+//     // Create a unique set of user IDs to minimize API calls
+//     const userIds = new Set(timesheets.map(ts => ts.user));
+
+//     // Fetch details for each user ID
+//     userIds.forEach(userId => {
+//       Axios.get(`http://localhost:8000/systemuser/${userId}/`) // Adjust this URL to your API's user detail endpoint
+//         .then(response => {
+//           setUsers(prevUsers => ({
+//             ...prevUsers,
+//             [userId]: response.data
+//           }));
+//         })
+//         .catch(error => {
+//           console.error(`Error fetching details for user ${userId}:`, error);
+//         });
+//     });
+//   };
+
+  // const handleFilterChange = (selectedFilter) => {
+  //   setFilter(selectedFilter);
+  // };
 
   return (
     <div className='container'>
-      {/* Menu */}
       <div className='menu-container'>
-        <div className='filters'><Filters/></div>
+        <Filters onFilterChange={handleFilterChange} />
         <button className='save-button'>Save</button>
       </div>
-      {/* Categories */}
       <div className='list-container'>
-        <div className="categories-container">
-          <div className="category-name">
-            <h2>Name</h2>
-          </div>
-          <div className="category-date">
-            <h2>Dates </h2>
-          </div>
-          <div className='category-status'>
-            <div className="category-review">
-              <h2>Review Status</h2>
-            </div>
-            <div className="category-payment">
-              <h2>Payment Status</h2>
-            </div>
-          </div>
-        </div>
-        {/* Displaying consultant timesheets */}
+        {/* Categories and such */}
         <div className='timesheet-container'>
-          {renderContent()}
+          {timesheets.map(timesheet => (
+            <ConsultantTimesheet
+              key={timesheet.id}
+              name={`${users[timesheet.user]?.firstname} ${users[timesheet.user]?.lastname}`} 
+              dates={`${new Date(timesheet.start_date).toLocaleDateString()} - ${new Date(timesheet.end_date).toLocaleDateString()}`}
+              reviewStatus={timesheet.review_status}
+              paymentStatus={timesheet.payment_status}
+              role={role}
+            />
+          ))}
         </div>
       </div>
     </div>
   );
 }
+
