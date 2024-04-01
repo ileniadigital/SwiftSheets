@@ -221,14 +221,6 @@ export default function App() {
     case "/consultantdashboard":
       page = <ConsultantDashboard/>
       break
-    // THESE ARE TO BE REMOVED BECAUSE ONCE WE HAVE THE ROLE FROM THE DB, WE CAN USE THAT TO DETERMINE THE VIEW
-    //THEY WILL BE ACCESSED VIA THE HOME PAGE
-    // case "/linemanagerview":
-    //   page = <TimesheetListView/>
-    //   break
-    // case "/financeteamview":
-    //   page = <TimesheetListView/>
-    //   break
   }
 
   return (

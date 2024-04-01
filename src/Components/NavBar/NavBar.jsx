@@ -11,6 +11,15 @@ import LanguageMenu from './LanguageMenu';
 
 //Navigation bar component
 export default function NavBar(props){
+    // let view;
+    // switch (props.view) {
+    //     case 'consultant':
+    //         view = '/consultantsettings';
+    //         break;
+    //     default:
+    //         view = '/settings';
+    //         break;
+    // }
 
     {/* Changing FDM logo colour based on page theme */}
     let fdmLogo;
@@ -33,11 +42,11 @@ export default function NavBar(props){
                 {/* Navigation menu icons */}
                 <ul className="navbar-menu">
                     <Link href='/Home' className='navbar-link'>Home</Link>
-                    <Link href='/Account' className='navbar-link'>Account</Link>    
+                    <Link href='/Account' className='navbar-link'>Account</Link>                   
+                    <Link href='/Settings' className='navbar-link'>Settings</Link>
                     {props.view === 'consultant' &&       
                     <>         
                      <Link href='/consultantdashboard' className='navbar-link'>Dashboard</Link>
-                     <Link href='/Settings' className='navbar-link'>Settings</Link> 
                      </>}
                 </ul>
                 {/* Language menu */}
