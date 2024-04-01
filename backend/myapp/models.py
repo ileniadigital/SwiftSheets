@@ -10,12 +10,14 @@ class SystemUser(models.Model):
         ('FinanceTeamMember', 'FinanceTeamMember'),
         ('Administrator', 'Administrator'),
     ]
-    username = models.EmailField(unique=True, null=True) 
+    username = models.EmailField(unique=True, null=True)
     password = models.CharField(max_length=128, default='pass')  # Default password
     user_type = models.CharField(max_length=20, choices=USER_TYPE_CHOICES, default='Consultant')  # Default user type
+    firstname = models.CharField(max_length=100, blank=True)  # Add firstname field
+    lastname = models.CharField(max_length=100, blank=True)  # Add lastname field
 
     def __str__(self):
-        return self.username
+        return f"{self.firstname} {self.lastname}" if self.firstname and self.lastname else self.username
 
 class Timesheet(models.Model):
     REVIEW_STATUS_CHOICES = [

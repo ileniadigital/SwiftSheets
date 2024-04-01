@@ -71,7 +71,7 @@
             <!-- Dropdown to select user -->
             <select name="user_id" id="userSelect">
                 {% for user in users %}
-                    <option value="{{ user.id }}">{{ user.username }}</option>
+                    <option value="{{ user.id }}">{{ user.firstname }}</option>
                 {% endfor %}
             </select>
             <!-- Button to submit form -->
