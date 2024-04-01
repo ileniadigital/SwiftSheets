@@ -1,5 +1,7 @@
 import './ConsultantTimesheet.css'; //Import styling
 
+import { GrView } from 'react-icons/gr';
+
 //Import components
 import Status from "./Status";
 import Date from './Date';
@@ -10,6 +12,7 @@ export default function ConsultantTimesheet(props) {
     const {name, dates, reviewStatus, paymentStatus, role} = props;
     return (
         <div className="consultantTimesheet-container">
+            <button className='view-icon'><GrView size={30} className='icon'/></button>
             <ConsultantName name={name}/>
             <Date dates={dates}/>
             {/* Review status */}

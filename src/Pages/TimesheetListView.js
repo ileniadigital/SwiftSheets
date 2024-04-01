@@ -9,7 +9,7 @@ export default function TimesheetListView({ role }) {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const userEmail = 'Asus@gmail.com'; // Replace with dynamic user email if necessary
+    const userEmail = 'elizabeth@email.com'; // Replace with dynamic user email if necessary
     fetchTimesheets(userEmail); 
   }, []); // The dependency array is empty so this will run only once on mount
 
@@ -68,17 +68,19 @@ export default function TimesheetListView({ role }) {
     <div className='list-container'>
       {/* Categories */}
       <div className="categories-container">
-        <div className="category">
+        <div className="category-name">
           <h2>Name</h2>
         </div>
-        <div className="category">
+        <div className="category-date">
           <h2>Dates </h2>
         </div>
-        <div className="category-review">
-          <h2>Review Status</h2>
-        </div>
-        <div className="category-payment">
-          <h2>Payment Status</h2>
+        <div className='category-status'>
+          <div className="category-review">
+            <h2>Review Status</h2>
+          </div>
+          <div className="category-payment">
+            <h2>Payment Status</h2>
+          </div>
         </div>
       </div>
       {/* Displaying consultant timesheets */}
