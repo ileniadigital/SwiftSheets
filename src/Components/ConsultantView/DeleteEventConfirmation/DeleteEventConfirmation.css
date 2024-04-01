@@ -28,15 +28,16 @@
 }
 
 /* Styling buttons */
-.popup button {
+.popup .button {
     background-color: #C5FF00;
+    color: #1E1E1E;
     font-size: x-large;
     width: 5rem;
     border-radius: 1rem;
 }
 
 /* Setting hover colour */
-.popup button:hover {
+.popup .button:hover {
     background-color: #5d7804;
 }
 

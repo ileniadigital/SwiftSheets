@@ -73,7 +73,7 @@ label {
 
 /* Styling input/select boxes */
 .add-event input,
-select {
+.add-event select {
   border: 0;
   width: 14rem;
   margin: auto;
@@ -82,7 +82,7 @@ select {
   border-radius: 0.3rem;
   font-family: Inter;
   font-size: 1.3rem;
-  box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2); 
 }
 
 /* Changing icon colour */
@@ -138,9 +138,9 @@ select {
   color: #efecea;
 }
 
-/* Setting colour to #EFECEA */
-.checkbox-container input:checked {
-  color: #1e1e1e;
+/* Setting colour to when event is recurring */
+.checkbox-container .recur{
+    color: #1E1E1E;
 }
 
 /* Styling checkbox */
@@ -236,15 +236,14 @@ textarea {
 
 /* Styling icon */
 .delete-event svg {
-  fill: #1e1e1e;
-  height: 1.4rem;
-  width: 1.4rem;
-  height: 3rem;
-  position: relative;
-  margin-left: auto;
-  margin-top: 0.7rem;
-  margin-right: 0.5rem;
-  z-index: 1000000;
+    fill: #1E1E1E;
+    height: 1.4rem;
+    width: 1.4rem;
+    height: 3rem;
+    position: relative;
+    margin-left: auto;
+    margin-top: 0.7rem;
+    margin-right: 0.5rem;
 }
 
 /* Setting hover colour */
@@ -263,4 +262,9 @@ textarea {
 }
 
 .hours-event {
+}
+
+/* Styling error message */
+.concur-error {
+    color: red;
 }

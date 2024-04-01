@@ -1,11 +1,5 @@
 /* Defining styles for ConsultantSettings page */
 
-/* Defining general layout of settings */
-.settings {
-  height: 100vh;
-  margin-top: 5rem;
-}
-
 /* Defining layout of settings items */
 .settings-items {
   margin-left: 3rem;
@@ -14,6 +8,15 @@
   white-space: nowrap;
   font-size: 1.5rem;
   border-radius: 1rem;
+}
+
+/* Styling header */
+.header {
+    text-align: center;
+    margin: 0;
+    font-family: Inter;
+    margin-bottom: 2rem;
+    font-size: 2.3rem;
 }
 
 /* Defining layout of container for days of week worked */
@@ -54,7 +57,7 @@
 }
 
 /* Styling line used to separate settings */
-br {
+.settings br {
   margin-top: 2rem;
   display: block;
   content: "";
@@ -67,18 +70,22 @@ br {
   background: #c5ff00;
   width: 6.5rem;
   text-align: center;
+  border: none;
+  border-radius: 0.2rem;
+  font-size: 1.3rem;
+  height: 3r;
 }
 
 /* Styling container */
-.working-hours {
-  margin-top: 2rem;
+.working-hours, .reminder {
+    margin-top: 2rem;
 }
 
 /* Designing hours container */
-.hours {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.hours, .reminder-inputs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Setting colour */
@@ -107,33 +114,35 @@ br {
 }
 
 .max-work-hours input {
-  box-shadow: none;
-  height: 1rem;
+  -webkit-appearance: none; /* Removing default box */
+  position: relative;
   width: 1rem;
+  height: 1rem;
+  font-size: 1rem;
+  box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  border-radius: 0.2rem;
+  color: #c5ff00;
   margin-left: 1rem;
 }
 
-.checkbox {
-  -webkit-appearance: none; /* Removing default box */
-  position: relative;
-  background: white;
-  box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  color: #c5ff00;
-  font-size: 1rem;
-}
-
-/* Setting colour to white */
-.checkbox:checked {
-  color: #1e1e1e;
+/* Setting colour to when event is recurring */
+.max-work-hours input:checked{
+    color: #1E1E1E;
+    font-size: 1rem;
 }
 
 /* Styling checkbox */
-.checkbox::before {
+.max-work-hours input::before {
   position: absolute;
   content: "\2713";
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   pointer-events: none;
+}
+
+/* Styling container */
+.reminder {
+    display: flex;
 }

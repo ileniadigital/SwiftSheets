@@ -29,16 +29,11 @@ export default function Week({viewedWeek, addEventHandler, timesheetStatus}) {
         }
     }
 
-    // Function that formats the day of the week
-    const formatDate = (week, dayToRetrieve) => {
-        const date = getDate(week, dayToRetrieve)
-        return `${date[2]}-${date[1]}-${date[0]}`
-    }
-    
     // Adds day worked to weekday if it exists in daysWorked
     for (let i = 0; i < daysOfTheWeek.length; i++) {
         if (daysWorked.includes(i)) {
-            weekDates.push(formatDate(viewedWeek,i+1))
+            const date = getDate(viewedWeek, i+1)
+            weekDates.push(`${date[2]}-${date[1]}-${date[0]}`)
         }
     }
 
@@ -46,8 +41,6 @@ export default function Week({viewedWeek, addEventHandler, timesheetStatus}) {
     if (weekDays.length > 0) {
         week.push(<DailyHours key={0}/>) 
     }
-
-    
 
     // Creating Day component for each day of the week and adding it to the array
     for (let i = 0; i < weekDays.length; i++) {
