@@ -22,8 +22,13 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+<<<<<<< Updated upstream
 
 #migrations
+=======
+__pycache__/
+*.pyc
+>>>>>>> Stashed changes
 **/migrations/
 
 *.pyc
