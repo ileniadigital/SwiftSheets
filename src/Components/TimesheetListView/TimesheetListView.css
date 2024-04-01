@@ -17,13 +17,17 @@
 .categories-container {
   display: flex;
   flex-direction: row;
-  gap: 10rem;
+  gap: 9rem;
   align-items: center;
   justify-content: center;
   position: relative;
   font-size: 0.75rem;
   margin: -7 0 -7 0;
   color: grey;
+}
+
+.category-review {
+  margin-left: 7em;
 }
 
 /* Styling for timesheets container */

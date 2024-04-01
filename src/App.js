@@ -4,8 +4,6 @@ import './Components/general.css';
 // Import components 
 import NavBar from './Components/NavBar/NavBar';
 import Account from './Pages/Account';
-import Settings from './Pages/Settings';
-import ConsultantHome from './Pages/ConsultantView/ConsultantHome/ConsultantHome'
 import Timesheet from './Pages/ConsultantView/Timesheet/Timesheet';
 import Home from './Pages/Home';
 import Name from './Components/NavBar/Name';
@@ -32,22 +30,18 @@ export default function App() {
       page= <Account/>
       break
     case "/Settings":
-      page= <Settings/>
-      break
-    case "/consultanthome":
-      page = <ConsultantHome/>
+      page= <ConsultantSettings/>
       break
     case "/timesheet":
       page = <Timesheet/>
       break
+    // THESE ARE TO BE REMOVED BECAUSE ONCE WE HAVE THE ROLE FROM THE DB, WE CAN USE THAT TO DETERMINE THE VIEW
+    //THEY WILL BE ACCESSED VIA THE HOME PAGE
     case "/linemanagerview":
       page = <TimesheetListView/>
       break
     case "/financeteamview":
       page = <TimesheetListView/>
-      break
-    case "/consultantsettings":
-      page = <ConsultantSettings/>
       break
   }
   return (
