@@ -71,17 +71,17 @@ export default function AddUser({ addUserMenuHandler, handleAddUserSubmit }) {
             <form action="" id='addUserForm'>
                 {/* Name text input*/}
                 <div className="input">
-                    <label htmlFor="name">Full Name</label>
+                    <label htmlFor="name" class='label'>Full Name</label>
                     <input type="text" name="name" id='name' class='inputBox' required onChange={validateName}/>
                 </div>
                 {/* Username text input*/}
                 <div className="input">
-                    <label htmlFor="username">Email</label>
+                    <label htmlFor="username" class='label'>Email</label>
                     <input type="text" name="username" id='username' class='inputBox' required onChange={validateUsername}/>
                 </div>
                 {/* User role dropdown*/}
                 <div className="input">
-                    <label htmlFor="userType">Role</label>
+                    <label htmlFor="userType" class='label'>Role</label>
                     <select name="userType" id='userType' defaultValue={""} class='inputBox' required onChange={setType}>
                         <option value="" selected disabled hidden>Role</option>
                         <option value="Consultant">Consultant</option>

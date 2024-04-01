@@ -8,7 +8,7 @@ export default function User({ userList, index, manageUserHandler }) {
             <div id="icon"/>
             <p>{userList[index].name}</p>
             <div className='manageUser' onClick={() => manageUserHandler(index, userList)}>
-                <p>Manage User</p>
+                <p class='p'>Manage User</p>
             </div>
         </div>
     )
