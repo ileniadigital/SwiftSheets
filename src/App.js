@@ -11,6 +11,7 @@ import Home from './Pages/Home';
 import Name from './Components/NavBar/Name';
 import ConsultantSettings from './Pages/ConsultantView/ConsultantSettings/ConsultantSettings';
 import TimesheetListView from './Pages/TimesheetListView';
+import Login from './Pages/Login';
 
 //ADD ROUTING BASED ON ROLE FROM DB
 const role='consultant';
@@ -21,9 +22,9 @@ export default function App() {
   // Render page based on location
   let page
   switch (window.location.pathname) {
-    // default:
-    //   page= <LogIn/>
-    //   break
+    default:
+      page= <Login/>
+      break
     case "/Home":
     case "/":
       page= <Home view={role}/>

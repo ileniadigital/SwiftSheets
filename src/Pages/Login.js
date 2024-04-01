@@ -1,12 +1,15 @@
 
 import React from 'react';
-import '../CSS/Login.css';
+import '../Components/Login.css'; //Import styling
+
+//Import logo
+import logo from '../Components/NavBar/logo/fdm-new-logo-green.svg';
 
 const Login = () => {
   return (
     <div className="login-container">
       <div className="top-bar">
-        <img src="../images/fdm-group=logo-vector.svg" alt="Logo" className="top-logo"/>
+        <img src={logo} alt="Logo" className="top-logo"/>
       </div>
       <h1 className = 'welcome-text'>Welcome!</h1>
       <div className="login-box">
