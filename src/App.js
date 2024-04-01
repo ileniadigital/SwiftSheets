@@ -11,7 +11,7 @@ import ConsultantSettings from './Pages/ConsultantView/ConsultantSettings/Consul
 import TimesheetListView from './Pages/TimesheetListView';
 
 //ADD ROUTING BASED ON ROLE FROM DB
-const role='consultant';
+const role='financeteam';
 
 // Main App component
 export default function App() {
@@ -37,12 +37,12 @@ export default function App() {
       break
     // THESE ARE TO BE REMOVED BECAUSE ONCE WE HAVE THE ROLE FROM THE DB, WE CAN USE THAT TO DETERMINE THE VIEW
     //THEY WILL BE ACCESSED VIA THE HOME PAGE
-    case "/linemanagerview":
-      page = <TimesheetListView/>
-      break
-    case "/financeteamview":
-      page = <TimesheetListView/>
-      break
+    // case "/linemanagerview":
+    //   page = <TimesheetListView/>
+    //   break
+    // case "/financeteamview":
+    //   page = <TimesheetListView/>
+    //   break
   }
   return (
     <>
