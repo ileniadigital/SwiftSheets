@@ -56,7 +56,7 @@ const timesheets=[
 
 
 //LineManagerView component
-export default function TimesheetListView() {
+export default function TimesheetListView({role}) {
   return (
     <div className='list-container'>
       {/* Categories */}
@@ -77,7 +77,7 @@ export default function TimesheetListView() {
       {/* Displaying consultant timesheets */}
       <div className='timesheet-container'>
         {timesheets.map((timesheet, index) => (
-          <ConsultantTimesheet key={index} name={timesheet.name} dates={timesheet.dates} reviewStatus={timesheet.reviewStatus} paymentStatus={timesheet.paymentStatus}/>
+          <ConsultantTimesheet key={index} name={timesheet.name} dates={timesheet.dates} reviewStatus={timesheet.reviewStatus} paymentStatus={timesheet.paymentStatus} role={role}/>
         ))}
       </div>
     </div>
