@@ -1,23 +1,27 @@
-body {
-    background-color: #1e1e1e;
-    color: white;
+.main-con-home {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Defining page styling */
 .consultant-home { 
     display: flex;
     flex-direction: column;
-    margin-left: 4rem;
     justify-content: center;
     align-items: center;
-    margin-right: 4rem;
+    border: 0.2rem solid #c5ff00;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-radius: 1.5rem;
+    width: 77rem;
 }
 
 /* Setting margin */
 .current-timesheet-container {
     width: 71rem;
     margin-bottom: 3rem;
-    color:  white
+    color: white
 }
 
 /* Setting layout */
@@ -59,6 +63,6 @@ body {
 .past-timesheet {
     width: 71rem;
     overflow-y: auto;
-    max-height: 30rem;
+    max-height: 28rem;
     color:  white
 }

@@ -1,3 +1,10 @@
+/* Styling */
+.main-dash {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /* Styling container */
 .dashboard-container {
     display: flex;
@@ -8,6 +15,10 @@
     gap: 2rem;
     padding-bottom: 1rem;
     align-items: center;
+    border: 0.2rem solid #c5ff00;
+    border-radius: 1.5rem;
+    width: 76rem;
+    margin-bottom: 2rem;
 }
 
 /* Styling weekly hours */

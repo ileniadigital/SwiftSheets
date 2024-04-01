@@ -154,36 +154,37 @@ export default function ConsultantHome() {
     const [isPastTimesheetsClicked, setIsPastTimesheetsClicked] = useState(true)
 
     return (
-        <div className='consultant-home'>
-            {/* Displaying current week's timesheet based on whether dropdown is clicked */}
-            <div className='current-timesheet-container'>
-                <div className='dropdown-menu'>
-                    <p>Current Timesheet</p>
-                    <button className='dropdown' onClick={() => setIsCurrentTimesheetClicked(!isCurrentTimesheetClicked)}>
-                        {isCurrentTimesheetClicked ? <IoIosArrowDropupCircle/> : <IoIosArrowDropdownCircle /> }
-                    </button>
-                </div>
-                { isCurrentTimesheetClicked && 
-                    <div className='current-timesheet'>
-                        <TimesheetDetails timesheet={currentTimesheet}/>
-                    </div> 
+        <div className='main-con-home'>
+            <div className='consultant-home'>
+                {/* Displaying current week's timesheet based on whether dropdown is clicked */}
+                <div className='current-timesheet-container'>
+                    <div className='dropdown-menu'>
+                        <p>Current Timesheet</p>
+                        <button className='dropdown' onClick={() => setIsCurrentTimesheetClicked(!isCurrentTimesheetClicked)}>
+                            {isCurrentTimesheetClicked ? <IoIosArrowDropupCircle/> : <IoIosArrowDropdownCircle /> }
+                        </button>
+                    </div>
+                    { isCurrentTimesheetClicked && 
+                        <div className='current-timesheet'>
+                            <TimesheetDetails timesheet={currentTimesheet}/>
+                        </div> 
 
-                }
-            </div>
-
-            {/* Displaying past timesheets based on whether dropdown is clicked */}
-            <div className='past-timesheets'>
-                <div className='dropdown-menu'>
-                    <p>Past Timesheets</p>
-                    <button className='dropdown' onClick={() => setIsPastTimesheetsClicked(!isPastTimesheetsClicked)}>
-                        {isPastTimesheetsClicked ? <IoIosArrowDropupCircle/> : <IoIosArrowDropdownCircle /> }
-                    </button>
+                    }
                 </div>
-                <div className='past-timesheet'>
-                    {isPastTimesheetsClicked && <PastTimesheets/>}
+
+                {/* Displaying past timesheets based on whether dropdown is clicked */}
+                <div className='past-timesheets'>
+                    <div className='dropdown-menu'>
+                        <p>Past Timesheets</p>
+                        <button className='dropdown' onClick={() => setIsPastTimesheetsClicked(!isPastTimesheetsClicked)}>
+                            {isPastTimesheetsClicked ? <IoIosArrowDropupCircle/> : <IoIosArrowDropdownCircle /> }
+                        </button>
+                    </div>
+                    <div className='past-timesheet'>
+                        {isPastTimesheetsClicked && <PastTimesheets/>}
+                    </div>
                 </div>
             </div>
         </div>
-
     )
 }

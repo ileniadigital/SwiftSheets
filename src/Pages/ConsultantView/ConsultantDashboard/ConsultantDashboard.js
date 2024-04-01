@@ -39,37 +39,39 @@ export default function ConsultantDashboard() {
     }
 
     return (
-        <div className='dashboard-container'>
-            <div className='weekly-hours'>
-                <p>Weekly Hours Logged </p>
-                <span className='hours'>{getWeeklyHours()}</span>
-            </div>
-            <div className='container'>
-                <div className='dropdown-menu'>
-                    <p>Payments Received</p>
-                    <button className='dropdown' onClick={() => setIsPaymentsReceived(!isPaymentsReceived)}>
-                        {isPaymentsReceived ? <IoIosArrowDropupCircle/> : <IoIosArrowDropdownCircle /> }
-                    </button>
+        <div className='main-dash'>
+            <div className='dashboard-container'>
+                <div className='weekly-hours'>
+                    <p>Weekly Hours Logged </p>
+                    <span className='hours'>{getWeeklyHours()}</span>
                 </div>
-                { isPaymentsReceived && 
-                    <div className='data'>
-                        <DisplayDetails attributeChecked={"paymentStatus"} value={'Approved'} />
+                <div className='container'>
+                    <div className='dropdown-menu'>
+                        <p>Payments Received</p>
+                        <button className='dropdown' onClick={() => setIsPaymentsReceived(!isPaymentsReceived)}>
+                            {isPaymentsReceived ? <IoIosArrowDropupCircle/> : <IoIosArrowDropdownCircle /> }
+                        </button>
                     </div>
-                }
-            </div>
-
-            <div className='container'>
-                <div className='dropdown-menu'>
-                    <p>Pending Timesheet Approvals</p>
-                    <button className='dropdown' onClick={() => setIsPendingApprovals(!isPendingApprovals)}>
-                        {isPendingApprovals ? <IoIosArrowDropupCircle/> : <IoIosArrowDropdownCircle /> }
-                    </button>
+                    { isPaymentsReceived && 
+                        <div className='data'>
+                            <DisplayDetails attributeChecked={"paymentStatus"} value={'Approved'} />
+                        </div>
+                    }
                 </div>
-                { isPendingApprovals && 
-                    <div className='data'>
-                        <DisplayDetails attributeChecked={"reviewStatus"} value={'Pending'} />
-                    </div> 
-                }
+
+                <div className='container'>
+                    <div className='dropdown-menu'>
+                        <p>Pending Timesheet Approvals</p>
+                        <button className='dropdown' onClick={() => setIsPendingApprovals(!isPendingApprovals)}>
+                            {isPendingApprovals ? <IoIosArrowDropupCircle/> : <IoIosArrowDropdownCircle /> }
+                        </button>
+                    </div>
+                    { isPendingApprovals && 
+                        <div className='data'>
+                            <DisplayDetails attributeChecked={"reviewStatus"} value={'Pending'} />
+                        </div> 
+                    }
+                </div>
             </div>
         </div>
     )

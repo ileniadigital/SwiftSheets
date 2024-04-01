@@ -110,7 +110,7 @@ export default function ConsultantSettings() {
                         // If start and end time are the same, a worker may work less than 1, or 24 hours
                         <div className='max-work-hours'>
                             Maximum Working Hours is 24
-                            <input className = "checkbox" type="checkbox" defaultValue={endWorkHours} onChange={() => setIs24WorkingHours(!is24WorkingHours)}/>
+                            <input type="checkbox" defaultValue={endWorkHours} onChange={() => setIs24WorkingHours(!is24WorkingHours)}/>
                         </div>
                         }
                         {/* Display error message if available */}
