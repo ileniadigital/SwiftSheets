@@ -81,7 +81,6 @@ export default function ConsultantSettings() {
 
     return (
         <div className='settings'>
-            <h1 className='header'>Settings</h1>
             <div className='settings-items'>
                 <div className='days-of-week-worked'>
                     <p>Working Day(s)</p>

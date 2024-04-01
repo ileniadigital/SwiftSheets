@@ -1,7 +1,6 @@
 import '../Components/TimesheetListView/TimesheetListView.css'; //Import styling
 import ConsultantTimesheet from '../Components/TimesheetListView/ConsultantTimesheet/ConsultantTimesheet';
 
-//MODIFY TO MAKE SCROLLABLE PAGES
 //MODIFY TO HAVE FILTERS AT THE TOP
 const timesheets=[
   {
@@ -53,6 +52,9 @@ const timesheets=[
     "paymentStatus": "Rejected"
   },
 ]
+
+
+
 //LineManagerView component
 export default function TimesheetListView() {
   return (
@@ -65,10 +67,10 @@ export default function TimesheetListView() {
         <div className="category">
           <h2>Dates </h2>
         </div>
-        <div className="category">
+        <div className="category-review">
           <h2>Review Status</h2>
         </div>
-        <div className="category">
+        <div className="category-payment">
           <h2>Payment Status</h2>
         </div>
       </div>
