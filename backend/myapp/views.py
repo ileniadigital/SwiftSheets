@@ -88,6 +88,13 @@ class TimesheetViewSet(viewsets.ViewSet):
         timesheet = self.queryset.get(pk=pk)
         serializer = self.serializer_class(timesheet)
         return Response(serializer.data)
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        user_email = self.request.query_params.get('user_email')
+        if user_email:
+            queryset = queryset.filter(user__email=user_email)
+        return queryset
 
     # Update a timesheet
     def update(self, request, pk=None):
