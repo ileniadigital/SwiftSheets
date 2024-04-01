@@ -10,15 +10,16 @@ import TimesheetListView from './TimesheetListView';
 export default function Home(props) {
     // const [view, setView] = useState('default');
     let view;
+    const role=props.view
     switch (props.view) {
         case 'consultant':
             view = <ConsultantHome />;
             break;
         case 'linemanager':
-            view = <TimesheetListView />;
+            view = <TimesheetListView role={role} />;
             break;
         case 'financeteam':
-            view = <TimesheetListView  />;
+            view = <TimesheetListView role={role} />;
             break;
     }
     return (
