@@ -3,6 +3,8 @@ import Axios from 'axios';
 import ConsultantTimesheet from '../Components/TimesheetListView/ConsultantTimesheet/ConsultantTimesheet';
 import '../Components/TimesheetListView/TimesheetListView.css'; // Import styling
 
+import Filters from '../Components/TimesheetListView/Filters/Filters';
+
 export default function TimesheetListView({ role }) {
   const [timesheets, setTimesheets] = useState([]);
   const [userDetails, setUserDetails] = useState({});
@@ -65,27 +67,34 @@ export default function TimesheetListView({ role }) {
   };
 
   return (
-    <div className='list-container'>
-      {/* Categories */}
-      <div className="categories-container">
-        <div className="category-name">
-          <h2>Name</h2>
-        </div>
-        <div className="category-date">
-          <h2>Dates </h2>
-        </div>
-        <div className='category-status'>
-          <div className="category-review">
-            <h2>Review Status</h2>
-          </div>
-          <div className="category-payment">
-            <h2>Payment Status</h2>
-          </div>
-        </div>
+    <div className='container'>
+      {/* Menu */}
+      <div className='menu-container'>
+        <div className='filters'><Filters/></div>
+        <button className='save-button'>Save</button>
       </div>
-      {/* Displaying consultant timesheets */}
-      <div className='timesheet-container'>
-        {renderContent()}
+      {/* Categories */}
+      <div className='list-container'>
+        <div className="categories-container">
+          <div className="category-name">
+            <h2>Name</h2>
+          </div>
+          <div className="category-date">
+            <h2>Dates </h2>
+          </div>
+          <div className='category-status'>
+            <div className="category-review">
+              <h2>Review Status</h2>
+            </div>
+            <div className="category-payment">
+              <h2>Payment Status</h2>
+            </div>
+          </div>
+        </div>
+        {/* Displaying consultant timesheets */}
+        <div className='timesheet-container'>
+          {renderContent()}
+        </div>
       </div>
     </div>
   );

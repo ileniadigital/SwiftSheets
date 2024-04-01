@@ -1,3 +1,31 @@
+/* Styling for menu */
+.menu-container {
+  display: flex;
+  flex-direction: row;
+  gap: 40rem;
+  align-items: center;
+  justify-content: center;
+  margin-left: 7rem;
+}
+
+/* Styling for filters */
+
+/* Styling for the save button*/
+.save-button {
+  width: 7rem;
+  height: 2.5rem;
+  border-radius: 1.5rem;
+  border: 0.2rem solid #c5ff00;
+  background-color: #c5ff00;
+  color: black;
+  font-weight: bold;
+}
+
+.save-button:hover {
+  background-color: white;
+  color: black;
+  border: 0.2rem solid white;
+}
 /* Styling for the timesheet containers */
 .list-container {
   display: flex;
