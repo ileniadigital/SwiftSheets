@@ -1,19 +1,70 @@
-#addUserStyle {
+#addUserMenu
+{
+    position: fixed;
+    background: linear-gradient(rgba(100, 42, 191, 1), rgba(44, 58, 197, 1));
+    color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 31.5rem;
+    width: 36rem;
+    padding-bottom: 2rem;
+    border-radius: 2rem;
+    display: flex;
+    flex-direction: column;
     font-family: Inter;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    background: linear-gradient(90deg, #000 0%, #666 100%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-size: 1.3rem;
+    margin: auto;
 }
 
-#addUser {
-    width: fit-content;
-    position: relative;
-    left: 80%;
-    margin: 30px;
-    margin-bottom: 50px;
+/* Styling input/select boxes */
+input, select {
+    border: 0;
+    background-color: white;
+    width: 14rem;
+    margin: auto;
+    height: 2rem;
+    border-radius: 0.3rem;
+    font-family: Inter;
+    font-size: 1.3rem;
+    /* box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2); */
+}
+
+/* Setting label name */
+label {
+    width: 11.3rem;
+    font-size: 1.5rem;
+    font-family: Inter;
+    text-align: left;
+}
+
+/* Styling log event heading */
+.addUserHeading {
+    margin: auto;
+    margin-bottom: 2.5rem;
+}
+
+/* Styling for all input boxes */
+.input{
+    margin: 1rem;
+}
+
+/* Styling for the submit button */
+.addUserButton {
+    margin: auto;
+    margin-top: 3rem;
+    margin-left: 40%;
+    background-color: black;
+    color: white;
+    width: 7rem;
+    padding: 1%;
+    border-radius: 25px;
+    font-family: Inter;
+    font-size: 0.9rem;
+}
+
+/* Adding styling on hover */
+.addUserButton:hover {
+    background-color: white;
+    color: black;
 }

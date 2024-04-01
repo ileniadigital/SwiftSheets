@@ -9,9 +9,11 @@ export default function ManageUser ({ index, manageUserHandler, userList, remove
     let user = userList[index];
     return (
         <div id='manageUser'>
-            <button className = "closeEvent" onClick={() => manageUserHandler(index, userList)}><IoClose /></button>
+            {/* Adds close button that toggles the window*/}
+            <button className = "closeWindow" onClick={() => manageUserHandler(index, userList)}><IoClose /></button>
             <h1 className='manageUserHeading'>Manage User</h1>
             <h3 className ='detailsHeading'>Personal Details</h3>
+            {/* Creates a 2 column table for the user data*/}
             <table className='detailsTable'>
                 <colgroup>
                     <col id='col1'></col>

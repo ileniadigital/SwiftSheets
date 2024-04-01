@@ -1,10 +1,8 @@
 // Importing CSS
 import './User.css';
 
-// Importing Components
-
 export default function User({ userList, index, manageUserHandler }) {
-
+    // Creates the section for each user
     return (
         <div className='user'>
             <div id="icon"/>
