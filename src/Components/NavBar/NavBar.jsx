@@ -11,7 +11,6 @@ import LanguageMenu from './LanguageMenu';
 
 //Navigation bar component
 export default function NavBar(props){
-    let view;
 
     {/* Changing FDM logo colour based on page theme */}
     let fdmLogo;
