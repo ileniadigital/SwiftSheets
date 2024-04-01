@@ -38,7 +38,7 @@ export default function NavBar(props){
                     {props.view === 'consultant' &&       
                     <>         
                      <Link href='/consultantdashboard' className='navbar-link'>Dashboard</Link>
-                     <Link href='/consultantsettings' className='navbar-link'>Settings</Link> 
+                     <Link href='/Settings' className='navbar-link'>Settings</Link> 
                      </>}
                 </ul>
                 {/* Language menu */}
