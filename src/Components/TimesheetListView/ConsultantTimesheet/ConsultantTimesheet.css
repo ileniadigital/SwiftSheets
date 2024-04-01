@@ -10,7 +10,7 @@ body {
 .consultantTimesheet-container {
   display: flex;
   flex-direction: row;
-  gap: 4rem;
+  gap: 3rem;
   align-items: center;
   justify-content: center;
   width: 60rem;
@@ -24,15 +24,24 @@ body {
 /* Styling for Consultant Name */
 .consultantName {
   font-weight: bold;
+  text-align: center;
+  width: 10rem;
 }
 
 /* Styling for Status dropdown menus */
 .status-dropdown {
-  width: 12rem;
+  width: 10rem;
   height: 2.5rem;
   flex-shrink: 0;
   border-radius: 1.5rem;
   border: 0.2rem solid #c5ff00;
   text-align: center;
   background-color: #c5ff00;
+  margin-right: 1rem;
+}
+
+/* Styling for Status dropdown when it's disabled */
+.disabled {
+  background-color: lightgray;
+  color: grey;
 }

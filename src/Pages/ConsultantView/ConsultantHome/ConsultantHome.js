@@ -20,73 +20,76 @@ export default function ConsultantHome() {
     // Testing retrieval of current timesheet
     // Store the timesheet data in local storage
     const timesheetData = {
-        week: "18/02/30 - 25/02/30",
-        submissionStatus: "saved",
+        week: "25/03/24 – 31/03/24",
+        submissionStatus: "Unsubmitted",
         reviewStatus: "Approved",
-        paymentStatus: "Pending"
+        paymentStatus: "Pending",
+        isSubmitted: false,
+        submissionTime: null,
+        events: {}
     };
   
     localStorage.setItem('currentTimesheet', JSON.stringify(timesheetData));
 
     const timesheets = {
         timesheetData1: {
-            week: "18/02/30 - 25/02/30",
+            week: "18/02/30 – 25/02/30",
             submissionStatus: "saved",
             reviewStatus: "Approved",
             paymentStatus: "Pending"
         },
 
         timesheetData2: {
-            week: "18/02/30 - 25/02/30",
+            week: "18/02/30 – 25/02/30",
             submissionStatus: "saved",
             reviewStatus: "Approved",
             paymentStatus: "Pending"
         },
 
         timesheetData3: {
-            week: "18/02/30 - 25/02/30",
+            week: "18/02/30 – 25/02/30",
             submissionStatus: "saved",
             reviewStatus: "Approved",
             paymentStatus: "Pending"
         },
 
         timesheetData4: {
-            week: "18/02/30 - 25/02/30",
+            week: "18/02/30 – 25/02/30",
             submissionStatus: "saved",
             reviewStatus: "Approved",
             paymentStatus: "Pending"
         },
 
         timesheetData5: {
-            week: "18/02/30 - 25/02/30",
+            week: "18/02/30 – 25/02/30",
             submissionStatus: "saved",
             reviewStatus: "Approved",
             paymentStatus: "Pending"
         },
 
         timesheetData6: {
-            week: "18/02/30 - 25/02/30",
+            week: "18/02/30 – 25/02/30",
             submissionStatus: "saved",
             reviewStatus: "Approved",
             paymentStatus: "Pending"
         },
 
         timesheetData7: {
-            week: "18/02/30 - 25/02/30",
+            week: "18/02/30 – 25/02/30",
             submissionStatus: "saved",
             reviewStatus: "Approved",
             paymentStatus: "Pending"
         },
 
         timesheetData8: {
-            week: "18/02/30 - 25/02/30",
+            week: "18/02/30 – 25/02/30",
             submissionStatus: "saved",
             reviewStatus: "Approved",
             paymentStatus: "Pending"
         },
 
         timesheetData9: {
-            week: "18/02/30 - 25/02/30",
+            week: "18/02/30 – 25/02/30",
             submissionStatus: "saved",
             reviewStatus: "Approved",
             paymentStatus: "Pending"
@@ -101,7 +104,6 @@ export default function ConsultantHome() {
 
     // Initialising database values on component mount if values do not exist
     useEffect(() => {
-        console.log(localStorage.getItem('daysWorked'))
         if (!localStorage.getItem('daysWorked')) {
             localStorage.setItem('daysWorked', JSON.stringify([0, 1, 2, 3, 4, 5, 6]))
         }

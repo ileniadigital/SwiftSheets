@@ -8,6 +8,10 @@ import { IoClose } from "react-icons/io5";
 // Importing useState
 import { useState } from 'react';
 
+// Importing component to display event on click
+import AddEvent from '../AddEvent/AddEvent';
+import DeleteEventConfirmation from '../DeleteEventConfirmation/DeleteEventConfirmation';
+
 export default function Hours({addEventHandler, date, timesheetStatus}) {
 
     // Retrieve start and end time from database to determine hours displayed
@@ -41,8 +45,14 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
         endWorkHours-=1
     }
 
+    // Determine if user wants to delete an event
+    const [deleteEventID, setDeleteEventID] = useState(false);
+    // Delete event
+    const deleteEvent = (eventId) => {
+        setDeleteEventID(eventId)
+    }
+
     let events = JSON.parse(localStorage.getItem('events'))
-    let num = 0
 
     let eventKey = 0 // Unique key for each element of the array
     // Iterates through the hours of a day, creating a new button for each day (this will serve as a timesheet timeslot)
@@ -68,7 +78,6 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
             let eventEndMin = parseInt(event.endTime.slice(3,5))
             // Ensures event is logged on the same day
             if (event.date === date) {
-             console.log(date, event.date, event.name, i)
                 // Performing checks where the event does not last more than a day
                 if (((eventStartHour < eventEndHour) || (eventStartHour === eventEndHour && eventStartMin < eventEndMin)) && i >= eventStartHour && i <= eventEndHour) {
                     // Checks when start and end time are within the same hour and sets height accordingly
@@ -83,6 +92,7 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
                         }
                         numberOfEvents++
                         startHour = true
+                        className += ' complete-event'
                     } else {
                         // Checks when start time is below end time
                         if (i === eventStartHour) {
@@ -94,6 +104,7 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
                             }
                             numberOfEvents++
                             startHour = true
+                            className += ' start-event hours-event'
                         } else if (i === eventEndHour && eventEndMin !== 0) {
                             className = 'event'
                             height = 0.05 * eventEndMin
@@ -102,14 +113,18 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
                                 className += ' rounded-bottom'
                             }
                             numberOfEvents++
+                            className += ' end-event hours-event'
                         } else if (!(i === eventEndHour && eventEndMin === 0)){
                             className = 'event'
                             height = 3 // Take up full hour block
 
                             if (((eventEndHour === endWorkHours+1 && eventEndMin === 0) && i === eventEndHour-1) && top+height > 2) {
-                                className += ' rounded-bottom'
+                                className += ' rounded-bottom end-event'
+                            } else if (eventEndHour === endWorkHours+1) {
+                                className += ' end-event'
                             }
                             numberOfEvents++
+                            className += ' hours-event'
                         }
                     }
                 } else if (eventStartHour > eventEndHour || (eventStartHour === eventEndHour) && eventStartMin > eventEndMin) {
@@ -123,6 +138,7 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
                         }
                         numberOfEvents++
                         startHour = true
+                        className += ' start-event hours-event'
                     } else if (i > eventStartHour && i > eventEndHour) {
                         // Regular hour blocks
                         className = 'event'
@@ -131,6 +147,7 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
                             className += ' rounded-bottom' 
                         }
                         numberOfEvents++
+                        className += ' hours-event'
                     } 
                 }
             } else if (eventStartHour > eventEndHour || (eventStartHour === eventEndHour) && eventStartMin > eventEndMin) {
@@ -145,6 +162,7 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
                             className += ' rounded-top'
                         } 
                         numberOfEvents++
+                        className += ' end-event hours-event'
                     } else if (i < eventEndHour) {
                         className = 'event'
                         height = 3
@@ -152,14 +170,25 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
                             className += ' rounded-top'
                         } 
                         numberOfEvents++
+                        className += ' hours-event'
                     }
                 }
             }
-            eventsPerHour.push (
-                <div className={className} key={eventKey}
-                style= {{top: `${top}rem`, height: `${height}rem`}} onClick={(event) => event.stopPropagation()}> 
-                {startHour ? <div className = "delete-event" onClick={(event) => {event.stopPropagation()}}><IoClose /></div> : ''}
 
+            const event1 = event
+            eventsPerHour.push (
+                className !== 'add-event-button' &&
+                <div className={className} key={eventKey}
+                style= {{top: `${top}rem`, height: `${height}rem`}} 
+                onClick={(event) => {
+                        event.stopPropagation();
+                        addEventHandler("Hours1", date, event1)
+                    }}> 
+                    {startHour ? <div className = "delete-event" 
+                    onClick={(event) => {
+                        event.stopPropagation()
+                        deleteEvent(event1.id)}}><IoClose /></div> : ''}
+                        {startHour && deleteEventID === event1.id && <DeleteEventConfirmation event = {event1.id} setOpenPopup = {setDeleteEventID}/>}
                 </div>
             )
             eventKey++
@@ -168,7 +197,7 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
         hoursArray.push(
             <button key={i} 
             className={`hour-block ${addUnderlineClass ? 'add-underline' : ''}`} 
-            onClick={() => addEventHandler("Hours", date)} 
+            onClick={() => addEventHandler("Hours", date, null)} 
             onMouseEnter={() => handleMouseEnter(i)} 
             onMouseLeave={handleMouseLeave}
             disabled={timesheetStatus === "Submitted"}>

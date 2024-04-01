@@ -2,241 +2,265 @@
 
 /* Styling which includes centering the component at the center of the page */
 .add-event {
-    position: fixed;
-    /* background-color: #C5FF00; */
-    background-color: white;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 36rem;
-    padding-bottom: 2rem;
-    border-radius: 2rem;
-    display: flex;
-    flex-direction: column;
-
+  position: fixed;
+  background-color: #1e1e1e;
+  border: 0.3rem solid #c5ff00;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 36rem;
+  padding-bottom: 2rem;
+  border-radius: 2rem;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Styling button used to close event */
 .close-event {
-    fill: white;
-    margin-top: 1rem;
-    margin-left: auto;
-    margin-right: 1rem;
-    font-size: 2rem;
+  fill: #efecea;
+  margin-top: 1rem;
+  margin-left: auto;
+  margin-right: 1rem;
+  font-size: 2rem;
 }
 
-.close-event svg{
-    fill: #1E1E1E;
-    background-color: white;
+.close-event svg {
+  fill: #efecea;
+  background-color: #1e1e1e;
 }
 
 /* Styling button colour on close */
 .close-event svg:hover {
-    background-color: white;
-    fill: black;
+  background-color: #1e1e1e;
+  fill: red;
 }
 
 /* Styling addEvent inputs, centering on div */
 .add-new-event {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: white;
-    gap: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #1e1e1e;
+  gap: 1.6rem;
 }
 
 /* Styling log event heading */
 .log-event-heading {
-    margin: auto;
-    background: white;
-    margin-bottom: 2.5rem;
-    color: #1E1E1E;
+  margin: auto;
+  background: #1e1e1e;
+  margin-bottom: 2.5rem;
+  color: #efecea;
 }
 
 /* Styling input div */
 .input {
-    display: flex;
-    gap: 2.5rem;
-    background: white;
-    align-items: center;
+  display: flex;
+  gap: 2.5rem;
+  background: #1e1e1e;
+  align-items: center;
+  color: #efecea;
 }
 
 /* Setting label name */
 label {
-    width: 11.3rem;
-    font-size: 1.5rem;
-    font-family: Inter;
-    color: #1E1E1E;
-    background: white;
-    text-align: left;
+  width: 11.3rem;
+  font-size: 1.5rem;
+  font-family: Inter;
+  color: #efefef;
+  background: #1e1e1e;
+  text-align: left;
 }
 
 /* Styling input/select boxes */
-input, select {
-    border: 0;
-    width: 14rem;
-    margin: auto;
-    color: white;
-    height: 2rem;
-    border-radius: 0.3rem;
-    font-family: Inter;
-    font-size: 1.3rem;
-    box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
+.add-event input,
+select {
+  border: 0;
+  width: 14rem;
+  margin: auto;
+  color: #1e1e1e;
+  height: 2rem;
+  border-radius: 0.3rem;
+  font-family: Inter;
+  font-size: 1.3rem;
+  box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
 }
 
 /* Changing icon colour */
 .add-event ::-webkit-calendar-picker-indicator {
-    filter: invert(98%) sepia(2%) saturate(660%) hue-rotate(226deg) brightness(118%) contrast(100%);
+  filter: invert(0%) sepia(6%) saturate(1473%) hue-rotate(332deg)
+    brightness(96%) contrast(76%);
+  /* filter: invert(98%) sepia(2%) saturate(660%) hue-rotate(226deg) brightness(118%) contrast(100%); */
 }
 
 /* Adding padding */
-select {
-    padding-left: 0.2rem;
-    padding-right: 4rem; 
-    border-right: 0.8rem solid transparent;
+.add-event select {
+  padding-left: 0.2rem;
+  padding-right: 4rem;
+  border-right: 0.8rem solid transparent;
 }
 
 /* Adding padding */
-.event-name input{
-    padding-left: 0.4rem;
-    padding-right: 0.4rem;
+.event-name input {
+  padding-left: 0.4rem;
+  padding-right: 0.4rem;
 }
 
 /* Styling add event button */
 .add-new-event .add-event-button {
-    margin: auto;
-    margin-top: 0.1rem;    
-    background-color:#1E1E1E;
-    color: white;
-    width: 7rem;
+  margin: auto;
+  margin-top: 0.1rem;
+  background-color: #c5ff00;
+  color: #1e1e1e;
+  width: 7rem;
 }
 
 /* Adding styling on hover */
 .add-new-event .add-event-button:hover {
-    background-color: white;
-    color: #1E1E1E;
+  background-color: #efecea;
+  color: #1e1e1e;
 }
 
 /* Code to move checkbox left */
 .checkbox-container {
-    margin-right: auto;
-    margin-left: 4rem;
+  margin-right: auto;
+  margin-left: 4rem;
 }
 
 .checkbox-container input {
-    -webkit-appearance: none; /* Removing default box */
-    position: relative;
-    width: 2rem;
-    height: 2rem;
-    background: #1E1E1E;
-    box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    border-radius: 0.4rem;
-    color: #1E1E1E;
+  -webkit-appearance: none; /* Removing default box */
+  position: relative;
+  width: 2rem;
+  height: 2rem;
+  background: #efecea;
+  box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  border-radius: 0.4rem;
+  color: #efecea;
 }
 
-/* Setting colour to white */
-.checkbox-container input:checked{
-    color: white;
+/* Setting colour to #EFECEA */
+.checkbox-container input:checked {
+  color: #1e1e1e;
 }
 
 /* Styling checkbox */
-.checkbox-container input::before{
-    position: absolute;
-    content:'\2713';
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
+.checkbox-container input::before {
+  position: absolute;
+  content: "\2713";
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
 }
 
 /* Styling hours and minutes inputs */
 .event-duration-length {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
 }
 
 .event-duration-length-item {
-    width: 6.5rem;
+  width: 6.5rem;
 }
 
 /* Styling error message */
 .error-message {
-    color: white;
-    background-color: red;
-    padding: 0.4rem;
-    border-radius: 1rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
+  color: #efecea;
+  background-color: red;
+  padding: 0.4rem;
+  border-radius: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 /* Defining textarea styles */
-textarea {
-    font-family: Inter;
-    border: none;
-    resize: none;
-    height: 7rem;
-    width: 27.8rem;
-    border-radius: 0.3rem;
-    font-size: 1rem;
-    overflow-y: auto;
-    border-right: 0.3rem solid #1E1E1E;
+.add-event textarea {
+  font-family: Inter;
+  border: none;
+  resize: none;
+  height: 7rem;
+  width: 27.8rem;
+  border-radius: 0.3rem;
+  font-size: 1rem;
+  overflow-y: auto;
+  background-color: #efecea;
+  border-right: 0.3rem solid #efecea;
 }
 
 /* Adding padding */
-.datetime, textarea {
-    padding: 0.5rem;
+.datetime,
+textarea {
+  padding: 0.5rem;
 }
 
 /* Defining container style */
 .note-container {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    margin-right: auto;
-    margin-left: 4.05rem;
-    background: white;
-    gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin-right: auto;
+  margin-left: 4.05rem;
+  background: #1e1e1e;
+  gap: 1rem;
 }
 
 /* Setting container */
 .event-container {
-    position: relative;
-    top: 0;
-    background-color: transparent;
-    height: 100%;
-    width: 100%;
+  position: relative;
+  top: 0;
+  background-color: transparent;
+  height: 100%;
+  width: 100%;
 }
 
 /* Displaying event */
 .event {
-    /* background-color: #EFECEA; white */
-    /* background-color: #FF4E48; red */
-    background-color: #FF4E48;
-    width: 100%;
-    position: absolute;
+  background-color: #efecea;
+  /* background-color: #FF4E48; red */
+  width: 100%;
+  position: absolute;
 }
 
 /* Roudning border if event is at beginning/end */
 .rounded-top {
-    border-top-left-radius: 1.3rem;
-    border-top-right-radius: 1.3rem;
+  border-top-left-radius: 1.3rem;
+  border-top-right-radius: 1.3rem;
 }
 
 .rounded-bottom {
-    border-bottom-left-radius: 1.3rem;
-    border-bottom-right-radius: 1.3rem;
+  border-bottom-left-radius: 1.3rem;
+  border-bottom-right-radius: 1.3rem;
 }
 
-.delete-event {
-    display: flex;
-}
-
+/* Styling icon */
 .delete-event svg {
-    fill: #1E1E1E;
-    background-color: red;
-    height: 1rem;
-    width: 1rem;
+  fill: #1e1e1e;
+  height: 1.4rem;
+  width: 1.4rem;
+  height: 3rem;
+  position: relative;
+  margin-left: auto;
+  margin-top: 0.7rem;
+  margin-right: 0.5rem;
+  z-index: 1000000;
+}
+
+/* Setting hover colour */
+.delete-event svg:hover {
+  fill: red;
+}
+
+/* Adding underline to signify end of event */
+.end-event {
+}
+
+.complete-event {
+}
+
+.start-event {
+}
+
+.hours-event {
 }
