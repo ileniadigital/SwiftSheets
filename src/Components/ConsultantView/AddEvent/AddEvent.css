@@ -73,7 +73,7 @@ label {
 
 /* Styling input/select boxes */
 .add-event input,
-select {
+.add-event select {
   border: 0;
   width: 14rem;
   margin: auto;
