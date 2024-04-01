@@ -23,7 +23,7 @@ yarn-debug.log*
 yarn-error.log*
 
 
-#migrations
+**/__pycache__/
 **/migrations/
 
 *.pyc
