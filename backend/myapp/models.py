@@ -25,18 +25,13 @@ class Timesheet(models.Model):
         ('Rejected', 'Rejected'),
         ('Pending', 'Pending'),
     ]
-    PAYMENT_STATUS_CHOICES = [
-        ('Processed', 'Processed'),
-        ('Inprogress', 'Inprogress'),
-        ('Rejected', 'Rejected'),
-    ]
     user = models.ForeignKey(SystemUser, on_delete=models.CASCADE, related_name='timesheets')
     start_date = models.DateField(default=timezone.now().date() - timedelta(days=timezone.now().weekday()))#start default is moday
     end_date = models.DateField(default=timezone.now().date() + timedelta(days=6 - timezone.now().weekday()))#end default is sunday 
     submission_date = models.DateField(auto_now_add=True, blank=True, null=True)  # Changed auto_now_add to blank=True, null=True
     submission_time = models.DateTimeField(auto_now_add=True, blank=True)    
     review_status = models.CharField(max_length=20, choices=REVIEW_STATUS_CHOICES, default='Pending')
-    payment_status = models.CharField(max_length=20, choices=PAYMENT_STATUS_CHOICES, default='Inprogress')
+    payment_status = models.CharField(max_length=20, choices=REVIEW_STATUS_CHOICES, default='Pending')
     auto_submit = models.BooleanField(default=False)
     completion_reminder = models.DateTimeField(null=True, blank=True)
     last_edited = models.DateTimeField(null=True, blank=True)
