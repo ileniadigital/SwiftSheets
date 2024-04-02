@@ -8,6 +8,7 @@ import Timesheet from './Pages/ConsultantView/Timesheet/Timesheet';
 import ConsultantDashboard from './Pages/ConsultantView/ConsultantDashboard/ConsultantDashboard';
 import Home from './Pages/Home';
 import Name from './Components/NavBar/Name';
+import SystemAdminView from './Pages/SystemAdminView';
 import ConsultantSettings from './Pages/ConsultantView/ConsultantSettings/ConsultantSettings';
 import TimesheetListView from './Pages/TimesheetListView';
 
@@ -220,6 +221,9 @@ export default function App() {
       break
     case "/consultantdashboard":
       page = <ConsultantDashboard/>
+      break
+    case "/systemadminview":
+      page = <SystemAdminView/>
       break
   }
 
