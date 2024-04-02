@@ -131,3 +131,10 @@
 body {
   background-color: #333;
 }
+
+.error-message {
+  color: #fff;
+  font-size: 14px;
+  margin-bottom:360px;
+  text-align: center;
+}
