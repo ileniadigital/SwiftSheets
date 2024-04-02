@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from rest_framework import generics, viewsets, permissions, status
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.renderers import TemplateHTMLRenderer
+from rest_framework.decorators import action
 # from rest_framework.decorators import action
 from rest_framework.views import APIView
 from .models import SystemUser, Timesheet, Event, Comment, Notification
@@ -26,8 +27,16 @@ class SystemUserViewSet(viewsets.ViewSet):
     serializer_class = SystemUserSerializer
 
     # Retrieve list of all users
+    # def list(self, request):
+    #     queryset = self.queryset
+    #     serializer = self.serializer_class(queryset, many=True)
+    #     return Response(serializer.data)
+
     def list(self, request):
         queryset = self.queryset
+        email = request.query_params.get('email')
+        if email is not None:
+            queryset = queryset.filter(username=email)
         serializer = self.serializer_class(queryset, many=True)
         return Response(serializer.data)
 
@@ -45,7 +54,7 @@ class SystemUserViewSet(viewsets.ViewSet):
         system_user = self.queryset.get(pk=pk)
         serializer = self.serializer_class(system_user)
         return Response(serializer.data)
-
+    
     # Update a user
     def update(self, request, pk=None):
         system_user = self.queryset.get(pk=pk)
@@ -88,6 +97,13 @@ class TimesheetViewSet(viewsets.ViewSet):
         timesheet = self.queryset.get(pk=pk)
         serializer = self.serializer_class(timesheet)
         return Response(serializer.data)
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        user_email = self.request.query_params.get('user_email')
+        if user_email:
+            queryset = queryset.filter(user__email=user_email)
+        return queryset
 
     # Update a timesheet
     def update(self, request, pk=None):

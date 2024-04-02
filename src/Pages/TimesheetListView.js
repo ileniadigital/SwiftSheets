@@ -1,62 +1,69 @@
-import '../Components/TimesheetListView/TimesheetListView.css'; //Import styling
+import React, { useEffect, useState } from 'react';
+import Axios from 'axios';
 import ConsultantTimesheet from '../Components/TimesheetListView/ConsultantTimesheet/ConsultantTimesheet';
+import '../Components/TimesheetListView/TimesheetListView.css'; // Import styling
 
-//MODIFY TO HAVE FILTERS AT THE TOP
-const timesheets=[
-  {
-    "name": "John Doe",
-    "dates": "01/01/2021 - 01/07/2021",
-    "reviewStatus": "Pending",
-    "paymentStatus": "Pending"
-  },
-  {
-    "name": "Jane Smith",
-    "dates": "01/01/2021 - 01/07/2021",
-    "reviewStatus": "Pending",
-    "paymentStatus": "Rejected"
-  },
-  {
-    "name": "John Smith",
-    "dates": "01/01/2021 - 01/07/2021",
-    "reviewStatus": "Approved",
-    "paymentStatus": "Pending"
-  },
-  {
-    "name": "Jonny Smith",
-    "dates": "01/01/2021 - 01/07/2021",
-    "reviewStatus": "Pending",
-    "paymentStatus": "Rejected"
-  },
-  {
-    "name": "John Doe",
-    "dates": "01/01/2021 - 01/07/2021",
-    "reviewStatus": "Pending",
-    "paymentStatus": "Pending"
-  },
-  {
-    "name": "Jane Smith",
-    "dates": "01/01/2021 - 01/07/2021",
-    "reviewStatus": "Pending",
-    "paymentStatus": "Rejected"
-  },
-  {
-    "name": "John Doe",
-    "dates": "01/01/2021 - 01/07/2021",
-    "reviewStatus": "Pending",
-    "paymentStatus": "Pending"
-  },
-  {
-    "name": "Jane Smith",
-    "dates": "01/01/2021 - 01/07/2021",
-    "reviewStatus": "Pending",
-    "paymentStatus": "Rejected"
-  },
-]
+export default function TimesheetListView({ role }) {
+  const [timesheets, setTimesheets] = useState([]);
+  const [userDetails, setUserDetails] = useState({});
+  const [error, setError] = useState("");
 
+  useEffect(() => {
+    const userEmail = 'Asus@gmail.com'; // Replace with dynamic user email if necessary
+    fetchTimesheets(userEmail); 
+  }, []); // The dependency array is empty so this will run only once on mount
 
+  const fetchTimesheets = (email) => {
+    Axios.get(`http://localhost:8000/timesheet/?user_email=${encodeURIComponent(email)}`)
+      .then(response => {
+        setTimesheets(response.data);
+        if (response.data.length > 0) {
+          // Assuming the user email is the same as the one we fetched the timesheets with
+          fetchUserDetails(email);
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching timesheets:', error);
+        setError("An error occurred while fetching the timesheets.");
+      });
+  };
 
-//LineManagerView component
-export default function TimesheetListView({role}) {
+  const fetchUserDetails = (email) => {
+    Axios.get(`http://localhost:8000/systemuser/?email=${encodeURIComponent(email)}`)
+      .then(response => {
+        const user = response.data.find(u => u.username === email);
+        setUserDetails(user || {});
+      })
+      .catch(error => {
+        console.error('Error fetching user details:', error);
+        setError("An error occurred while fetching user details.");
+      });
+  };
+
+  const formatDate = (dateString) => {
+    const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+    return new Date(dateString).toLocaleDateString('en-GB', options);
+  };
+
+  const renderContent = () => {
+    if (error) {
+      return <div>{error}</div>;
+    }
+    if (timesheets.length === 0) {
+      return <div>No timesheets found.</div>;
+    }
+    return timesheets.map(timesheet => (
+      <ConsultantTimesheet
+        key={timesheet.id}
+        name={`${userDetails.firstname} ${userDetails.lastname}`} 
+        dates={`${formatDate(timesheet.start_date)} - ${formatDate(timesheet.end_date)}`}
+        reviewStatus={timesheet.review_status}
+        paymentStatus={timesheet.payment_status}
+        role={role}
+      />
+    ));
+  };
+
   return (
     <div className='list-container'>
       {/* Categories */}
@@ -76,9 +83,7 @@ export default function TimesheetListView({role}) {
       </div>
       {/* Displaying consultant timesheets */}
       <div className='timesheet-container'>
-        {timesheets.map((timesheet, index) => (
-          <ConsultantTimesheet key={index} name={timesheet.name} dates={timesheet.dates} reviewStatus={timesheet.reviewStatus} paymentStatus={timesheet.paymentStatus} role={role}/>
-        ))}
+        {renderContent()}
       </div>
     </div>
   );
