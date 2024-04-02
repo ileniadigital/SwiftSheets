@@ -1,3 +1,4 @@
+/* Styling for log in container */
 .login-container {
   display: flex;
   flex-direction: column;
@@ -7,134 +8,123 @@
 }
 
 .login-box {
-  width: 461px;
-  height: 325px;
-  top: 388px;
-  left: 489px;
-  radius: 25px;
+  width: 29rem;
+  height: 21rem;
+  top: 24.25rem;
+  left: 30.5625rem;
   background: #c5ff00;
-  padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 2.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
+/* Styiling for inputs */
 .email-input {
-  width: 350px;
-  height: 50px;
-  margin-bottom: 30px;
+  width: 22rem;
+  height: 3.125rem;
+  margin-bottom: 1.875rem;
   border: none;
-  border-radius: 5px;
+  border-radius: 0.3125rem;
   outline: none;
   font-family: Inter;
-  font-size: 20px;
+  font-size: 1.25rem;
   color: #333;
-  padding-top: 5px;
+  padding-top: 0.3125rem;
 }
 
 .password-input {
-  width: 350px;
-  height: 50px;
-  margin-bottom: 25px;
+  width: 22rem;
+  height: 3.125rem;
+  margin-bottom: 1.5625rem;
   border: none;
-  border-radius: 5px;
+  border-radius: 0.3125rem;
   outline: none;
-  font-family: Inter;
-  font-size: 20px;
-  color: #333;
-  padding-top: 5px;
+  font-size: 1rem;
+  color: #1e1e1e;
+  padding-top: 0.3125rem;
 }
 
-.forgot-password {
-  font-family: Inter;
-  font-size: 25px;
-  font-weight: 700;
-  line-height: 24.2px;
+/* Styling for input placeholders */
+.email-input::placeholder,
+.password-input::placeholder {
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.5125rem;
   text-align: left;
-  margin-top: 10px;
-  margin-left: 250px;
-  color: #ffffff;
-  font-size: 14px;
+  padding-left: 0.625rem;
+  padding-top: 6.25rem;
+}
+
+/* Styling for welcome text */
+.welcome-text {
+  font-size: 3rem;
+  font-weight: 400;
+  text-align: left;
+  margin-bottom: 2rem;
+  color: #fff;
+}
+
+/* Styling for forgot password */
+.forgot-password {
+  font-size: 1.5625rem;
+  font-weight: 700;
+  line-height: 1.5125rem;
+  text-align: left;
+  margin-top: 0.625rem;
+  margin-left: 15.625rem;
+  color: black;
+  font-size: 0.875rem;
   text-align: right;
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 0.625rem;
   text-decoration: underline;
   transition: color 0.3s ease;
 }
 
+.forgot-password:hover {
+  color: white;
+}
+
+/* Styling for log in button */
 .login-button {
-  width: 250px;
-  height: 40px;
-  padding: 10px;
+  width: 12rem;
+  height: 2.5rem;
+  padding: 0.625rem;
   border: none;
-  border-radius: 5px;
-  background-color: #fff;
-  color: #333;
+  border-radius: 0.5rem;
+  background-color: black;
+  color: white;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .login-button:hover {
-  background-color: #ddd;
+  background-color: white;
+  color: black;
 }
 
-.email-input::placeholder {
-  font-family: Inter;
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 24.2px;
-  text-align: left;
-  padding-left: 10px;
-  padding-top: 100px;
-}
-
-.password-input::placeholder {
-  font-family: "Inter", sans-serif;
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 24.2px;
-  text-align: left;
-  padding-left: 10px;
-  padding-top: 100px;
-}
-
-.welcome-text {
-  font-family: "Arial Black", Gadget, sans-serif;
-  font-size: 50px;
-  font-weight: 400;
-  line-height: 60.51px;
-  text-align: left;
-  color: #fff;
-}
-
+/* Styling for top bar and logo*/
 .top-bar {
   width: 100%;
   height: 100%;
   margin-bottom: 7%;
-  background-color: #000;
   display: flex;
   align-items: center;
 }
 
 .top-logo {
-  height: 40px;
-  margin-left: 20px;
+  height: 2.5rem;
+  margin-left: 1.25rem;
 }
 
-.forgot-password:hover {
-  color: #bbb;
-}
-
-body {
-  background-color: #333;
-}
-
+/* Styling for error message */
 .error-message {
   color: #fff;
-  font-size: 14px;
-  margin-bottom:360px;
+  font-size: 0.875rem;
+  margin-bottom: 22.5rem;
   text-align: center;
 }
