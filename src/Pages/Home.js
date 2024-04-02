@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import '../Components/general.css'; //Import Styling
 
 //Import componentts
+import SystemAdminView from './SystemAdminView';
 import ConsultantHome from './ConsultantView/ConsultantHome/ConsultantHome';
 import TimesheetListView from './TimesheetListView';
 
@@ -20,6 +21,9 @@ export default function Home(props) {
             break;
         case 'financeteam':
             view = <TimesheetListView role={role} />;
+            break;
+        case 'systemadmin':
+            view = <SystemAdminView />;
             break;
     }
     return (
