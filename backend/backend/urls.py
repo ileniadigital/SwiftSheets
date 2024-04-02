@@ -40,3 +40,4 @@ router.register('event', EventViewset, basename='event')
 router.register('comment', CommentViewSet , basename='comment')
 router.register('notification', NotificationViewSet , basename='notification')
 urlpatterns += router.urls
+

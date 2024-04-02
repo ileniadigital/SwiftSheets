@@ -78,10 +78,19 @@ class TimesheetViewSet(viewsets.ViewSet):
     serializer_class = TimesheetSerializer
 
     # Retrieve list of all timesheets
-    def list(self, request):
-        queryset = self.queryset
+    def list(self, request, *args, **kwargs):
+        review_status = request.query_params.get('review_status')
+        if review_status:
+            if review_status.lower() == 'all':
+                queryset = Timesheet.objects.all()
+            else:
+                queryset = Timesheet.objects.filter(review_status=review_status.capitalize())
+        else:
+            queryset = Timesheet.objects.all()
+        
         serializer = self.serializer_class(queryset, many=True)
         return Response(serializer.data)
+
 
     # Create a new timesheet
     def create(self, request):
