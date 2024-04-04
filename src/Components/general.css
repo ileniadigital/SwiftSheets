@@ -7,6 +7,10 @@
   text-decoration: none;
 }
 
+:root {
+  font-size: 16px; /* Assuming 1rem = 16px */
+}
+
 .name-container {
   display: flex;
   text-align: center;
@@ -16,26 +20,24 @@
   margin-bottom: 1rem;
 }
 
-/* Scrollbar */
 ::-webkit-scrollbar {
   width: 0.7rem;
   height: 1rem;
   background-color: transparent;
 }
 
+/* Making track transparent for a more seamless look */
 ::-webkit-scrollbar-track {
   background-color: transparent;
 }
 
+/* Setting colour for scrollbar thumb */
 ::-webkit-scrollbar-thumb {
   background-color: #c5ff00;
   border-radius: 0.6rem;
 }
-
-/* Basic common styling */
 body {
   background-color: #1e1e1e;
-  color: white;
 }
 
 h1,

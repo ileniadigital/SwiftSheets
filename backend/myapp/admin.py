@@ -1,10 +1,7 @@
 from django.contrib import admin
 from .models import SystemUser, Timesheet, Event, Comment, Notification
 
-@admin.register(SystemUser)
-class SystemUserAdmin(admin.ModelAdmin):
-    list_display = ['id', 'username', 'firstname', 'lastname', 'user_type']  
-    search_fields = ['username', 'user_type', 'firstname', 'lastname']  
+admin.site.register(SystemUser)
 
 @admin.register(Timesheet)
 class TimesheetAdmin(admin.ModelAdmin):
