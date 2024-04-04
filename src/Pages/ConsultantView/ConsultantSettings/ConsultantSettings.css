@@ -1,5 +1,17 @@
 /* Defining styles for ConsultantSettings page */
 
+/* Defining container */
+.settings {
+  border: 0.2rem solid #c5ff00;
+  border-radius: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+  width: 70rem;
+  margin: auto;
+  margin-top: 3rem;
+}
+
+
 /* Defining layout of settings items */
 .settings-items {
   margin-left: 3rem;
