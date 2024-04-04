@@ -11,7 +11,7 @@ import TimesheetListView from './TimesheetListView';
 export default function Home() {
     // const [view, setView] = useState('default');
     let view;
-    const role="systemadmin";
+    const role="linemanager";//need to set the role from the login page global state
     switch (role) {
         case 'consultant':
             view = <ConsultantHome />;
