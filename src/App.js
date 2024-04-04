@@ -11,7 +11,6 @@ import Name from './Components/NavBar/Name';
 import SystemAdminView from './Pages/SystemAdminView';
 import ConsultantSettings from './Pages/ConsultantView/ConsultantSettings/ConsultantSettings';
 import TimesheetListView from './Pages/TimesheetListView';
-import Login from './Pages/Login';
 
 import { useState, useEffect } from 'react';
 import getDate from './Components/ConsultantView/getDate';
@@ -197,9 +196,9 @@ export default function App() {
   // Render page based on location
   let page
   switch (window.location.pathname) {
-    default:
-      page= <Login/>
-      break
+    // default:
+    //   page= <LogIn/>
+    //   break
     case "/Home":
     case "/":
       page= <Home view={role}/>

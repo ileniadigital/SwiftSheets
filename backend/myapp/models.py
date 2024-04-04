@@ -25,7 +25,13 @@ class Timesheet(models.Model):
         ('Rejected', 'Rejected'),
         ('Pending', 'Pending'),
     ]
-    user = models.ForeignKey(SystemUser, on_delete=models.CASCADE, related_name='timesheets')
+    # user = models.ForeignKey(SystemUser, on_delete=models.CASCADE, related_name='timesheets') # bydefault it is set to any user
+    user = models.ForeignKey(
+        SystemUser,
+        on_delete=models.CASCADE,
+        related_name='timesheets',
+        limit_choices_to={'user_type': 'Consultant'}  # This enforces the consultant only constraint
+    )
     start_date = models.DateField(default=timezone.now().date() - timedelta(days=timezone.now().weekday()))#start default is moday
     end_date = models.DateField(default=timezone.now().date() + timedelta(days=6 - timezone.now().weekday()))#end default is sunday 
     submission_date = models.DateField(auto_now_add=True, blank=True, null=True)  # Changed auto_now_add to blank=True, null=True
@@ -41,6 +47,7 @@ class Timesheet(models.Model):
     # Ensure your __str__ method accounts for SystemUser attributes correctly
     def __str__(self):
         return f"{self.id} - {self.user.username} - {self.submission_time.strftime('%Y-%m-%d %H:%M')}"
+
     
 class Event(models.Model):
     EVENT_TYPE_CHOICES = [
