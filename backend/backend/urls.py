@@ -16,25 +16,28 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from myapp.views import SystemUserViewSet, TimesheetViewSet, EventViewset
+# from backend.myapp import views
+from myapp import views  # Adjust the import path
+from myapp.views import SystemUserViewSet, TimesheetViewSet, EventViewset, CommentViewSet, NotificationViewSet, TimesheetEventView, UserTimesheetView
 from rest_framework_simplejwt.views import TokenObtainPairView,  TokenRefreshView
 from rest_framework.routers import DefaultRouter
+from django.urls import reverse
 
-from myapp.views import EventViewset
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path("myapp/user/register/", CreateUserView.as_view(), name="register"),
-    # path("myapp/token/", TokenObtainPairView.as_view(), name="get_token"),
-    # path("myapp/token/refresh/", TokenRefreshView.as_view(), name="refresh"),
     path("myapp-auth/", include("rest_framework.urls")),
     path("myapp/", include("myapp.urls")),
+    path('myapp/timesheet-events/', views.TimesheetEventView.as_view(), name='timesheet_events'),
+    path('myapp/user-timesheets/', UserTimesheetView.as_view(), name='user_timesheets'),
     # path('myapp/timesheets/not-reviewed/', TimesheetListView.as_view(), name='timesheet-not-reviewed-list'),
 ]
 
 router = DefaultRouter()
-router.register('event', EventViewset, basename='event')
+router.register('systemuser', SystemUserViewSet , basename='systemuser')
 router.register('timesheet', TimesheetViewSet , basename='timesheet')
-router.register('system', SystemUserViewSet , basename='system')
-
+router.register('event', EventViewset, basename='event')
+router.register('comment', CommentViewSet , basename='comment')
+router.register('notification', NotificationViewSet , basename='notification')
 urlpatterns += router.urls
+

@@ -6,49 +6,33 @@ import { IoClose } from "react-icons/io5";
 
 // Importing useState
 import { useEffect, useState } from 'react';
+import getDate from '../getDate';
 
-// Importing axios instance for backend handling
-import AxiosInstance from '../../Axios';
-
-export default function AddEvent({componentCaller, addEventHandler, viewedWeek}) {
+export default function AddEvent({componentCaller, addEventHandler, viewedWeek, event}) {
 
     /* Only needs to be rendered for Timesheet component caller as its viewedWeek
     argument will be a Date, compared to Hours' string */
-    let startOfWeek, startOfWeekDay, startOfWeekMonth, startOfWeekYear;
-    let endOfWeek, endOfWeekDay, endOfWeekMonth, endOfWeekYear;
 
-    if (componentCaller === "Timesheet") {
-        // Determining date for start of week
-         startOfWeek = new Date(viewedWeek); // Creates copy of current week
-         startOfWeek.setDate(viewedWeek.getDate() - viewedWeek.getDay() + 1)  // Adds 1 as function starts from Sunday (o)
 
-         startOfWeekDay = startOfWeek.getDate().toString().padStart(2, '0');
-         startOfWeekMonth = (startOfWeek.getMonth() + 1).toString().padStart(2,'0'); // + 1 due to 0 indexing
-         startOfWeekYear = startOfWeek.getFullYear();
+    // Determinining date for start of week
+    const startDate = getDate(viewedWeek, 1)
+    // Converting into format for minimum date value
+    let startOfWeek = `${startDate[2]}-${startDate[1]}-${startDate[0]}`
 
-        // Converting into format for minimum date value
-        startOfWeek = `${startOfWeekYear}-${startOfWeekMonth}-${startOfWeekDay}`
+    // Determinining date for end of week
+    const endDate = getDate(viewedWeek, 7)
+    // Converting into format for maximum date value
+    let endOfWeek = `${endDate[2]}-${endDate[1]}-${endDate[0]}`
 
-        // Determinining date for end of week
-        endOfWeek = new Date(startOfWeek); // Creates copy of current week
-        endOfWeek.setDate(endOfWeek.getDate() + 6) // Retrives end of week by adding 6
-        
-         endOfWeekDay = endOfWeek.getDate().toString().padStart(2, '0');
-         endOfWeekMonth = (endOfWeek.getMonth() + 1).toString().padStart(2,'0'); // + 1 due to 0 indexing
-         endOfWeekYear = endOfWeek.getFullYear();
-
-        // Converting into format for maximum date value
-        endOfWeek = `${endOfWeekYear}-${endOfWeekMonth}-${endOfWeekDay}`
-} 
 
     // String all inputs
-    const [eventName, setEventName] = useState('')
-    const [eventDate, setEventDate] = useState(componentCaller !== 'Hours' ? '' : viewedWeek) // Set default if an event is clicked, otherwise find it
-    const [eventStartTime, setEventStartTime] = useState('')
-    const [eventEndTime, setEventEndTime] = useState('')
+    const [eventName, setEventName] = useState(componentCaller === 'Hours1' ? event.name : '')
+    const [eventDate, setEventDate] = useState(componentCaller === 'Hours1' ? event.date : componentCaller === 'Hours' ? viewedWeek : '') // Set default if an event is clicked, otherwise find it
+    const [eventStartTime, setEventStartTime] = useState(componentCaller === 'Hours1' ? event.startTime : '')
+    const [eventEndTime, setEventEndTime] = useState(componentCaller === 'Hours1' ? event.endTime : '')
     const [eventCategory, setEventCategory] = useState(componentCaller === 'Hours1' ? event.category : '')
-    const [isRecurring, setIsRecurring] = useState(false)
-    const [eventNote, setEventNote] = useState('')
+    const [isRecurring, setIsRecurring] = useState(componentCaller === 'Hours1' ? event.recurring : false)
+    const [eventNote, setEventNote] = useState(componentCaller === 'Hours1' ? event.note : '')
 
     const [eventType, setEventType] = useState(componentCaller === 'Hours1' ? event.type : '')
     const [disableCategory, setDisableCategory] = useState(componentCaller === 'Hours1' && (eventType !== 'eventTypeNormal' && eventType !== 'eventTypeOvertime') ? true : false)
@@ -145,7 +129,7 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek})
             }
             if (eventStartTime !== '') {
                 const startTimeHours = parseInt(eventStartTime.slice(0,2)); 
-                const startTimeMins = parseInt(eventStartTime.slice(3,5)); 
+                const startTimeMins = parseInt(eventStartTime.slice(3,5));
                 if (localStorage.getItem('24HoursWorked') === 'false') {
                     // Ensuring end time is not before start time
                     if (startTimeHours === endTimeHours) {
@@ -163,23 +147,106 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek})
         event.target.setCustomValidity('');
     }
 
+    let event1 = event
+    const [concurrentEvent, setConcurrentEvent] = useState(false)
+
     // Handles validation after submit button has abeen pressed
     function handleSubmit(event) {
         const events = JSON.parse(localStorage.getItem("events")) || {}
-        const newEventId = Object.keys(events).length; // Get the length of current events to generate a new ID
-        const newEvent = {
-            id: newEventId,
-            name: eventName,
-            date: eventDate,
-            startTime: eventStartTime,
-            endTime: eventEndTime,
-            type: eventType,
-            category: eventCategory,
-            recurring: isRecurring,
-            note: eventNote
-        };
-        events[newEventId] = newEvent; // Add the new event to the existing events object
-        localStorage.setItem("events", JSON.stringify(events)); // Save the updated events back to localStorage
+
+        if (componentCaller === 'Hours1') {
+            // Edit event
+            for (const e in events) {
+                // When event has been found
+                if (events[e].id === event1.id) {
+                    const editedEvent = event1
+
+                    // Updating edited values
+                    if (eventName !== event1.name) {
+                        event1['name'] = eventName
+                    }
+                    if (eventDate !== event1.date) {
+                        event1['date'] = eventDate
+                    }
+                    if (eventStartTime !== event1.startTime) {
+                        event1['startTime'] = eventStartTime
+                    }
+                    if (eventEndTime !== event1.endTime) {
+                        event1['endTime'] = eventEndTime
+                    }
+                    if (eventType !== event1.type) {
+                        event1['type'] = eventType
+                    } 
+                    if (eventCategory !== event1.category) {
+                        event1['category'] = eventCategory
+                    }
+                    if (isRecurring !== event1.recurring) {
+                        event1['recurring'] = isRecurring
+                    }
+                    if (eventNote !== event1.note) {
+                        event1['note'] = eventNote
+                    }
+                    events[event1.id] = editedEvent
+                    localStorage.setItem("events", JSON.stringify(events)); // Save the updated events back to localStorage
+
+                    const recurringEvents = JSON.parse(localStorage.getItem('recurringEvents'))
+                       
+                    // Updating/Deleting recurring event
+                    for (const e in events) {
+                        // Find current event
+                        if (events[e].id === event1.id) {
+                            // Check if event is in recurring events
+                            let found = false
+                            for (const r in recurringEvents) {
+                                if (recurringEvents[r].id === event1.id)
+                                found = true
+                                break
+                            }
+
+                            // Add to recurring events if not in already
+                            if (!found && isRecurring) {
+                                recurringEvents[event1.id] = event1
+                                localStorage.setItem("recurringEvents", JSON.stringify(recurringEvents)); // Save the updated events back to localStorage
+                            } else if (found && !isRecurring) {
+                                delete recurringEvents[event1.id]
+                                localStorage.setItem("recurringEvents", JSON.stringify(recurringEvents)); // Save the updated events back to localStorage
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            // Add event
+            const newEventId = Object.keys(events).length; // Get the length of current events to generate a new ID
+            const newEvent = {
+                id: newEventId,
+                name: eventName,
+                date: eventDate,
+                startTime: eventStartTime,
+                endTime: eventEndTime,
+                type: eventType,
+                category: eventCategory,
+                recurring: isRecurring,
+                note: eventNote
+            };
+            
+
+            // Continue with adding event if it doesn't already exit
+            if (!concurrentEvent) {
+                events[newEventId] = newEvent; // Add the new event to the existing events object
+                localStorage.setItem("events", JSON.stringify(events)); // Save the updated events back to localStorage 
+
+                if (isRecurring) {
+                    // No need for check as this is the first time the event has been added
+                    const recurringEvents = JSON.parse(localStorage.getItem('recurringEvents'))
+                    recurringEvents[newEvent.id] = newEvent
+                    localStorage.setItem("recurringEvents", JSON.stringify(recurringEvents)); // Save the updated events back to localStorage
+                }
+            } else {
+                event.preventDefault() // Prevent addition of event
+            }
+        }
+
         // Values to be added to database
         //     eventName,
         //     eventDate,
@@ -189,29 +256,148 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek})
         //     eventCategory,
         //     isRecurring,
         //     eventNote
+    }
 
-        // Handle data using axios
-        AxiosInstance.post('event/', {
-            name: eventName,
-            date: eventDate,
-            startTime: eventStartTime,
-            endTime: eventEndTime,
-            type: eventType,
-            category: eventCategory,
-            recurring: isRecurring,
-            note: eventNote
-        })
+    // Checking for when values change to let user know times overlap
+    useEffect(() => {
+        let isConcurrent = false
 
-        // console.log(
-        //     eventName,
-        //     eventDate,
-        //     eventStartTime,
-        //     eventEndTime,
-        //     eventType,
-        //     eventCategory,
-        //     isRecurring,
-        //     eventNote
-        // )
+        if (eventDate !== '' && eventStartTime !== '' && eventEndTime !== '') {
+            // Retrieve all events
+            const events = JSON.parse(localStorage.getItem("events")); 
+            
+            // Ensuring event does not already exist 
+            for (const e in events) {
+                // No need to compare edited event against itself
+                if (componentCaller === 'Hours1' && events[e].id === event.id) {
+                    continue
+                }
+
+                let eventObserved = events[e]
+                let eventObservedDate = eventObserved.date
+                
+                let eventObservedStartTime = eventObserved.startTime
+                let eventObservedStartHours = parseInt(eventObservedStartTime.slice(0,2))
+                let eventObservedStartMins = parseInt(eventObservedStartTime.slice(3,5))
+
+                let eventObservedEndTime = eventObserved.endTime
+                let eventObservedEndHours = parseInt(eventObservedEndTime.slice(0,2))
+                let eventObservedEndMins = parseInt(eventObservedEndTime.slice(3,5))
+
+
+                let startTimeHours = parseInt(eventStartTime.slice(0,2))
+                let startTimeMins = parseInt(eventStartTime.slice(3,5))
+
+                let endTimeHours = parseInt(eventEndTime.slice(0,2))
+                let endTimeMins = parseInt(eventEndTime.slice(3,5))
+
+                if (eventDate === eventObservedDate) {
+                    if (eventStartTime === eventObservedStartTime &&
+                    eventEndTime === eventObservedEndTime) {
+                        // Prevent event addition
+                        isConcurrent = true
+                        break
+                    } 
+                    // Considering events that last one day
+                    else if (eventObservedStartHours <= eventObservedEndHours) {
+                        if (eventObservedStartHours === eventObservedEndHours) {
+                            if (startTimeHours === eventObservedStartHours) {
+                                if (startTimeMins >= eventObservedStartMins && startTimeMins <= eventObservedEndMins) {
+                                    isConcurrent = true
+                                    break
+                                }
+                            } else if (startTimeHours <= endTimeHours && endTimeHours === eventObservedStartHours) {
+                                if (endTimeMins >= eventObservedStartMins && endTimeMins <= eventObservedEndMins) {
+                                    isConcurrent = true
+                                    break
+                                }
+                            } 
+                        } else {
+                            if (startTimeHours === eventObservedStartHours) {
+                                if (startTimeMins >= eventObservedStartMins) {
+                                    isConcurrent = true
+                                    break
+                                }
+                            } 
+                            if (startTimeHours === eventObservedEndHours) {
+                                if (startTimeMins <= eventObservedEndMins) {
+                                    isConcurrent = true
+                                    break
+                                }
+                            } 
+                            if (endTimeHours === eventObservedEndHours) {
+                                if (endTimeMins <= eventObservedEndMins) {
+                                    isConcurrent = true
+                                    break
+                                }
+                            } 
+                            if (endTimeHours === eventObservedStartHours) {
+                                if (endTimeMins >= eventObservedStartMins) {
+                                    isConcurrent = true
+                                    break
+                                }
+                            }
+                            if ((startTimeHours > eventObservedStartHours) && (startTimeHours < eventObservedEndHours)) {
+                                isConcurrent = true
+                                break
+                            } 
+                            if (startTimeHours <= eventObservedStartHours) {
+                                if ((endTimeHours === eventObservedEndHours && endTimeMins <= eventObservedEndMins) ||
+                                    (endTimeHours > eventObservedEndHours)) {
+                                    isConcurrent = true
+                                    break
+                                } 
+                            }
+                        }
+                    }
+                } 
+            }
+        }
+        setConcurrentEvent(isConcurrent)
+    }, [eventDate, eventStartTime, eventEndTime])
+
+    
+    const [recurringEvents, setRecurringEvents] = useState(
+        localStorage.getItem('recurringEvents') && 
+        Object.keys(JSON.parse(localStorage.getItem('recurringEvents'))).length > 0
+    )
+
+    const [dropdown, setDropdown] = useState([])
+
+    useEffect(() => {
+        // Creating dropdown menu with recurring events
+        if (recurringEvents) {
+            let recEvents = JSON.parse(localStorage.getItem('recurringEvents'))
+            let options = []
+            for (const re in recEvents) {
+                options.push(
+                    <option key={recEvents[re].id}>
+                        {recEvents[re].name}
+                    </option>
+                )
+            }
+            setDropdown(options)
+        }
+    }, [localStorage.getItem('recurringEvents')])
+
+    const handleChange = (event) => {
+        // Find event and update input values
+        let recEvents = JSON.parse(localStorage.getItem('recurringEvents'))
+        let event1;
+        for (const re in recEvents) {
+            if (recEvents[re].name === event.target.value) {
+                event1 = recEvents[re]
+            }
+        }
+
+        // Updating all values (apart from date as this will change)
+        setEventName(event1.name)
+        setEventStartTime(event1.startTime)
+        setEventEndTime(event1.endTime)
+        setEventType(event1.type)
+        setEventCategory(event1.category)
+        setIsRecurring(event1.recurring)
+        setEventNote(event1.note)
     }
 
     return(
@@ -220,41 +406,47 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek})
             <h1 className='log-event-heading'>Log Event</h1>
             {/* Creating a form that represents the Consultant logging an event */}
             <form action="" className = "add-new-event">
+
+                {/* Show dropdown menu for recurring event upon selection */}
+                {componentCaller !== 'Hours1' && recurringEvents &&
+                
+                <div className='input'>
+                    <label>Select Event</label>
+                    <select onChange={handleChange} defaultValue={''}>
+                        <option value="" disabled hidden>Select Event</option> {/* Default value */}
+                        {dropdown}
+                    </select>
+                </div>
+                }
+
                 <div className="input event-name">
                     <label htmlFor="eventName">Name</label>
                     <input type="text" name = "eventName" required onChange={validateEventName}
-                    defaultValue={componentCaller === 'Hours1' ? event.name : ''}/>
+                    defaultValue={eventName}/>
                 </div>
 
                 <div className="input">
                     <label htmlFor="eventDate">Date</label>
-                    {componentCaller === "Hours" || "Hours1" ? (
-
-                        // Date is preset as the day of the week is known from the time/dayslot click 
-                        <input className = 'datetime' type="date" name = "eventDate" value = {viewedWeek} readOnly required/>
-                        ) : (
-                        
-                        // Limiting days to choose from as days in current week
-                        <input type="date" className='datetime' name = "eventDate" min={startOfWeek} max={endOfWeek} onChange={(event) => setEventDate(event.target.value)} required/>
-                    )}
+                        {/* // Limiting days to choose from as days in current week */}
+                        <input className = 'datetime' type="date" name = "eventDate" defaultValue = {viewedWeek} min={startOfWeek} max={endOfWeek} onChange={(event) => setEventDate(event.target.value)} required/>
                 </div>
 
                 <div className="input">
                     <label htmlFor="eventStartTime">Start Time</label>
                     <input type="time" className='datetime' name = "eventStartTime" required onChange={validateStartTime}
-                    defaultValue={componentCaller === 'Hours1' ? event.startTime : ''}/>
+                    defaultValue={eventStartTime}/>
                 </div>
 
                 <div className="input">
                     <label htmlFor="eventEndTime">End Time</label>
                     <input className='datetime' type="time" name = "eventEndTime" required onChange={validateEndTime}
-                    defaultValue={componentCaller === 'Hours1' ? event.endTime : ''}/>
+                    defaultValue={eventEndTime}/>
                 </div>
 
                 <div className="input">
                     <label htmlFor="eventType">Type</label>
                     <select name="eventType" onChange={handleEventType} required
-                    defaultValue={componentCaller === 'Hours1' ? event.type : ''}>
+                    value={eventType}>
                         <option value="" disabled hidden>Type</option> {/* Default value */}
                         <option value="eventTypeNormal">Normal</option>
                         <option value="eventTypeOvertime">Overtime</option>
@@ -267,7 +459,7 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek})
                 <div className="input">
                     <label htmlFor="eventCategory">Category</label>
                     <select name="eventCategory" required onChange = {(event) => setEventCategory(event.target.value)} disabled = {disableCategory}
-                    defaultValue={componentCaller === 'Hours1' ? event.category : ''}>
+                    value={eventCategory}>
                         <option value="" disabled hidden>Category</option> {/* Default value */}
                         <option value="Project">Project</option>
                         <option value="eventCategoryPlanning">Planning</option>
@@ -277,17 +469,19 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek})
 
                 <div className="input checkbox-container">
                     <label htmlFor="isRecurring" className='checkbox-label'>Recurring </label>
-                    <input className ='is-recurring' type="checkbox" onChange={() => setIsRecurring(!isRecurring)}
-                    defaultValue={componentCaller === 'Hours1' ? event.recurring : ''}/>
+                    <input className = {`is-recurring ${isRecurring ? 'recur' : ''}`} type="checkbox" onChange={() => setIsRecurring(!isRecurring)}
+                    defaultValue={isRecurring}/>
                 </div>
 
                 <div className='note-container'>
                     <label htmlFor="note"> Note </label>
                     <textarea name="note" cols="30" rows="5" placeholder='Enter text' onChange = {(event) => setEventNote(event.target.value.trim())}
-                    defaultValue={componentCaller === 'Hours1' ? event.note : ''}>
+                    defaultValue={eventNote}>
                     </textarea>
                 </div>
 
+                {concurrentEvent && 
+                <p className='concur-error'>Event is Overlapping</p>}
                 {componentCaller === 'Hours1' ? (
                 <input type="submit" value={"Edit Event"} className='add-event-button'/> 
                 )

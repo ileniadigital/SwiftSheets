@@ -1,0 +1,17 @@
+/* Button styling*/
+.removeUser {
+    margin: auto;
+    margin-top: 3rem;
+    background-color: #c5ff00;
+    color: #1e1e1e;
+    width: 10rem;
+    border-radius: 0.3rem;
+    font-family: Inter;
+    font-size: 1.3rem;
+}
+
+/* Adding styling on hover */
+.removeUser:hover {
+    background-color: white;
+    color: black;
+}

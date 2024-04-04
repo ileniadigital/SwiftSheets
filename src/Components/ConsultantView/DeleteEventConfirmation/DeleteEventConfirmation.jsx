@@ -7,14 +7,18 @@ export default function DeleteEventConfirmation({event, setOpenPopup}) {
     // Delete event
     const deleteEvent = () => {
         const events = JSON.parse(localStorage.getItem('events'))
-        const newEvents = {}; // Initialize an empty object for updated events
-            for (const key in events) {
-                if (events[key].id !== event) { // Exclude the event to delete
-                    newEvents[key] = events[key]; // Copy non-deleted events to the updated object
-                }
-            }
+        const newEvents = { ...events}; // Copying events
+        delete newEvents[event]
         localStorage.setItem('events', JSON.stringify(newEvents))
+
+        // Delete recurring event if it exists
+        const recurringEvents = JSON.parse(localStorage.getItem('recurringEvents'))
+        const newRecurringEvents = { ...recurringEvents}; // Copying events
+        delete newRecurringEvents[event]
+        localStorage.setItem('recurringEvents', JSON.stringify(newEvents))
+
         setOpenPopup(false)
+        window.location.reload(); // Reload screen to update events
     }
 
     return (
@@ -22,12 +26,12 @@ export default function DeleteEventConfirmation({event, setOpenPopup}) {
             <div className='popup'>
                 <p>Are you sure you want to delete this event? This action cannot be undone. </p>
                 <div className='popup-buttons'>
-                    <button onClick={deleteEvent}>
+                    <div className='button' onClick={deleteEvent}>
                         Yes
-                    </button>
-                    <button onClick={() => setOpenPopup(false)}>
+                    </div>
+                    <div className='button' onClick={() => setOpenPopup(false)}>
                         No
-                    </button>
+                    </div>
                 </div>    
             </div>
         </div>

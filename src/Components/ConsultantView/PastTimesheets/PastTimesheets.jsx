@@ -8,7 +8,7 @@ export default function PastTimesheets() {
     let pastTimesheetDetails = []
     for (const key in pastTimesheets) {
         pastTimesheetDetails.push(
-        <TimesheetDetails timesheet = {pastTimesheets[key]}/>
+        <TimesheetDetails key ={key} timesheet = {pastTimesheets[key]}/>
         )
     }
 
@@ -18,3 +18,4 @@ export default function PastTimesheets() {
         </div>
     )
 }
+
