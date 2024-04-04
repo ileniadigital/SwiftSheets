@@ -7,32 +7,32 @@ from django.urls import reverse
 from rest_framework.response import Response
 from rest_framework import generics, viewsets, permissions, status
 from rest_framework.permissions import IsAuthenticated, AllowAny
+from django.contrib.auth import authenticate
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.decorators import action
-# from rest_framework.decorators import action
-from rest_framework.authtoken.models import Token
-from django.contrib.auth import authenticate
 from rest_framework.views import APIView
 from .models import SystemUser, Timesheet, Event, Comment, Notification
 from .serializers import SystemUserSerializer, TimesheetSerializer, EventSerializer, CommentSerializer, NotificationSerializer 
-
-class LoginAPIView(APIView):
-    def post(self, request):
-        email = request.data.get('email')
-        password = request.data.get('password')
-        user = authenticate(username=email, password=password)
-
-        if user:
-            token, _ = Token.objects.get_or_create(user=user)
-            return Response({"token": token.key}, status=status.HTTP_200_OK)
-        else:
-            return Response({"error": "Invalid Credentials"}, status=status.HTTP_400_BAD_REQUEST)
 
 # View to create a new user
 class CreateUserView(generics.CreateAPIView):
     queryset = SystemUser.objects.all()
     serializer_class = SystemUserSerializer
     permission_classes = [AllowAny]
+
+class LoginView(APIView):
+    permission_classes = []
+
+    def post(self, request):
+        email = request.data.get('email')
+        password = request.data.get('password')
+        user = authenticate(username=email, password=password)  # Using email as username
+        if user is not None:
+            # Assuming you have a method to generate or retrieve a token for the user
+            token = 'user_specific_token'
+            return Response({'token': token}, status=status.HTTP_200_OK)
+        else:
+            return Response({'error': 'Invalid Credentials'}, status=status.HTTP_401_UNAUTHORIZED)
 
 # ViewSet for managing system users
 class SystemUserViewSet(viewsets.ViewSet):

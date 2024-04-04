@@ -78,7 +78,6 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS =  [
   'http://localhost:8000',
-#   "https://yourfrontenddomain.com",
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -103,6 +102,15 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 
 # Database
+# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+
+# SECRET_KEY=django-insecure-bs)myop02d=b(k+i*2jmzu-ujpug*$=xpk%sh$wnl+ckyt=sjz
+# DB_NAME=SwiftSheets-db
+# DB_USER=postgres
+# DB_PASSWORD=gugu@gaga21
+# DB_HOST=localhost
+# DB_PORT=5432
+
 
 DATABASES = {
     'default': {

@@ -8,11 +8,11 @@ import ConsultantHome from './ConsultantView/ConsultantHome/ConsultantHome';
 import TimesheetListView from './TimesheetListView';
 
 
-export default function Home(props) {
+export default function Home() {
     // const [view, setView] = useState('default');
     let view;
-    const role=props.view
-    switch (props.view) {
+    const role="systemadmin";
+    switch (role) {
         case 'consultant':
             view = <ConsultantHome />;
             break;
