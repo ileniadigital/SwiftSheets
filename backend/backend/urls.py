@@ -16,12 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-# from backend.myapp import views
-from myapp import views  # Adjust the import path
-from myapp.views import SystemUserViewSet, TimesheetViewSet, EventViewset, CommentViewSet, NotificationViewSet, TimesheetEventView, UserTimesheetView, LoginView
-from rest_framework_simplejwt.views import TokenObtainPairView,  TokenRefreshView
+from myapp import views 
+from myapp.views import SystemUserViewSet, TimesheetViewSet, EventViewset, CommentViewSet, NotificationViewSet, TimesheetEventView, UserTimesheetView, LoginAPIView
 from rest_framework.routers import DefaultRouter
-from django.urls import reverse
 
 
 urlpatterns = [
@@ -30,8 +27,7 @@ urlpatterns = [
     path("myapp/", include("myapp.urls")),
     path('myapp/timesheet-events/', views.TimesheetEventView.as_view(), name='timesheet_events'),
     path('myapp/user-timesheets/', UserTimesheetView.as_view(), name='user_timesheets'),
-    path('myapp/login/', LoginView.as_view(), name='login'),
-    # path('myapp/timesheets/not-reviewed/', TimesheetListView.as_view(), name='timesheet-not-reviewed-list'),
+    path('myapp/login/', LoginAPIView.as_view(), name='login'),    # path('myapp/timesheets/not-reviewed/', TimesheetListView.as_view(), name='timesheet-not-reviewed-list'),
 ]
 
 router = DefaultRouter()

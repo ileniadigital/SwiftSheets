@@ -1,15 +1,12 @@
 # Import necessary modules and classes
-from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
-from django.utils import timezone
-from django.urls import reverse
 from rest_framework.response import Response
 from rest_framework import generics, viewsets, permissions, status
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import AllowAny
 from django.contrib.auth import authenticate
 from rest_framework.renderers import TemplateHTMLRenderer
-from rest_framework.decorators import action
+from rest_framework_simplejwt.tokens import AccessToken
+from rest_framework.authtoken.models import Token
 from rest_framework.views import APIView
 from .models import SystemUser, Timesheet, Event, Comment, Notification
 from .serializers import SystemUserSerializer, TimesheetSerializer, EventSerializer, CommentSerializer, NotificationSerializer 
@@ -20,19 +17,34 @@ class CreateUserView(generics.CreateAPIView):
     serializer_class = SystemUserSerializer
     permission_classes = [AllowAny]
 
-class LoginView(APIView):
-    permission_classes = []
+# class LoginAPIView(APIView):
+#     def post(self, request, *args, **kwargs):
+#         email = request.data.get('email')
+#         password = request.data.get('password')
 
-    def post(self, request):
+#         user = authenticate(username=email, password=password)
+#         if user:
+#             token, _ = Token.objects.get_or_create(user=user)
+#             response_status = status.HTTP_200_OK
+#             response_data = {"token": token.key}
+#         else:
+#             response_status = status.HTTP_400_BAD_REQUEST
+#             response_data = {"error": "Invalid credentials"}
+
+#   
+#       return Response(response_data, status=response_status)
+    
+class LoginAPIView(APIView):
+    def post(self, request, *args, **kwargs):
         email = request.data.get('email')
         password = request.data.get('password')
-        user = authenticate(username=email, password=password)  # Using email as username
-        if user is not None:
-            # Assuming you have a method to generate or retrieve a token for the user
-            token = 'user_specific_token'
-            return Response({'token': token}, status=status.HTTP_200_OK)
+
+        user = authenticate(username=email, password=password)
+        if user:
+            access_token = AccessToken.for_user(user)
+            return Response({'access_token': str(access_token)})
         else:
-            return Response({'error': 'Invalid Credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response({'error': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
 
 # ViewSet for managing system users
 class SystemUserViewSet(viewsets.ViewSet):
