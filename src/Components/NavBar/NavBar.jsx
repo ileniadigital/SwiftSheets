@@ -48,6 +48,7 @@ export default function NavBar(props){
                         <Link href='/Settings' className='navbar-link'>Settings</Link>
                         <Link href='/consultantdashboard' className='navbar-link'>Dashboard</Link>
                     </>}
+                    <Link href='/Form' className='navbar-link'>Form</Link>                   
                 </ul>
                 {/* Language menu */}
                 <LanguageMenu/>

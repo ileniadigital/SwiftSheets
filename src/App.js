@@ -15,6 +15,7 @@ import TimesheetListView from './Pages/TimesheetListView';
 import { useState, useEffect } from 'react';
 import getDate from './Components/ConsultantView/getDate';
 import Reminder from './Components/ConsultantView/Reminder/Reminder';
+import Form from './Components/Form/Form';
 
 //ADD ROUTING BASED ON ROLE FROM DB
 const role='consultant';
@@ -224,6 +225,9 @@ export default function App() {
       break
     case "/systemadminview":
       page = <SystemAdminView/>
+      break
+    case "/form":
+      page = <Form/>
       break
   }
 
