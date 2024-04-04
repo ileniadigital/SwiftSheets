@@ -1,0 +1,35 @@
+/* Styling Form */
+
+/* Styling container */
+.form-container {
+    border: 0.2rem solid #c5ff00;
+    border-radius: 1rem;
+    justify-content: center;
+    display: flex;
+    width: 50rem;
+    align-items: center;
+    margin: auto;
+    margin-top: 4rem;
+}
+
+/* Styling form */
+.form-container form {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Styling header */
+.form-container legend {
+    font-size: 2rem;
+    align-self: center;
+}
+
+/* Styling input */
+.form-container .form-item {
+    display: flex;
+    gap: 4rem;
+    background-color: red;
+}
