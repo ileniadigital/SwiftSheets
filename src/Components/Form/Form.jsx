@@ -14,6 +14,27 @@ export default function Form() {
     // Handles submission of form
     const handleSubmit = () => {
         // Add values to database: formType, subject, text
+
+        // Adding to local storage temporarily
+        if (!localStorage.getItem("forms")) {
+            const newForm = {
+                0: { 
+                    type: formType,
+                    subject: subject,
+                    text: text
+                }
+            }
+            localStorage.setItem("forms", JSON.stringify(newForm))
+        } else {
+            let forms = JSON.parse(localStorage.getItem("forms"))
+            let formSize = Object.keys(forms).length
+            forms[formSize] = {
+                    type: formType,
+                    subject: subject,
+                    text: text
+            }
+            localStorage.setItem("forms", JSON.stringify(forms))
+        }
     }
 
     return (
@@ -36,9 +57,9 @@ export default function Form() {
 
                 <div className='form-item'>
                     <label>Message</label>
-                    <textarea cols="30" rows="10" placeholder='Enter Text Here' required></textarea>
+                    <textarea cols="30" rows="10" placeholder='Enter Text Here' required onChange={(event) => setText(event.target.value)}></textarea>
                 </div>
-                <button onClick={() => handleSubmit}>Submit</button>
+                <button onClick={handleSubmit}>Submit</button>
             </form>
         </div>
     )
