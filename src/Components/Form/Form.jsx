@@ -15,25 +15,29 @@ export default function Form() {
     const handleSubmit = () => {
         // Add values to database: formType, subject, text
     }
-    
+
     return (
         <div className='form-container form-item'>
             <form>
                 <legend>Share Your Opinion</legend>
-                <div className='form-type'>
+                <div className='form-item'>
                     <label>Form Type</label>
-                    <select defaultValue="" onChange={(event) => setFormType(event.target.value)}>
-                        <option value="">Select Type</option>
+                    <select defaultValue="" onChange={(event) => setFormType(event.target.value)} required>
+                        <option disabled hidden value="">Select Type</option>
                         <option>Report Bug</option>
-                        <option>Request Additional Functionlaity</option>
+                        <option>Request Functionality</option>
                     </select>
                 </div>
             
                 <div className='subject form-item'>
                     <label>Subject</label>
-                    <input type="text" placeholder='Subject' onChange={(event) => setSubject(event.target.value)}/>
+                    <input type="text" placeholder='Subject' onChange={(event) => setSubject(event.target.value)} required/>
                 </div>
-                <input type="textarea" placeholder='Enter Text Here' onChange={(event) => setText(event.target.value)}/>
+
+                <div className='form-item'>
+                    <label>Message</label>
+                    <textarea cols="30" rows="10" placeholder='Enter Text Here' required></textarea>
+                </div>
                 <button onClick={() => handleSubmit}>Submit</button>
             </form>
         </div>
