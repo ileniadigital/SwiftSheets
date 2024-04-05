@@ -71,11 +71,28 @@ export default function TimesheetListView({ role }) {
   return (
     <div className='container'>
       <div className='menu-container'>
-        <Filters onFilterChange={handleFilterChange} />
+        <Filters onFilterChange={handleFilterChange} className='filters' />
         <button className='save-button'>Save</button>
       </div>
       <div className='list-container'>
-        {/* Categories and such */}
+        {/* Categories */}
+        <div className="categories-container">
+          <div className="category-name">
+            <h2>Name</h2>
+          </div>
+          <div className="category-dates">
+            <h2>Dates </h2>
+          </div>
+          <div className="category-status">
+            <div className="category">
+              <h2>Review Status</h2>
+            </div>
+            <div className="category">
+              <h2>Payment Status</h2>
+            </div>
+          </div>
+      </div>
+      {/* Displaying consultant timesheets */}
         <div className='timesheet-container'>
           {timesheets.map(timesheet => (
             <ConsultantTimesheet

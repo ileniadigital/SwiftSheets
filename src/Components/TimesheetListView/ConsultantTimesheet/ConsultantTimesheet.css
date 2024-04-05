@@ -1,7 +1,5 @@
 /* General text styling */
 body {
-  color: white;
-  font-family: Inter;
   font-size: 1.25rem;
   font-style: normal;
   font-weight: 400;
@@ -17,7 +15,7 @@ body {
   width: 75rem;
   height: 4rem;
   border-radius: 1.5rem;
-  border: 0.2rem solid #c5ff00;
+  border: 0.1rem solid #1e1e1e;
   position: relative;
   margin: 2rem;
 }
@@ -28,15 +26,19 @@ body {
 }
 
 .icon {
-  color: white;
+  color: #1e1e1e;
 }
 
 .icon:hover {
-  color: #c5ff00;
+  color: #a7d900;
+  background-color: transparent;
+  border: none;
 }
 
 .view-icon:hover {
-  color: #c5ff00;
+  color: #a7d900;
+  background-color: transparent;
+  border: none;
 }
 /* Styling for Consultant Name */
 .consultantName {
@@ -61,4 +63,5 @@ body {
 .disabled {
   background-color: lightgray;
   color: grey;
+  border: grey;
 }

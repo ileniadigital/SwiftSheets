@@ -4,9 +4,9 @@
   height: 2.5rem;
   flex-shrink: 0;
   border-radius: 1.5rem;
-  border: 0.2rem solid #c5ff00;
+  border: 0.1rem solid #1e1e1e;
   text-align: center;
-  background-color: #c5ff00;
+  background-color: #f7f6f5;
   margin-right: 1rem;
   font-weight: bold;
 }
@@ -14,4 +14,7 @@
 .filters label {
   font-size: 1rem;
   margin-right: 1rem;
+  background-color: transparent;
+  color: #1e1e1e;
+  font-weight: 500;
 }

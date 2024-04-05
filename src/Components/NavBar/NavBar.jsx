@@ -2,8 +2,7 @@
 import './NavBar.css';
 
 //Import FDM logo
-import fdmIcon from './logo/fdm-new-logo-green.svg';
-import fdmIconBlack from './logo/fdm-new-logo.svg';
+import fdmIcon from './logo/fdm-new-logo.svg';
 
 //Import Link component
 import Link from './Link';

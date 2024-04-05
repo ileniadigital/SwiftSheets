@@ -35,16 +35,17 @@
   background-color: #efecea;
   border-radius: 10rem;
   padding: 1rem;
+  border: 0.1rem solid #1e1e1e;
 }
 
 .navbar-link {
-  color: black;
+  color: #1e1e1e;
   padding: 1rem;
   text-decoration: none;
 }
 
 .navbar-link:hover {
-  color: #c5ff00;
+  color: #a7d900;
 }
 
 /* Adding styling for 'Hi' message */
@@ -57,12 +58,12 @@
 
 /* Setting font colour */
 .welcome-message h1 {
-  color: #efecea;
+  color: #1e1e1e;
 }
 
 /* Setting svg colour */
 .language-menu svg {
-  color: #efecea;
+  color: #1e1e1e;
 }
 
 /* Styling for language menu */
@@ -77,9 +78,9 @@
 .language-select {
   outline: none;
   background: transparent;
-  color: white !important;
+  color: #1e1e1e !important;
   width: 6rem;
-  z-index: 100;
+  border: none;
 }
 
 select {
@@ -89,9 +90,10 @@ select {
 }
 
 .language-select:hover {
-  color: #c5ff00;
+  color: #a7d900;
 }
 .language-select option {
-  background-color: #1e1e1e;
-  color: white;
+  background-color: #f7f6f5;
+  color: #1e1e1e;
+  font-size: 1rem;
 }

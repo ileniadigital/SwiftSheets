@@ -2,9 +2,7 @@
 .menu-container {
   display: flex;
   flex-direction: row;
-  gap: 40rem;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   margin-left: 7rem;
 }
 
@@ -17,14 +15,15 @@
   border-radius: 1.5rem;
   border: 0.2rem solid #c5ff00;
   background-color: #c5ff00;
-  color: black;
+  color: #1e1e1e;
   font-weight: bold;
+  margin-right: 7rem;
 }
 
 .save-button:hover {
-  background-color: white;
-  color: black;
-  border: 0.2rem solid white;
+  background-color: #1e1e1e;
+  color: #f7f6f5;
+  border: 0.2rem solid #1e1e1e;
 }
 /* Styling for the timesheet containers */
 .list-container {
@@ -36,7 +35,7 @@
   width: 80rem;
   height: 40rem;
   border-radius: 1.5rem;
-  border: 0.2rem solid #c5ff00;
+  border: 0.1rem solid #1e1e1e;
   margin-left: 7rem;
   margin-top: 1rem;
 }
@@ -51,7 +50,7 @@
   position: relative;
   font-size: 0.75rem;
   margin: -7 0 -7 0;
-  color: grey;
+  color: darkgrey;
 }
 
 .category-name {
@@ -65,7 +64,7 @@
   display: flex;
   flex-direction: row;
   gap: 10rem;
-  margin-left: 2rem;
+  margin-left: 4rem;
 }
 
 /* Styling for timesheets container */
