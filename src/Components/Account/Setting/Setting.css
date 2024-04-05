@@ -3,7 +3,8 @@
   display: flex;
   flex-direction: row;
   gap: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
+  align-items: center;
 }
 
 /* Styling for setting name */
@@ -15,7 +16,7 @@
 .value {
   justify-content: center;
   text-align: center;
-  margin-top: 2rem;
+  align-items: center;
 }
 
 /* Styling for password */
