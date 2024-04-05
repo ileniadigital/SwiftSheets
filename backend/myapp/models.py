@@ -1,6 +1,6 @@
 from datetime import timedelta, timezone
-from django.utils import timezone
-from django.db import models
+from django.utils import timezone # type: ignore
+from django.db import models # type: ignore
 # from django.contrib.auth.models import User
 
 class SystemUser(models.Model):

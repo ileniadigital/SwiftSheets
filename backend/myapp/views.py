@@ -1,13 +1,13 @@
 # Import necessary modules and classes
-from django.shortcuts import render
-from rest_framework.response import Response
-from rest_framework import generics, viewsets, permissions, status
-from rest_framework.permissions import AllowAny
-from django.contrib.auth import authenticate
-from rest_framework.renderers import TemplateHTMLRenderer
-from rest_framework_simplejwt.tokens import AccessToken
-from rest_framework.authtoken.models import Token
-from rest_framework.views import APIView
+from django.shortcuts import render # type: ignore
+from rest_framework.response import Response # type: ignore
+from rest_framework import generics, viewsets, permissions, status # type: ignore
+from rest_framework.permissions import AllowAny # type: ignore
+from django.contrib.auth import authenticate # type: ignore
+from rest_framework.renderers import TemplateHTMLRenderer # type: ignore
+from rest_framework_simplejwt.tokens import AccessToken # type: ignore
+from rest_framework.authtoken.models import Token # type: ignore
+from rest_framework.views import APIView # type: ignore
 from .models import SystemUser, Timesheet, Event, Comment, Notification
 from .serializers import SystemUserSerializer, TimesheetSerializer, EventSerializer, CommentSerializer, NotificationSerializer 
 
