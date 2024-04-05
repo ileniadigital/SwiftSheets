@@ -13,7 +13,8 @@ export const fetchTimesheetsAndUsers = async (setTimesheets, setUsers, filter) =
     const userIds = new Set(response.data.map(ts => ts.user));
     const userDetails = await fetchUserDetails(Array.from(userIds));
     setUsers(userDetails);
-  } catch (error) {
+  } 
+  catch (error) {
     console.error('Error fetching timesheets:', error);
   }
 };

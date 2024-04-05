@@ -5,46 +5,49 @@ from rest_framework import generics, viewsets, permissions, status # type: ignor
 from rest_framework.permissions import AllowAny # type: ignore
 from django.contrib.auth import authenticate # type: ignore
 from rest_framework.renderers import TemplateHTMLRenderer # type: ignore
-from rest_framework_simplejwt.tokens import AccessToken # type: ignore
+from rest_framework_simplejwt.tokens import AccessToken, RefreshToken # type: ignore
 from rest_framework.authtoken.models import Token # type: ignore
 from rest_framework.views import APIView # type: ignore
 from .models import SystemUser, Timesheet, Event, Comment, Notification
 from .serializers import SystemUserSerializer, TimesheetSerializer, EventSerializer, CommentSerializer, NotificationSerializer 
+
+class LoginView(APIView):
+    permission_classes = []  # Allow any to access this view
+
+    def post(self, request, *args, **kwargs):
+        email = request.data.get('email')
+        password = request.data.get('password')
+        user = authenticate(request, username=email, password=password)  # Email as username
+        if user is not None:
+            # If using DRF's TokenAuthentication
+            token, _ = Token.objects.get_or_create(user=user)
+            return Response({"token": token.key}, status=status.HTTP_200_OK)
+            # If using JWT
+            # from rest_framework_simplejwt.tokens import RefreshToken
+            # refresh = RefreshToken.for_user(user)
+            # return Response({'refresh': str(refresh), 'access': str(refresh.access_token)}, status=status.HTTP_200_OK)
+        else:
+            return Response({"error": "Invalid Credentials"}, status=status.HTTP_400_BAD_REQUEST)
+
+# class LoginView(APIView):
+#     def post(self, request):
+#         email = request.data.get('email')
+#         password = request.data.get('password')
+#         user = authenticate(username=email, password=password)  # Assuming username is used as email
+#         if user:
+#             refresh = RefreshToken.for_user(user)
+#             return Response({
+#                 'refresh': str(refresh),
+#                 'access': str(refresh.access_token),
+#             })
+#         else:
+#             return Response({'error': 'Invalid Credentials'}, status=400)
 
 # View to create a new user
 class CreateUserView(generics.CreateAPIView):
     queryset = SystemUser.objects.all()
     serializer_class = SystemUserSerializer
     permission_classes = [AllowAny]
-
-# class LoginAPIView(APIView):
-#     def post(self, request, *args, **kwargs):
-#         email = request.data.get('email')
-#         password = request.data.get('password')
-
-#         user = authenticate(username=email, password=password)
-#         if user:
-#             token, _ = Token.objects.get_or_create(user=user)
-#             response_status = status.HTTP_200_OK
-#             response_data = {"token": token.key}
-#         else:
-#             response_status = status.HTTP_400_BAD_REQUEST
-#             response_data = {"error": "Invalid credentials"}
-
-#   
-#       return Response(response_data, status=response_status)
-    
-class LoginAPIView(APIView):
-    def post(self, request, *args, **kwargs):
-        email = request.data.get('email')
-        password = request.data.get('password')
-
-        user = authenticate(username=email, password=password)
-        if user:
-            access_token = AccessToken.for_user(user)
-            return Response({'access_token': str(access_token)})
-        else:
-            return Response({'error': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
 
 # ViewSet for managing system users
 class SystemUserViewSet(viewsets.ViewSet):

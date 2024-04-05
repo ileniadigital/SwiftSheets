@@ -237,24 +237,66 @@
 //   )
 // }
 
-import React from 'react';
+// import React from 'react';
+// import NavBar from './Components/NavBar/NavBar';
+// import Account from './Pages/Account';
+// import Settings from './Pages/ConsultantView/ConsultantSettings/ConsultantSettings';
+// import Home from './Pages/Home';
+// import Login from './Pages/Login';
+// import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+// function App() {
+//   return (
+//     <React.Fragment>
+//       <NavBar/>
+//       <BrowserRouter>
+//         <Routes>
+//           <Route path="/home" element={<Home />} />
+//           <Route path="/" element={<Login />} />
+//           <Route path="/account" element={<Account />} />
+//           <Route path="/settings" element={<Settings />} />
+//         </Routes>
+//       </BrowserRouter>
+//     </React.Fragment>
+//   );
+// }
+
+// export default App;
+
+import React, { useState, useEffect } from 'react';
 import NavBar from './Components/NavBar/NavBar';
 import Account from './Pages/Account';
 import Settings from './Pages/ConsultantView/ConsultantSettings/ConsultantSettings';
 import Home from './Pages/Home';
 import Login from './Pages/Login';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    setIsAuthenticated(!!token);
+  }, []);
+
   return (
     <React.Fragment>
       <NavBar/>
       <BrowserRouter>
         <Routes>
-          <Route path="/home" element={<Home />} />
-          <Route path="/" element={<Login />} />
-          <Route path="/account" element={<Account />} />
-          <Route path="/settings" element={<Settings />} />
+          {isAuthenticated ? (
+            <>
+              <Route path="/home" element={<Home />} />
+              <Route path="/account" element={<Account />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="*" element={<Navigate to="/home" />} />
+            </>
+          ) : (
+            <>
+              <Route path="/" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+              <Route path="*" element={<Navigate to="/" />} />
+            </>
+          )}
         </Routes>
       </BrowserRouter>
     </React.Fragment>

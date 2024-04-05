@@ -109,8 +109,13 @@
   
   /* Styling for error message */
   .error-message {
-    color: #fff;
+    color: red;
+    background-color: black;
+    font-weight: bold;
     font-size: 0.875rem;
+    margin-top: 6rem;
     margin-bottom: 22.5rem;
+    padding: 0.625rem;
+    border-radius: 0.5rem;
     text-align: center;
   }
