@@ -46,6 +46,8 @@
 
 .navbar-link:hover {
   color: #a7d900;
+  font-size: 1.5rem;
+  font-weight: 500;
 }
 
 /* Adding styling for 'Hi' message */
@@ -81,6 +83,7 @@
   color: #1e1e1e !important;
   width: 6rem;
   border: none;
+  font-size: 1.25rem;
 }
 
 select {
@@ -95,5 +98,5 @@ select {
 .language-select option {
   background-color: #f7f6f5;
   color: #1e1e1e;
-  font-size: 1rem;
+  font-size: 1.25rem;
 }
