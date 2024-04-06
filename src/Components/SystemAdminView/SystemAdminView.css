@@ -1,16 +1,30 @@
 /* Styling for the add use button */
+
 #addUserStyle {
-    font-size: 24px;
+    font-size: 1rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(0%,-50%);
 }
 
 #addUser {
+    width: 7rem;
+    height: 2.5rem;
+    color: #1e1e1e;
+    padding: 1rem;
+    border-radius: 1rem;
+    border: 0.2rem solid #c5ff00;
+    background-color: #c5ff00;
     width: fit-content;
     position: relative;
     left: 80%;
     margin: 30px;
     margin-bottom: 50px;
-}
-
-#addUser:hover {
-    text-decoration: underline;
-}
+    justify-content: center;
+  }
+  
+  #addUser:hover {
+    background-color: white;
+    color: black;
+    border: 0.2rem solid white;
+  }

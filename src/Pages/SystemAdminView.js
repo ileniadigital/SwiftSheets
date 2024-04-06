@@ -64,7 +64,7 @@ export default function SystemAdminView() {
         <div>
             {/*add user button*/}
             <div id='addUser' onClick={() => addUserMenuHandler(userList)}>
-                <h1 id='addUserStyle'>Add User</h1>
+                <p id='addUserStyle'>Add User</p>
             </div>
             {/*only opens add user menu if manage user menu is closed*/}
             {addUserMenuClicked && 
