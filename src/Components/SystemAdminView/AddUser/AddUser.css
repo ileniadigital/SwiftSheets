@@ -14,6 +14,15 @@
     margin: auto;
 }
 
+/* Styling addUser inputs, centering on div */
+#addUserForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #1e1e1e;
+    gap: 1.6rem;
+}
+
 /* Styling button used to close event */
 .closeWindow {
     fill: #efecea;
@@ -74,13 +83,15 @@
     background-color: #c5ff00;
     color: #1e1e1e;
     width: 7rem;
-    border-radius: 0.3rem;
+    border-radius: 1rem;
     font-family: Inter;
-    font-size: 1.3rem;
+    font-size: 1rem;
+    border: 0.2rem solid #c5ff00;
 }
 
 /* Adding styling on hover */
 .addUserButton:hover {
     background-color: white;
     color: black;
+    border: 0.2rem solid white;
 }

@@ -1,5 +1,18 @@
+.manageUser {
+    color: #1e1e1e;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    border: 0.2rem solid #c5ff00;
+    background-color: #c5ff00;
+    width: fit-content;
+    justify-content: center;
+    margin: auto;
+  }
+
 .manageUser:hover {
-    text-decoration: underline;
+    background-color: white;
+    color: black;
+    border: 0.2rem solid white;
 }
 
 .user{
@@ -24,7 +37,7 @@
 .p {
     width: 217px;
     height: 29px;
-    color: #FFF;
+    color: #000;
     font-family: Inter;
     font-size: 24px;
     font-style: normal;
