@@ -40,6 +40,7 @@ body {
   background-color: transparent;
   border: none;
 }
+
 /* Styling for Consultant Name */
 .consultantName {
   font-weight: bold;
@@ -52,6 +53,7 @@ body {
   width: 10rem;
   height: 2.5rem;
   flex-shrink: 0;
+  font-size: 1.25rem;
   border-radius: 1.5rem;
   border: 0.2rem solid #c5ff00;
   text-align: center;
