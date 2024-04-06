@@ -1,5 +1,7 @@
 /* Defining styles for ConsultantSettings page */
-
+.settings {
+  margin-top: 5rem;
+}
 /* Defining layout of settings items */
 .settings-items {
   margin-left: 3rem;
@@ -12,11 +14,11 @@
 
 /* Styling header */
 .header {
-    text-align: center;
-    margin: 0;
-    font-family: Inter;
-    margin-bottom: 2rem;
-    font-size: 2.3rem;
+  text-align: center;
+  margin: 0;
+  font-family: Inter;
+  margin-bottom: 2rem;
+  font-size: 2.3rem;
 }
 
 /* Defining layout of container for days of week worked */
@@ -39,7 +41,8 @@
   font-size: 1rem;
   border-radius: 1rem;
   height: 3rem;
-  background: gray;
+  background: #1e1e1e;
+  color: #f7f6f5;
   width: 3rem;
   box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
 }
@@ -49,11 +52,13 @@
 .worked-day {
   background: #c5ff00;
   color: #1e1e1e;
+  border: 0.1rem solid #c5ff00;
 }
 
 .worked-day:hover {
-  background: gray;
-  color: white;
+  background: #1e1e1e;
+  color: #f7f6f5;
+  border: 0.1rem solid #1e1e1e;
 }
 
 /* Styling line used to separate settings */
@@ -62,30 +67,35 @@
   display: block;
   content: "";
   height: 0.1rem;
-  background: #c5ff00;
+  background: #1e1e1e;
 }
 
 /* Styling input */
 .settings input {
-  background: #c5ff00;
+  background: #f7f6f5;
+  color: #1e1e1e;
   width: 6.5rem;
   text-align: center;
   border: none;
   border-radius: 0.2rem;
   font-size: 1.3rem;
-  height: 3r;
+  height: 2rem;
+  border: 0.1rem solid #1e1e1e;
+  border-radius: 0.5rem;
 }
 
 /* Styling container */
-.working-hours, .reminder {
-    margin-top: 2rem;
+.working-hours,
+.reminder {
+  margin-top: 2rem;
 }
 
 /* Designing hours container */
-.hours, .reminder-inputs {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.hours,
+.reminder-inputs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Setting colour */
@@ -127,9 +137,9 @@
 }
 
 /* Setting colour to when event is recurring */
-.max-work-hours input:checked{
-    color: #1E1E1E;
-    font-size: 1rem;
+.max-work-hours input:checked {
+  color: #1e1e1e;
+  font-size: 1rem;
 }
 
 /* Styling checkbox */
@@ -144,5 +154,5 @@
 
 /* Styling container */
 .reminder {
-    display: flex;
+  display: flex;
 }
