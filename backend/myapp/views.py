@@ -1,53 +1,56 @@
 # Import necessary modules and classes
 from django.shortcuts import render # type: ignore
-from rest_framework.response import Response # type: ignore
+
+from django.contrib.auth import authenticate # type: ignore
+from django.contrib.auth import get_user_model, login, logout # type: ignore
 from rest_framework import generics, viewsets, permissions, status # type: ignore
 from rest_framework.permissions import AllowAny # type: ignore
-from django.contrib.auth import authenticate # type: ignore
+from rest_framework.response import Response # type: ignore
+from rest_framework.authentication import SessionAuthentication # type: ignore
 from rest_framework.renderers import TemplateHTMLRenderer # type: ignore
 from rest_framework_simplejwt.tokens import AccessToken, RefreshToken # type: ignore
+from rest_framework import permissions, status # type: ignore
 from rest_framework.authtoken.models import Token # type: ignore
 from rest_framework.views import APIView # type: ignore
-from .models import SystemUser, Timesheet, Event, Comment, Notification
-from .serializers import SystemUserSerializer, TimesheetSerializer, EventSerializer, CommentSerializer, NotificationSerializer 
+from .models import  Timesheet, Event, Comment, Notification, SystemUser
+from .serializers import  TimesheetSerializer, EventSerializer, CommentSerializer, NotificationSerializer, SystemUserLoginSerializer, SystemUserSerializer 
+from .validations import custom_validation, validate_email, validate_password
 
-class LoginView(APIView):
-    permission_classes = []  # Allow any to access this view
 
-    def post(self, request, *args, **kwargs):
-        email = request.data.get('email')
-        password = request.data.get('password')
-        user = authenticate(request, username=email, password=password)  # Email as username
-        if user is not None:
-            # If using DRF's TokenAuthentication
-            token, _ = Token.objects.get_or_create(user=user)
-            return Response({"token": token.key}, status=status.HTTP_200_OK)
-            # If using JWT
-            # from rest_framework_simplejwt.tokens import RefreshToken
-            # refresh = RefreshToken.for_user(user)
-            # return Response({'refresh': str(refresh), 'access': str(refresh.access_token)}, status=status.HTTP_200_OK)
-        else:
-            return Response({"error": "Invalid Credentials"}, status=status.HTTP_400_BAD_REQUEST)
+class SystemUserLogin(APIView):
+	permission_classes = (permissions.AllowAny,)
+	authentication_classes = (SessionAuthentication,)
+	##
+	def post(self, request):
+		data = request.data
+		assert validate_email(data)
+		assert validate_password(data)
+		serializer = SystemUserLoginSerializer(data=data)
+		if serializer.is_valid(raise_exception=True):
+			user = serializer.check_user(data)
+			login(request, user)
+			return Response(serializer.data, status=status.HTTP_200_OK)
 
-# class LoginView(APIView):
-#     def post(self, request):
-#         email = request.data.get('email')
-#         password = request.data.get('password')
-#         user = authenticate(username=email, password=password)  # Assuming username is used as email
-#         if user:
-#             refresh = RefreshToken.for_user(user)
-#             return Response({
-#                 'refresh': str(refresh),
-#                 'access': str(refresh.access_token),
-#             })
-#         else:
-#             return Response({'error': 'Invalid Credentials'}, status=400)
+class SystemUserLogout(APIView):
+	permission_classes = (permissions.AllowAny,)
+	authentication_classes = ()
+	def post(self, request):
+		logout(request)
+		return Response(status=status.HTTP_200_OK)
+    
+class SystemUserView(APIView):
+	permission_classes = (permissions.IsAuthenticated,)
+	authentication_classes = (SessionAuthentication,)
+	##
+	def get(self, request):
+		serializer = SystemUserSerializer(request.user)
+		return Response({'user': serializer.data}, status=status.HTTP_200_OK)
 
 # View to create a new user
-class CreateUserView(generics.CreateAPIView):
-    queryset = SystemUser.objects.all()
-    serializer_class = SystemUserSerializer
-    permission_classes = [AllowAny]
+# class CreateUserView(generics.CreateAPIView):
+#     queryset = SystemUser.objects.all()
+#     serializer_class = SystemUserSerializer
+#     permission_classes = [AllowAny]
 
 # ViewSet for managing system users
 class SystemUserViewSet(viewsets.ViewSet):
@@ -316,11 +319,11 @@ class TimesheetEventView(APIView):
 # View to display timesheets related to a selected user
 class UserTimesheetView(APIView):
     def get(self, request):
-        users = SystemUser.objects.all()
+        users = User.objects.all()
         return render(request, 'user_timesheets.html', {'users': users})
 
     def post(self, request):
         user_id = request.POST.get('user_id')
-        user = SystemUser.objects.get(pk=user_id)
+        user = User.objects.get(pk=user_id)
         timesheets = user.timesheets.all()  # Retrieve all timesheets related to the selected user
-        return render(request, 'user_timesheets.html', {'users': SystemUser.objects.all(), 'user': user, 'timesheets': timesheets})
+        return render(request, 'user_timesheets.html', {'users': User.objects.all(), 'user': user, 'timesheets': timesheets})

@@ -1,10 +1,26 @@
-# from django.contrib.auth.models import User
 # from tokenize import Comment
-from .models import SystemUser, Timesheet, Event, Comment, Notification
+from .models import  SystemUser, Timesheet, Event, Comment, Notification
 from rest_framework import serializers # type: ignore
+from django.contrib.auth import authenticate, get_user_model # type: ignore
+from django.core.exceptions import ValidationError # type: ignore
 
-#SystemUsers
-#timesheets
+UserModel = get_user_model()
+
+class SystemUserLoginSerializer(serializers.Serializer):
+	email = serializers.EmailField()
+	password = serializers.CharField()
+	
+	def check_user(self, clean_data):
+		user = authenticate(username=clean_data['email'], password=clean_data['password'])
+		if not user:
+			raise ValidationError('user not found')
+		return user
+    
+class SystemUserSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = UserModel
+		fields = ('email', 'username')
+
 class SystemUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = SystemUser

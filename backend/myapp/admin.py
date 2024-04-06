@@ -1,10 +1,12 @@
 from django.contrib import admin # type: ignore
 from .models import SystemUser, Timesheet, Event, Comment, Notification
 
-@admin.register(SystemUser)
+#@admin.register(SystemUser)
 class SystemUserAdmin(admin.ModelAdmin):
-    list_display = ['id', 'username', 'password' , 'firstname', 'lastname', 'user_type']  
+    list_display = ('email', 'user_type', 'firstname', 'lastname', 'is_active', 'is_staff')
     search_fields = ['username', 'user_type', 'firstname', 'lastname']  
+
+admin.site.register(SystemUser, SystemUserAdmin)
 
 @admin.register(Timesheet)
 class TimesheetAdmin(admin.ModelAdmin):
