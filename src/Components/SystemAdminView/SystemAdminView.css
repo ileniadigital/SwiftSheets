@@ -1,16 +1,21 @@
 /* Styling for the add use button */
 #addUserStyle {
-    font-size: 24px;
+  font-size: 1.5rem;
 }
 
 #addUser {
-    width: fit-content;
-    position: relative;
-    left: 80%;
-    margin: 30px;
-    margin-bottom: 50px;
+  width: fit-content;
+  position: relative;
+  left: 80%;
+  margin: 1.875rem;
+  margin-bottom: 3.125rem;
+  background-color: #c5ff00;
+  padding: 0.75rem;
+  border-radius: 1.5rem;
 }
 
 #addUser:hover {
-    text-decoration: underline;
+  text-decoration: none;
+  background-color: #1e1e1e;
+  color: #f7f6f5;
 }
