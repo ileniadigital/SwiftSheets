@@ -9,7 +9,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 36rem;
-  padding-bottom: 2rem;
+  padding-bottom: 1rem;
   border-radius: 2rem;
   display: flex;
   flex-direction: column;
@@ -18,15 +18,18 @@
 /* Styling button used to close event */
 .close-event {
   fill: #efecea;
-  margin-top: 1rem;
-  margin-left: auto;
-  margin-right: 1rem;
-  font-size: 2rem;
+  margin-top: 0.6rem;
+  margin-right: 0.6rem;
+  position: absolute;
+  right: 0;
 }
 
+/* Styling button */
 .close-event svg {
   fill: #efecea;
   background-color: #1e1e1e;
+  height: 2rem;
+  width: 2rem;
 }
 
 /* Styling button colour on close */
@@ -41,34 +44,34 @@
   flex-direction: column;
   align-items: center;
   background: #1e1e1e;
-  gap: 1.6rem;
 }
 
 /* Styling log event heading */
 .log-event-heading {
   margin: auto;
   background: #1e1e1e;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1rem;
   color: #efecea;
+  font-size: 2rem;
+  padding-top: 1.5rem;
 }
 
 /* Styling input div */
 .input {
   display: flex;
-  gap: 2.5rem;
+  gap: 2rem;
   background: #1e1e1e;
   align-items: center;
   color: #efecea;
 }
 
 /* Setting label name */
-label {
+.add-event label {
   width: 11.3rem;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-family: Inter;
   color: #efefef;
   background: #1e1e1e;
-  text-align: left;
 }
 
 /* Styling input/select boxes */
@@ -108,7 +111,7 @@ label {
 /* Styling add event button */
 .add-new-event .add-event-button {
   margin: auto;
-  margin-top: 0.1rem;
+  margin-top: 0.6rem;
   background-color: #c5ff00;
   color: #1e1e1e;
   width: 7rem;
@@ -120,17 +123,14 @@ label {
   color: #1e1e1e;
 }
 
-/* Code to move checkbox left */
-.checkbox-container {
-  margin-right: auto;
-  margin-left: 4rem;
-}
-
+/* Styling checkbox */
 .checkbox-container input {
   -webkit-appearance: none; /* Removing default box */
   position: relative;
   width: 2rem;
   height: 2rem;
+  margin-left: 6rem;
+  margin-right: 6.1rem;
   background: #efecea;
   box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
   cursor: pointer;
@@ -139,7 +139,7 @@ label {
 }
 
 /* Setting colour to when event is recurring */
-.checkbox-container .recur{
+.checkbox-container .recur {
     color: #1E1E1E;
 }
 
@@ -204,6 +204,7 @@ textarea {
   margin-left: 4.05rem;
   background: #1e1e1e;
   gap: 1rem;
+  margin-top: 1rem;
 }
 
 /* Setting container */
