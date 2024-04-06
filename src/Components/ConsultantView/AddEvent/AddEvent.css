@@ -233,8 +233,7 @@ textarea {
 
 /* Displaying event */
 .event {
-  background-color: #f7f6f5;
-  /* background-color: #FF4E48; red */
+  background-color: #c5ff00;
   width: 100%;
   position: absolute;
 }
