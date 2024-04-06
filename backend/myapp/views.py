@@ -16,7 +16,6 @@ from .models import  Timesheet, Event, Comment, Notification, SystemUser
 from .serializers import  TimesheetSerializer, EventSerializer, CommentSerializer, NotificationSerializer, SystemUserLoginSerializer, SystemUserSerializer 
 from .validations import custom_validation, validate_email, validate_password
 
-
 class SystemUserLogin(APIView):
 	permission_classes = (permissions.AllowAny,)
 	authentication_classes = (SessionAuthentication,)
@@ -25,6 +24,7 @@ class SystemUserLogin(APIView):
 		data = request.data
 		assert validate_email(data)
 		assert validate_password(data)
+        
 		serializer = SystemUserLoginSerializer(data=data)
 		if serializer.is_valid(raise_exception=True):
 			user = serializer.check_user(data)

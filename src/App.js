@@ -262,7 +262,7 @@
 // }
 
 // export default App;
-
+/* 
 import React, { useState, useEffect } from 'react';
 import NavBar from './Components/NavBar/NavBar';
 import Account from './Pages/Account';
@@ -296,6 +296,168 @@ function App() {
               <Route path="/" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
               <Route path="*" element={<Navigate to="/" />} />
             </>
+          )}
+        </Routes>
+      </BrowserRouter>
+    </React.Fragment>
+  );
+}
+
+export default App; */
+
+/* import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import NavBar from './Components/NavBar/NavBar';
+import Account from './Pages/Account';
+import Settings from './Pages/ConsultantView/ConsultantSettings/ConsultantSettings';
+import Home from './Pages/Home';
+import Login from './Pages/Login';
+
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.withCredentials = true;
+
+const client = axios.create({
+  baseURL: "http://127.0.0.1:8000" // Adjust according to your backend server
+});
+
+function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    setIsAuthenticated(!!token);
+    // Check if user is authenticated on component mount
+    client.get("/myapp/user")
+      .then(function (res) {
+        setIsAuthenticated(true);
+      })
+      .catch(function (error) {
+        setIsAuthenticated(false);
+      });
+  }, []);
+
+  const loginHandler = (email, password) => {
+    client.post("/myapp/login", { email, password })
+      .then(function (response) {
+        localStorage.setItem('token', response.data.token); // Adjust according to your response structure
+        setIsAuthenticated(true);
+      })
+      .catch(function (error) {
+        console.error("Login failed:", error);
+      });
+  };
+
+  const logoutHandler = () => {
+    client.post("/myapp/logout")
+      .then(function (response) {
+        localStorage.removeItem('token');
+        setIsAuthenticated(false);
+      })
+      .catch(function (error) {
+        console.error("Logout failed:", error);
+      });
+  };
+
+  return (
+    <React.Fragment>
+      <NavBar isAuthenticated={isAuthenticated} logoutHandler={logoutHandler} />
+      <BrowserRouter>
+        <Routes>
+          {isAuthenticated ? (
+            <>
+              <Route path="/home" element={<Home />} />
+              <Route path="/account" element={<Account />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="*" element={<Navigate to="/home" />} />
+            </>
+          ) : (
+            <>
+              <Route path="/" element={<Login loginHandler={loginHandler} />} />
+              <Route path="*" element={<Navigate to="/" />} />
+            </>
+          )}
+        </Routes>
+      </BrowserRouter>
+    </React.Fragment>
+  );
+}
+
+export default App;
+ */
+
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import NavBar from './Components/NavBar/NavBar';
+import Account from './Pages/Account';
+import Settings from './Pages/ConsultantView/ConsultantSettings/ConsultantSettings';
+import Home from './Pages/Home';
+
+// Adjust this URL to match your backend login endpoint
+const LOGIN_URL = "http://127.0.0.1:8000/myapp/login";
+
+function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loginError, setLoginError] = useState('');
+
+  useEffect(() => {
+    // Automatically check token presence to adjust isAuthenticated state
+    const token = localStorage.getItem('token');
+    setIsAuthenticated(!!token);
+  }, []);
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(LOGIN_URL, { email, password });
+      if (response.data.token) {
+        localStorage.setItem('token', response.data.token); // Save token
+        setIsAuthenticated(true);
+      } else {
+        setLoginError("Login failed, please try again.");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      setLoginError("An error occurred during login.");
+    }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setIsAuthenticated(false);
+  };
+
+  return (
+    <React.Fragment>
+      <NavBar isAuthenticated={isAuthenticated} logoutHandler={handleLogout} />
+      <BrowserRouter>
+        <Routes>
+          {isAuthenticated ? (
+            <>
+              <Route path="/home" element={<Home />} />
+              <Route path="/account" element={<Account />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="*" element={<Navigate to="/home" />} />
+            </>
+          ) : (
+            <Route 
+              path="/" 
+              element={
+                <div>
+                  <h2>Login</h2>
+                  <form onSubmit={handleLogin}>
+                    <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <button type="submit">Login</button>
+                    {loginError && <p>{loginError}</p>}
+                  </form>
+                </div>
+              } 
+            />
           )}
         </Routes>
       </BrowserRouter>
