@@ -100,8 +100,8 @@
 .add-new-event .add-event-button {
   margin: auto;
   margin-top: 0.6rem;
-  width: 9rem;
-  height: 2.5rem;
+  width: 8rem;
+  height: 2rem;
   border-radius: 1.5rem;
   font-size: 1.25rem;
   font-weight: 600;
@@ -121,7 +121,7 @@
   position: relative;
   width: 2rem;
   height: 2rem;
-  margin-right: 12.1rem;
+  margin-right: 13rem;
   background: #f7f6f5;
   box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
   cursor: pointer;
@@ -190,20 +190,17 @@ textarea {
 .note-container {
   display: flex;
   flex-direction: column;
-  align-items: start;
-  margin-right: auto;
-  margin-left: 4.05rem;
-  gap: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 .note-container label {
-  margin-left: 0.5rem;
   margin-top: 0.5rem;
 }
 
 .note-container textarea {
   border: 0.1rem solid #1e1e1e;
   margin-top: 1rem;
+  margin-bottom: 0.2rem;
 }
 
 /* Setting container */
