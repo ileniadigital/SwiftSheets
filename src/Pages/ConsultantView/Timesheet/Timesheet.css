@@ -2,171 +2,176 @@
 
 /* Setting font family */
 .consultant-view {
-    margin-bottom: 1rem;
-    background-color: #1E1E1E;
-    color: #efecea;
+  margin-bottom: 1rem;
 }
-
 
 /* Aligning date */
 .consultant-view-header p {
-    text-align: center;
-    font-size: 1.5rem;
-    font-weight: 400;
-    margin-bottom: 1.2rem;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 1.2rem;
 }
 
 /* Removing prior styling */
 button {
-    background: none;
-    border: none;
+  background: none;
+  border: none;
 }
 
 /* Styling hover */
 .submit-button:hover {
-    filter: grayscale(50%);
+  filter: grayscale(50%);
 }
 
 /* Stying status container */
 .status-container {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    justify-content: center;
-    margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  justify-content: center;
+  margin-left: auto;
 }
 
 /* Centering buttons rightmost */
 .buttons {
-    display: flex;
-    gap: 1rem;
-    margin-left: auto;
-    margin-right: 5rem;
+  display: flex;
+  gap: 1rem;
+  margin-left: auto;
+  margin-right: 5rem;
 }
 
 /* Ensuring the rest of the content in the div remains centered */
 .centered {
-    display: flex;
-    justify-content: center; 
-    gap: 2rem;
-    white-space: nowrap;
-    margin-left: auto;
-    margin: auto;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  white-space: nowrap;
+  margin-left: auto;
+  margin: auto;
 }
 
 /* Styling submit button */
 .submit-button {
-    background-color: #C5FF00;
-    font: Inter;
-    color: #1E1E1E;
-    padding: 0;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    border-radius: 0.4rem;
-    width: 8rem;
-    height: 2rem;
-    white-space: nowrap;
+  background-color: #a7d900;
+  color: #1e1e1e;
+  padding: 0;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 1.5em;
+  width: 8rem;
+  height: 3rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
 /* Styling submit button when disabled */
 .submit-button:disabled {
-    background: gray;
+  background: gray;
 }
-
 
 /* Adding colours based on different timesheet statuses */
-.status.pending, .status.unsubmitted {
-    color: grey;
+.status.pending,
+.status.unsubmitted {
+  color: grey;
 }
 
-.status.approved, .status.submitted {
-    color: green;
+.status.approved,
+.status.submitted {
+  color: green;
 }
 
 .status.rejected {
-    color: red;
+  color: red;
 }
 
-.status.saved { 
-    color: #C5FF00;
+.status.saved {
+  color: #c5ff00;
 }
 
 /* Setting default button styling */
 .consultant-view-header svg {
-    height: 3rem;
-    width: auto;
-    fill: #C5FF00;
+  height: 3rem;
+  width: auto;
+  color: #a7d900;
 }
 
 /* Setting button colour on hover */
 .consultant-view-header svg:hover {
-    fill: white;
+  color: #1e1e1e;
+  background-color: #efecea;
+  border: 0.1 solid #efecea;
 }
 
 /* Moving button closer to timesheet */
 .consultant-view-header .add-event-button {
-    position: absolute;
-    top: 10rem;
-    right: 10rem;
+  position: absolute;
+  top: 10rem;
+  right: 10rem;
 }
 
 /* Changing + button colour to grey so it's easier for users to understand that they cannot add a new event after submission */
-.consultant-view-header .add-event-button:disabled svg, .completion-reminder:disabled svg {
-    fill: gray;
+.consultant-view-header .add-event-button:disabled svg,
+.completion-reminder:disabled svg {
+  fill: gray;
 }
 
 /* Defining container style */
-.completion-reminder{
-    position: absolute;
-    top: 10rem;
-    right: 5rem;
+.completion-reminder {
+  position: absolute;
+  top: 10rem;
+  right: 5rem;
 }
 
 /* Defining container style */
 .reminder-setting {
-    position: absolute;
-    background-color: #1E1E1E;
-    border: 0.1rem solid #C5FF00;
-    border-radius: 1rem;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: auto;
-    padding: 1rem;
-    width: 30rem;
+  position: absolute;
+  color: #1e1e1e;
+  background-color: #f7f6f5;
+  border: 0.1rem solid #1e1e1e;
+  box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 1rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  padding: 1rem;
+  width: 30rem;
 }
 
 .reminder-setting button {
-    margin-left: auto;
-    padding-right: 0.6rem;
-    margin-bottom: 1rem;
+  margin-left: auto;
+  padding-right: 0.6rem;
+  margin-bottom: 1rem;
 }
 
 .reminder-setting button svg {
-    height: 2rem;
-    width: 2rem;
+  height: 2rem;
+  width: 2rem;
 }
 
 .reminder-setting .inputs {
-    display: flex;
-    gap: 2rem;
-    justify-content: center;
+  display: flex;
+  gap: 2rem;
+  width: 24rem;
+  margin-left: 7rem;
 }
 
 .reminder-container {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgb(239, 236, 234, 0.5);
-    color: #EFECEA;
-    z-index: 1000000000000000;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(239, 236, 234, 0.5);
+  color: #f7f6f5;
+  z-index: 1000000000000000;
 }
 
 /* Styling input */
@@ -183,87 +188,88 @@ button {
 }
 
 .reminder-toggle {
-    background-color: #C5FF00;
-    font-size: large;
-    border-radius: 1rem;
-    padding: 0.5rem;
-    height: 2.5rem;
-    width: 6rem;
+  background-color: #c5ff00;
+  font-size: large;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  height: 2.5rem;
+  width: 6rem;
 }
 
 .reminder-toggle:hover {
-    background-color: #7ca005;
+  background-color: #1e1e1e;
+  color: #f7f6f5;
 }
 
 .reminder-buttons {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
 .turn-off:hover {
-    background-color: rgba(255, 0, 0, 0.341);
-    color: #EFECEA;
+  background-color: rgba(255, 0, 0, 0.341);
+  color: #efecea;
 }
 
 /* Styling error message */
 .reminder-error {
-    color: red;
-    font-size: 1rem;
-    margin-top: 1rem;
+  color: red;
+  font-size: 1rem;
+  margin-top: 1rem;
 }
 
 .empty-error-container {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgb(239, 236, 234, 0.5);
-    z-index: 1000000000000000;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(239, 236, 234, 0.5);
+  z-index: 1000000000000000;
 }
 
 /* Styling button used to close event */
 .empty-error {
-    padding-top: 1rem;
-    padding-right: 1rem;
-    background-color: #1E1E1E;
-    width: 36rem;
-    border-radius: 2rem;
-    border: 0.3rem solid #C5FF00;
-    fill: #EFECEA;
-    padding-bottom: 2rem;
-    margin-top: 1rem;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin-left: auto;
-    margin-right: 1rem;
-    font-size: 2rem;
-    display: flex;
-    flex-direction: column;
+  padding-top: 1rem;
+  padding-right: 1rem;
+  background-color: #1e1e1e;
+  width: 36rem;
+  border-radius: 2rem;
+  border: 0.3rem solid #c5ff00;
+  fill: #efecea;
+  padding-bottom: 2rem;
+  margin-top: 1rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-left: auto;
+  margin-right: 1rem;
+  font-size: 2rem;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Styling text */
 .empty-error p {
-    text-align: center;
-    font-size: 1.5rem;
+  text-align: center;
+  font-size: 1.5rem;
 }
 
 .empty-error svg:hover {
-    fill: #C5FF00;
+  fill: #c5ff00;
 }
 
 /* Styling button */
 .empty-error svg {
-    height: 2rem;
-    width: 2rem;
-    fill: #EFECEA;
+  height: 2rem;
+  width: 2rem;
+  fill: #efecea;
 }
 
 /* Styling container */
 .empty-error button {
-    margin-left: auto;
+  margin-left: auto;
 }

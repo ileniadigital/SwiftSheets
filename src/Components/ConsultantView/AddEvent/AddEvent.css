@@ -3,8 +3,9 @@
 /* Styling which includes centering the component at the center of the page */
 .add-event {
   position: fixed;
-  background-color: #1e1e1e;
-  border: 0.3rem solid #c5ff00;
+  background-color: #f7f6f5;
+  border: 0.1rem solid #1e1e1e;
+  box-shadow: 3px 3px 5px 0 rgba(0, 0, 0, 0.2);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -17,7 +18,7 @@
 
 /* Styling button used to close event */
 .close-event {
-  fill: #efecea;
+  fill: #f7f6f5;
   margin-top: 0.6rem;
   margin-right: 0.6rem;
   position: absolute;
@@ -26,32 +27,35 @@
 
 /* Styling button */
 .close-event svg {
-  fill: #efecea;
-  background-color: #1e1e1e;
+  fill: #1e1e1e;
+  background-color: #f7f6f5;
   height: 2rem;
   width: 2rem;
 }
 
 /* Styling button colour on close */
 .close-event svg:hover {
-  background-color: #1e1e1e;
   fill: red;
+  transform: scale(1.5);
 }
 
+.close-event:hover {
+  border: none;
+  background-color: #f7f6f5;
+}
 /* Styling addEvent inputs, centering on div */
 .add-new-event {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #1e1e1e;
+  background: #f7f6f5;
 }
 
 /* Styling log event heading */
 .log-event-heading {
   margin: auto;
-  background: #1e1e1e;
   margin-bottom: 1rem;
-  color: #efecea;
+  color: #1e1e1e;
   font-size: 2rem;
   padding-top: 1.5rem;
 }
@@ -60,32 +64,30 @@
 .input {
   display: flex;
   gap: 2rem;
-  background: #1e1e1e;
   align-items: center;
-  color: #efecea;
+  color: #f7f6f5;
 }
 
 /* Setting label name */
 .add-event label {
   width: 11.3rem;
   font-size: 1.3rem;
-  font-family: Inter;
-  color: #efefef;
-  background: #1e1e1e;
+  color: #1e1e1e;
+  background-color: #f7f6f5;
+  font-weight: 600;
 }
 
 /* Styling input/select boxes */
 .add-event input,
 .add-event select {
-  border: 0;
-  width: 14rem;
+  border: 0.1 solid #1e1e1e;
+  width: 15rem;
   margin: auto;
   color: #1e1e1e;
-  height: 2rem;
-  border-radius: 0.3rem;
-  font-family: Inter;
+  height: 2.5rem;
+  border-radius: 0.5rem;
   font-size: 1.3rem;
-  box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2); 
+  box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
 }
 
 /* Changing icon colour */
@@ -114,13 +116,18 @@
   margin-top: 0.6rem;
   background-color: #c5ff00;
   color: #1e1e1e;
-  width: 7rem;
+  width: 9rem;
+  height: 2.5rem;
+  border-radius: 1.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  border: none;
 }
 
 /* Adding styling on hover */
 .add-new-event .add-event-button:hover {
-  background-color: #efecea;
-  color: #1e1e1e;
+  background-color: #1e1e1e;
+  color: #f7f6f5;
 }
 
 /* Styling checkbox */
@@ -130,11 +137,12 @@
   width: 2rem;
   height: 2rem;
   margin-right: 12.1rem;
-  background: #efecea;
+  background: #f7f6f5;
   box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
   cursor: pointer;
   border-radius: 0.4rem;
-  color: #efecea;
+  border: 0.1rem solid #1e1e1e;
+  color: #f7f6f5;
 }
 
 /* Setting colour to when event is recurring */
@@ -166,7 +174,7 @@
 
 /* Styling error message */
 .error-message {
-  color: #efecea;
+  color: #f7f6f5;
   background-color: red;
   padding: 0.4rem;
   border-radius: 1rem;
@@ -176,7 +184,6 @@
 
 /* Defining textarea styles */
 .add-event textarea {
-  font-family: Inter;
   border: none;
   resize: none;
   height: 7rem;
@@ -184,8 +191,8 @@
   border-radius: 0.3rem;
   font-size: 1rem;
   overflow-y: auto;
-  background-color: #efecea;
-  border-right: 0.3rem solid #efecea;
+  background-color: #f7f6f5;
+  border-right: 0.3rem solid #f7f6f5;
 }
 
 /* Adding padding */
@@ -194,15 +201,24 @@ textarea {
   padding: 0.5rem;
 }
 
-/* Defining container style */
+/* Defining container style for notes */
 .note-container {
   display: flex;
   flex-direction: column;
   align-items: start;
   margin-right: auto;
   margin-left: 4.05rem;
-  background: #1e1e1e;
-  gap: 1rem;
+  border: 0.1rem solid #1e1e1e;
+  gap: 0.5rem;
+}
+
+.note-container label {
+  margin-left: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.note-container textarea {
+  border-top: 0.1rem solid #1e1e1e;
   margin-top: 1rem;
 }
 
@@ -217,8 +233,7 @@ textarea {
 
 /* Displaying event */
 .event {
-  background-color: #efecea;
-  /* background-color: #FF4E48; red */
+  background-color: #c5ff00;
   width: 100%;
   position: absolute;
 }
@@ -236,14 +251,14 @@ textarea {
 
 /* Styling icon */
 .delete-event svg {
-    fill: #1E1E1E;
-    height: 1.4rem;
-    width: 1.4rem;
-    height: 3rem;
-    position: relative;
-    margin-left: auto;
-    margin-top: 0.7rem;
-    margin-right: 0.5rem;
+  fill: #1e1e1e;
+  height: 1.4rem;
+  width: 1.4rem;
+  height: 3rem;
+  position: relative;
+  margin-left: auto;
+  margin-top: 0.7rem;
+  margin-right: 0.5rem;
 }
 
 /* Setting hover colour */
@@ -266,5 +281,5 @@ textarea {
 
 /* Styling error message */
 .concur-error {
-    color: red;
+  color: red;
 }

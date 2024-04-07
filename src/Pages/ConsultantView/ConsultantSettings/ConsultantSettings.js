@@ -1,5 +1,4 @@
 // Performing necessary imports
-import '../../../Components/general.css';
 import './ConsultantSettings.css'
 import { useState, useEffect } from 'react';
 

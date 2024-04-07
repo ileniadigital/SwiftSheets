@@ -1,68 +1,79 @@
 .main-con-home {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Defining page styling */
-.consultant-home { 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 0.2rem solid #c5ff00;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    border-radius: 1.5rem;
-    width: 77rem;
+.consultant-home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 0.1rem solid #1e1e1e;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-radius: 1.5rem;
+  width: 77rem;
 }
 
 /* Setting margin */
 .current-timesheet-container {
-    width: 71rem;
-    margin-bottom: 3rem;
-    color: white
+  width: 71rem;
+  margin-bottom: 3rem;
+  color: #f7f6f5;
 }
 
 /* Setting layout */
-.current-timesheet { 
-    display: flex;
-    gap: 3rem;
-    align-items: center;
-    text-align: center;
+.current-timesheet {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  text-align: center;
 }
 
 /* Styling dropdown */
 .dropdown svg {
-    height: 1.5rem;
-    width: auto;
-    fill: #C5FF00;
+  height: 1.5rem;
+  width: auto;
+  fill: #a7d900;
 }
 
 /* Setting hover colour */
 .dropdown svg:hover {
-    fill: white;
+  fill: #a7d900;
+  background-color: transparent;
 }
 
 /* Centering dropdown icons */
 .dropdown {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
+.dropdown:hover {
+  fill: #a7d900;
+  background-color: transparent;
+  border: none;
+}
+
+.dropdown svg:hover {
+  height: 2rem;
+}
 /* Styling dropdown menu */
 .dropdown-menu {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    position: sticky;
-    top: 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: sticky;
+  top: 0;
+  color: #1e1e1e;
 }
 
-/* Setting overflow */
+/* Styling past timesheets */
 .past-timesheet {
-    width: 71rem;
-    overflow-y: auto;
-    max-height: 28rem;
-    color:  white
+  width: 71rem;
+  overflow-y: auto; /* Setting overflow*/
+  max-height: 28rem;
+  color: #1e1e1e;
 }
