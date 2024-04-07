@@ -12,17 +12,15 @@ import { IoIosNotificationsOff } from "react-icons/io";
 import { FaCirclePlus } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
 
-// Importing helper function
-import getDate from '../../../Components/ConsultantView/getDate'
+// Importing helper
+import getDate from '../../../Components/ConsultantView/getDate';
 
 // Importing useState and useEffect
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import exportPdf from './exportPdf';
+import ManualCompletionReminder from '../../../Components/ConsultantView/Reminder/ManualCompletionReminder';
 
-export default function Timesheet({completionReminderDate, setCompletionReminderDate, completionReminderTime, setCompletionReminderTime, timesheetCompletionReminder, setTimesheetCompletionReminder}) {
-
-    // Getting current timesheet
-    // let currentTimesheet = TimeshgetCurrentTimesheet()
+export default function Timesheet() {
 
     // Used to create and manage the week shown on the timesheet
     const [viewedWeek, setViewedWeek] = useState(new Date());
@@ -71,49 +69,15 @@ export default function Timesheet({completionReminderDate, setCompletionReminder
         setReminder(true)
     }
 
-    // Storing today's date so it can be the minimum for the timesheet completion reminder
-    let today = `${new Date().getFullYear()}-${(new Date().getMonth()+1).toString().padStart(2, '0')}-${new Date().getDate().toString().padStart(2, '0')}`
-
-    // Alert only works when time is at least 2 minutes ahead
-    let currentTime = new Date()
-    currentTime.setMinutes(currentTime.getMinutes()+1)
-    currentTime = currentTime.toTimeString().slice(0,5)
-
-    const [reminderError, setReminderError] = useState(false)
-    const [reminderTime, setReminderTime] = useState('')
-    useEffect(() => {
-        if (completionReminderTime !== '' && completionReminderDate !== '') {
-            const currentTimeHours = parseInt(currentTime.slice(0,2))
-            const currentTimeMins = parseInt(currentTime.slice(3,5))
-            const inputHours = parseInt(completionReminderTime.slice(0,2))
-            const inputMins = parseInt(completionReminderTime.slice(3,5))
-
-            // Ensures input is within valid range
-            if (completionReminderDate === today) {
-                if (inputHours < currentTimeHours) {
-                    setReminderError(true)
-                } else if (inputHours === currentTimeHours) {
-                    if (inputMins < currentTimeMins) {
-                        setReminderError(true)
-                    } else {
-                        setReminderError(false)
-                    }
-                } else {
-                    setReminderError(false)
-                }
-            } else {
-                setReminderError(false)
-            }
-        }
-    }, [completionReminderTime, completionReminderDate])
-    
     // Determinining date for start of week
     const startDate = getDate(viewedWeek, 1)
+    
     // Converting into format for minimum date value
     let startOfWeek = `${startDate[0]}/${startDate[1]}/${startDate[2]}`
 
     // Determinining date for end of week
     const endDate = getDate(viewedWeek, 7)
+
     // Converting into format for maximum date value
     let endOfWeek = `${endDate[0]}/${endDate[1]}/${endDate[2]}`
 
@@ -148,44 +112,9 @@ export default function Timesheet({completionReminderDate, setCompletionReminder
                     <FaCirclePlus /> {/* Button icon */}
                 </button>
                 <button className='completion-reminder' disabled = {timesheetStatus === "Submitted"} onClick={updateCompletionReminder}>
-                    {timesheetCompletionReminder ? <IoIosNotifications /> : <IoIosNotificationsOff />}
+                    {localStorage.getItem('timesheetCompletionReminder') ? <IoIosNotifications /> : <IoIosNotificationsOff />}
                 </button>
-                {reminder && (
-                    <div className='reminder-container'>
-                        <div className='reminder-setting'>
-                            <button onClick={() => setReminder(false)}>
-                                <IoClose />
-                            </button>
-                            <p>
-                                Timesheet Completion Reminder
-                            </p>
-                            
-                            <div className='inputs'>
-                                <input className="time" type="time" value={completionReminderTime}
-                                onChange={(event) => {
-                                    setReminderTime(event.target.value);
-                                    setCompletionReminderTime(event.target.value)}}/>
-                                    
-
-                                <input type="date" className='datetime' value={completionReminderDate} name = "eventDate" min={today} max={endOfWeek} 
-                                onChange={(event) => setCompletionReminderDate(event.target.value)}/>
-                            </div>
-                            {reminderError && <div className='reminder-error'>Time must be at least {currentTime}</div>}
-                            <div className='reminder-buttons'>
-                                <button className='reminder-toggle turn-off' onClick={() => {
-                                    setReminder(false);
-                                    setTimesheetCompletionReminder(false)
-                                    setCompletionReminderDate('')
-                                    setCompletionReminderTime('')}}>
-                                    Turn Off
-                                </button>
-                                <button className='reminder-toggle done' onClick={() => setReminder(false)}>
-                                    Done
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                )}
+                {reminder && <ManualCompletionReminder viewedWeek={viewedWeek} endOfWeek = {endOfWeek}/>}
             </div>
 
             {/* Displays currently viewed week, along with hours */}
