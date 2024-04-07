@@ -15,7 +15,6 @@ export default function ConsultantTimesheet(props) {
     console.log("ID is:",id);
     return (
       <div className="consultantTimesheet-container">
-        <h1 className="black-text">{id}</h1>
         <button className="view-icon">
           <GrView size={30} className="icon" />
         </button>
