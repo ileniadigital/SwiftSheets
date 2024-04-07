@@ -5,7 +5,9 @@ import '../Components/TimesheetListView/TimesheetListView.css'; // Import stylin
 import Filters from '../Components/TimesheetListView/Filters/Filters';
 import { fetchTimesheetsAndUsers } from '../Components/Data/TimesheetData'; // Adjust the path as necessary
 
-export default function TimesheetListView({ role }) {
+export default function TimesheetListView(props) {
+  const role = props.role;
+  console.log("Role is:", role)
   const [timesheets, setTimesheets] = useState([]);
   const [users, setUsers] = useState({});
   const [filter, setFilter] = useState("pending");
@@ -20,13 +22,15 @@ export default function TimesheetListView({ role }) {
     setFilter(selectedFilter);
   };
 
-  const handleStatusUpdate = (id, newStatus, role) => {
+  const handleStatusUpdate = (id, newStatus) => {
     // Send an API request to update the status in the database
     let updateField;
     if (role === 'linemanager') {
       updateField = 'review_status';
+      //console.log("Review status updated");
     } else {
       updateField = 'payment_status';
+      //console.log("Payment status updated");
     }
   
     Axios.patch(`http://127.0.0.1:8000/timesheet/${id}/`, {

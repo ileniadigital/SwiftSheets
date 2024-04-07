@@ -12,7 +12,6 @@ export default function ConsultantTimesheet(props) {
     const handleStatusUpdate = (newStatus) => {
       onUpdateStatus(id, newStatus); // Call the parent function with the timesheet id and new status
     };
-    console.log("ID is:",id);
     return (
       <div className="consultantTimesheet-container">
         <button className="view-icon">
@@ -27,7 +26,7 @@ export default function ConsultantTimesheet(props) {
           onUpdateStatus={handleStatusUpdate} // Pass the callback function
         />
         {/* Payment status */}
-        <Status status={paymentStatus} editable={role !== 'linemanager'} onUpdateStatus={handleStatusUpdate} />
+        <Status status={paymentStatus} editable={role == 'financeteam'} onUpdateStatus={handleStatusUpdate} />
       </div>
     );
   }
