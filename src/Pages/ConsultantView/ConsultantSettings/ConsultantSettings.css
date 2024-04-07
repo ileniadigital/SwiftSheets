@@ -2,7 +2,7 @@
 
 /* Defining container */
 .settings {
-  /* border: 0.2rem solid #c5ff00;
+  /* border: 0.2rem solid #a7d900;
   border-radius: 1rem;
   padding-top: 2rem;
   padding-bottom: 3rem;
@@ -62,9 +62,9 @@
 /* Defining hover colour/background colour for selected day */
 .day-of-week:hover,
 .worked-day {
-  background: #c5ff00;
+  background: #a7d900;
   color: #1e1e1e;
-  border: 0.1rem solid #c5ff00;
+  border: 0.1rem solid #a7d900;
 }
 
 .worked-day:hover {
@@ -144,7 +144,7 @@
   box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
   cursor: pointer;
   border-radius: 0.2rem;
-  color: #c5ff00;
+  color: #a7d900;
   margin-left: 1rem;
 }
 

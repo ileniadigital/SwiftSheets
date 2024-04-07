@@ -26,12 +26,17 @@
   margin: auto;
 }
 
+.event-container {
+  background-color: #f7f6f5;
+  border: none;
+}
+
 /* Setting dimensions */
 .hour-block svg {
   height: 2rem;
   width: auto;
   opacity: 50%;
-  fill: #c5ff00;
+  fill: #a7d900;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -40,5 +45,5 @@
 
 /* Setting button colour on hover */
 .hour-block svg:hover {
-  fill: white;
+  fill: #1e1e1e;
 }

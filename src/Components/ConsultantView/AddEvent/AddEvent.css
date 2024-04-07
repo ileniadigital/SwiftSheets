@@ -114,8 +114,7 @@
 .add-new-event .add-event-button {
   margin: auto;
   margin-top: 0.6rem;
-  background-color: #c5ff00;
-  color: #1e1e1e;
+  background-color: #f7f6f5;
   width: 9rem;
   height: 2.5rem;
   border-radius: 1.5rem;
@@ -126,8 +125,7 @@
 
 /* Adding styling on hover */
 .add-new-event .add-event-button:hover {
-  fill: red;
-  background-color: #f7f6f5;
+  fill: #1E1E1E;
 }
 
 /* Styling checkbox */
@@ -233,7 +231,7 @@ textarea {
 
 /* Displaying event */
 .event {
-  background-color: #c5ff00;
+  background-color: #a7d900;
   width: 100%;
   position: absolute;
 }

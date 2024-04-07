@@ -87,7 +87,7 @@ button {
 }
 
 .status.saved {
-  color: #c5ff00;
+  color: #a7d900;
 }
 
 /* Setting default button styling */
@@ -188,7 +188,7 @@ button {
 }
 
 .reminder-toggle {
-  background-color: #c5ff00;
+  background-color: #a7d900;
   font-size: large;
   border-radius: 1rem;
   padding: 0.5rem;
@@ -237,7 +237,7 @@ button {
   background-color: #1e1e1e;
   width: 36rem;
   border-radius: 2rem;
-  border: 0.3rem solid #c5ff00;
+  border: 0.3rem solid #a7d900;
   fill: #efecea;
   padding-bottom: 2rem;
   margin-top: 1rem;
@@ -259,7 +259,7 @@ button {
 }
 
 .empty-error svg:hover {
-  fill: #c5ff00;
+  fill: #a7d900;
 }
 
 /* Styling button */
