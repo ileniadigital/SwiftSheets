@@ -9,6 +9,10 @@
   height: 100%;
 }
 
+.hours-container button {
+  background-color: transparent;
+}
+
 /* Adding underline to separate time slots */
 .add-underline {
   border-bottom: 0.1rem solid #1e1e1e;
@@ -24,11 +28,6 @@
 /* Centering */
 .hour-block .add-event-button {
   margin: auto;
-}
-
-.event-container {
-  background-color: #f7f6f5;
-  border: none;
 }
 
 /* Setting dimensions */

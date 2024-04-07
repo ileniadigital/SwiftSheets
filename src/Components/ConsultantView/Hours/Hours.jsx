@@ -194,7 +194,7 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
         }
 
         hoursArray.push(
-            <button key={i} 
+            <div key={i} 
             className={`hour-block ${addUnderlineClass ? 'add-underline' : ''}`} 
             onClick={() => addEventHandler("Hours", date, null)} 
             onMouseEnter={() => handleMouseEnter(i)} 
@@ -204,7 +204,7 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
                     {numberOfEvents === 0 && hoveredHour === i && <FaCirclePlus/>} {/* Show add event button if hour hovered over */}
                     {eventsPerHour}
                 </div>
-            </button>)
+            </div>)
     }
     
     return(
