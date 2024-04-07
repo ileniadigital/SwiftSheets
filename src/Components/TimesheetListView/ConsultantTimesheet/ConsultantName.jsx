@@ -5,8 +5,7 @@ import './ConsultantTimesheet.css'; //Import styling
 export default function ConsultantName({ name }) { 
     if (name === null) {
         console.log("Name is null");
-    } else { console.log(name) }
-
+    } 
     return(
         <div className="consultantName-container">
             <p className="consultantName">{name}</p>

@@ -17,12 +17,3 @@ export default function Filters({ onFilterChange }) {
       </div>
     );
   }
-  
-/* <div className="filter">
-            <label htmlFor="date">Date:</label>
-            <input type="date" id="date" />
-        </div>
-        <div className="filter">
-            <label htmlFor="consultant">Consultant:</label>
-            <input type="text" id="consultant" />
-        </div> */

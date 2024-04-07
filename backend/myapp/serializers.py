@@ -12,10 +12,11 @@ class SystemUserSerializer(serializers.ModelSerializer):
 
 #timesheets
 class TimesheetSerializer(serializers.ModelSerializer):
+    review_status= serializers.CharField(required=False)
+    payment_status = serializers.CharField(required=False)
     class Meta:
         model = Timesheet
         fields = '__all__'
-
 #Event
 class EventSerializer(serializers.ModelSerializer):
     class Meta:

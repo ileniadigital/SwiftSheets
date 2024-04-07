@@ -16,7 +16,7 @@ import getDate from './Components/ConsultantView/getDate';
 import Reminder from './Components/ConsultantView/Reminder/Reminder';
 
 //ADD ROUTING BASED ON ROLE FROM DB
-const role='consultant';
+const role='financeteam';
 
 // Main App component
 export default function App() {

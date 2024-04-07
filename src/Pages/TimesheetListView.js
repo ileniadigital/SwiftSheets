@@ -14,59 +14,46 @@ export default function TimesheetListView({ role }) {
     fetchTimesheetsAndUsers(setTimesheets, setUsers, filter);
   }, [filter]);
 
+  console.log("Timesheets:", timesheets);
+  timesheets.map(timesheet => console.log("Timesheet:", timesheet.id));
   const handleFilterChange = (selectedFilter) => {
     setFilter(selectedFilter);
   };
 
-  //old fetch
-// export default function TimesheetListView({ role }) {
-//   const [timesheets, setTimesheets] = useState([]);
-//   const [users, setUsers] = useState({});
-//   const [filter, setFilter] = useState("pending"); // Default filter
+  const handleStatusUpdate = (id, newStatus, role) => {
+    // Send an API request to update the status in the database
+    let updateField;
+    if (role === 'linemanager') {
+      updateField = 'review_status';
+    } else {
+      updateField = 'payment_status';
+    }
+  
+    Axios.patch(`http://127.0.0.1:8000/timesheet/${id}/`, {
+      [updateField]: newStatus,
+    })
+      .then(response => {
+        console.log("Success");
+        // Update the status in the UI immediately
+        setTimesheets(prevTimesheets => {
+          return prevTimesheets.map(timesheet => {
+            if (timesheet.id === id) {
+              return {
+                ...timesheet,
+                [updateField]: newStatus,
+              };
+            } else {
+              return timesheet;
+            }
+          });
+        });
+      })
+      .catch(error => {
+        console.error('Error updating status:', error);
+      });
+  };
+  
 
-//   useEffect(() => {
-//     fetchTimesheets();
-//   }, [filter]); // Re-fetch timesheets when the filter changes
-
-//   const fetchTimesheets = () => {
-//     let url = 'http://localhost:8000/timesheet/';
-//     if (filter !== 'all') {
-//       url += `?review_status=${filter}`;
-//     }
-
-//     Axios.get(url)
-//       .then(response => {
-//         setTimesheets(response.data);
-//         // After fetching timesheets, fetch user details for each timesheet
-//         fetchUserDetails(response.data);
-//       })
-//       .catch(error => {
-//         console.error('Error fetching timesheets:', error);
-//       });
-//   };
-
-//   const fetchUserDetails = (timesheets) => {
-//     // Create a unique set of user IDs to minimize API calls
-//     const userIds = new Set(timesheets.map(ts => ts.user));
-
-//     // Fetch details for each user ID
-//     userIds.forEach(userId => {
-//       Axios.get(`http://localhost:8000/systemuser/${userId}/`) // Adjust this URL to your API's user detail endpoint
-//         .then(response => {
-//           setUsers(prevUsers => ({
-//             ...prevUsers,
-//             [userId]: response.data
-//           }));
-//         })
-//         .catch(error => {
-//           console.error(`Error fetching details for user ${userId}:`, error);
-//         });
-//     });
-//   };
-
-  // const handleFilterChange = (selectedFilter) => {
-  //   setFilter(selectedFilter);
-  // };
 
   return (
     <div className='container'>
@@ -97,11 +84,13 @@ export default function TimesheetListView({ role }) {
           {timesheets.map(timesheet => (
             <ConsultantTimesheet
               key={timesheet.id}
+              id={timesheet.id}
               name={`${users[timesheet.user]?.firstname} ${users[timesheet.user]?.lastname}`} 
               dates={`${new Date(timesheet.start_date).toLocaleDateString()} - ${new Date(timesheet.end_date).toLocaleDateString()}`}
               reviewStatus={timesheet.review_status}
               paymentStatus={timesheet.payment_status}
               role={role}
+              onUpdateStatus={handleStatusUpdate}
             />
           ))}
         </div>
