@@ -13,8 +13,10 @@ export default function TimesheetListView(props) {
   const [filter, setFilter] = useState("pending");
 
   useEffect(() => {
-    fetchTimesheetsAndUsers(setTimesheets, setUsers, filter);
-  }, [filter]);
+    // Pass role to fetchTimesheetsAndUsers function
+    fetchTimesheetsAndUsers(setTimesheets, setUsers, filter, role);
+  }, [filter]); // Include role in the dependency array
+
 
   console.log("Timesheets:", timesheets);
   timesheets.map(timesheet => console.log("Timesheet:", timesheet.id));

@@ -86,14 +86,21 @@ class TimesheetViewSet(viewsets.ViewSet):
     queryset = Timesheet.objects.all()
     serializer_class = TimesheetSerializer
 
-    # Retrieve list of all timesheets
     def list(self, request, *args, **kwargs):
+        # Check if the query parameter is for review_status or payment_status
         review_status = request.query_params.get('review_status')
+        payment_status = request.query_params.get('payment_status')
+
         if review_status:
             if review_status.lower() == 'all':
                 queryset = Timesheet.objects.all()
             else:
                 queryset = Timesheet.objects.filter(review_status=review_status.capitalize())
+        elif payment_status:
+            if payment_status.lower() == 'all':
+                queryset = Timesheet.objects.all()
+            else:
+                queryset = Timesheet.objects.filter(payment_status=payment_status.capitalize())
         else:
             queryset = Timesheet.objects.all()
         
