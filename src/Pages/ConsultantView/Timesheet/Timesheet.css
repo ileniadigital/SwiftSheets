@@ -93,14 +93,13 @@ button {
 .consultant-view-header svg {
   height: 3rem;
   width: auto;
-  color: #a7d900;
+  background-color: #f7f6f5;
+  fill: #a7d900;
 }
 
 /* Setting button colour on hover */
 .consultant-view-header svg:hover {
-  color: #1e1e1e;
-  background-color: #efecea;
-  border: 0.1 solid #efecea;
+  fill: #1e1e1e;
 }
 
 /* Moving button closer to timesheet */

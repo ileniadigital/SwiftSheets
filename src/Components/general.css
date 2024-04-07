@@ -53,8 +53,9 @@ button {
   font-family: "Inter", sans-serif;
 }
 
-button:hover {
+/* Move elsewhere - keep running into issues */
+/* button:hover {
   background-color: #1e1e1e;
   color: #f7f6f5;
   border: 0.2rem solid #1e1e1e;
-}
+} */
