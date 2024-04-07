@@ -69,22 +69,20 @@ export default function ManualCompletionReminder({open, setOpen}) {
             } else {
                 setReminderError(false)
             }
-        }
-    }, [completionReminderTime, completionReminderDate])
+        } 
+        // Updating local storage values on change
+        localStorage.setItem('completionReminderDate', completionReminderDate);
+        localStorage.setItem('completionReminderTime', completionReminderTime);
+        console.log(reminderError, completionReminderDate, completionReminderTime)
+        setTimesheetCompletionReminder(!reminderError && completionReminderDate !== '' && completionReminderTime !== '');
+        localStorage.setItem('timesheetCompletionReminder', !reminderError && completionReminderDate !== '' && completionReminderTime !== '');
+    }, [completionReminderTime, completionReminderDate, reminderError])
 
     
   
     // Setting timesheet completion reminder
     const [timesheetCompletionReminder, setTimesheetCompletionReminder] = useState(localStorage.getItem('timesheetCompletionReminder') || 
     localStorage.setItem('timesheetCompletionReminder', completionReminderDate !== '' && completionReminderTime !== ''));
-
-    // Updating local storage values on change
-    useEffect(() => {
-        setTimesheetCompletionReminder(completionReminderDate !== '' && completionReminderTime !== '');
-        localStorage.setItem('completionReminderDate', completionReminderDate);
-        localStorage.setItem('completionReminderTime', completionReminderTime);
-        localStorage.setItem('timesheetCompletionReminder', completionReminderDate !== '' && completionReminderTime !== '');
-    }, [completionReminderDate, completionReminderTime]);
 
     return (
         <>
@@ -110,11 +108,11 @@ export default function ManualCompletionReminder({open, setOpen}) {
                 {reminderError && <div className='reminder-error'>Time must be at least {currentTime}</div>}
                 <div className='reminder-buttons'>
                     <button className='reminder-toggle turn-off' onClick={() => {
-                        setOpen(false);
-                        setTimesheetCompletionReminder(false)
-                        localStorage.setItem('timesheetCompletionReminder', 'false')
-                        setCompletionReminderDate('')
-                        setCompletionReminderTime('')}}>
+                        setTimesheetCompletionReminder(false);
+                        setCompletionReminderDate('');
+                        setCompletionReminderTime('');
+                        setTimeout(() => setOpen(false), 0); // Delay execution so lines above execute first
+                        }}>
                         Turn Off
                     </button>
                     <button className='reminder-toggle done' onClick={() => setOpen(false)}>
