@@ -59,7 +59,6 @@ export default function TimesheetListView({ role }) {
     <div className='container'>
       <div className='menu-container'>
         <Filters onFilterChange={handleFilterChange} className='filters' />
-        <button className='save-button'>Save</button>
       </div>
       <div className='list-container'>
         {/* Categories */}
