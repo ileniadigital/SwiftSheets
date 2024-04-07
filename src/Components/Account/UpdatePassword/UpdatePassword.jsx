@@ -39,8 +39,8 @@ export default function UpdatePassword() {
                     <label htmlFor='confirm-password'>Confirm New Password</label>
                     <input type='password' id='confirm-password' name='confirm-password' required/>
                 </div>
-                {/* Submit button */}
-                <button type='submit' onClick={validatePassword}>Update Password</button>
+                {/* Update password button */}
+                <button type='submit' onClick={validatePassword} className='update-button'>Update Password</button>
 
             </form>
         </div>

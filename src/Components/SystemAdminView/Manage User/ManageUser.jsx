@@ -12,7 +12,7 @@ export default function ManageUser ({ index, manageUserHandler, userList, remove
             {/* Adds close button that toggles the window*/}
             <button className = "closeWindow" onClick={() => manageUserHandler(index, userList)}><IoClose /></button>
             <h1 className='manageUserHeading'>Manage User</h1>
-            <h3 className ='detailsHeading'>Personal Details</h3>
+            <h2 className ='detailsHeading'>Personal Details</h2>
             {/* Creates a 2 column table for the user data*/}
             <table className='detailsTable'>
                 <colgroup>
@@ -21,15 +21,15 @@ export default function ManageUser ({ index, manageUserHandler, userList, remove
                 </colgroup>
                 <tbody>
                     <tr>
-                        <td>Name</td>
+                        <td className='label'>Name</td>
                         <td>{user.name}</td>
                     </tr>
                     <tr>
-                        <td>Username</td>
+                        <td className='label'>Username</td>
                         <td>{user.username}</td>
                     </tr>
                     <tr>
-                        <td>Role</td>
+                        <td className='label'>Role</td>
                         <td>{user.userType}</td>
                     </tr>
                 </tbody>
