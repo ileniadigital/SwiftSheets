@@ -371,7 +371,7 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
             let options = []
             for (const re in recEvents) {
                 options.push(
-                    <option key={recEvents[re].id}>
+                    <option key={re}>
                         {recEvents[re].name}
                     </option>
                 )

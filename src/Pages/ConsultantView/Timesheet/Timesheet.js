@@ -212,7 +212,7 @@ export default function Timesheet({completionReminderDate, setCompletionReminder
                 <div className='buttons'>
                     <button className='submit-button' onClick={handleSubmission} disabled = {timesheetStatus === "Submitted"} >{timesheetStatus === "Submitted" ? "Submitted" : "Submit"}</button>
                     <button className='submit-button' onClick={() => setTimesheetStatus("Saved")} disabled = {timesheetStatus === "Submitted"}>Save</button>
-                    <button className='submit-button' onClick={() => exportPdf(document.querySelector('body'))}>Export PDF</button>
+                    <button className='submit-button' onClick={() => exportPdf()}>Export PDF</button>
                 </div>
             </div>
 

@@ -12,7 +12,7 @@ export default function DisplayDetails({attributeChecked, value}) {
         let event = pastTimesheets[key]
         if (event[attributeChecked] === value) {
             pastTimesheetDetails.push(
-            <TimesheetDetails timesheet = {pastTimesheets[key]}/>
+            <TimesheetDetails key = {key} timesheet = {pastTimesheets[key]}/>
             )
         }
     }

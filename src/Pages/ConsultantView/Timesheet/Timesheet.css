@@ -28,6 +28,7 @@ button {
 .status-container {
   display: flex;
   align-items: center;
+  font-size: 1.3rem;
   gap: 2rem;
   justify-content: center;
   margin-left: auto;
@@ -56,12 +57,10 @@ button {
   background-color: #a7d900;
   color: #1e1e1e;
   padding: 0;
-  padding-left: 1rem;
-  padding-right: 1rem;
   border-radius: 1.5em;
-  width: 9rem;
-  height: 3rem;
-  font-size: 1.25rem;
+  font-size: 1.2rem;
+  width: 8.5rem;
+  height: 2.5rem;
   font-weight: 600;
   white-space: nowrap;
 }
@@ -79,7 +78,7 @@ button {
 
 .status.approved,
 .status.submitted {
-  color: green;
+  color: #a7d900;
 }
 
 .status.rejected {
