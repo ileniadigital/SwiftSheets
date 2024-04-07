@@ -61,8 +61,8 @@ class Event(models.Model):
         ('Meeting', 'Meeting'),
         ('Project', 'Project'),
     ]
-    timesheet = models.ForeignKey(Timesheet, on_delete=models.CASCADE, related_name='events')
-    date = models.DateField()
+    #timesheet = models.ForeignKey(Timesheet, on_delete=models.CASCADE, related_name='events')
+    date = models.CharField(max_length=30, default=timezone.now().date().strftime('%Y-%m-%d'))  # Default date
     duration = models.FloatField(default=0.0)  # Default duration
     name = models.CharField(max_length=255, default='Event')  # Default name
     type = models.CharField(max_length=20, choices=EVENT_TYPE_CHOICES, default='Normal')  # Default type
