@@ -126,8 +126,8 @@
 
 /* Adding styling on hover */
 .add-new-event .add-event-button:hover {
-  background-color: #1e1e1e;
-  color: #f7f6f5;
+  fill: red;
+  background-color: #f7f6f5;
 }
 
 /* Styling checkbox */
