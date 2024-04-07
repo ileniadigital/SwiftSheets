@@ -10,6 +10,7 @@ import DisplayDetails from '../../../Components/ConsultantView/DisplayDetails/Di
 
 // Displays dashboard for consultant
 export default function ConsultantDashboard() {
+
     // Stores whether button has been clicked; determines whether to show timesheet data
     const [isPaymentsReceived, setIsPaymentsReceived] = useState(true)
     const [isPendingApprovals, setIsPendingApprovals] = useState(true)

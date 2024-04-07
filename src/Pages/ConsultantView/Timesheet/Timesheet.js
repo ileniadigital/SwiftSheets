@@ -16,7 +16,7 @@ import { IoClose } from "react-icons/io5";
 import getDate from '../../../Components/ConsultantView/getDate';
 
 // Importing useState and useEffect
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import exportPdf from './exportPdf';
 import ManualCompletionReminder from '../../../Components/ConsultantView/Reminder/ManualCompletionReminder';
 
@@ -60,10 +60,7 @@ export default function Timesheet() {
         setAddEventClicked(!addEventClicked)
     }
 
-
-    // Store whether timesheet completion reminder has been set
     const [reminder, setReminder] = useState(false);
-
 
     const updateCompletionReminder = () => {
         setReminder(true)
@@ -100,6 +97,16 @@ export default function Timesheet() {
         }
     }
 
+    const [reminderSet, setReminderSet] = useState(
+        (localStorage.getItem('timesheetCompletionReminder') && 
+    localStorage.getItem('timesheetCompletionReminder') === 'true' ? true : false )|| false)
+
+    useEffect(() => {
+        setReminderSet(
+        localStorage.getItem('timesheetCompletionReminder') === 'true' ? true : false 
+        )
+    }, [localStorage.getItem('timesheetCompletionReminder')])
+
     return (
         localStorage.getItem('daysWorked') !== "[]" ? (
         <div className = 'consultant-view'>
@@ -112,9 +119,9 @@ export default function Timesheet() {
                     <FaCirclePlus /> {/* Button icon */}
                 </button>
                 <button className='completion-reminder' disabled = {timesheetStatus === "Submitted"} onClick={updateCompletionReminder}>
-                    {localStorage.getItem('timesheetCompletionReminder') ? <IoIosNotifications /> : <IoIosNotificationsOff />}
+                    {reminderSet ? <IoIosNotifications /> : <IoIosNotificationsOff />}
                 </button>
-                {reminder && <ManualCompletionReminder viewedWeek={viewedWeek} endOfWeek = {endOfWeek}/>}
+                {reminder && <ManualCompletionReminder open = {reminder} setOpen={setReminder}/>}
             </div>
 
             {/* Displays currently viewed week, along with hours */}

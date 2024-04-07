@@ -12,6 +12,7 @@ import SystemAdminView from './Pages/SystemAdminView';
 import ConsultantSettings from './Pages/ConsultantView/ConsultantSettings/ConsultantSettings';
 import Form from './Components/Form/Form';
 import CompletionReminder from './Components/ConsultantView/Reminder/CompletionReminder';
+import StartReminder from './Components/ConsultantView/Reminder/StartReminder';
 
 //ADD ROUTING BASED ON ROLE FROM DB
 const role='consultant';
@@ -54,7 +55,12 @@ export default function App() {
         <NavBar view={role}/>
         <Name/>
         {page}
-        {role === 'consultant' && <CompletionReminder/>}
+        {role === 'consultant' && 
+        <>
+          <CompletionReminder/>
+          <StartReminder/>
+        </>
+        }
     </>
   )
 }
