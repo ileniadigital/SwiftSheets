@@ -28,7 +28,6 @@
 /* Styling button */
 .close-event svg {
   fill: #1e1e1e;
-  background-color: #f7f6f5;
   height: 2rem;
   width: 2rem;
 }
@@ -80,7 +79,7 @@
 /* Styling input/select boxes */
 .add-event input,
 .add-event select {
-  border: 0.1 solid #1e1e1e;
+  border: 0.1rem solid #1e1e1e;
   width: 15rem;
   margin: auto;
   color: #1e1e1e;
@@ -98,13 +97,6 @@
 }
 
 /* Adding padding */
-.add-event select {
-  padding-left: 0.2rem;
-  padding-right: 4rem;
-  border-right: 0.8rem solid transparent;
-}
-
-/* Adding padding */
 .event-name input {
   padding-left: 0.4rem;
   padding-right: 0.4rem;
@@ -114,18 +106,19 @@
 .add-new-event .add-event-button {
   margin: auto;
   margin-top: 0.6rem;
-  background-color: #f7f6f5;
   width: 9rem;
   height: 2.5rem;
   border-radius: 1.5rem;
   font-size: 1.25rem;
   font-weight: 600;
+  background-color: #1e1e1e;
+  color: #f7f6f5;
   border: none;
 }
 
 /* Adding styling on hover */
 .add-new-event .add-event-button:hover {
-  fill: #1E1E1E;
+  background-color: #454545;
 }
 
 /* Styling checkbox */
@@ -206,7 +199,6 @@ textarea {
   align-items: start;
   margin-right: auto;
   margin-left: 4.05rem;
-  border: 0.1rem solid #1e1e1e;
   gap: 0.5rem;
 }
 
@@ -216,7 +208,7 @@ textarea {
 }
 
 .note-container textarea {
-  border-top: 0.1rem solid #1e1e1e;
+  border: 0.1rem solid #1e1e1e;
   margin-top: 1rem;
 }
 

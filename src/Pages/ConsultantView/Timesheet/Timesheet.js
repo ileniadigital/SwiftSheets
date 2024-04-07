@@ -179,7 +179,7 @@ export default function Timesheet({completionReminderDate, setCompletionReminder
                                     setCompletionReminderTime('')}}>
                                     Turn Off
                                 </button>
-                                <button className='reminder-toggle' onClick={() => setReminder(false)}>
+                                <button className='reminder-toggle done' onClick={() => setReminder(false)}>
                                     Done
                                 </button>
                             </div>
