@@ -1,7 +1,7 @@
 /* Styling Form */
 
 /* Styling container */
-.form-container {
+#form-container {
     border-radius: 1rem;
     border: 0.1rem solid #1e1e1e;
     justify-content: center;
@@ -13,7 +13,7 @@
 }
 
 /* Styling form */
-.form-container form {
+#form-container form {
     margin-top: 2rem;
     margin-bottom: 2rem;
     display: flex;
@@ -22,31 +22,31 @@
 }
 
 /* Styling header */
-.form-container legend {
+#form-container legend {
     font-size: 1.8rem;
     align-self: center;
 }
 
 /* Styling input */
-.form-container .form-item {
+#form-container .form-item1 {
     display: flex;
     gap: 2rem;
 }
 
 /* Setting font size */
-.form-container label, .form-container input, .form-container select, .form-container textarea {
+#form-container label, #form-container input, #form-container select, #form-container textarea {
     font-size: 1.3rem;
 }
 
 /* Styling label */
-.form-container label {
+#form-container label {
     white-space: nowrap;
     font-size: 1.5rem;
     width: 8rem;
 }
 
 /* Styling input */
-.form-container input, .form-container select, .form-container textarea {
+#form-container input, #form-container select, #form-container textarea {
     border-radius: 0.5rem;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
@@ -54,20 +54,20 @@
 }
 
 /* Setting width */
-.form-item input, .form-item select {
+.form-item1 input, .form-item1 select {
     width: 25rem;
     height: 2.5rem;
 }
 
 /* Setting dimensions */
-.form-container textarea {
+#form-container textarea {
     width: 25rem;
     resize: none;
     height: 10rem;
 }
 
 /* Styling button */
-.form-container button {
+#form-container button {
     background-color: #a7d900;
     width: auto;
     align-self: center;
@@ -81,7 +81,7 @@
 }
 
 /* Setting hover colour */
-.form-container button:hover {
+#form-container button:hover {
     background-color: #1e1e1e;
     color: #f7f6f5;
 }

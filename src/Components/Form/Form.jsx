@@ -38,10 +38,10 @@ export default function Form() {
     }
 
     return (
-        <div className='form-container form-item'>
+        <div id='form-container' className='form-item1'>
             <form>
                 <legend>Share Your Opinion</legend>
-                <div className='form-item'>
+                <div className='form-item1'>
                     <label>Form Type</label>
                     <select defaultValue="" onChange={(event) => setFormType(event.target.value)} required>
                         <option disabled hidden value="">Select Type</option>
@@ -50,12 +50,12 @@ export default function Form() {
                     </select>
                 </div>
             
-                <div className='subject form-item'>
+                <div className='subject form-item1'>
                     <label>Subject</label>
                     <input type="text" placeholder='Subject' onChange={(event) => setSubject(event.target.value)} required/>
                 </div>
 
-                <div className='form-item'>
+                <div className='form-item1'>
                     <label>Message</label>
                     <textarea cols="30" rows="10" placeholder='Enter Text Here' required onChange={(event) => setText(event.target.value)}></textarea>
                 </div>
