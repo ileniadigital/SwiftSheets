@@ -10,10 +10,6 @@ import getDate from '../getDate';
 
 export default function AddEvent({componentCaller, addEventHandler, viewedWeek, event}) {
 
-    /* Only needs to be rendered for Timesheet component caller as its viewedWeek
-    argument will be a Date, compared to Hours' string */
-
-
     // Determinining date for start of week
     const startDate = getDate(viewedWeek, 1)
     // Converting into format for minimum date value
