@@ -1,6 +1,7 @@
 import Axios from 'axios';
 import { fetchUserDetails } from './UserData';
 
+// Fetch timesheets and users from the API
 export const fetchTimesheetsAndUsers = async (setTimesheets, setUsers, filter, role) => {
   let url = 'http://localhost:8000/timesheet/';
 
@@ -23,3 +24,19 @@ export const fetchTimesheetsAndUsers = async (setTimesheets, setUsers, filter, r
     console.error('Error fetching timesheets:', error);
   }
 };
+
+export const fetchTimesheetsbyID= async (setTimesheets, consultant) => {
+  let url = 'http://localhost:8000/timesheet/';
+
+  if (consultant) {
+    url += `?user=${consultant}`;
+  }
+
+  try {
+    const response = await Axios.get(url);
+    console.log("Timesheets by id:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching timesheets:', error);
+  }
+}

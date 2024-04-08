@@ -11,147 +11,49 @@ import PastTimesheets from '../../../Components/ConsultantView/PastTimesheets/Pa
 
 // Importing useState and useEffect
 import { useState, useEffect } from 'react';
-
+import { fetchTimesheetsbyID} from '../../../Components/Data/TimesheetData';
 // Provides home page to user
 export default function ConsultantHome() {
-
-    // Testing retrieval of current timesheet
-    // Store the timesheet data in local storage
-    const timesheetData = {
-        week: "25/03/24 – 31/03/24",
-        submissionStatus: "Unsubmitted",
-        reviewStatus: "Approved",
-        paymentStatus: "Pending",
-        isSubmitted: true,
-        submissionTime: null,
-        events: {
-            event1: {
-                startTime: '13:00',
-                endTime: '15:00',
-            },
-            event2: {
-                startTime: '13:00',
-                endTime: '15:00',
-            },
-            event3: {
-                startTime: '13:24',
-                endTime: '15:36',
-            },
-            event4: {
-                startTime: '13:00',
-                endTime: '15:00',
-            },
-            event5: {
-                startTime: '13:00',
-                endTime: '15:00',
-            },
-            event6: {
-                startTime: '13:00',
-                endTime: '15:00',
-            },
-            event7: {
-                startTime: '13:00',
-                endTime: '11:00',
-            },
-        }
-    };
-  
-    localStorage.setItem('currentTimesheet', JSON.stringify(timesheetData));
-
-    const timesheets = {
-        timesheetData1: {
-            week: "18/02/30 – 25/02/30",
-            submissionStatus: "saved",
-            reviewStatus: "Approved",
-            paymentStatus: "Pending"
-        },
-
-        timesheetData2: {
-            week: "18/02/30 – 25/02/30",
-            submissionStatus: "saved",
-            reviewStatus: "Approved",
-            paymentStatus: "Approved"
-        },
-
-        timesheetData3: {
-            week: "18/02/30 – 25/02/30",
-            submissionStatus: "saved",
-            reviewStatus: "Approved",
-            paymentStatus: "Approved"
-        },
-
-        timesheetData4: {
-            week: "18/02/30 – 25/02/30",
-            submissionStatus: "saved",
-            reviewStatus: "Pending",
-            paymentStatus: "Approved"
-        },
-
-        timesheetData5: {
-            week: "18/02/30 – 25/02/30",
-            submissionStatus: "saved",
-            reviewStatus: "Pending",
-            paymentStatus: "Approved"
-        },
-
-        timesheetData6: {
-            week: "18/02/30 – 25/02/30",
-            submissionStatus: "saved",
-            reviewStatus: "Pending",
-            paymentStatus: "Approved"
-        },
-
-        timesheetData7: {
-            week: "18/02/30 – 25/02/30",
-            submissionStatus: "saved",
-            reviewStatus: "Pending",
-            paymentStatus: "Approved"
-        },
-
-        timesheetData8: {
-            week: "18/02/30 – 25/02/30",
-            submissionStatus: "saved",
-            reviewStatus: "Pending",
-            paymentStatus: "Approved"
-        },
-
-        timesheetData9: {
-            week: "18/02/30 – 25/02/30",
-            submissionStatus: "saved",
-            reviewStatus: "Pending",
-            paymentStatus: "Pending"
-        }
-    };
-  
-    localStorage.setItem('pastTimesheets', JSON.stringify(timesheets));
-
-
-    const currentTimesheet = JSON.parse(localStorage.getItem('currentTimesheet'));
-
-
-    // Initialising database values on component mount if values do not exist
-    useEffect(() => {
-        if (!localStorage.getItem('daysWorked')) {
-            localStorage.setItem('daysWorked', JSON.stringify([0, 1, 2, 3, 4, 5, 6]))
-        }
-
-        if (!localStorage.getItem('startWorkHours')) {
-            localStorage.setItem('startWorkHours', "00:00")
-        }
-
-        if (!localStorage.getItem('endWorkHours')) {
-            localStorage.setItem('endWorkHours', "23:00")
-        }
-
-        if (!localStorage.getItem('24HoursWorked')) {
-            localStorage.setItem('24HoursWorked', false)    
-        }
-    }, [])
+    //Retrieve timesheet data
+    const id = 6; // Placeholder for user ID
+    const [timesheets, setTimesheets] = useState([]);
+    const [pastTimesheets, setPastTimesheets] = useState([]);
 
     // Stores whether button has been clicked; determines whether to show timesheet data
     const [isCurrentTimesheetClicked, setIsCurrentTimesheetClicked] = useState(true)
     const [isPastTimesheetsClicked, setIsPastTimesheetsClicked] = useState(true)
 
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await fetchTimesheetsbyID(id);
+                console.log("Data:", data);
+                
+                // Filter current and past timesheets based on end date and submission status
+                const currentDate = new Date();
+                const currentTimesheets = data.filter(ts => {
+                    const endDate = new Date(ts.end_date);
+                    return endDate >= currentDate && !ts.is_submitted;
+                });
+                const pastTimesheets = data.filter(ts => !currentTimesheets.includes(ts));
+
+                setTimesheets(currentTimesheets);
+                setPastTimesheets(pastTimesheets);
+            } catch (error) {
+                console.error('Error fetching timesheets:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    // Define currentTimesheets and pastTimesheets
+    const currentTimesheets = timesheets.filter(ts => ts.current);
+    const pastTimesheetsFiltered = pastTimesheets.filter(ts => !ts.current);
+
+    // console.log("Timesheets:", timesheets);
+    // timesheets.map(timesheet => console.log("Timesheet after fetching:", timesheet.id));
+    
     return (
         <div className='main-con-home'>
             <div className='consultant-home'>
@@ -165,9 +67,8 @@ export default function ConsultantHome() {
                     </div>
                     { isCurrentTimesheetClicked && 
                         <div className='current-timesheet'>
-                            <TimesheetDetails timesheet={currentTimesheet}/>
+                            <TimesheetDetails timesheet={currentTimesheets}/>
                         </div> 
-
                     }
                 </div>
 
@@ -180,7 +81,7 @@ export default function ConsultantHome() {
                         </button>
                     </div>
                     <div className='past-timesheet'>
-                        {isPastTimesheetsClicked && <PastTimesheets/>}
+                        {isPastTimesheetsClicked && <PastTimesheets  pastTimesheets={pastTimesheetsFiltered}/>}
                     </div>
                 </div>
             </div>
