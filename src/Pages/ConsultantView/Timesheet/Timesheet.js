@@ -17,7 +17,9 @@ import { useState, useEffect } from 'react';
 import exportPdf from './exportPdf';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
+// Importing Data from backend
 import {fetchTimesheetsbyID} from '../../../Components/Data/TimesheetData';
 import {fetchEventsByTimesheetID} from '../../../Components/Data/EventsData';
 
@@ -30,6 +32,9 @@ export default function Timesheet() {
     const [timesheetReviewStatus, setTimesheetReviewStatus] = useState(''); 
     const [timesheetPaymentStatus, setTimesheetPaymentStatus] = useState('');
     const { timesheetId } = useParams(); 
+
+    // History hook to redirect user
+    const navigate = useNavigate();
 
     //Fetch the user's timesheet by ID
     useEffect(() => {
@@ -192,6 +197,8 @@ export default function Timesheet() {
             console.log("Success");
             // Update the timesheet status in the UI immediately
             setTimesheetStatus('Not Submitted');
+            // Redirect line manager to home page
+            navigate('/');
         })
         .catch(error => {
             console.error('Error revoking submission:', error);
