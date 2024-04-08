@@ -13,6 +13,15 @@
   margin: auto;
 }
 
+/* Styling addUser inputs, centering on div */
+#addUserForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #1e1e1e;
+    gap: 1.6rem;
+}
+
 /* Styling button used to close event */
 .closeWindow {
   fill: #efecea;
