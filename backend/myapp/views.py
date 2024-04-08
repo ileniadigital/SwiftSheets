@@ -1,19 +1,46 @@
 # Import necessary modules and classes
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User  # type: ignore
 from django.http import HttpResponseRedirect, JsonResponse
-from django.shortcuts import render
-from django.utils import timezone
-from django.urls import reverse
-from rest_framework.response import Response
-from rest_framework import generics, viewsets, permissions, status
-from rest_framework.permissions import IsAuthenticated, AllowAny
-from rest_framework.renderers import TemplateHTMLRenderer
-from rest_framework.decorators import action
+from django.shortcuts import render  # type: ignore
+from django.utils import timezone  # type: ignore
+from django.urls import reverse  # type: ignore
+from rest_framework.response import Response  # type: ignore
+from rest_framework import generics, viewsets, permissions, status  # type: ignore
+from rest_framework.permissions import IsAuthenticated, AllowAny  # type: ignore
+from rest_framework.renderers import TemplateHTMLRenderer  # type: ignore
+from rest_framework.decorators import action, api_view  # type: ignore
 # from rest_framework.decorators import action
-from rest_framework.views import APIView
+from rest_framework.views import APIView  # type: ignore
 from .models import SystemUser, Timesheet, Event, Comment, Notification
 from .serializers import SystemUserSerializer, TimesheetSerializer, EventSerializer, CommentSerializer, NotificationSerializer 
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_POST  # type: ignore
+
+@api_view(['POST'])
+def create_timesheet(request):
+    serializer = TimesheetSerializer(data=request.data)
+    if serializer.is_valid():
+        timesheet = serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])
+def create_events(request, timesheet_id):
+    try:
+        timesheet = Timesheet.objects.get(id=timesheet_id)
+    except Timesheet.DoesNotExist:
+        return Response({'error': 'Timesheet does not exist'}, status=status.HTTP_400_BAD_REQUEST)
+
+    events_data = request.data.get('events', [])
+    for event_data in events_data:
+        event_data['timesheet'] = timesheet_id  # Associate event with the specified timesheet
+        event_serializer = EventSerializer(data=event_data)
+        if event_serializer.is_valid():
+            event_serializer.save()
+        else:
+            return Response(event_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    return Response({'message': 'Events created successfully'}, status=status.HTTP_201_CREATED)
+
 
 # View to create a new user
 class CreateUserView(generics.CreateAPIView):
