@@ -16,7 +16,7 @@ export const fetchTimesheetsAndUsers = async (setTimesheets, setUsers, filter, r
   try {
     const response = await Axios.get(url);
     setTimesheets(response.data);
-    console.log("Timesheets:", response.data);
+    //console.log("Timesheets:", response.data);
     const userIds = new Set(response.data.map(ts => ts.user));
     const userDetails = await fetchUserDetails(Array.from(userIds));
     setUsers(userDetails);
@@ -35,7 +35,7 @@ export const fetchTimesheetsbyID = async (setTimesheets, consultant) => {
 
   try {
     const response = await Axios.get(url);
-    console.log("Timesheets by id:", response.data);
+    //console.log("Timesheets by id:", response.data);
     return response.data;
   } catch (error) {
     console.error('Error fetching timesheets:', error);

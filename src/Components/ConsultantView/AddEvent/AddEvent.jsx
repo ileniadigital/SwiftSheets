@@ -7,7 +7,6 @@ import { IoClose } from "react-icons/io5";
 // Importing useState
 import { useEffect, useState } from 'react';
 import getDate from '../getDate';
-import { fetchEventsByTimesheetID } from '../../Data/EventsData';
 
 export default function AddEvent({componentCaller, addEventHandler, viewedWeek, event}) {
 
@@ -152,21 +151,6 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
     const [concurrentEvent, setConcurrentEvent] = useState(false)
 
     // Handles validation after submit button has abeen pressed handleSubmit(event)
-    
-    //Fetch the user's timesheet by ID
-    useEffect(() => {
-        const fetchEventsData = async () => {
-            try {
-                const timesheetID = 7; // Replace with the actual timesheet ID you want to fetch events for
-                const events = await fetchEventsByTimesheetID(setEvents, timesheetID);
-                console.log('Fetched events:', events); // Log the fetched events
-            } catch (error) {
-                console.error('Error fetching events:', error);
-            }
-        };
-    
-        fetchEventsData();
-    }, []);
 
     return(
         <div className='add-event'>

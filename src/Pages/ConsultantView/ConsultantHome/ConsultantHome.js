@@ -50,9 +50,9 @@ export default function ConsultantHome() {
 
     // Define currentTimesheets and pastTimesheets
     const currentTimesheets = timesheets.filter(ts => ts.current);
-    console.log("Current Timesheets:", currentTimesheets);
+    //console.log("Current Timesheets:", currentTimesheets);
     const pastTimesheetsFiltered = pastTimesheets.filter(ts => !ts.current);
-    console.log("Past Timesheets:", pastTimesheetsFiltered);
+    //console.log("Past Timesheets:", pastTimesheetsFiltered);
 
     // console.log("Timesheets:", timesheets);
     // timesheets.map(timesheet => console.log("Timesheet after fetching:", timesheet.id));
