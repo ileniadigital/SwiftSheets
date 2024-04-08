@@ -225,11 +225,10 @@ button {
 .empty-error {
   padding-top: 1rem;
   padding-right: 1rem;
-  background-color: #1e1e1e;
+  background-color: #f7f6f5;
   width: 36rem;
   border-radius: 2rem;
-  border: 0.3rem solid #a7d900;
-  fill: #efecea;
+  border: 0.1rem solid #1e1e1e;
   padding-bottom: 2rem;
   margin-top: 1rem;
   position: absolute;
@@ -250,6 +249,7 @@ button {
 }
 
 .empty-error svg:hover {
+  transform: scale(1.4);
   fill: #a7d900;
 }
 
@@ -257,7 +257,7 @@ button {
 .empty-error svg {
   height: 2rem;
   width: 2rem;
-  fill: #efecea;
+  fill: #1e1e1e;
 }
 
 /* Styling container */
@@ -269,4 +269,8 @@ button {
 .consultant-view .submit-button:not([disabled]):hover, .done:hover {
   background-color: #1e1e1e;
   color: #f7f6f5;
+}
+
+option span {
+  background-color: red;
 }
