@@ -1,6 +1,6 @@
 # Import necessary modules and classes
 from django.contrib.auth.models import User  # type: ignore
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse # type: ignore
 from django.shortcuts import render  # type: ignore
 from django.utils import timezone  # type: ignore
 from django.urls import reverse  # type: ignore
