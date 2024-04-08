@@ -26,7 +26,7 @@ export const fetchTimesheetsAndUsers = async (setTimesheets, setUsers, filter, r
 };
 
 // Fetch timesheets by user ID
-export const fetchTimesheetsbyID= async (setTimesheets, consultant) => {
+export const fetchTimesheetsbyID = async (setTimesheets, consultant) => {
   let url = 'http://localhost:8000/timesheet/';
 
   if (consultant) {

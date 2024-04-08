@@ -74,13 +74,6 @@ class Event(models.Model):
     timesheet = models.ForeignKey(Timesheet, on_delete=models.CASCADE, related_name='events')
     note = models.TextField(blank=True, default='')  # Default note
 
-    def save(self, *args, **kwargs):
-        start = datetime.combine(date.today(), self.start_time)
-        end = datetime.combine(date.today(), self.end_time)
-        duration = (end - start).total_seconds() / 3600
-        self.duration = round(duration, 2)
-        super().save(*args, **kwargs)
-
     def __str__(self):
         return f"{self.id} - {self.name} - {self.type} - {self.duration}"
 

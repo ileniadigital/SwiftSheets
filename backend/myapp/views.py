@@ -199,12 +199,28 @@ class EventViewset(viewsets.ViewSet):
             return Response(serializer.errors, status=400)
 
     # Retrieve list of all events
+    #def list(self, request):
+    #    queryset = self.queryset
+    #    serializer = self.serializer_class(queryset, many=True)
+    #    return Response(serializer.data)
+
     def list(self, request):
-        queryset = self.queryset
-        serializer = self.serializer_class(queryset, many=True)
+        timesheet_id = request.query_params.get('timesheet_id')
+        
+        if timesheet_id:
+            try:
+                timesheet = Timesheet.objects.get(id=timesheet_id)
+            except Timesheet.DoesNotExist:
+                return Response({'error': 'Timesheet does not exist'}, status=status.HTTP_400_BAD_REQUEST)
+            
+            events = timesheet.events.all()  # Assuming related_name is 'events'
+        else:
+            events = Event.objects.all()
+        
+        serializer = self.serializer_class(events, many=True)
         return Response(serializer.data)
     
-   # Create a new event
+    # Create a new event
     def create(self, request):
         # Extract timesheet_id from request data
         timesheet_id = request.data.get('timesheet_id')
@@ -224,35 +240,6 @@ class EventViewset(viewsets.ViewSet):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        
-    @require_POST
-    def save_event(request):
-        data = request.POST  # Assuming you're sending form data from React
-        
-        # Get the Timesheet ID from the form data
-        timesheet_id = data.get('timesheet_id')
-        
-        # Retrieve the Timesheet instance
-        timesheet = Timesheet.objects.get(id=timesheet_id)
-        
-        # Create the Event instance and associate it with the Timesheet
-        event = Event.objects.create(
-            timesheet=timesheet,
-            date=data.get('date'),
-            duration=data.get('duration'),
-            name=data.get('name'),
-            type=data.get('type'),
-            category=data.get('category'),
-            is_recurring=data.get('is_recurring')
-        )
-        return JsonResponse({'message': 'Event saved successfully'})
-        
-    # def post(self, request, format=None):
-    #     serializer = EventSerializer(data=request.data)
-    #     if serializer.is_valid():
-    #         serializer.save()
-    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
-    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     # Retrieve a specific event
     def retrieve(self, request, pk=None):
