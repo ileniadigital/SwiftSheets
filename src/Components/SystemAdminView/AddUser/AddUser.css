@@ -82,6 +82,7 @@
   margin-top: 3rem;
   margin-left: 40%;
   background-color: #c5ff00;
+  border: 0.1rem solid #c5ff00;
   color: #1e1e1e;
   width: 9rem;
   height: 3rem;
@@ -96,3 +97,30 @@
   color: #1e1e1e;
   border: 0.1rem solid #1e1e1e;
 }
+
+/* Positioning for the visibility toggle */
+#passDiv {
+  position: relative;
+}
+ 
+
+.addUsericon {
+  position: absolute;
+  top: 20%;
+  left: 95%;
+  z-index: 1;
+}
+
+/* sets styling for the visibility toggle */
+.eye {
+  color: #000;
+  background-color: #FFF;
+  left: 50%;
+  top: 50%;
+  cursor: pointer;
+}
+
+.eye:hover {
+  color: #c5ff00;
+}
+

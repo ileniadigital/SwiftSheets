@@ -56,9 +56,9 @@ export default function SystemAdminView() {
     }
 
     // Converts the given data into JSON and adds it to the user list (updates local storage)
-    const handleAddUserSubmit = (name, username, userType) => {
+    const handleAddUserSubmit = (firstname, lastname, username, userType, password) => {
         var newUserList = [...userList]
-        var newEntry = `{ "name":"${name}" , "username":"${username}" , "userType":"${userType}" }`
+        var newEntry = `{ "firstname":"${firstname}" , "lastname":"${lastname}" , "username":"${username}" , "userType":"${userType}", "password":"${password}" }`
         var jsonEntry = JSON.parse(newEntry)
         newUserList.push(jsonEntry)
         setUserList(newUserList)

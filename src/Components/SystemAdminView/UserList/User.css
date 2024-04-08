@@ -1,14 +1,12 @@
 .manageUser {
     color: #1e1e1e;
-    padding: 0.5rem;
-    border-radius: 1rem;
     border: 0.2rem solid #c5ff00;
+    border-radius: 1.5rem;
     background-color: #c5ff00;
     width: fit-content;
     justify-content: center;
     margin: auto;
-  }
-
+  } 
 .manageUser:hover {
     background-color: #f7f6f5;
     color: #1e1e1e;
@@ -50,7 +48,6 @@
   line-height: normal;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 1rem;
   background-color: #c5ff00;
   border-radius: 1.5rem;
   padding: 0.5rem;

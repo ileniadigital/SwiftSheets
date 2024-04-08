@@ -4,7 +4,7 @@
     font-size: 1.5rem;
     top: 50%;
     left: 50%;
-    transform: translate(0%,-50%);
+    transform: translate(0%,-35%);
 }
 
 #addUser {
@@ -27,4 +27,5 @@
     text-decoration: none;
     background-color: #1e1e1e;
     color: #f7f6f5;
+    border: 0.2rem solid #1e1e1e;
   }

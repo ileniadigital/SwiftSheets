@@ -24,6 +24,10 @@
   font-size: 2rem;
 }
 
+.closeWindow:hover {
+  border: none;
+}
+
 .closeWindow svg {
   fill: #f7f6f5;
   background-color: #1e1e1e;
@@ -45,6 +49,7 @@
   margin-right: 2rem;
 }
 /* Styling for user details */
+/*
 .detailsTable {
     display: table;
     border-collapse: separate;
@@ -56,6 +61,25 @@
     font-size: 1.5rem;
     font-family: Inter;
     text-align: left;
+} */
+
+#manageUserForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #1e1e1e;
+  gap: 1.6rem;
+}
+
+.manageUserInput {
+  display: flex;
+  flex-shrink: 0;
+  width: 80%;
+  gap: 2.5rem;
+  align-items: center;
+  color: #f7f6f5;
+  margin: 1rem;
+  overflow: hidden;
 }
 
 td {
@@ -63,9 +87,27 @@ td {
   font-size: 1.5rem;
 }
 
+/* Setting label name */
 .label {
+  flex-shrink: 0;
   font-weight: bold;
+  width: 11.3rem;
+  font-size: 1.5rem;
+  text-align: left;
+  color: #f7f6f5;
+  background-color: #1e1e1e;
+  margin-left: 0rem;
 }
+
+.formInputLabel {
+  font-weight: bold;
+  width: 11.3rem;
+  font-size: 1.5rem;
+  text-align: left;
+  color: #f7f6f5;
+  background-color: #1e1e1e;
+}
+
 /* Styling for user details heading*/
 .detailsHeading {
   margin-left: 1.25rem;
@@ -75,7 +117,7 @@ td {
 .inputBox{
   border: 0;
   width: 14rem;
-  margin: auto;
+  margin: 0;
   color: #1e1e1e;
   height: 2rem;
   border-radius: 0.3rem;
@@ -91,8 +133,8 @@ td {
  
 .icon {
   position: absolute;
-  top: 14%;
-  left: 80%;
+  top: 20%;
+  left: 90%;
   z-index: 1;
 }
 
@@ -112,6 +154,11 @@ td {
 /* Flexbox for the bottom row of buttons */
 .buttonFlex {
   display: flex;
+  width: 80%;
+  gap: 2.5rem;
+  align-items: center;
+  color: #f7f6f5;
+  margin: 1rem;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
@@ -123,10 +170,11 @@ td {
   margin-top: 3rem;
   background-color: #c5ff00;
   color: #1e1e1e;
-  width: 10rem;
-  border-radius: 1rem;
+  width: 12rem;
+  height: 3rem;
+  border-radius: 1.5rem;
   font-family: Inter;
-  font-size: 1rem;
+  font-size: 1.5rem;
   border: 0.2rem solid #c5ff00;
 }
 
