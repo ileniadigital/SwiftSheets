@@ -18,16 +18,15 @@ import exportPdf from './exportPdf';
 import { useParams } from 'react-router-dom';
 
 import {fetchTimesheetsbyID} from '../../../Components/Data/TimesheetData';
-import { fetchEventsByTimesheetID } from '../../../Components/Data/EventsData';
+import {fetchEventsByTimesheetID} from '../../../Components/Data/EventsData';
 
 export default function Timesheet() {
     const [timesheet, setTimesheet] = useState(null); 
+    const [events, setEvents] = useState([]);
     const [timesheetStatus, setTimesheetStatus] = useState(''); 
-    let [isSubmitted, setIsSubmitted] = useState(false);
-    let [isSaved, setIsSaved] = useState(false);
+    const [isSaved] = useState(false);
     const [timesheetReviewStatus, setTimesheetReviewStatus] = useState(''); 
     const [timesheetPaymentStatus, setTimesheetPaymentStatus] = useState('');
-    const [events, setEvents] = useState([]);
     const { timesheetId } = useParams(); 
 
     //Fetch the user's timesheet by ID
@@ -35,21 +34,19 @@ export default function Timesheet() {
         const fetchData = async () => {
             try {
                 const userID= 6;
-                const timesheetId = 13;
                 const data = await fetchTimesheetsbyID(userID);
+                
+                const timesheet = data.find(ts => ts.id === parseInt(timesheetId));
+                setTimesheet(timesheet);
+                console.log("Timesheet:", timesheet);
 
                 const events = await fetchEventsByTimesheetID(timesheetId);
                 setEvents(events);
                 console.log("Events:", events);
-                
-                const timesheet = data.find(ts => ts.id === parseInt(timesheetId));
-                setTimesheet(timesheet);
-                //console.log("Timesheet:", timesheet);
 
                 if (timesheet){
                     //Set timesheet status based on submission and save status
                     if (timesheet.is_submitted) {
-                        isSubmitted = true;
                         setTimesheetStatus('Submitted');
                     } else {
                         if (isSaved) {
@@ -259,8 +256,8 @@ export default function Timesheet() {
                     <p>Payment Status <span className={"status " + timesheetPaymentStatus.toLowerCase()}>{timesheetPaymentStatus}</span></p>
                 </div>
                 <div className='buttons'>
-                    <button className='submit-button' onClick={handleSubmission} disabled = {isSubmitted} >{timesheetStatus === "Submitted" ? "Submitted" : "Submit"}</button>
-                    <button className='submit-button' onClick={() => {setTimesheetStatus("Saved"); isSaved=true;}} disabled = {isSubmitted}>Save</button>
+                    <button className='submit-button' onClick={handleSubmission} disabled = {timesheetStatus === "Submitted"} >{timesheetStatus === "Submitted" ? "Submitted" : "Submit"}</button>
+                    <button className='submit-button' onClick={() => setTimesheetStatus("Saved")} disabled = {timesheetStatus === "Submitted"}>Save</button>
                     <button className='submit-button' onClick={() => exportPdf(document.querySelector('body'))}>PDF Export</button>
                 </div>
             </div>
