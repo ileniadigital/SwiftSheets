@@ -10,18 +10,16 @@ import Home from './Pages/Home';
 import Name from './Components/NavBar/Name';
 import SystemAdminView from './Pages/SystemAdminView';
 import ConsultantSettings from './Pages/ConsultantView/ConsultantSettings/ConsultantSettings';
-import Settings from './Pages/ConsultantView/ConsultantSettings/ConsultantSettings';
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import getDate from './Components/ConsultantView/getDate';
 import Reminder from './Components/ConsultantView/Reminder/Reminder';
-import { BrowserRouter, Routes, Route } from 'react-router-dom'; // Import BrowserRouter
 
-
+// Role of user
+const role='consultant';
 
 // Main App component
 export default function App() {
-  const role='consultant';
 
   // State to manage completion reminder
   const [completionReminderDate, setCompletionReminderDate] = useState(() => {
@@ -193,17 +191,47 @@ export default function App() {
           } 
         }
     }, []);
+
+  // Render page based on location
+  let page
+  switch (window.location.pathname) {
+    // default:
+    //   page= <LogIn/>
+    //   break
+    case "/Home":
+    case "/":
+      page= <Home view={role}/>
+      break
+    case "/Account":
+      page= <Account/>
+      break
+    case "/Settings":
+      page= <ConsultantSettings/>
+      break
+    case "/timesheet":
+      page = <Timesheet
+      completionReminderDate={completionReminderDate}
+      setCompletionReminderDate = {setCompletionReminderDate} 
+      completionReminderTime={completionReminderTime}
+      setCompletionReminderTime={setCompletionReminderTime}
+      timesheetCompletionReminder = {timesheetCompletionReminder}
+      setTimesheetCompletionReminder={setTimesheetCompletionReminder}
+      />
+      break
+    case "/consultantdashboard":
+      page = <ConsultantDashboard/>
+      break
+    case "/systemadminview":
+      page = <SystemAdminView/>
+      break
+  }
+
   return (
-    <React.Fragment>
-      <NavBar/>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/Home" element={<Home role={role} />} />
-          {/* <Route path="/login" element={<Login />} /> */}
-          <Route path="/Account" element={<Account />} />
-          <Route path="/Settings" element={<Settings />} />
-        </Routes>
-      </BrowserRouter>
-    </React.Fragment>
-  );
+    <>
+        <NavBar view={role}/>
+        <Name/>
+        {page}
+        {role === 'consultant' && reminder && <Reminder message={reminderMessage} setReminder={setReminder}/>}
+    </>
+  )
 }

@@ -7,13 +7,11 @@ import { IoClose } from "react-icons/io5";
 // Importing useState
 import { useEffect, useState } from 'react';
 import getDate from '../getDate';
-import AxiosInstance from "../../Axios";
 
 export default function AddEvent({componentCaller, addEventHandler, viewedWeek, event}) {
 
     /* Only needs to be rendered for Timesheet component caller as its viewedWeek
     argument will be a Date, compared to Hours' string */
-
 
     // Determinining date for start of week
     const startDate = getDate(viewedWeek, 1)
@@ -151,7 +149,7 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
     let event1 = event
     const [concurrentEvent, setConcurrentEvent] = useState(false)
 
-    // Handles validation after submit button has abeen pressed
+    // Handles validation after submit button has been pressed
     function handleSubmit(event) {
         const events = JSON.parse(localStorage.getItem("events")) || {}
 
@@ -247,25 +245,6 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
                 event.preventDefault() // Prevent addition of event
             }
         }
-
-        // Values to be added to database
-        //     eventName,
-        //     eventDate,
-        //     eventStartTime,
-        //     eventEndTime,
-        //     eventType,
-        //     eventCategory,
-        //     isRecurring,
-        //     eventNote
-
-        AxiosInstance.post('event/', {
-            date: eventDate,
-            duration: 0.0,
-            name: eventName,
-            type: eventType,
-            category: eventCategory,
-            is_recurring: isRecurring
-        })
     }
 
     // Checking for when values change to let user know times overlap
@@ -501,3 +480,4 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
         </div>
     )
 }
+console.log(JSON.parse(localStorage.getItem("events")));
