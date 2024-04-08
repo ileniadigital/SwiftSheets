@@ -2,31 +2,32 @@
 import './TimesheetDetails.css'
 
 /* Displays timesheet's details */
-export default function TimesheetDetails(timesheet) {
-    const viewedWeek = timesheet.timesheet.week
-    const submissionStatus = timesheet.timesheet.submissionStatus
-    const reviewStatus = timesheet.timesheet.reviewStatus
-    const paymentStatus = timesheet.timesheet.paymentStatus
-
+export default function TimesheetDetails({timesheet}) {
+    // const viewedWeek = timesheet.timesheet.week
+    // const submissionStatus = timesheet.timesheet.submissionStatus
+    // const reviewStatus = timesheet.timesheet.reviewStatus
+    // const paymentStatus = timesheet.timesheet.paymentStatus
+    console.log("Timesheet in details:", timesheet)
 
     return (
         <div className="timesheet-details-container">
             <div className='timesheet-details'>
+                <p>Id</p> {timesheet.id}
                 <div>
                     <p className='title'>Date</p>
-                    {viewedWeek}
+                    {timesheet.start_date} - {timesheet.end_date}
                 </div>
                 <div>
                     <p className='title'>Submission Status</p>
-                    {submissionStatus}
+                    {timesheet.is_submitted ? "Submitted" : "Not Submitted"}
                 </div>
                 <div>
                     <p className='title'>Review Status</p>
-                    {reviewStatus}
+                    {timesheet.review_status}
                 </div>
                 <div>
                     <p className='title'>Payment Status</p>
-                    {paymentStatus}
+                    {timesheet.payment_status}
                 </div>
             </div>
             {/* Button redirects user to current timesheet */}

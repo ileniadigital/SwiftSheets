@@ -27,13 +27,14 @@ export default function ConsultantHome() {
         const fetchData = async () => {
             try {
                 const data = await fetchTimesheetsbyID(id);
-                console.log("Data:", data);
+                //console.log("Data:", data);
                 
                 // Filter current and past timesheets based on end date and submission status
                 const currentDate = new Date();
                 const currentTimesheets = data.filter(ts => {
                     const endDate = new Date(ts.end_date);
-                    return endDate >= currentDate && !ts.is_submitted;
+                    const isSubmitted = ts.is_submitted;
+                    return endDate >= currentDate && !isSubmitted;
                 });
                 const pastTimesheets = data.filter(ts => !currentTimesheets.includes(ts));
 
@@ -49,7 +50,9 @@ export default function ConsultantHome() {
 
     // Define currentTimesheets and pastTimesheets
     const currentTimesheets = timesheets.filter(ts => ts.current);
+    console.log("Current Timesheets:", currentTimesheets);
     const pastTimesheetsFiltered = pastTimesheets.filter(ts => !ts.current);
+    console.log("Past Timesheets:", pastTimesheetsFiltered);
 
     // console.log("Timesheets:", timesheets);
     // timesheets.map(timesheet => console.log("Timesheet after fetching:", timesheet.id));
@@ -67,7 +70,9 @@ export default function ConsultantHome() {
                     </div>
                     { isCurrentTimesheetClicked && 
                         <div className='current-timesheet'>
-                            <TimesheetDetails timesheet={currentTimesheets}/>
+                            {timesheets.map((timesheet, index) => (
+                                <TimesheetDetails key={index} timesheet={timesheet} />
+                            ))}
                         </div> 
                     }
                 </div>
