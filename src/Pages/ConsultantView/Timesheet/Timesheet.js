@@ -21,25 +21,42 @@ import exportPdf from './exportPdf';
 import { useParams } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
-import {fetchTimesheet} from '../../../Components/Data/TimesheetData'
+import {fetchTimesheetsbyID} from '../../../Components/Data/TimesheetData';
+
 export default function Timesheet({completionReminderDate, setCompletionReminderDate, completionReminderTime, setCompletionReminderTime, timesheetCompletionReminder, setTimesheetCompletionReminder}) {
     const [timesheet, setTimesheet] = useState(null); // State to store the fetched timesheet
     const location = useLocation();
-    const { timesheetId } = useParams(); // Assuming you have set up React Router correctly to extract the timesheet ID from the URL
+    const { timesheetId } = useParams(); 
 
+    //Fetch the user's timesheet by ID
     useEffect(() => {
-        const fetchTimesheetData = async () => {
+        const fetchData = async () => {
             try {
-                const timesheetData = await fetchTimesheet(timesheetId); // Fetch timesheet data using the provided ID
-                setTimesheet(timesheetData); // Set the fetched timesheet data to the state
+                const userID= 6;
+                const data = await fetchTimesheetsbyID(userID);
+                
+                const timesheet = data.find(ts => ts.id === parseInt(timesheetId));
+                setTimesheet(timesheet);
+                console.log("Timesheet:", timesheet);
             } catch (error) {
-                console.error('Error fetching timesheet:', error);
+                console.error('Error fetching timesheets:', error);
             }
         };
 
-        fetchTimesheetData(); // Call the fetchTimesheetData function when the component mounts
-    }, [timesheetId]);
+        fetchData();
+    }, []);
 
+
+    // Function to format date
+    //This is also in TimesheetDetails.jsx and it can definitely be called without being defined twice
+    //No time to figure it out now, we got a deadline to meet
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
+    }
     // Getting current timesheet
     // let currentTimesheet = TimeshgetCurrentTimesheet()
 
@@ -163,7 +180,7 @@ export default function Timesheet({completionReminderDate, setCompletionReminder
             {/* Creating page header */}
             <div className='consultant-view-header'>
                 <p> 
-                    {startOfWeek} – {endOfWeek}
+                    {timesheet && formatDate(timesheet.start_date)} – {timesheet && formatDate(timesheet.end_date)}
                 </p>
                 <button className='add-event-button' disabled = {timesheetStatus === "Submitted"} onClick={() => addEventHandler("Timesheet", viewedWeek)}> 
                     <FaCirclePlus /> {/* Button icon */}
