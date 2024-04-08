@@ -265,8 +265,8 @@ button {
   margin-left: auto;
 }
 
-
-.consultant-view .submit-button:hover, .done:hover {
+/* Styling buttons */
+.consultant-view .submit-button:not([disabled]):hover, .done:hover {
   background-color: #1e1e1e;
   color: #f7f6f5;
 }
