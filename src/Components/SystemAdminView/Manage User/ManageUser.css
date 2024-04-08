@@ -41,14 +41,21 @@
   margin-bottom: 2.5rem;
 }
 
+#col1 {
+  margin-right: 2rem;
+}
 /* Styling for user details */
 .detailsTable {
-  display: table;
-  border-collapse: separate;
-  box-sizing: border-box;
-  text-indent: initial;
-  border-spacing: 0.125rem;
-  margin-left: 1.25rem;
+    display: table;
+    border-collapse: separate;
+    box-sizing: border-box;
+    text-indent: initial;
+    border-spacing: 0.125rem;
+    border-color: gray;
+    margin-left: 1.25rem;
+    font-size: 1.5rem;
+    font-family: Inter;
+    text-align: left;
 }
 
 td {
@@ -62,4 +69,83 @@ td {
 /* Styling for user details heading*/
 .detailsHeading {
   margin-left: 1.25rem;
+}
+
+/* Styling for all input boxes */
+.inputBox{
+  border: 0;
+  width: 14rem;
+  margin: auto;
+  color: #1e1e1e;
+  height: 2rem;
+  border-radius: 0.3rem;
+  font-family: Inter;
+  font-size: 1.3rem;
+  box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Positioning for the visibility toggle */
+#passDiv {
+  position: relative;
+}
+ 
+.icon {
+  position: absolute;
+  top: 14%;
+  left: 80%;
+  z-index: 1;
+}
+
+/* sets styling for the visibility toggle */
+.eye {
+  color: #000;
+  background-color: #FFF;
+  left: 50%;
+  top: 50%;
+  cursor: pointer;
+}
+
+.eye:hover {
+  color: #c5ff00;
+}
+
+/* Flexbox for the bottom row of buttons */
+.buttonFlex {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+/* Styling for the updateUser button */
+.updateUserButton {
+  margin: auto;
+  margin-top: 3rem;
+  background-color: #c5ff00;
+  color: #1e1e1e;
+  width: 10rem;
+  border-radius: 1rem;
+  font-family: Inter;
+  font-size: 1rem;
+  border: 0.2rem solid #c5ff00;
+}
+
+/* Adding styling on hover */
+.updateUserButton:hover {
+  background-color: white;
+  color: black;
+  border: 0.2rem solid white;
+}
+
+/* Styling error message */
+.errorMessage {
+  position: relative;
+  margin-inline: auto;
+  left: 1.3rem;
+  color: #efecea;
+  background-color: red;
+  padding: 0.4rem;
+  border-radius: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
