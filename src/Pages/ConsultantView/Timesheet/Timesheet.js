@@ -21,6 +21,7 @@ import {fetchTimesheetsbyID} from '../../../Components/Data/TimesheetData';
 import {fetchEventsByTimesheetID} from '../../../Components/Data/EventsData';
 
 export default function Timesheet() {
+    const role='linemanager' // Placeholder for user role
     const [timesheet, setTimesheet] = useState(null); 
     const [events, setEvents] = useState([]);
     const [timesheetStatus, setTimesheetStatus] = useState(''); 
@@ -181,6 +182,12 @@ export default function Timesheet() {
         }
     }
 
+    // Function to handle revoking submission
+    const handleRevokeSubmission = () => {
+        // Logic to revoke submission
+        setTimesheetStatus('Not Submitted');
+        // Additional logic if needed
+    };
     return (
         localStorage.getItem('daysWorked') !== "[]" ? (
         <div className = 'consultant-view'>
@@ -256,6 +263,12 @@ export default function Timesheet() {
                     <p>Payment Status <span className={"status " + timesheetPaymentStatus.toLowerCase()}>{timesheetPaymentStatus}</span></p>
                 </div>
                 <div className='buttons'>
+                    {/* Revoke Button for line manager */}
+                    {role === 'linemanager' && timesheet && timesheet.is_submitted && (
+                        <button className='submit-button' onClick={handleRevokeSubmission}>
+                            Revoke
+                        </button>
+                    )}
                     <button id='submit-button' className='submit-button' disabled={timesheet && timesheet.is_submitted} onClick={handleSubmission}>
                         {timesheet && timesheet.is_submitted ? "Submitted" : "Submit"}
                     </button>

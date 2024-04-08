@@ -13,12 +13,20 @@ export default function TimesheetListView(props) {
   const [timesheets, setTimesheets] = useState([]);
   const [users, setUsers] = useState({});
   const [filter, setFilter] = useState("pending");
+  const [submittedTimesheets, setSubmittedTimesheets] = useState([]);
+
 
   useEffect(() => {
     // Pass role to fetchTimesheetsAndUsers function
     fetchTimesheetsAndUsers(setTimesheets, setUsers, filter, role);
+  }, [filter, role]); // Include filter and role in the dependency array
 
-  }, [filter]); // Include role in the dependency array
+  // Separate useEffect for filtering timesheets
+  useEffect(() => {
+    // Filter timesheets by submitted only
+    const filteredTimesheets = timesheets.filter(timesheet => timesheet.is_submitted === true);
+    setSubmittedTimesheets(filteredTimesheets);
+  }, [timesheets]); // Include timesheets in the dependency array
 
   const handleFilterChange = (selectedFilter) => {
     setFilter(selectedFilter);
@@ -58,6 +66,7 @@ export default function TimesheetListView(props) {
   };
   
 
+
   return (
     <div className='container'>
       <div className='menu-container'>
@@ -83,7 +92,7 @@ export default function TimesheetListView(props) {
       </div>
       {/* Displaying consultant timesheets */}
         <div className='timesheet-container'>
-          {timesheets.map(timesheet => (
+          {submittedTimesheets.map(timesheet => (
             <ConsultantTimesheet
               key={timesheet.id}
               id={timesheet.id}
