@@ -3,16 +3,10 @@ import './TimesheetDetails.css'
 
 /* Displays timesheet's details */
 export default function TimesheetDetails({timesheet}) {
-    // const viewedWeek = timesheet.timesheet.week
-    // const submissionStatus = timesheet.timesheet.submissionStatus
-    // const reviewStatus = timesheet.timesheet.reviewStatus
-    // const paymentStatus = timesheet.timesheet.paymentStatus
-    console.log("Timesheet in details:", timesheet)
 
     return (
         <div className="timesheet-details-container">
             <div className='timesheet-details'>
-                <p>Id</p> {timesheet.id}
                 <div>
                     <p className='title'>Date</p>
                     {timesheet.start_date} - {timesheet.end_date}
