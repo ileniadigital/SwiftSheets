@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Inter;
+  font-family: "Inter";
   text-decoration: none;
 }
 
@@ -28,14 +28,15 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #c5ff00;
+  background-color: #a7d900;
   border-radius: 0.6rem;
 }
 
 /* Basic common styling */
 body {
-  background-color: #1e1e1e;
-  color: white;
+  background-color: #f7f6f5;
+  color: #1e1e1e;
+  width: 100%;
 }
 
 h1,
@@ -50,4 +51,10 @@ option,
 input,
 button {
   font-family: "Inter", sans-serif;
+}
+
+button:hover {
+  background-color: #1e1e1e;
+  color: #f7f6f5;
+  border: 0.2rem solid #1e1e1e;
 }
