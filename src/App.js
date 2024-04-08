@@ -15,7 +15,7 @@ import CompletionReminder from './Components/ConsultantView/Reminder/CompletionR
 import StartReminder from './Components/ConsultantView/Reminder/StartReminder';
 
 //ADD ROUTING BASED ON ROLE FROM DB
-const role='financeteam';
+const role='consultant';
 
 
 // Main App component
