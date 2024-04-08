@@ -5,16 +5,25 @@ import Status from "./Status";
 import Date from './Date';
 import ConsultantName from './ConsultantName';
 
+import { useState } from 'react';
+
 // Consultant Timesheet component for Line Manager and Finance Team Member
 export default function ConsultantTimesheet(props) {
     const { id, name, dates, reviewStatus, paymentStatus, role, onUpdateStatus } = props;
+    const [isTimesheetOpen, setIsTimesheetOpen] = useState(false);
+
+    const handleViewTimesheet = () => {
+        setIsTimesheetOpen(true);
+        // Additional logic to fetch and display the timesheet details
+        // You can pass the timesheet id to the parent component to fetch details if needed
+    };
   
     const handleStatusUpdate = (newStatus) => {
       onUpdateStatus(id, newStatus); // Call the parent function with the timesheet id and new status
     };
     return (
       <div className="consultantTimesheet-container">
-        <button className="view-icon">
+        <button className="view-icon" onClick={handleViewTimesheet}>
           <GrView size={30} className="icon" />
         </button>
         <ConsultantName name={name} />
