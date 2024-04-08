@@ -138,3 +138,19 @@ body {
   margin-bottom:360px;
   text-align: center;
 }
+
+.instruction-text {
+  color: #333; 
+  font-size: 18px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.success-message {
+  color: #fff;
+  background-color: #28a745;
+  font-size: 14px;
+  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
+}
