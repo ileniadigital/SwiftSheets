@@ -20,7 +20,11 @@ import { useParams } from 'react-router-dom';
 import {fetchTimesheetsbyID} from '../../../Components/Data/TimesheetData';
 
 export default function Timesheet() {
-    const [timesheet, setTimesheet] = useState(null); // State to store the fetched timesheet
+    const [timesheet, setTimesheet] = useState(null); 
+    const [timesheetStatus, setTimesheetStatus] = useState(''); 
+    const [isSaved] = useState(false);
+    const [timesheetReviewStatus, setTimesheetReviewStatus] = useState(''); 
+    const [timesheetPaymentStatus, setTimesheetPaymentStatus] = useState('');
     const { timesheetId } = useParams(); 
 
     //Fetch the user's timesheet by ID
@@ -34,11 +38,27 @@ export default function Timesheet() {
                 setTimesheet(timesheet);
                 console.log("Timesheet:", timesheet);
 
-                if (timesheet && timesheet.completion_reminder) {
-                    setTimesheetCompletionReminder(true)
-                    setCompletionReminderDate(timesheet.completion_reminder_date)
-                    setCompletionReminderTime(timesheet.completion_reminder_time)
+                if (timesheet){
+                    //Set timesheet status based on submission and save status
+                    if (timesheet.is_submitted) {
+                        setTimesheetStatus('Submitted');
+                    } else {
+                        if (isSaved) {
+                            setTimesheetStatus('Saved');
+                        } else {
+                            setTimesheetStatus('Not Saved');
+                        }
+                    }
+                    setTimesheetReviewStatus(timesheet.review_status);
+                    setTimesheetPaymentStatus(timesheet.payment_status);
+                    if  (timesheet.completion_reminder) {
+                        setTimesheetCompletionReminder(timesheet.completion_reminder);
+                        setCompletionReminderDate(timesheet.completion_reminder_date);
+                        setCompletionReminderTime(timesheet.completion_reminder_time);
+    
+                    }
                 }
+
             } catch (error) {
                 console.error('Error fetching timesheets:', error);
             }
@@ -46,10 +66,10 @@ export default function Timesheet() {
 
         fetchData();
     }, [timesheetId]);
+
+    console.log("Review:", timesheetReviewStatus);
     
     // Setting the date for the reminder
-    const [reminderError, setReminderError] = useState(false);
-    const [currentTime, setCurrentTime] = useState('');
     const [completionReminderDate, setCompletionReminderDate] = useState('');
     const [completionReminderTime, setCompletionReminderTime] = useState('');
     const [timesheetCompletionReminder, setTimesheetCompletionReminder] = useState(false);
@@ -83,7 +103,6 @@ export default function Timesheet() {
             return false; // Reminder is not before current time and day
         }
     }
-    
 
     // Function to format date
     //This is also in TimesheetDetails.jsx and it can definitely be called without being defined twice
@@ -113,12 +132,6 @@ export default function Timesheet() {
 
     // Enables relevant screen to be displayed when the + button is clicked 
     const [addEventClicked, setAddEventClicked] = useState(false);
-
-
-    //  Used to control timesheet submission
-    const [timesheetStatus, setTimesheetStatus] = useState("Unsubmitted") // Allows timesheet to become uneditable if submitted
-    const [timesheetReviewStatus, setTimesheetReviewStatus] = useState("Pending")
-    const [timesheetPaymentStatus, setTimesheetPaymentStatus] = useState("Pending")
 
     // When add event is clicked, add event screen is shown, with the details based on the component it is called by
     const addEventHandler = (componentCaller1, addEventViewedWeek1, event) => {

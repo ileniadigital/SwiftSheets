@@ -1,7 +1,8 @@
+import '../Components/TimesheetListView/TimesheetListView.css'; // Import styling
+
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 import ConsultantTimesheet from '../Components/TimesheetListView/ConsultantTimesheet/ConsultantTimesheet';
-import '../Components/TimesheetListView/TimesheetListView.css'; // Import styling
 import Filters from '../Components/TimesheetListView/Filters/Filters';
 import { fetchTimesheetsAndUsers } from '../Components/Data/TimesheetData';
 
