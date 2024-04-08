@@ -201,7 +201,7 @@ export default function Hours({addEventHandler, date, timesheetStatus}) {
             onMouseLeave={handleMouseLeave}
             disabled={timesheetStatus === "Submitted"}>
                 <div className= 'event-container'>
-                    {numberOfEvents === 0 && hoveredHour === i && <FaCirclePlus/>} {/* Show add event button if hour hovered over */}
+                    {numberOfEvents === 0 && hoveredHour === i && timesheetStatus !== "Submitted" && <FaCirclePlus/>} {/* Show add event button if hour hovered over */}
                     {eventsPerHour}
                 </div>
             </div>)
