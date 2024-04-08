@@ -68,6 +68,7 @@ class Event(models.Model):
     type = models.CharField(max_length=20, choices=EVENT_TYPE_CHOICES, default='Normal')  # Default type
     category = models.CharField(max_length=20, choices=EVENT_CATEGORY_CHOICES, default='Planning')  # Default category
     is_recurring = models.BooleanField(default=False)
+    timesheet= models.ForeignKey(Timesheet, on_delete=models.CASCADE, related_name='events')
     #note = models.TextField(blank=True, default='')  # Default note
 
     def __str__(self):

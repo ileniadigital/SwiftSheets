@@ -13,6 +13,7 @@ from rest_framework.decorators import action
 from rest_framework.views import APIView
 from .models import SystemUser, Timesheet, Event, Comment, Notification
 from .serializers import SystemUserSerializer, TimesheetSerializer, EventSerializer, CommentSerializer, NotificationSerializer 
+from django.views.decorators.http import require_POST
 
 # View to create a new user
 class CreateUserView(generics.CreateAPIView):
@@ -176,14 +177,48 @@ class EventViewset(viewsets.ViewSet):
         serializer = self.serializer_class(queryset, many=True)
         return Response(serializer.data)
     
-    # Create a new event
+   # Create a new event
     def create(self, request):
+        # Extract timesheet_id from request data
+        timesheet_id = request.data.get('timesheet_id')
+        
+        # Check if the timesheet exists
+        try:
+            timesheet = Timesheet.objects.get(id=timesheet_id)
+        except Timesheet.DoesNotExist:
+            return Response({'error': 'Timesheet does not exist'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Associate the event with the timesheet
+        request.data['timesheet'] = timesheet_id
+        
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
-            return Response(serializer.errors, status=400)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+    @require_POST
+    def save_event(request):
+        data = request.POST  # Assuming you're sending form data from React
+        
+        # Get the Timesheet ID from the form data
+        timesheet_id = data.get('timesheet_id')
+        
+        # Retrieve the Timesheet instance
+        timesheet = Timesheet.objects.get(id=timesheet_id)
+        
+        # Create the Event instance and associate it with the Timesheet
+        event = Event.objects.create(
+            timesheet=timesheet,
+            date=data.get('date'),
+            duration=data.get('duration'),
+            name=data.get('name'),
+            type=data.get('type'),
+            category=data.get('category'),
+            is_recurring=data.get('is_recurring')
+        )
+        return JsonResponse({'message': 'Event saved successfully'})
         
     # def post(self, request, format=None):
     #     serializer = EventSerializer(data=request.data)
