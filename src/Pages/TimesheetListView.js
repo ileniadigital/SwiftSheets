@@ -1,23 +1,25 @@
+import '../Components/TimesheetListView/TimesheetListView.css'; // Import styling
+
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 import ConsultantTimesheet from '../Components/TimesheetListView/ConsultantTimesheet/ConsultantTimesheet';
-import '../Components/TimesheetListView/TimesheetListView.css'; // Import styling
 import Filters from '../Components/TimesheetListView/Filters/Filters';
-import { fetchTimesheetsAndUsers } from '../Components/Data/TimesheetData'; // Adjust the path as necessary
+import { fetchTimesheetsAndUsers } from '../Components/Data/TimesheetData';
 
 export default function TimesheetListView(props) {
   const role = props.role;
-  console.log("Role is:", role)
   const [timesheets, setTimesheets] = useState([]);
   const [users, setUsers] = useState({});
   const [filter, setFilter] = useState("pending");
 
   useEffect(() => {
-    fetchTimesheetsAndUsers(setTimesheets, setUsers, filter);
-  }, [filter]);
+    // Pass role to fetchTimesheetsAndUsers function
+    fetchTimesheetsAndUsers(setTimesheets, setUsers, filter, role);
+  }, [filter]); // Include role in the dependency array
 
-  console.log("Timesheets:", timesheets);
-  timesheets.map(timesheet => console.log("Timesheet:", timesheet.id));
+
+  // console.log("Timesheets:", timesheets);
+  // timesheets.map(timesheet => console.log("Timesheet:", timesheet.id));
   const handleFilterChange = (selectedFilter) => {
     setFilter(selectedFilter);
   };
@@ -57,7 +59,6 @@ export default function TimesheetListView(props) {
       });
   };
   
-
 
   return (
     <div className='container'>

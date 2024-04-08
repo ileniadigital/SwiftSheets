@@ -34,7 +34,7 @@ SECRET_KEY = 'django-insecure-bs)myop02d=b(k+i*2jmzu-ujpug*$=xpk%sh$wnl+ckyt=sjz
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['*']
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
@@ -44,6 +44,7 @@ REST_FRAMEWORK = {
     ),
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
+        'rest_framework.permissions.IsAdminUser'
     ],
 }
 
@@ -63,6 +64,7 @@ INSTALLED_APPS = [
     'myapp.apps.MyappConfig', # added the my app
     'rest_framework',
     'corsheaders',
+    'django_extensions', # added for debugging
 ]
 
 MIDDLEWARE = [
