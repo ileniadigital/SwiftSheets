@@ -32,6 +32,15 @@ class SystemUserViewSet(viewsets.ViewSet):
     #     serializer = self.serializer_class(queryset, many=True)
     #     return Response(serializer.data)
 
+    def partial_update(self, request, pk=None):
+        system_user = self.queryset.get(pk=pk)
+        serializer = self.serializer_class(system_user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=400)
+
     def list(self, request):
         queryset = self.queryset
         email = request.query_params.get('email')
@@ -77,20 +86,35 @@ class TimesheetViewSet(viewsets.ViewSet):
     queryset = Timesheet.objects.all()
     serializer_class = TimesheetSerializer
 
-    # Retrieve list of all timesheets
     def list(self, request, *args, **kwargs):
+        # Check if the query parameter is for review_status or payment_status
         review_status = request.query_params.get('review_status')
+        payment_status = request.query_params.get('payment_status')
+
         if review_status:
             if review_status.lower() == 'all':
                 queryset = Timesheet.objects.all()
             else:
                 queryset = Timesheet.objects.filter(review_status=review_status.capitalize())
+        elif payment_status:
+            if payment_status.lower() == 'all':
+                queryset = Timesheet.objects.all()
+            else:
+                queryset = Timesheet.objects.filter(payment_status=payment_status.capitalize())
         else:
             queryset = Timesheet.objects.all()
         
         serializer = self.serializer_class(queryset, many=True)
         return Response(serializer.data)
-
+    
+    def partial_update(self, request, pk=None):
+        timesheet = self.queryset.get(pk=pk)
+        serializer = self.serializer_class(timesheet, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=400)
 
     # Create a new timesheet
     def create(self, request):
@@ -136,6 +160,15 @@ class EventViewset(viewsets.ViewSet):
     permission_classes = [permissions.AllowAny]
     queryset = Event.objects.all()
     serializer_class = EventSerializer
+
+    def partial_update(self, request, pk=None):
+        event = self.queryset.get(pk=pk)
+        serializer = self.serializer_class(event, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=400)
 
     # Retrieve list of all events
     def list(self, request):
@@ -187,6 +220,15 @@ class CommentViewSet(viewsets.ViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
 
+    def partial_update(self, request, pk=None):
+        comment = self.queryset.get(pk=pk)
+        serializer = self.serializer_class(comment, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=400)
+
     # Retrieve list of all comments
     def list(self, request):
         queryset = self.queryset
@@ -229,6 +271,15 @@ class NotificationViewSet(viewsets.ViewSet):
     permission_classes = [permissions.AllowAny]
     queryset = Notification.objects.all()
     serializer_class = NotificationSerializer
+
+    def partial_update(self, request, pk=None):
+        notification = self.queryset.get(pk=pk)
+        serializer = self.serializer_class(notification, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=400)
 
     # Retrieve list of all notifications
     def list(self, request):

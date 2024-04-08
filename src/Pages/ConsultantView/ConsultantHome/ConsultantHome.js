@@ -1,6 +1,5 @@
 // Importing CSS
 import './ConsultantHome.css'
-import '../../../Components/general.css'
 
 // Importing dropdown menu icons
 import { IoIosArrowDropupCircle } from "react-icons/io";

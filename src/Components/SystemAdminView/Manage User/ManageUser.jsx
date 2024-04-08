@@ -61,7 +61,7 @@ export default function ManageUser ({ index, manageUserHandler, userList, remove
             {/* Adds close button that toggles the window*/}
             <button className = "closeWindow" onClick={() => manageUserHandler(index, userList)}><IoClose /></button>
             <h1 className='manageUserHeading'>Manage User</h1>
-            <h3 className ='detailsHeading'>Personal Details</h3>
+            <h2 className ='detailsHeading'>Personal Details</h2>
             {/* Creates a 2 column table for the user data*/}
             <form action="" id='manageUserForm' onSubmit={handleSubmitValidation}>
                 <table className='detailsTable'>
