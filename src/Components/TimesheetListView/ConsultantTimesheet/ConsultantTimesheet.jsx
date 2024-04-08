@@ -6,6 +6,7 @@ import Date from './Date';
 import ConsultantName from './ConsultantName';
 
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 // Consultant Timesheet component for Line Manager and Finance Team Member
 export default function ConsultantTimesheet(props) {
@@ -23,9 +24,9 @@ export default function ConsultantTimesheet(props) {
     };
     return (
       <div className="consultantTimesheet-container">
-        <button className="view-icon" onClick={handleViewTimesheet}>
+        <Link to={{ pathname: `/timesheet/${id}` }} className="view-icon" onClick={handleViewTimesheet}>
           <GrView size={30} className="icon" />
-        </button>
+        </Link>
         <ConsultantName name={name} />
         <Date dates={dates} />
         {/* Review status */}
@@ -35,7 +36,7 @@ export default function ConsultantTimesheet(props) {
           onUpdateStatus={handleStatusUpdate} // Pass the callback function
         />
         {/* Payment status */}
-        <Status status={paymentStatus} editable={role == 'financeteam'} onUpdateStatus={handleStatusUpdate} />
+        <Status status={paymentStatus} editable={role === 'financeteam'} onUpdateStatus={handleStatusUpdate} />
       </div>
     );
   }

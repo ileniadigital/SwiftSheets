@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 import ConsultantTimesheet from '../Components/TimesheetListView/ConsultantTimesheet/ConsultantTimesheet';
 import Filters from '../Components/TimesheetListView/Filters/Filters';
+
+//Data fetching from backend
 import { fetchTimesheetsAndUsers } from '../Components/Data/TimesheetData';
 
 export default function TimesheetListView(props) {
@@ -15,11 +17,9 @@ export default function TimesheetListView(props) {
   useEffect(() => {
     // Pass role to fetchTimesheetsAndUsers function
     fetchTimesheetsAndUsers(setTimesheets, setUsers, filter, role);
+
   }, [filter]); // Include role in the dependency array
 
-
-  // console.log("Timesheets:", timesheets);
-  // timesheets.map(timesheet => console.log("Timesheet:", timesheet.id));
   const handleFilterChange = (selectedFilter) => {
     setFilter(selectedFilter);
   };
@@ -29,10 +29,8 @@ export default function TimesheetListView(props) {
     let updateField;
     if (role === 'linemanager') {
       updateField = 'review_status';
-      //console.log("Review status updated");
     } else {
       updateField = 'payment_status';
-      //console.log("Payment status updated");
     }
   
     Axios.patch(`http://127.0.0.1:8000/timesheet/${id}/`, {

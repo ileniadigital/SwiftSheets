@@ -16,7 +16,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'; // Import Brows
 
 // Main App component
 export default function App() {
-  const role='consultant';
+  const role='linemanager';
 
   return (
     <React.Fragment>
