@@ -46,14 +46,10 @@ export const fetchTimesheetsbyID= async (setTimesheets, consultant) => {
 export const fetchTimesheet = async (timesheetId) => {
   let url= `http://localhost:8000/timesheet/${timesheetId}`;
   try {
-      const response = await fetch(url);
-      if (!response.ok) {
-          throw new Error('Failed to fetch timesheet');
-      }
-      const data = await response.json();
-      return data;
+    const response = await Axios.get(url);
+    console.log("Timesheet fetched:", response.data);
+    return response.data;
   } catch (error) {
-      console.error('Error fetching timesheet:', error);
-      throw error;
+    console.error('Error fetching timesheet:', error);
   }
-};
+}

@@ -34,9 +34,8 @@ export default function TimesheetDetails({timesheet}) {
                     {timesheet.payment_status}
                 </div>
             </div>
-            {/* Button redirects user to current timesheet */}
-            <Link to={`/timesheet/${timesheet.id}`} className='click'>Click to View</Link>
-            
+            {/* Button redirects user to current timesheet */} 
+            <Link to={{ pathname: `/timesheet/${timesheet.id}` }} className='click'>Click to View</Link>
         </div>
     )
 }

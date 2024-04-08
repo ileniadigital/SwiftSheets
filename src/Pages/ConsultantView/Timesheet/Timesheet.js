@@ -15,28 +15,29 @@ import { IoClose } from "react-icons/io5";
 // Importing helper function
 import getDate from '../../../Components/ConsultantView/getDate';
 
-import ReactDOM from 'react-dom';
-import { fetchTimesheet } from '../../../Components/Data/TimesheetData';
-
 // Importing useState and useEffect
 import { useState, useEffect } from 'react';
 import exportPdf from './exportPdf';
 import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
+import {fetchTimesheet} from '../../../Components/Data/TimesheetData'
 export default function Timesheet({completionReminderDate, setCompletionReminderDate, completionReminderTime, setCompletionReminderTime, timesheetCompletionReminder, setTimesheetCompletionReminder}) {
-    let {timesheetId}= useParams();
-    const [timesheet, setTimesheet] = useState(null);
+    const [timesheet, setTimesheet] = useState(null); // State to store the fetched timesheet
+    const location = useLocation();
+    const { timesheetId } = useParams(); // Assuming you have set up React Router correctly to extract the timesheet ID from the URL
 
     useEffect(() => {
-        const fetchOpenTimesheet = async () => {
+        const fetchTimesheetData = async () => {
             try {
-                const timesheetData = await fetchTimesheet(timesheetId);
-                setTimesheet(timesheetData);
+                const timesheetData = await fetchTimesheet(timesheetId); // Fetch timesheet data using the provided ID
+                setTimesheet(timesheetData); // Set the fetched timesheet data to the state
             } catch (error) {
                 console.error('Error fetching timesheet:', error);
             }
         };
-        fetchOpenTimesheet();
+
+        fetchTimesheetData(); // Call the fetchTimesheetData function when the component mounts
     }, [timesheetId]);
 
     // Getting current timesheet
@@ -89,41 +90,43 @@ export default function Timesheet({completionReminderDate, setCompletionReminder
         setReminder(true)
     }
 
-    // Storing today's date so it can be the minimum for the timesheet completion reminder
-    let today = `${new Date().getFullYear()}-${(new Date().getMonth()+1).toString().padStart(2, '0')}-${new Date().getDate().toString().padStart(2, '0')}`
+    // // Storing today's date so it can be the minimum for the timesheet completion reminder
+    // let today = `${new Date().getFullYear()}-${(new Date().getMonth()+1).toString().padStart(2, '0')}-${new Date().getDate().toString().padStart(2, '0')}`
 
-    // Alert only works when time is at least 2 minutes ahead
-    let currentTime = new Date()
-    currentTime.setMinutes(currentTime.getMinutes()+1)
-    currentTime = currentTime.toTimeString().slice(0,5)
+    // // Alert only works when time is at least 2 minutes ahead
+    // let currentTime = new Date()
+    // currentTime.setMinutes(currentTime.getMinutes()+1)
+    // currentTime = currentTime.toTimeString().slice(0,5);
 
-    const [reminderError, setReminderError] = useState(false)
-    const [reminderTime, setReminderTime] = useState('')
-    useEffect(() => {
-        if (completionReminderTime !== '' && completionReminderDate !== '') {
-            const currentTimeHours = parseInt(currentTime.slice(0,2))
-            const currentTimeMins = parseInt(currentTime.slice(3,5))
-            const inputHours = parseInt(completionReminderTime.slice(0,2))
-            const inputMins = parseInt(completionReminderTime.slice(3,5))
 
-            // Ensures input is within valid range
-            if (completionReminderDate === today) {
-                if (inputHours < currentTimeHours) {
-                    setReminderError(true)
-                } else if (inputHours === currentTimeHours) {
-                    if (inputMins < currentTimeMins) {
-                        setReminderError(true)
-                    } else {
-                        setReminderError(false)
-                    }
-                } else {
-                    setReminderError(false)
-                }
-            } else {
-                setReminderError(false)
-            }
-        }
-    }, [completionReminderTime, completionReminderDate])
+    // const [reminderError, setReminderError] = useState(false)
+    // const [reminderTime, setReminderTime] = useState('')
+    // useEffect(() => {
+    //     if (completionReminderTime !== '' && completionReminderDate !== '') {
+    //         const currentTimeHours = parseInt(currentTime.slice(0,2))
+    //         const currentTimeMins = parseInt(currentTime.slice(3,5))
+    //         console.log("Input hours before:", inputHours)
+    //         const inputHours = parseInt(completionReminderTime.slice(0,2))
+    //         const inputMins = parseInt(completionReminderTime.slice(3,5))
+
+    //         // Ensures input is within valid range
+    //         if (completionReminderDate === today) {
+    //             if (inputHours < currentTimeHours) {
+    //                 setReminderError(true)
+    //             } else if (inputHours === currentTimeHours) {
+    //                 if (inputMins < currentTimeMins) {
+    //                     setReminderError(true)
+    //                 } else {
+    //                     setReminderError(false)
+    //                 }
+    //             } else {
+    //                 setReminderError(false)
+    //             }
+    //         } else {
+    //             setReminderError(false)
+    //         }
+    //     }
+    // }, [completionReminderTime, completionReminderDate])
     
     // Determinining date for start of week
     const startDate = getDate(viewedWeek, 1)
@@ -162,14 +165,13 @@ export default function Timesheet({completionReminderDate, setCompletionReminder
                 <p> 
                     {startOfWeek} – {endOfWeek}
                 </p>
-                <h1>ID: {timesheetId}</h1>
                 <button className='add-event-button' disabled = {timesheetStatus === "Submitted"} onClick={() => addEventHandler("Timesheet", viewedWeek)}> 
                     <FaCirclePlus /> {/* Button icon */}
                 </button>
                 <button className='completion-reminder' disabled = {timesheetStatus === "Submitted"} onClick={updateCompletionReminder}>
                     {timesheetCompletionReminder ? <IoIosNotifications /> : <IoIosNotificationsOff />}
                 </button>
-                {reminder && (
+                {/* {reminder && (
                     <div className='reminder-container'>
                         <div className='reminder-setting'>
                             <button onClick={() => setReminder(false)}>
@@ -203,8 +205,7 @@ export default function Timesheet({completionReminderDate, setCompletionReminder
                                 </button>
                             </div>
                         </div>
-                    </div>
-                )}
+                    </div> */}
             </div>
 
             {/* Displays currently viewed week, along with hours */}
