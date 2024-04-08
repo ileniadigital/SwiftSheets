@@ -195,6 +195,7 @@ export default function App() {
   return (
     <React.Fragment>
       <NavBar/>
+      <Name/>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home role={role} />} />
