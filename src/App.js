@@ -197,6 +197,7 @@ export default function App() {
       <NavBar/>
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<Home role={role} />} />
           <Route path="/Home" element={<Home role={role} />} />
           {/* <Route path="/login" element={<Login />} /> */}
           <Route path="/Account" element={<Account />} />
