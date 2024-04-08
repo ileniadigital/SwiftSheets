@@ -9,14 +9,19 @@ import UserList from '../Components/SystemAdminView/UserList/UserList';
 import AddUser from '../Components/SystemAdminView/AddUser/AddUser';
 import ManageUser from '../Components/SystemAdminView/Manage User/ManageUser'
 
-// Turn this into a state
-
 
 export default function SystemAdminView() {
 
-    // Get dummy list data from JSON file
+    // Get dummy list data from localStorage or file if not yet set
     // To be changed to integrate backend
-    const [userList, setUserList] = useState(require('../Components/SystemAdminView/UserList/DummyUsers'));
+    const [userList, setUserList] = useState(() => {
+        let list = JSON.parse(localStorage.getItem('userList'))
+        if (list === null) {
+            list = require('../Components/SystemAdminView/UserList/DummyUsers.json')
+            localStorage.setItem('userList', JSON.stringify(list))
+        }
+        return list
+    });
     
     // Enables relevant screen to be displayed when the + button is clicked 
     const [manageUserClicked, setManageUserClicked] = useState(false);
@@ -50,14 +55,30 @@ export default function SystemAdminView() {
         setManageUserClicked(!manageUserClicked)
     }
 
-    // Converts the given data into JSON and adds it to the user list (can't update dummy file from frontend)
+    // Converts the given data into JSON and adds it to the user list (updates local storage)
     const handleAddUserSubmit = (name, username, userType) => {
         var newUserList = [...userList]
         var newEntry = `{ "name":"${name}" , "username":"${username}" , "userType":"${userType}" }`
         var jsonEntry = JSON.parse(newEntry)
         newUserList.push(jsonEntry)
         setUserList(newUserList)
+        localStorage.setItem('userList', JSON.stringify(newUserList))
         addUserMenuHandler()
+    }
+
+    // Changes the userType and password of the user of the given index and updates local storage
+    const handleUpdateUserSubmit = (index, userType, password) => {
+        var newUserList = [...userList]
+        if (userType != null) {
+            newUserList[index].userType = userType
+        }
+        if (password != null) {
+            newUserList[index].password = password
+        }
+
+        setUserList(newUserList)
+        localStorage.setItem('userList', JSON.stringify(newUserList))
+        manageUserHandler(index, userList)
     }
     
     return(
@@ -84,6 +105,7 @@ export default function SystemAdminView() {
                 manageUserHandler={manageUserHandler} 
                 userList={userList}
                 removeUserHandler={removeUserHandler}
+                handleUpdateUserSubmit={handleUpdateUserSubmit}
             />
             )}
         </div>
