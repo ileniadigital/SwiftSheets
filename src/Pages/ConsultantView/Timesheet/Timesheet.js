@@ -256,10 +256,15 @@ export default function Timesheet() {
                     <p>Payment Status <span className={"status " + timesheetPaymentStatus.toLowerCase()}>{timesheetPaymentStatus}</span></p>
                 </div>
                 <div className='buttons'>
-                    <button className='submit-button' onClick={handleSubmission} disabled = {timesheetStatus === "Submitted"} >{timesheetStatus === "Submitted" ? "Submitted" : "Submit"}</button>
-                    <button className='submit-button' onClick={() => setTimesheetStatus("Saved")} disabled = {timesheetStatus === "Submitted"}>Save</button>
+                    <button id='submit-button' className='submit-button' disabled={timesheet && timesheet.is_submitted} onClick={handleSubmission}>
+                        {timesheet && timesheet.is_submitted ? "Submitted" : "Submit"}
+                    </button>
+                    <button id='save-button' className='submit-button' disabled={timesheet && timesheet.is_submitted} onClick={() => setTimesheetStatus("Saved")}>
+                        Save
+                    </button>
                     <button className='submit-button' onClick={() => exportPdf(document.querySelector('body'))}>PDF Export</button>
                 </div>
+
             </div>
 
             {/* Display error if user attempts to submit empty timesheet */}
