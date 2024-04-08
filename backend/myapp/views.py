@@ -106,7 +106,7 @@ class TimesheetViewSet(viewsets.ViewSet):
         
         serializer = self.serializer_class(queryset, many=True)
         return Response(serializer.data)
-    
+        
     def partial_update(self, request, pk=None):
         timesheet = self.queryset.get(pk=pk)
         serializer = self.serializer_class(timesheet, data=request.data, partial=True)
