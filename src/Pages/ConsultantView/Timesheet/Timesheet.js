@@ -13,13 +13,31 @@ import { FaCirclePlus } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
 
 // Importing helper function
-import getDate from '../../../Components/ConsultantView/getDate'
+import getDate from '../../../Components/ConsultantView/getDate';
+
+import ReactDOM from 'react-dom';
+import { fetchTimesheet } from '../../../Components/Data/TimesheetData';
 
 // Importing useState and useEffect
 import { useState, useEffect } from 'react';
 import exportPdf from './exportPdf';
+import { useParams } from 'next/navigation';
 
 export default function Timesheet({completionReminderDate, setCompletionReminderDate, completionReminderTime, setCompletionReminderTime, timesheetCompletionReminder, setTimesheetCompletionReminder}) {
+    let {timesheetId}= useParams();
+    const [timesheet, setTimesheet] = useState(null);
+
+    useEffect(() => {
+        const fetchOpenTimesheet = async () => {
+            try {
+                const timesheetData = await fetchTimesheet(timesheetId);
+                setTimesheet(timesheetData);
+            } catch (error) {
+                console.error('Error fetching timesheet:', error);
+            }
+        };
+        fetchOpenTimesheet();
+    }, [timesheetId]);
 
     // Getting current timesheet
     // let currentTimesheet = TimeshgetCurrentTimesheet()
@@ -144,6 +162,7 @@ export default function Timesheet({completionReminderDate, setCompletionReminder
                 <p> 
                     {startOfWeek} – {endOfWeek}
                 </p>
+                <h1>ID: {timesheetId}</h1>
                 <button className='add-event-button' disabled = {timesheetStatus === "Submitted"} onClick={() => addEventHandler("Timesheet", viewedWeek)}> 
                     <FaCirclePlus /> {/* Button icon */}
                 </button>

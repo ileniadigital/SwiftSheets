@@ -9,7 +9,6 @@ import ConsultantDashboard from './Pages/ConsultantView/ConsultantDashboard/Cons
 import Home from './Pages/Home';
 import Name from './Components/NavBar/Name';
 import SystemAdminView from './Pages/SystemAdminView';
-import ConsultantSettings from './Pages/ConsultantView/ConsultantSettings/ConsultantSettings';
 import Settings from './Pages/ConsultantView/ConsultantSettings/ConsultantSettings';
 
 import React, { useState, useEffect } from 'react';
@@ -202,6 +201,8 @@ export default function App() {
           {/* <Route path="/login" element={<Login />} /> */}
           <Route path="/Account" element={<Account />} />
           <Route path="/Settings" element={<Settings />} />
+          {/* Route to a timesheet based on ID */}
+          <Route path="/timesheet/:timesheetId" element={<Timesheet />} />
         </Routes>
       </BrowserRouter>
     </React.Fragment>

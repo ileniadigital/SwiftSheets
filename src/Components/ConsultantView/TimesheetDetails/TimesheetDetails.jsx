@@ -1,5 +1,8 @@
 // Importing CSS
-import './TimesheetDetails.css'
+import './TimesheetDetails.css';
+
+import { Link } from 'react-router-dom';
+
 
 /* Displays timesheet's details */
 export default function TimesheetDetails({timesheet}) {
@@ -32,7 +35,7 @@ export default function TimesheetDetails({timesheet}) {
                 </div>
             </div>
             {/* Button redirects user to current timesheet */}
-            <a className = 'click' href="/timesheet">Click to View</a>
+            <Link to={`/timesheet/${timesheet.id}`} className='click'>Click to View</Link>
             
         </div>
     )
