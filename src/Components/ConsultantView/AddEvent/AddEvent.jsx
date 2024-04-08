@@ -260,7 +260,7 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
 
         AxiosInstance.post('event/', {
             date: eventDate,
-            duration: `${eventEndTime} - ${eventStartTime}`,
+            duration: 0.0,
             name: eventName,
             type: eventType,
             category: eventCategory,
