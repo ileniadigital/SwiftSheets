@@ -12,9 +12,6 @@ import { IoIosNotificationsOff } from "react-icons/io";
 import { FaCirclePlus } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
 
-// Importing helper function
-import getDate from '../../../Components/ConsultantView/getDate';
-
 // Importing useState and useEffect
 import { useState, useEffect } from 'react';
 import exportPdf from './exportPdf';
@@ -145,16 +142,6 @@ export default function Timesheet({completionReminderDate, setCompletionReminder
     //     }
     // }, [completionReminderTime, completionReminderDate])
     
-    // Determinining date for start of week
-    const startDate = getDate(viewedWeek, 1)
-    // Converting into format for minimum date value
-    let startOfWeek = `${startDate[0]}/${startDate[1]}/${startDate[2]}`
-
-    // Determinining date for end of week
-    const endDate = getDate(viewedWeek, 7)
-    // Converting into format for maximum date value
-    let endOfWeek = `${endDate[0]}/${endDate[1]}/${endDate[2]}`
-
    //  Initialising recurring events
    if (!localStorage.getItem('recurringEvents')) {
     localStorage.setItem('recurringEvents', JSON.stringify({}))
