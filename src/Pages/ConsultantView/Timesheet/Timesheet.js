@@ -16,6 +16,7 @@ import { IoClose } from "react-icons/io5";
 import { useState, useEffect } from 'react';
 import exportPdf from './exportPdf';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 import {fetchTimesheetsbyID} from '../../../Components/Data/TimesheetData';
 import {fetchEventsByTimesheetID} from '../../../Components/Data/EventsData';
@@ -184,9 +185,17 @@ export default function Timesheet() {
 
     // Function to handle revoking submission
     const handleRevokeSubmission = () => {
-        // Logic to revoke submission
-        setTimesheetStatus('Not Submitted');
-        // Additional logic if needed
+        axios.patch(`http://127.0.0.1:8000/timesheet/${timesheetId}/`, {
+            is_submitted: false,
+        })
+        .then(response => {
+            console.log("Success");
+            // Update the timesheet status in the UI immediately
+            setTimesheetStatus('Not Submitted');
+        })
+        .catch(error => {
+            console.error('Error revoking submission:', error);
+        });
     };
     return (
         localStorage.getItem('daysWorked') !== "[]" ? (
