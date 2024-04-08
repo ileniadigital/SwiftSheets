@@ -407,9 +407,9 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
                 {componentCaller !== 'Hours1' && recurringEvents &&
                 
                 <div className='input'>
-                    <label>Select Event</label>
+                    <label className='select-recurring'>Recurring Event</label>
                     <select onChange={handleChange} defaultValue={''}>
-                        <option value="" disabled hidden>Select Event</option> {/* Default value */}
+                        <option value="" disabled hidden>Recurring Event</option> {/* Default value */}
                         {dropdown}
                     </select>
                 </div>
