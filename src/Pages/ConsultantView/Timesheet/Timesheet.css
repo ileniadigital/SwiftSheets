@@ -79,15 +79,18 @@ button {
 
 .status.approved,
 .status.submitted {
-  color: green;
+  color: darkgreen;
+  font-weight: 600;
 }
 
 .status.rejected {
   color: red;
+  font-weight: 600;
 }
 
 .status.saved {
-  color: #c5ff00;
+  color: #7da00a;
+  font-weight: 600;
 }
 
 /* Setting default button styling */
