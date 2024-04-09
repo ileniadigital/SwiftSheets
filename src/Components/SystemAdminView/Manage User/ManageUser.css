@@ -88,7 +88,7 @@ td {
 }
 
 /* Setting label name */
-.label {
+#manageUser .label {
   flex-shrink: 0;
   font-weight: bold;
   width: 11.3rem;
