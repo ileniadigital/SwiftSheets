@@ -49,7 +49,7 @@ export default function Week({viewedWeek, addEventHandler, timesheetStatus}) {
                 key={i+1} 
                 day = {weekDays[i]} 
                 date = {weekDates[i]} 
-                addEventHandler = {addEventHandler} 
+                addEventHandler={(day, date) => addEventHandler(day, date)} 
                 timesheetStatus = {timesheetStatus}
             />
         )

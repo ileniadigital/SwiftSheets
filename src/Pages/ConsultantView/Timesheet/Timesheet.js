@@ -138,21 +138,17 @@ export default function Timesheet() {
         setIsAddEventOpen(false);
     };
 
-
     // Enables relevant screen to be displayed when the + button is clicked 
-    const [addEventClicked, setAddEventClicked] = useState(false);
+    // const [addEventClicked, setAddEventClicked] = useState(false);
+    const [eventDate, setEventDate] = useState('');
     // When add event is clicked, add event screen is shown, with the details based on the component it is called by
-    const addEventHandler = (componentCaller1, event) => {
-        // Won't open the Add Event box as the timesheet is submitted
-        if (timesheetStatus === "Submitted") {
-            return
-        }
-        if (!addEventClicked) {
-            setComponentCaller(componentCaller1)
-            setEvent(event)
-        }
-        setAddEventClicked(!addEventClicked)
-    }
+    const addEventHandler = () => {
+        // Open the add event screen
+        setIsAddEventOpen(true);
+        // Pass the date to the AddEvent component
+        //setEventDate(date);
+    };
+
 
     // Store whether timesheet completion reminder has been set
     const [reminder, setReminder] = useState(false);
@@ -221,7 +217,7 @@ export default function Timesheet() {
                 <p> 
                     {timesheet && formatDate(timesheet.start_date)} – {timesheet && formatDate(timesheet.end_date)}
                 </p>
-                <button className='add-event-button' disabled = {timesheetStatus === "Submitted"} onClick={() => setIsAddEventOpen(true)}> 
+                <button className='add-event-button' disabled = {timesheetStatus === "Submitted"} onClick={addEventHandler}> 
                     <FaCirclePlus /> {/* Button icon */}
                 </button>
                 <button className='completion-reminder' disabled = {timesheetStatus === "Submitted"} onClick={updateCompletionReminder}>
@@ -269,7 +265,7 @@ export default function Timesheet() {
 
             {/* Shows add event screen, with the arguments based on the component that called the method 
                 Only allows logging events if timesheet has not been submitted */}
-                <Week timesheet={timesheet} addEventHandler={addEventHandler} timesheetStatus={timesheetStatus} />
+            <Week timesheet={timesheet} addEventHandler={addEventHandler} timesheetStatus={timesheetStatus} />
             {isAddEventOpen && <AddEvent onClose={closeAddEvent} timesheet={timesheet} />}
         
 

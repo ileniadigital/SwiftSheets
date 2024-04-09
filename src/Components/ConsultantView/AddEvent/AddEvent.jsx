@@ -8,6 +8,7 @@ import { IoClose } from "react-icons/io5";
 import { useEffect, useState } from 'react';
 import getDate from '../getDate';
 
+//readd eventDate if it might
 export default function AddEvent({onClose, timesheet}) {
 
     //Handle closing of add event pop up
@@ -17,6 +18,70 @@ export default function AddEvent({onClose, timesheet}) {
         setIsOpen(false);
         onClose();
     }
+
+    // Handle change in date input
+    const [date, setDate] = useState('');
+    const handleDateChange = (e) => {
+        const selectedDate = e.target.value;
+        // Validate the selected date here
+        if (selectedDate < timesheet.start_date || selectedDate > timesheet.end_date) {
+            e.target.setCustomValidity(`Date must be between ${timesheet.start_date} and ${timesheet.end_date}`);
+        } else {
+            e.target.setCustomValidity('');
+            setDate(selectedDate);
+        }
+    };
+
+    //Store events in local storage
+    const [events, setEvents] = useState([]);
+    const [eventName, setEventName] = useState('');
+    const [eventDates, setEventDates] = useState('');
+    const [eventStartTime, setEventStartTime] = useState('');
+    const [eventEndTime, setEventEndTime] = useState('');
+    const [eventType, setEventType] = useState('');
+    const [eventCategory, setEventCategory] = useState('');
+    const [isRecurring, setIsRecurring] = useState(false);
+    const [note, setNote] = useState('');
+    const [disableCategory, setDisableCategory] = useState(false);
+
+    const handleAddEvent = () => {
+        // Construct event object
+        const newEvent = {
+            eventName: eventName,
+            eventDatse: eventDates,
+            eventStartTime: eventStartTime,
+            eventEndTime: eventEndTime,
+            eventType: eventType,
+            eventCategory: eventCategory,
+            isRecurring: isRecurring,
+            note: note,
+            disableCategory: disableCategory
+        };
+
+        // Retrieve existing events from local storage or initialize empty array
+        const existingEvents = JSON.parse(localStorage.getItem('events')) || [];
+
+        // Add new event to existing events
+        const updatedEvents = [...existingEvents, newEvent];
+
+        // Store updated events back to local storage
+        localStorage.setItem('events', JSON.stringify(updatedEvents));
+    }
+
+    //Validate event name
+    // Ensuring empty string is not entered
+    const validateEventName = (event) =>  {
+        const eventName = event.target.value.trim(); 
+        if (eventName.trim() == "") {
+            // setEventName('')
+            event.target.setCustomValidity('Enter an event name');
+        } else {
+            // If value is valid, clear any existing error message and update value
+            event.target.setCustomValidity('');
+            setEventName(eventName)
+        }
+    }
+
 
     return(
         isOpen && (
@@ -43,7 +108,7 @@ export default function AddEvent({onClose, timesheet}) {
                     <div className="input">
                         <label htmlFor="eventDate">Date</label>
                             {/* // Limiting days to choose from as days in current week */}
-                            <input className = 'datetime' type="date" name = "eventDate" required min={timesheet.start_date} max={timesheet.end_date}/>
+                            <input className = 'datetime' type="date" name = "eventDate" value={date} onChange={handleDateChange} required min={timesheet.start_date} max={timesheet.end_date}/>
                     </div>
 
                     <div className="input">
@@ -105,11 +170,10 @@ export default function AddEvent({onClose, timesheet}) {
                     : (
                     <input type="submit" value={"Add Event"} className='add-event-button'/> ) } */}
                     {/* CHANGE THIS SO IF EVENT ALREADY EXISTS THEN IT'S EDIT IF NOT IT'S ADD */}
-                    {timesheet.eventId ? (
+                    {/* {timesheet.eventId ? (
                         <input type="submit" value={"Edit Event"} className='add-event-button'/>
-                    ) : (
-                        <input type="submit" value={"Add Event"} className='add-event-button'/>
-                    )}
+                    ) : ( */}
+                    <input type="submit" value={"Add Event"} onClick={handleAddEvent} className='add-event-button'/>
                     
                 </form>
             </div>
