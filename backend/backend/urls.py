@@ -32,6 +32,7 @@ urlpatterns = [
     path('myapp/user-timesheets/', UserTimesheetView.as_view(), name='user_timesheets'),
     path('create_timesheet/', views.create_timesheet, name='create_timesheet'),
     path('create_events/<int:timesheet_id>/', views.create_events, name='create_events'),
+    #path('event/delete/', destroy_events, name='delete_events'),
     # path('myapp/timesheets/not-reviewed/', TimesheetListView.as_view(), name='timesheet-not-reviewed-list'),
 ]
 
