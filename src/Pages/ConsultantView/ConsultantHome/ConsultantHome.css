@@ -78,3 +78,16 @@
   max-height: 28rem;
   color: #1e1e1e;
 }
+
+/* Styling create new timesheet button */
+.create-button {
+  border-radius: 1.5rem;
+  background-color: #a7d900;
+  color: #1e1e1e;
+}
+
+.create-button:hover {
+  border-radius: 1.5rem;
+  background-color: #1e1e1e;
+  color: #f7f6f5;
+}

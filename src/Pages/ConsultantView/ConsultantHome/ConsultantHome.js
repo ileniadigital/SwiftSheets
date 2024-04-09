@@ -86,7 +86,7 @@ export default function ConsultantHome() {
                                         ))
                                     :
                                     // If there's no submitted timesheet, display the button for creating a new timesheet
-                                    <button onClick={() => { refreshPage(id); }}>Create New Timesheet</button>
+                                    <button className='create-button' onClick={() => { refreshPage(id); }}>Create New Timesheet</button>
                                 )
                             }
                         </div> 
