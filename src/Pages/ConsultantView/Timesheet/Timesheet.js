@@ -22,7 +22,7 @@ import { useNavigate } from 'react-router-dom';
 
 // Importing Data from backend
 import {fetchTimesheetsbyID} from '../../../Components/Data/TimesheetData';
-import {fetchEventsByTimesheetID} from '../../../Components/Data/EventsData';
+import {fetchEventsByTimesheetID, createEvents, destroyEvents} from '../../../Components/Data/EventsData';
 
 export default function Timesheet() {
     const role='consultant' // Placeholder for user role
@@ -166,7 +166,7 @@ export default function Timesheet() {
 
     // Function that handles timesheet submission
     const handleSubmission = () => {
-        //Calculate submission time
+        // Calculate submission time
         const currentTime = new Date().toISOString();
  
         axios.patch(`http://127.0.0.1:8000/timesheet/${timesheetId}/`, {
@@ -177,11 +177,15 @@ export default function Timesheet() {
             // Update the timesheet status in the UI immediately
             setTimesheetStatus('Submitted');
             // Redirect consultant to home page
-            //navigate('/');
+            // navigate('/');
         })
         .catch(error => {
             console.error('Error revoking submission:', error);
         });
+
+        // Call the create events function passing the timesheet id
+        createEvents(timesheetId);
+        destroyEvents();
     }
 
     // Function to handle revoking submission
