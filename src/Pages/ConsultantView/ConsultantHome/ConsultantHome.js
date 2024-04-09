@@ -42,8 +42,23 @@ export default function ConsultantHome() {
         return date >= firstDayOfWeek && date <= lastDayOfWeek;
     };
 
-    const refreshPage = () => {
-        navigate('/');
+    const refreshPage = async (timesheetId) => {
+        try {
+            await createTimesheet(timesheetId);
+            const data = await fetchTimesheetsbyID(id);
+            const currentDate = new Date();
+            const currentTimesheets = data.filter(ts => {
+                const endDate = new Date(ts.end_date);
+                const isSubmitted = ts.is_submitted;
+                return endDate >= currentDate && !isSubmitted;
+            });
+            const pastTimesheets = data.filter(ts => !currentTimesheets.includes(ts));
+            setTimesheets(currentTimesheets);
+            setPastTimesheets(pastTimesheets);
+        } catch (error) {
+            console.error('Error refreshing timesheets:', error);
+        }
+        navigate('/home');
     };
 
     return (
@@ -71,7 +86,7 @@ export default function ConsultantHome() {
                                         ))
                                     :
                                     // If there's no submitted timesheet, display the button for creating a new timesheet
-                                    <button onClick={() => { createTimesheet(id); refreshPage(); }}>Create New Timesheet</button>
+                                    <button onClick={() => { refreshPage(id); }}>Create New Timesheet</button>
                                 )
                             }
                         </div> 
