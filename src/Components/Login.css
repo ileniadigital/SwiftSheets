@@ -130,6 +130,7 @@ body {
 .top-bar {
   margin: 0 0 0 2rem;
   margin-right: auto;
+  padding-top: 1rem;
 }
 
 .top-logo {
