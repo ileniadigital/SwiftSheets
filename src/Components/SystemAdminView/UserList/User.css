@@ -1,5 +1,18 @@
+.manageUser {
+    color: #1e1e1e;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    border: 0.2rem solid #c5ff00;
+    background-color: #c5ff00;
+    width: fit-content;
+    justify-content: center;
+    margin: auto;
+  }
+
 .manageUser:hover {
-  text-decoration: underline;
+    background-color: #f7f6f5;
+    color: #1e1e1e;
+    border: 0.1rem solid #f7f6f5;
 }
 
 .user {

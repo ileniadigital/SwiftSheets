@@ -16,11 +16,15 @@ import { IoClose } from "react-icons/io5";
 import { useState, useEffect } from 'react';
 import exportPdf from './exportPdf';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
+// Importing Data from backend
 import {fetchTimesheetsbyID} from '../../../Components/Data/TimesheetData';
 import {fetchEventsByTimesheetID} from '../../../Components/Data/EventsData';
 
 export default function Timesheet() {
+    const role='linemanager' // Placeholder for user role
     const [timesheet, setTimesheet] = useState(null); 
     const [events, setEvents] = useState([]);
     const [timesheetStatus, setTimesheetStatus] = useState(''); 
@@ -28,6 +32,9 @@ export default function Timesheet() {
     const [timesheetReviewStatus, setTimesheetReviewStatus] = useState(''); 
     const [timesheetPaymentStatus, setTimesheetPaymentStatus] = useState('');
     const { timesheetId } = useParams(); 
+
+    // History hook to redirect user
+    const navigate = useNavigate();
 
     //Fetch the user's timesheet by ID
     useEffect(() => {
@@ -181,6 +188,22 @@ export default function Timesheet() {
         }
     }
 
+    // Function to handle revoking submission
+    const handleRevokeSubmission = () => {
+        axios.patch(`http://127.0.0.1:8000/timesheet/${timesheetId}/`, {
+            is_submitted: false,
+        })
+        .then(response => {
+            console.log("Success");
+            // Update the timesheet status in the UI immediately
+            setTimesheetStatus('Not Submitted');
+            // Redirect line manager to home page
+            navigate('/');
+        })
+        .catch(error => {
+            console.error('Error revoking submission:', error);
+        });
+    };
     return (
         localStorage.getItem('daysWorked') !== "[]" ? (
         <div className = 'consultant-view'>
@@ -256,6 +279,12 @@ export default function Timesheet() {
                     <p>Payment Status <span className={"status " + timesheetPaymentStatus.toLowerCase()}>{timesheetPaymentStatus}</span></p>
                 </div>
                 <div className='buttons'>
+                    {/* Revoke Button for line manager */}
+                    {role === 'linemanager' && timesheet && timesheet.is_submitted && (
+                        <button className='submit-button' onClick={handleRevokeSubmission}>
+                            Revoke
+                        </button>
+                    )}
                     <button id='submit-button' className='submit-button' disabled={timesheet && timesheet.is_submitted} onClick={handleSubmission}>
                         {timesheet && timesheet.is_submitted ? "Submitted" : "Submit"}
                     </button>
