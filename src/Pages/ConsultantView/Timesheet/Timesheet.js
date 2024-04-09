@@ -167,18 +167,6 @@ export default function Timesheet() {
         setReminder(true)
     }
 
-    // Determinining date for start of week
-    const startDate = getDate(viewedWeek, 1)
-    
-    // Converting into format for minimum date value
-    let startOfWeek = `${startDate[0]}/${startDate[1]}/${startDate[2]}`
-
-    // Determinining date for end of week
-    const endDate = getDate(viewedWeek, 7)
-
-    // Converting into format for maximum date value
-    let endOfWeek = `${endDate[0]}/${endDate[1]}/${endDate[2]}`
-
    //  Initialising recurring events
    if (!localStorage.getItem('recurringEvents')) {
     localStorage.setItem('recurringEvents', JSON.stringify({}))
@@ -197,16 +185,6 @@ export default function Timesheet() {
             setEmptyTimesheetError(true)
         }
     }
-
-    const [reminderSet, setReminderSet] = useState(
-        (localStorage.getItem('timesheetCompletionReminder') && 
-    localStorage.getItem('timesheetCompletionReminder') === 'true' ? true : false )|| false)
-
-    useEffect(() => {
-        setReminderSet(
-        localStorage.getItem('timesheetCompletionReminder') === 'true' ? true : false 
-        )
-    }, [localStorage.getItem('timesheetCompletionReminder')])
 
     const [reminderSet, setReminderSet] = useState(
         (localStorage.getItem('timesheetCompletionReminder') && 

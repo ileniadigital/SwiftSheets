@@ -15,10 +15,6 @@ import StartReminder from './Components/ConsultantView/Reminder/StartReminder';
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'; // Import BrowserRouter
 
-//ADD ROUTING BASED ON ROLE FROM DB
-const role='financeteam';
-
-
 // Main App component
 export default function App() {
   const role='consultant';
@@ -37,15 +33,15 @@ export default function App() {
           <Route path="/Form" element={<Form />} />
           {/* Route to a timesheet based on ID */}
           <Route path="/timesheet/:timesheetId" element={<Timesheet />} />
-          {/* Completion reminder for consultant */}
-          {role === 'consultant' && 
+        </Routes>
+      </BrowserRouter>
+      {/* Completion reminder for consultant */}
+      {role === 'consultant' && 
           <>
             <CompletionReminder/>
             <StartReminder/>
           </>
-          }
-        </Routes>
-      </BrowserRouter>
+      }
     </React.Fragment>
   );
 }
