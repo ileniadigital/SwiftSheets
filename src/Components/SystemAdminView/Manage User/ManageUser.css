@@ -114,7 +114,7 @@ td {
 }
 
 /* Styling for all input boxes */
-.inputBox{
+#manageUser .inputBox{
   border: 0;
   width: 14rem;
   margin: 0;

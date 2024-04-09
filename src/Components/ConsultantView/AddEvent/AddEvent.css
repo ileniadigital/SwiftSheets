@@ -57,7 +57,7 @@
 }
 
 /* Styling input div */
-.input {
+.add-event .input {
   display: flex;
   gap: 2.5rem;
   align-items: center;
@@ -65,7 +65,7 @@
 }
 
 /* Setting label name */
-label {
+.add-event label {
   width: 11.3rem;
   font-size: 1.5rem;
   color: #1e1e1e;
