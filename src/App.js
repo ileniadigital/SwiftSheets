@@ -8,7 +8,7 @@ import Timesheet from './Pages/ConsultantView/Timesheet/Timesheet';
 import ConsultantDashboard from './Pages/ConsultantView/ConsultantDashboard/ConsultantDashboard';
 import Home from './Pages/Home';
 import Name from './Components/NavBar/Name';
-import SystemAdminView from './Pages/SystemAdminView';
+import SystemAdminForm from './Pages/SystemAdminView/SystemAdminForm/SystemAdminForm';
 import ConsultantSettings from './Pages/ConsultantView/ConsultantSettings/ConsultantSettings';
 
 import { useState, useEffect } from 'react';
@@ -16,7 +16,7 @@ import getDate from './Components/ConsultantView/getDate';
 import Reminder from './Components/ConsultantView/Reminder/Reminder';
 
 //ADD ROUTING BASED ON ROLE FROM DB
-const role='financeteam';
+const role='systemadmin';
 
 
 // Main App component
@@ -222,8 +222,8 @@ export default function App() {
     case "/consultantdashboard":
       page = <ConsultantDashboard/>
       break
-    case "/systemadminview":
-      page = <SystemAdminView/>
+    case "/systemadminform":
+      page = <SystemAdminForm/>
       break
   }
 

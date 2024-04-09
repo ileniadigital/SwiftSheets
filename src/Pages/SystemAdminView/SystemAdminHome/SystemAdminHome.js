@@ -1,13 +1,14 @@
 // Importing CSS
-import '../Components/SystemAdminView/SystemAdminView.css';
+import './SystemAdminHome.css';
 
 // Import Components
+import UserList from '../../../Components/SystemAdminView/UserList/UserList';
+import AddUser from '../../../Components/SystemAdminView/AddUser/AddUser';
+import ManageUser from '../../../Components/SystemAdminView/Manage User/ManageUser'
 
 // Import useState
 import { useState } from 'react'
-import UserList from '../Components/SystemAdminView/UserList/UserList';
-import AddUser from '../Components/SystemAdminView/AddUser/AddUser';
-import ManageUser from '../Components/SystemAdminView/Manage User/ManageUser'
+
 
 
 export default function SystemAdminView() {
@@ -17,7 +18,7 @@ export default function SystemAdminView() {
     const [userList, setUserList] = useState(() => {
         let list = JSON.parse(localStorage.getItem('userList'))
         if (list === null) {
-            list = require('../Components/SystemAdminView/UserList/DummyUsers.json')
+            list = require('../../../Components/SystemAdminView/UserList/DummyUsers.json')
             localStorage.setItem('userList', JSON.stringify(list))
         }
         return list

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import '../Components/general.css'; //Import Styling
 
 //Import componentts
-import SystemAdminView from './SystemAdminView';
+import SystemAdminView from './SystemAdminView/SystemAdminHome/SystemAdminHome';
 import ConsultantHome from './ConsultantView/ConsultantHome/ConsultantHome';
 import TimesheetListView from './TimesheetListView';
 
