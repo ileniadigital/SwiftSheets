@@ -77,7 +77,6 @@ export default function Timesheet() {
         };
 
         fetchData();
-        console.log(events)
     }, [timesheetId]);
 
     // Setting the date for the reminder
@@ -183,8 +182,8 @@ export default function Timesheet() {
         });
 
         // Call the create events function passing the timesheet id
-        createEvents(timesheetId);
-        destroyEvents();
+        // createEvents(timesheetId);
+        // destroyEvents();
     }
 
     // Function to handle revoking submission
