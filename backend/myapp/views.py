@@ -139,12 +139,11 @@ class TimesheetViewSet(viewsets.ViewSet):
         timesheet = self.queryset.get(pk=pk)
         serializer = self.serializer_class(timesheet, data=request.data, partial=True)
         if serializer.is_valid():
-            serializer.save()
+            serializer.save(submission_date=timezone.now().date(), submission_time=timezone.now())
             return Response(serializer.data)
         else:
             return Response(serializer.errors, status=400)
-
-
+        
     # Create a new timesheet
     def create(self, request):
         serializer = self.serializer_class(data=request.data)
@@ -155,17 +154,17 @@ class TimesheetViewSet(viewsets.ViewSet):
             return Response(serializer.errors, status=400)
 
     # Retrieve a specific timesheet
-    def retrieve(self, request, pk=None):
-        timesheet = self.queryset.get(pk=pk)
-        serializer = self.serializer_class(timesheet)
-        return Response(serializer.data)
+    # def retrieve(self, request, pk=None):
+    #     timesheet = self.queryset.get(pk=pk)
+    #     serializer = self.serializer_class(timesheet)
+    #     return Response(serializer.data)
     
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        user_email = self.request.query_params.get('user_email')
-        if user_email:
-            queryset = queryset.filter(user__email=user_email)
-        return queryset
+    # def get_queryset(self):
+    #     queryset = super().get_queryset()
+    #     user_email = self.request.query_params.get('user_email')
+    #     if user_email:
+    #         queryset = queryset.filter(user__email=user_email)
+    #     return queryset
 
     # Update a timesheet
     def update(self, request, pk=None):

@@ -166,16 +166,7 @@ export default function Timesheet() {
         // Extract date and time
         const submission_date = currentTime.split('T')[0]; // Get date part
         const submission_time = currentTime.split('T')[1].split('.')[0];
-        //CHECK IF NUMBER OF EVENTS IS MORE THAN 0
-        // Include iteration that checks the length of the events; if theres more than 1 the timesheet can be submitted
-        // const numberOfEvents = Object.keys(JSON.parse(localStorage.getItem('events'))).length > 0
-        // if (numberOfEvents > 0 ) {
-        //     // Storing date and time of timesehet submission
-        //     const timesheetSubmissionDateandTime = new Date() 
-        //     setTimesheetStatus('Submitted')
-        // } else {
-        //     setEmptyTimesheetError(true)
-        // }
+ 
         axios.patch(`http://127.0.0.1:8000/timesheet/${timesheetId}/`, {
             is_submitted: true
         })
