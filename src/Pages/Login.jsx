@@ -7,7 +7,10 @@ function Login() {
 
   useEffect(() => {
     const username = localStorage.getItem('username');
+    const role = localStorage.getItem('role');
     console.log('Username:', username);
+    console.log('Username:', role);
+
   }, []); // The empty array means this effect runs once on mount
 
 
@@ -16,6 +19,8 @@ function Login() {
     try {
       const response = await axios.post('http://localhost:8000/login/', { username, password });
       localStorage.setItem('username', response.data.username);
+      localStorage.setItem('role', response.data.role);
+
       alert('Login successful');
     } catch (error) {
       alert('Login failed');

@@ -17,8 +17,12 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'; // Import Brows
 
 // Main App component
 export default function App() {
-  const role='linemanager';
-  
+  const [role, setRole] = useState('')
+  useEffect(() => {
+    role = localStorage.getItem('role');
+    setRole(role);
+
+  }, []); // The empty array means this effect runs once on mount
   return (
     <React.Fragment>
       <NavBar/>
