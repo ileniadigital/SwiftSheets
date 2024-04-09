@@ -51,16 +51,21 @@ const EventGrid = ({ events, openAddEvent }) => {
           {hours.map(hour => (
             <div key={hour} className="time-slot">
               {`${hour}:00`}
-              <button className="add-event-button" onClick={handleAddEventClick}>
-                <FaCirclePlus /> {/* Plus button */}
-              </button>
             </div>
           ))}
         </div>
-        {days.map((day, index) => (
+        {days.map((day, dayIndex) => (
           <div key={day} className="grid-column">
-            {events.filter(event => new Date(event.date).getDay() === (index + 1) % 7).map(event => (
-              <div key={event.id} className="event-block" style={calculateEventBlockStyle(event, index)}>
+            {hours.map(hour => (
+                    <div key={`${day}-${hour}`} className="add-button" style={{ position: 'relative' }}>
+                    <button className="add-event-button" onClick={handleAddEventClick}>
+                        <FaCirclePlus size={30} /> 
+                    </button>
+                    </div>
+            ))}
+
+            {events.filter(event => new Date(event.date).getDay() === (dayIndex + 1) % 7).map(event => (
+              <div key={event.id} className="event-block" style={calculateEventBlockStyle(event, dayIndex)}>
                 {/* Event content */}
               </div>
             ))}

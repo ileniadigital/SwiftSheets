@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box;
+}
 .event-grid {
   display: flex;
   flex-direction: column;
@@ -38,13 +41,41 @@
 
 .event-block {
   position: absolute;
-  width: calc(100% - 0.25rem);
+  width: calc(100% - 0.4rem);
   border: 0.2rem solid #afd900;
   border-radius: 1.5rem;
   box-sizing: border-box;
+  z-index: 1;
 }
 
-.event-block div {
+/* .event-block div {
   left: unset;
   right: unset;
+} */
+
+/* Styling add event button inside */
+.add-button {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  box-sizing: border-box;
+  border-bottom: 0.2rem solid #1e1e1e;
+}
+
+.add-button:hover {
+  background-color: #1e1e1e;
+}
+
+.add-event-button {
+  height: 2.8rem;
+  border-radius: none;
+  align-self: center;
+  border: none;
+  color: #afd900;
+}
+
+.add-event-button:hover {
+  color: #afd900;
+  background-color: transparent;
+  border: none;
 }
