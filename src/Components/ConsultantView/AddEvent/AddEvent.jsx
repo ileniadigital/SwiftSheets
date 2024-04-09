@@ -530,7 +530,7 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
                 {componentCaller === 'Hours1' ? (
                     <div id='hours1-submit'>
                         <input type="submit" value={"Edit Event"} className='add-event-button'/> 
-                        <input value={"Delete Event"} className='add-event-button' id = 'add-delete'
+                        <input defaultValue={"Delete Event"} className='add-event-button' id = 'add-delete'
                         onClick={() => setOpenPopup(true)}/> 
                         {/* Show deletion confirmation message */}
                         {openPopup && <DeleteEventConfirmation event={event.id} setOpenPopup={setOpenPopup}/>}
