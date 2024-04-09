@@ -22,7 +22,6 @@ export default function ViewForm ({ formData, viewFormHandler }) {
                 }
                 {/* Name text input*/}
                 <div className="input">
-                    <label htmlFor="subject" className='label'>Subject</label>
                     <p id='subject' className='inputBox'>{formData.subject}</p>
                 </div>
                 <div className='input'>

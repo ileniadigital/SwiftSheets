@@ -1,16 +1,17 @@
 .manageUser {
-    color: #1e1e1e;
-    border: 0.2rem solid #a7d900;
-    border-radius: 1.5rem;
-    background-color: #a7d900;
-    width: fit-content;
-    justify-content: center;
-    margin: auto;
-  } 
+  color: #1e1e1e;
+  border: 0.2rem solid #a7d900;
+  border-radius: 1.5rem;
+  background-color: #a7d900;
+  width: fit-content;
+  justify-content: center;
+  margin: auto;
+} 
+
 .manageUser:hover {
-    background-color: #f7f6f5;
-    color: #1e1e1e;
-    border: 0.1rem solid #f7f6f5;
+  background-color: #f7f6f5;
+  color: #1e1e1e;
+  border: 0.1rem solid #f7f6f5;
 }
 
 .user {

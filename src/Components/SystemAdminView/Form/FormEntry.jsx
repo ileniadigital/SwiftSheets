@@ -7,8 +7,13 @@ export default function FormEntry ({ formData, viewFormHandler }) {
     return (
         <div className="formEntryContainer">
             <div className='formEntry'>
+                <div className= 'user'>
+                </div>
+                <div className='username'>
+                    {/* Add users name and surname here */}
+                    Jane Smith
+                </div>
                 <div>
-                    <p className='title'>Subject</p>
                     {subject}
                 </div>
             </div>
