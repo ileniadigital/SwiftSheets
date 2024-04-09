@@ -75,6 +75,7 @@ button {
 .status.pending,
 .status.unsubmitted {
   color: grey;
+  font-weight: 600;
 }
 
 .status.approved,
