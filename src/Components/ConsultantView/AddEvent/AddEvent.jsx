@@ -59,12 +59,17 @@ export default function AddEvent({onClose, timesheet}) {
         };
 
         // Retrieve existing events from local storage or initialize empty array
-        const existingEvents = JSON.parse(localStorage.getItem('events')) || [];
+        let existingEvents = JSON.parse(localStorage.getItem('events')) || [];
         // Add new event to existing events
-        const updatedEvents = [...existingEvents, newEvent];
+        const updatedEvents = Array.isArray(existingEvents) ? [...existingEvents, newEvent] : [newEvent];
 
         // Store updated events back to local storage
         localStorage.setItem('events', JSON.stringify(updatedEvents));
+        // Update the events state with the updated array
+        setEvents(updatedEvents);
+
+        // Close the AddEvent component
+        closeMenu();
     }
 
     //Validate event name
@@ -172,7 +177,10 @@ export default function AddEvent({onClose, timesheet}) {
                     {/* {timesheet.eventId ? (
                         <input type="submit" value={"Edit Event"} className='add-event-button'/>
                     ) : ( */}
-                    <input type="submit" value={"Add Event"} onClick={handleAddEvent} className='add-event-button'/>
+                    <input type="submit" value={"Add Event"} onClick={(event) => {
+                        validateEventName(event); 
+                        handleAddEvent(); 
+                     }}  className='add-event-button'/>
                     
                 </form>
             </div>

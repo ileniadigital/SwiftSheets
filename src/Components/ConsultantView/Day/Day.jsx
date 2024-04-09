@@ -23,6 +23,7 @@ export default function Day({ day, date, addEventHandler, timesheetStatus, event
                 addEventHandler={addEventHandler}
                 date={date}
                 timesheetStatus={timesheetStatus}
+                events={events}
             />
         </div>
     )
