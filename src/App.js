@@ -8,6 +8,7 @@ import Timesheet from './Pages/ConsultantView/Timesheet/Timesheet';
 import Home from './Pages/Home';
 import Name from './Components/NavBar/Name';
 import Settings from './Pages/ConsultantView/ConsultantSettings/ConsultantSettings';
+import Dashboard from './Pages/ConsultantView/ConsultantDashboard/ConsultantDashboard';
 
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'; // Import BrowserRouter
@@ -31,6 +32,7 @@ export default function App() {
           <Route path="/Settings" element={<Settings />} />
           {/* Route to a timesheet based on ID */}
           <Route path="/timesheet/:timesheetId" element={<Timesheet />} />
+          <Route path="/dashboard" element={<Dashboard/>} />
         </Routes>
       </BrowserRouter>
     </React.Fragment>

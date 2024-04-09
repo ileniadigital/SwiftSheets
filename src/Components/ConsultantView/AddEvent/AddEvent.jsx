@@ -60,7 +60,6 @@ export default function AddEvent({onClose, timesheet}) {
 
         // Retrieve existing events from local storage or initialize empty array
         const existingEvents = JSON.parse(localStorage.getItem('events')) || [];
-
         // Add new event to existing events
         const updatedEvents = [...existingEvents, newEvent];
 

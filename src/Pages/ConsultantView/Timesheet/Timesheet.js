@@ -177,9 +177,7 @@ export default function Timesheet() {
         //     setEmptyTimesheetError(true)
         // }
         axios.patch(`http://127.0.0.1:8000/timesheet/${timesheetId}/`, {
-            is_submitted: true,
-            submission_time: submission_time,
-            submission_date: submission_date,
+            is_submitted: true
         })
         .then(response => {
             console.log("Success");

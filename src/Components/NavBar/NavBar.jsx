@@ -42,11 +42,8 @@ export default function NavBar(props){
                 <ul className="navbar-menu">
                     <Link href='/Home' className='navbar-link'>Home</Link>
                     <Link href='/Account' className='navbar-link'>Account</Link>                   
-                    <Link href='/Settings' className='navbar-link'>Settings</Link>
-                    {props.view === 'consultant' &&       
-                    <>         
-                     <Link href='/consultantdashboard' className='navbar-link'>Dashboard</Link>
-                     </>}
+                    <Link href='/Settings' className='navbar-link'>Settings</Link>       
+                    <Link href='/Dashboard' className='navbar-link'>Dashboard</Link>
                 </ul>
                 {/* Language menu */}
                 <LanguageMenu/>
