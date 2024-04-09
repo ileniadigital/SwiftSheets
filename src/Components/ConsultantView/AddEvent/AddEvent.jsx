@@ -6,7 +6,8 @@ import { IoClose } from "react-icons/io5";
 
 // Importing useState
 import { useEffect, useState } from 'react';
-import getDate from '../getDate';
+
+import {createEvents} from '../../Data/EventsData';
 
 //readd eventDate if it might
 export default function AddEvent({onClose, timesheet}) {
@@ -44,19 +45,39 @@ export default function AddEvent({onClose, timesheet}) {
     const [note, setNote] = useState('');
     const [disableCategory, setDisableCategory] = useState(false);
 
-    const handleAddEvent = () => {
+    const handleAddEvent = async (e) => {
+        e.preventDefault();
         // Construct event object
         const newEvent = {
-            eventName: eventName,
-            eventDatse: eventDates,
-            eventStartTime: eventStartTime,
-            eventEndTime: eventEndTime,
-            eventType: eventType,
-            eventCategory: eventCategory,
-            isRecurring: isRecurring,
+            date: eventDates,
+            start_time: eventStartTime,
+            end_time: eventEndTime,
+            // Calculate duration based on start and end times
+            duration: (new Date(eventEndTime) - new Date(eventStartTime)) / (1000 * 60 * 60), 
+            name: eventName,
+            type: eventType,
+            category: eventCategory,
+            is_recurring: isRecurring,
             note: note,
-            disableCategory: disableCategory
+            timesheet: timesheet.id
         };
+
+        try {
+            // Call createEvents function to send data to the database
+            const response = await createEvents(timesheet.id, [newEvent]); // Assuming timesheet has an id field
+            console.log('Event created successfully:', response);
+            console.log('New event:', newEvent);
+            console.log(timesheet.id);
+    
+            // Close the AddEvent component
+            closeMenu();
+        } catch (error) {
+            console.error('Error creating event:', error);
+            console.log('New event:', newEvent);
+            console.log(timesheet.id);
+    
+            // Handle error appropriately (e.g., show error message to the user)
+        }
 
         // Retrieve existing events from local storage or initialize empty array
         let existingEvents = JSON.parse(localStorage.getItem('events')) || [];
