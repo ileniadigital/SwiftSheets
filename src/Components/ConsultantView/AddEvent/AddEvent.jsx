@@ -39,28 +39,37 @@ export default function AddEvent({onClose, timesheet}) {
     const [eventDates, setEventDates] = useState('');
     const [eventStartTime, setEventStartTime] = useState('');
     const [eventEndTime, setEventEndTime] = useState('');
-    const [eventType, setEventType] = useState('');
-    const [eventCategory, setEventCategory] = useState('');
+    const [eventType, setEventType] = useState('Normal');
+    const [eventCategory, setEventCategory] = useState('Project');
     const [isRecurring, setIsRecurring] = useState(false);
-    const [note, setNote] = useState('');
+    const [note, setNote] = useState('N/A');
     const [disableCategory, setDisableCategory] = useState(false);
 
     const handleAddEvent = async (e) => {
         e.preventDefault();
         // Construct event object
-        const newEvent = {
+        const startTime = new Date(`${eventDates}T${eventStartTime}`).toLocaleTimeString('en-US', { hour12: false });
+        const endTime = new Date(`${eventDates}T${eventEndTime}`).toLocaleTimeString('en-US', { hour12: false });
+
+        // Calculate the difference in milliseconds
+        const differenceMs = endTime - startTime;
+
+        // Convert the difference to hours
+        const duration = differenceMs / (1000 * 60 * 60);
+        console.log('Duration:', duration);
+
+        const newEvent = JSON.stringify({
             date: eventDates,
-            start_time: eventStartTime,
-            end_time: eventEndTime,
-            // Calculate duration based on start and end times
-            duration: (new Date(eventEndTime) - new Date(eventStartTime)) / (1000 * 60 * 60), 
+            start_time: startTime,
+            end_time: endTime,
+            duration: duration,
             name: eventName,
             type: eventType,
             category: eventCategory,
             is_recurring: isRecurring,
             note: note,
             timesheet: timesheet.id
-        };
+        });
 
         try {
             // Call createEvents function to send data to the database
@@ -127,50 +136,50 @@ export default function AddEvent({onClose, timesheet}) {
 
                     <div className="input event-name">
                         <label htmlFor="eventName">Name</label>
-                        <input type="text" name = "eventName" required/>
+                        <input type="text" name = "eventName" required onChange={(e) => setEventName(e.target.value)}/>
                     </div>
 
                     <div className="input">
                         <label htmlFor="eventDate">Date</label>
                             {/* // Limiting days to choose from as days in current week */}
-                            <input className = 'datetime' type="date" name = "eventDate" value={date} onChange={handleDateChange} required min={timesheet.start_date} max={timesheet.end_date}/>
+                            <input className = 'datetime' type="date" name = "eventDate" value={date} onChange={(e) => setEventDates(e.target.value)} required min={timesheet.start_date} max={timesheet.end_date}/>
                     </div>
 
                     <div className="input">
                         <label htmlFor="eventStartTime">Start Time</label>
-                        <input type="time" className='datetime' name = "eventStartTime" required />
+                        <input type="time" className='datetime' name = "eventStartTime" required  onChange={(e) => setEventStartTime(e.target.value)}/>
                     </div>
 
                     <div className="input">
                         <label htmlFor="eventEndTime">End Time</label>
-                        <input className='datetime' type="time" name = "eventEndTime" required />
+                        <input className='datetime' type="time" name = "eventEndTime" required onChange={(e) => setEventEndTime(e.target.value)}/>
                     </div>
 
                     <div className="input">
                         <label htmlFor="eventType">Type</label>
-                        <select name="eventType" required>
+                        <select name="eventType" required onChange={(e) => setEventType(e.target.value)}>
                             <option value="" disabled hidden>Type</option> {/* Default value */}
-                            <option value="eventTypeNormal">Normal</option>
-                            <option value="eventTypeOvertime">Overtime</option>
-                            <option value="eventTypeHoliday">Holiday</option>
-                            <option value="eventTypeSick">Sick</option>
+                            <option value="Normal">Normal</option>
+                            <option value="Overtime">Overtime</option>
+                            <option value="Holiday">Holiday</option>
+                            <option value="Sick">Sick</option>
                         </select>
                     </div>
 
                     {/* No need to show category if work is not Normal or Overtime e.g. if Consultants are sick */}
                     <div className="input">
                         <label htmlFor="eventCategory">Category</label>
-                        <select name="eventCategory" required>
+                        <select name="eventCategory" required onChange={(e) => setEventCategory(e.target.value)}>
                             <option value="" disabled hidden>Category</option> {/* Default value */}
                             <option value="Project">Project</option>
-                            <option value="eventCategoryPlanning">Planning</option>
-                            <option value="eventCategoryMeeting">Meeting</option>
+                            <option value="Planning">Planning</option>
+                            <option value="Meeting">Meeting</option>
                         </select>
                     </div>
 
                     <div className="input checkbox-container">
                         <label htmlFor="isRecurring" className='checkbox-label'>Recurring </label>
-                        <input  type="checkbox"/>
+                        <input  type="checkbox" onChange={(e) => setIsRecurring(e.target.value)}/>
                         {/* <input className = {`is-recurring ${isRecurring ? 'recur' : ''}`} type="checkbox" onChange={() => setIsRecurring(!isRecurring)}
                         defaultValue={isRecurring}/> */}
                     </div>
@@ -200,7 +209,7 @@ export default function AddEvent({onClose, timesheet}) {
                     ) : ( */}
                     <input type="submit" value={"Add Event"} onClick={(event) => {
                         validateEventName(event); 
-                        handleAddEvent(); 
+                        handleAddEvent(event); 
                      }}  className='add-event-button'/>
                     
                 </form>

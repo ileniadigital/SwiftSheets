@@ -65,7 +65,8 @@ export const createEvents = async (timesheetID, eventData) => { // Accept event 
   }
 
   try {
-    const response = await Axios.post(url, eventData); // Send eventData to the backend
+    const response = await Axios.post(url, eventData);
+    console.log("Sent data") // Send eventData to the backend
     return response.data;
   } catch (error) {
     console.error('Error creating events:', error);
