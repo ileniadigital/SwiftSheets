@@ -249,7 +249,7 @@ export default function Timesheet() {
 
             {/* Shows add event screen, with the arguments based on the component that called the method 
                 Only allows logging events if timesheet has not been submitted */}
-            {isAddEventOpen && <AddEvent onClose={closeAddEvent} />}
+            {isAddEventOpen && <AddEvent onClose={closeAddEvent} timesheet={timesheet} />}
         
 
             {/* Used to display the different statuses of the timesheet */}

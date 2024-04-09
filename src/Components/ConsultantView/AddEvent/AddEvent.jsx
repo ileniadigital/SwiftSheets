@@ -8,14 +8,16 @@ import { IoClose } from "react-icons/io5";
 import { useEffect, useState } from 'react';
 import getDate from '../getDate';
 
-export default function AddEvent({onClose}) {
+export default function AddEvent({onClose, timesheet}) {
+
+    //Handle closing of add event pop up
     const [isOpen, setIsOpen] = useState(true);
 
     const closeMenu = () => {
         setIsOpen(false);
         onClose();
     }
-
+    
     return(
         isOpen && (
             <div className='add-event'>
@@ -41,7 +43,7 @@ export default function AddEvent({onClose}) {
                     <div className="input">
                         <label htmlFor="eventDate">Date</label>
                             {/* // Limiting days to choose from as days in current week */}
-                            <input className = 'datetime' type="date" name = "eventDate"required/>
+                            <input className = 'datetime' type="date" name = "eventDate" required min={timesheet.start_date} max={timesheet.end_date}/>
                     </div>
 
                     <div className="input">
