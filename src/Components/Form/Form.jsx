@@ -16,6 +16,7 @@ export default function Form() {
         // Add values to database: formType, subject, text
 
         // Adding to local storage temporarily
+        // Add the users name as part of the attributes
         if (!localStorage.getItem("forms")) {
             const newForm = {
                 0: { 
