@@ -14,7 +14,7 @@ class TimesheetAdmin(admin.ModelAdmin):
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
-    list_display = ('id', 'date', 'duration', 'name', 'type', 'category', 'is_recurring')
+    list_display = ('id', 'date', 'start_time', 'end_time', 'duration', 'name', 'type', 'category', 'is_recurring')
     list_filter = ('category', 'type', 'is_recurring')
     search_fields = ('type', 'is_recurring', 'name')
 

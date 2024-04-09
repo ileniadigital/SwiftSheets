@@ -48,7 +48,7 @@ export default function Timesheet() {
                 console.log("Timesheet:", timesheet);
 
                 const events = await fetchEventsByTimesheetID(timesheetId);
-                setEvents(events);
+                setEvents(events || []);
                 console.log("Events:", events);
 
                 if (timesheet){
@@ -163,9 +163,6 @@ export default function Timesheet() {
     const handleSubmission = () => {
         //Calculate submission time
         const currentTime = new Date().toISOString();
-        // Extract date and time
-        const submission_date = currentTime.split('T')[0]; // Get date part
-        const submission_time = currentTime.split('T')[1].split('.')[0];
  
         axios.patch(`http://127.0.0.1:8000/timesheet/${timesheetId}/`, {
             is_submitted: true
