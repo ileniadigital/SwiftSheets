@@ -3,10 +3,19 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 80vh;
+  height: 100%;
+  background-color: #f7f6f5;
+}
+
+/* Adding padding */
+.login-container input {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  background-color: #f7f6f5;
 }
 
 .login-box {
+  margin-top: 1rem;
   width: 461px;
   height: 325px;
   top: 388px;
@@ -52,17 +61,19 @@
   font-family: Inter;
   font-size: 25px;
   font-weight: 700;
-  line-height: 24.2px;
   text-align: left;
-  margin-top: 10px;
+  margin-top: 20px;
   margin-left: 250px;
   color: #ffffff;
   font-size: 14px;
   text-align: right;
   display: block;
-  margin-bottom: 10px;
   text-decoration: underline;
   transition: color 0.3s ease;
+}
+
+body {
+  background-color: #f7f6f5;
 }
 
 .login-button {
@@ -71,7 +82,7 @@
   padding: 10px;
   border: none;
   border-radius: 5px;
-  background-color: #fff;
+  background-color: #f7f6f5;
   color: #333;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -107,16 +118,14 @@
   font-weight: 400;
   line-height: 60.51px;
   text-align: left;
-  color: #fff;
+  color: #1e1e1e;
 }
 
 .top-bar {
   width: 100%;
-  height: 100%;
+  height: 10rem;
   margin-bottom: 7%;
-  background-color: #000;
-  display: flex;
-  align-items: center;
+  padding-top: 2rem;
 }
 
 .top-logo {
@@ -125,11 +134,7 @@
 }
 
 .forgot-password:hover {
-  color: #bbb;
-}
-
-body {
-  background-color: #333;
+  color: #1e1e1e;
 }
 
 .error-message {
