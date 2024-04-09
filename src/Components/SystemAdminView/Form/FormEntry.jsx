@@ -4,6 +4,8 @@ import './FormEntry.css'
 export default function FormEntry ({ formData, viewFormHandler }) {
     let type = formData.type
     let subject = formData.subject
+    let firstname = formData.firstname
+    let lastname = formData.lastname
     return (
         <div className="formEntryContainer">
             <div className='formEntry'>
@@ -11,7 +13,7 @@ export default function FormEntry ({ formData, viewFormHandler }) {
                 </div>
                 <div className='username'>
                     {/* Add users name and surname here */}
-                    Jane Smith
+                    {firstname} {lastname}
                 </div>
                 <div>
                     {subject}
