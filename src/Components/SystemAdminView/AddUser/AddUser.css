@@ -1,7 +1,7 @@
 #addUserMenu {
   position: fixed;
   background-color: #1e1e1e;
-  border: 0.1rem solid #c5ff00;
+  border: 0.3rem solid #a7d900;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -51,9 +51,10 @@
   font-size: 1.3rem;
   box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
   width: 15rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 
-/* Password otherwise covered by icon */
 .pass-input1 {
   padding-right: 2rem;
 }
