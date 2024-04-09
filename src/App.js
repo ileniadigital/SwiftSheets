@@ -8,6 +8,9 @@ import Timesheet from './Pages/ConsultantView/Timesheet/Timesheet';
 import Home from './Pages/Home';
 import Name from './Components/NavBar/Name';
 import Settings from './Pages/ConsultantView/ConsultantSettings/ConsultantSettings';
+import Form from './Components/Form/Form';
+import CompletionReminder from './Components/ConsultantView/Reminder/CompletionReminder';
+import StartReminder from './Components/ConsultantView/Reminder/StartReminder';
 
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'; // Import BrowserRouter
@@ -35,8 +38,12 @@ export default function App() {
           {/* Route to a timesheet based on ID */}
           <Route path="/timesheet/:timesheetId" element={<Timesheet />} />
           {/* Completion reminder for consultant */}
-          {role === 'consultant' && reminder && <Reminder message={reminderMessage} setReminder={setReminder}/>}
-          
+          {role === 'consultant' && 
+          <>
+            <CompletionReminder/>
+            <StartReminder/>
+          </>
+          }
         </Routes>
       </BrowserRouter>
     </React.Fragment>
