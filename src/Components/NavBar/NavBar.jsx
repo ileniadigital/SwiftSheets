@@ -9,7 +9,7 @@ import Link from './Link';
 import LanguageMenu from './LanguageMenu';
 
 //Navigation bar component
-export default function NavBar(props){
+export default function NavBar(role){
     // let view;
     // switch (props.view) {
     //     case 'consultant':
@@ -42,7 +42,7 @@ export default function NavBar(props){
                 <ul className="navbar-menu">
                     <Link href='/Home' className='navbar-link'>Home</Link>
                     <Link href='/Account' className='navbar-link'>Account</Link>                   
-                    {props.view === 'consultant' &&       
+                    {role.role === 'consultant' &&       
                     <>       
                         <Link href='/Settings' className='navbar-link'>Settings</Link>
                         <Link href='/consultantdashboard' className='navbar-link'>Dashboard</Link>

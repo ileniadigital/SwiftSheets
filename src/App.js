@@ -11,6 +11,7 @@ import Settings from './Pages/ConsultantView/ConsultantSettings/ConsultantSettin
 import Form from './Components/Form/Form';
 import CompletionReminder from './Components/ConsultantView/Reminder/CompletionReminder';
 import StartReminder from './Components/ConsultantView/Reminder/StartReminder';
+import ConsultantDashboard from './Pages/ConsultantView/ConsultantDashboard/ConsultantDashboard'
 
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'; // Import BrowserRouter
@@ -21,7 +22,7 @@ export default function App() {
 
   return (
     <React.Fragment>
-      <NavBar/>
+      <NavBar role={role}/>
       <Name/>
       <BrowserRouter>
         <Routes>
@@ -31,6 +32,7 @@ export default function App() {
           <Route path="/Account" element={<Account />} />
           <Route path="/Settings" element={<Settings />} />
           <Route path="/Form" element={<Form />} />
+          <Route path="/ConsultantDashboard" element={<ConsultantDashboard />} />
           {/* Route to a timesheet based on ID */}
           <Route path="/timesheet/:timesheetId" element={<Timesheet />} />
         </Routes>
