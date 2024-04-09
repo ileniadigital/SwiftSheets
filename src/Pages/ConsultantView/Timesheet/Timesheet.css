@@ -1,6 +1,4 @@
 /* Styling for Timesheet Component */
-
-/* Setting font family */
 .consultant-view {
   margin-bottom: 1rem;
 }
@@ -263,4 +261,17 @@ button {
 /* Styling container */
 .empty-error button {
   margin-left: auto;
+}
+
+/* Styling timesheet container */
+.timesheet-container {
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.consultant-view-header,
+.status-container {
+  flex: 0 0 auto;
 }

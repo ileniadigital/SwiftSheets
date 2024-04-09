@@ -5,6 +5,8 @@ import './Day.css';
 import Hours from '../Hours/Hours';
 
 export default function Day({ day, date, addEventHandler, timesheetStatus, events }) {
+      
+      
     return (
         // Each weekday stored with its hours in a day
         <div className='weekday'>

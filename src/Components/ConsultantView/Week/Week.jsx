@@ -62,7 +62,7 @@ export default function Week({ viewedWeek, addEventHandler, timesheetStatus }) {
     }
 
     // Creating Day component for each day of the week and adding it to the array
-    for (let i = 0; i < weekDays.length; i++) {
+    for (let i = 0; i < daysOfTheWeek.length; i++) {
         week.push(
             <Day
                 key={i + 1}
@@ -70,7 +70,7 @@ export default function Week({ viewedWeek, addEventHandler, timesheetStatus }) {
                 date={weekDates[i]}
                 addEventHandler={(day, date) => addEventHandler(day, date)}
                 timesheetStatus={timesheetStatus}
-                events={events} 
+                events={events.filter(event => new Date(event.date).getDay() === i)}
             />
         );
     }

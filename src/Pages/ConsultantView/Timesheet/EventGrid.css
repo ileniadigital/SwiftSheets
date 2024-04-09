@@ -1,0 +1,45 @@
+.event-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+.grid-header {
+  display: flex;
+}
+
+.grid-column-header {
+  flex: 1;
+  text-align: center;
+  border-bottom: 0.2rem solid #1e1e1e;
+}
+
+.grid-body {
+  display: flex;
+}
+
+.grid-column {
+  flex: 1;
+  border-right: 0.2rem solid #1e1e1e;
+  position: relative;
+}
+
+.hour-column {
+  /* Style the hour column */
+  width: 5rem; /* Adjust width as needed */
+}
+
+.time-slot {
+  height: 3rem; /* height for each hour */
+  border-bottom: 0.2rem solid #1e1e1e;
+  position: relative;
+  text-align: center; /* for absolute positioning of events */
+}
+
+.event-block {
+  position: absolute;
+  width: calc(100% - 4px);
+  left: 2px;
+  right: 2px;
+  border: 0.2rem solid #1e1e1e;
+  /* top and height will be set in inline styles */
+}

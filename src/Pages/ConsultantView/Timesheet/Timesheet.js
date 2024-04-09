@@ -3,6 +3,7 @@ import './Timesheet.css';
 
 // Importing Components
 import Week from '../../../Components/ConsultantView/Week/Week';
+import EventGrid from './EventGrid';
 import AddEvent from '../../../Components/ConsultantView/AddEvent/AddEvent';
 import NoWorkingDaysError from '../../../Components/ConsultantView/NoWorkingDaysError/NoWorkingDaysError'
 
@@ -45,7 +46,6 @@ export default function Timesheet() {
                 
                 const timesheet = data.find(ts => ts.id === parseInt(timesheetId));
                 setTimesheet(timesheet);
-                console.log("Timesheet:", timesheet);
 
                 const events = await fetchEventsByTimesheetID(timesheetId);
                 setEvents(events || []);
@@ -78,7 +78,7 @@ export default function Timesheet() {
         };
 
         fetchData();
-        console.log("Fetched")
+        console.log(events)
     }, [timesheetId]);
 
     // Setting the date for the reminder
@@ -251,9 +251,11 @@ export default function Timesheet() {
 
             {/* Shows add event screen, with the arguments based on the component that called the method 
                 Only allows logging events if timesheet has not been submitted */}
-            <Week timesheet={timesheet} addEventHandler={addEventHandler} timesheetStatus={timesheetStatus} />
-            {isAddEventOpen && <AddEvent onClose={closeAddEvent} timesheet={timesheet} />}
-        
+            <div className='timesheet-container'>
+                <EventGrid events={events}/>
+                {isAddEventOpen && <AddEvent onClose={closeAddEvent} timesheet={timesheet} />}
+            </div>
+          
 
             {/* Used to display the different statuses of the timesheet */}
             <div className='status-container'>
