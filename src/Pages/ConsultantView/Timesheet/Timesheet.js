@@ -24,7 +24,7 @@ import {fetchTimesheetsbyID} from '../../../Components/Data/TimesheetData';
 import {fetchEventsByTimesheetID} from '../../../Components/Data/EventsData';
 
 export default function Timesheet() {
-    const role='linemanager' // Placeholder for user role
+    const role='consultant' // Placeholder for user role
     const [timesheet, setTimesheet] = useState(null); 
     const [events, setEvents] = useState([]);
     const [timesheetStatus, setTimesheetStatus] = useState(''); 
@@ -177,6 +177,11 @@ export default function Timesheet() {
    const [emptyTimesheetError, setEmptyTimesheetError] = useState(false)
     // Function that handles timesheet submission
     const handleSubmission = () => {
+        //Calculate submission time
+        const currentTime = new Date().toISOString();
+        // Extract date and time
+        const submission_date = currentTime.split('T')[0]; // Get date part
+        const submission_time = currentTime.split('T')[1].split('.')[0];
         //CHECK IF NUMBER OF EVENTS IS MORE THAN 0
         // Include iteration that checks the length of the events; if theres more than 1 the timesheet can be submitted
         // const numberOfEvents = Object.keys(JSON.parse(localStorage.getItem('events'))).length > 0
@@ -189,6 +194,8 @@ export default function Timesheet() {
         // }
         axios.patch(`http://127.0.0.1:8000/timesheet/${timesheetId}/`, {
             is_submitted: true,
+            submission_time: submission_time,
+            submission_date: submission_date,
         })
         .then(response => {
             console.log("Success");
