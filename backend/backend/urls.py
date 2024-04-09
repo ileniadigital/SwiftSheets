@@ -22,7 +22,7 @@ from myapp.views import SystemUserViewSet, TimesheetViewSet, EventViewset, Comme
 from rest_framework_simplejwt.views import TokenObtainPairView,  TokenRefreshView# type: ignore
 from rest_framework.routers import DefaultRouter# type: ignore
 from django.urls import reverse# type: ignore
-
+from myapp.views import login
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,6 +32,8 @@ urlpatterns = [
     path('myapp/user-timesheets/', UserTimesheetView.as_view(), name='user_timesheets'),
     path('create_timesheet/', views.create_timesheet, name='create_timesheet'),
     path('create_events/<int:timesheet_id>/', views.create_events, name='create_events'),
+    path('login/', login, name='login'),
+
     # path('myapp/timesheets/not-reviewed/', TimesheetListView.as_view(), name='timesheet-not-reviewed-list'),
 ]
 

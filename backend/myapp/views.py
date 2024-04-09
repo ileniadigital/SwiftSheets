@@ -396,3 +396,25 @@ class UserTimesheetView(APIView):
         user = SystemUser.objects.get(pk=user_id)
         timesheets = user.timesheets.all()  # Retrieve all timesheets related to the selected user
         return render(request, 'user_timesheets.html', {'users': SystemUser.objects.all(), 'user': user, 'timesheets': timesheets})
+
+
+from django.http import JsonResponse
+from .models import SystemUser
+from .serializers import SystemUserSerializer
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.decorators import api_view, permission_classes
+
+
+@api_view(['POST'])
+@permission_classes([permissions.AllowAny])
+def login(request):
+    print('1231')
+    print(request.data)
+    username = request.data.get('username')
+    password = request.data.get('password')
+    user = SystemUser.objects.filter(username=username, password=password).first()
+    print(user)
+    if user:
+        return Response({"username": user.username})
+    return Response({"error": "Invalid credentials"}, status=400)
