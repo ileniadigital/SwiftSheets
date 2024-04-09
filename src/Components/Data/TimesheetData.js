@@ -41,3 +41,25 @@ export const fetchTimesheetsbyID = async (setTimesheets, consultant) => {
     console.error('Error fetching timesheets:', error);
   }
 }
+
+// Function to create a new timesheet
+export const createTimesheet = async (userId) => {
+  const url = 'http://localhost:8000/timesheet/';
+  const currentTime = new Date().toISOString();
+  const submission_date = currentTime.split('T')[0];
+  const submission_time = currentTime.split('T')[1].split('.')[0];
+
+  const data = {
+    user: userId,
+    submission_date: submission_date,
+    submission_time: submission_time,
+    // You can add other fields if needed
+  };
+
+  try {
+    await Axios.post(url, data);
+    console.log("Timesheet created successfully!");
+  } catch (error) {
+    console.error('Error creating timesheet:', error);
+  }
+};
