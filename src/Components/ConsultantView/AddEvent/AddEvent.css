@@ -122,12 +122,12 @@
   width: 2rem;
   height: 2rem;
   margin-right: 13rem;
-  background: #f7f6f5;
+  background: white;
   box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
   cursor: pointer;
   border-radius: 0.4rem;
   border: 0.1rem solid #1e1e1e;
-  color: #f7f6f5;
+  color: white;
 }
 
 /* Setting colour to when event is recurring */
@@ -176,8 +176,8 @@
   border-radius: 0.3rem;
   font-size: 1rem;
   overflow-y: auto;
-  background-color: #f7f6f5;
-  border-right: 0.3rem solid #f7f6f5;
+  background-color: white;
+  border-right: 0.3rem solid white;
 }
 
 /* Adding padding */
@@ -254,4 +254,55 @@ textarea {
 
 /* Formatting */
 .select-recurring {
+}
+
+.manual-dropdown {
+  background-color: white;
+  border: 0.1rem solid #1e1e1e;
+  width: 15rem;
+  height: 2.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.3rem;
+  border-radius: 0.5rem;
+  font-size: 1.3rem;
+  box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
+  color: #1E1E1E;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.manual-dropdown svg:hover {
+  fill: #a7d900;
+}
+
+.menu {
+  position: absolute;
+  border-radius: 0.5rem;
+  border: 0.1rem solid gray;
+  background-color: white;
+  top: 2.4rem;
+  width: 15rem;
+  left: 0;
+  z-index: 1;
+}
+
+.menu div {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  width: 14.9rem;
+}
+
+.menu div:hover {
+  background-color: #a7d900;
+}
+
+/* Setting hover colour */
+.menu svg:hover {
+  fill: red;
 }

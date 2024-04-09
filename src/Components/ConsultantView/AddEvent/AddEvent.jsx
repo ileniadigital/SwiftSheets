@@ -3,6 +3,8 @@ import './AddEvent.css';
 
 // Importing icon
 import { IoClose } from "react-icons/io5";
+import { IoIosArrowDown } from "react-icons/io";
+import { ImBin } from "react-icons/im";
 
 // Importing useState
 import { useEffect, useState } from 'react';
@@ -367,21 +369,23 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
             let options = []
             for (const re in recEvents) {
                 options.push(
-                    <option key={re}>
+                    <div key={re} onClick={() => {
+                        setMenuItem(recEvents[re].name); setOpenMenu(false); handleChange(recEvents[re].name)}}>
                         {recEvents[re].name}
-                    </option>
+                        <ImBin />
+                    </div>
                 )
             }
             setDropdown(options)
         }
     }, [localStorage.getItem('recurringEvents')])
 
-    const handleChange = (event) => {
+    const handleChange = (eventName) => {
         // Find event and update input values
         let recEvents = JSON.parse(localStorage.getItem('recurringEvents'))
         let event1;
         for (const re in recEvents) {
-            if (recEvents[re].name === event.target.value) {
+            if (recEvents[re].name === eventName) {
                 event1 = recEvents[re]
             }
         }
@@ -396,6 +400,12 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
         setEventNote(event1.note)
     }
 
+    // Setting dropdown menu item
+    const [menuItem, setMenuItem] = useState('Set Recurring Event')
+
+    // Keep track of whether to display dropdown menu
+    const [openMenu, setOpenMenu] = useState(false)
+
     return(
         <div className='add-event' onSubmit={handleSubmit}>
             <button className = "close-event" onClick={addEventHandler}><IoClose /></button>
@@ -408,10 +418,16 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
                 
                 <div className='input'>
                     <label className='select-recurring'>Recurring Event</label>
-                    <select onChange={handleChange} defaultValue={''}>
-                        <option value="" disabled hidden>Recurring Event</option> {/* Default value */}
-                        {dropdown}
-                    </select>
+                    <div className='manual-dropdown' onClick={() => setOpenMenu(!openMenu)}>
+                        <p>{menuItem}</p>
+                        <IoIosArrowDown/>
+                        {openMenu && 
+                        <div className='menu'>
+                            <div onClick={() => { setMenuItem('Set Recurring Event'); setOpenMenu(false)}}>None</div> {/* Default value */}
+                            {dropdown}
+                        </div>
+                        }
+                    </div>
                 </div>
                 }
 
