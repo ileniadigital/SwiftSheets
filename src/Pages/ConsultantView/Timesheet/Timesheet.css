@@ -269,4 +269,13 @@ button {
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+  position: relative;
+  z-index: 0;
+}
+
+.add-event-menu {
+  z-index: 2;
+  top: 0; /* Adjust as necessary */
+  left: 50%; /* Adjust as necessary */
+  transform: scale(0.75);
 }
