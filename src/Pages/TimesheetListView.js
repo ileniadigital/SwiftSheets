@@ -1,25 +1,33 @@
+import '../Components/TimesheetListView/TimesheetListView.css'; // Import styling
+
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 import ConsultantTimesheet from '../Components/TimesheetListView/ConsultantTimesheet/ConsultantTimesheet';
-import '../Components/TimesheetListView/TimesheetListView.css'; // Import styling
 import Filters from '../Components/TimesheetListView/Filters/Filters';
-import { fetchTimesheetsAndUsers } from '../Components/Data/TimesheetData'; // Adjust the path as necessary
+
+//Data fetching from backend
+import { fetchTimesheetsAndUsers } from '../Components/Data/TimesheetData';
 
 export default function TimesheetListView(props) {
   const role = props.role;
-  console.log("Role is:", role)
   const [timesheets, setTimesheets] = useState([]);
   const [users, setUsers] = useState({});
   const [filter, setFilter] = useState("pending");
+  const [submittedTimesheets, setSubmittedTimesheets] = useState([]);
+
 
   useEffect(() => {
     // Pass role to fetchTimesheetsAndUsers function
     fetchTimesheetsAndUsers(setTimesheets, setUsers, filter, role);
-  }, [filter]); // Include role in the dependency array
+  }, [filter, role]); // Include filter and role in the dependency array
 
+  // Separate useEffect for filtering timesheets
+  useEffect(() => {
+    // Filter timesheets by submitted only
+    const filteredTimesheets = timesheets.filter(timesheet => timesheet.is_submitted === true);
+    setSubmittedTimesheets(filteredTimesheets);
+  }, [timesheets]); // Include timesheets in the dependency array
 
-  console.log("Timesheets:", timesheets);
-  timesheets.map(timesheet => console.log("Timesheet:", timesheet.id));
   const handleFilterChange = (selectedFilter) => {
     setFilter(selectedFilter);
   };
@@ -29,10 +37,8 @@ export default function TimesheetListView(props) {
     let updateField;
     if (role === 'linemanager') {
       updateField = 'review_status';
-      //console.log("Review status updated");
     } else {
       updateField = 'payment_status';
-      //console.log("Payment status updated");
     }
   
     Axios.patch(`http://127.0.0.1:8000/timesheet/${id}/`, {
@@ -86,7 +92,7 @@ export default function TimesheetListView(props) {
       </div>
       {/* Displaying consultant timesheets */}
         <div className='timesheet-container'>
-          {timesheets.map(timesheet => (
+          {submittedTimesheets.map(timesheet => (
             <ConsultantTimesheet
               key={timesheet.id}
               id={timesheet.id}

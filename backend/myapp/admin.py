@@ -1,4 +1,4 @@
-from django.contrib import admin
+from django.contrib import admin # type: ignore
 from .models import SystemUser, Timesheet, Event, Comment, Notification
 
 @admin.register(SystemUser)
@@ -14,7 +14,7 @@ class TimesheetAdmin(admin.ModelAdmin):
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
-    list_display = ('id', 'timesheet', 'date', 'duration', 'name', 'type', 'category', 'is_recurring')
+    list_display = ('id', 'date', 'duration', 'name', 'type', 'category', 'is_recurring')
     list_filter = ('category', 'type', 'is_recurring')
     search_fields = ('type', 'is_recurring', 'name')
 
