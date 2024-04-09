@@ -19,7 +19,7 @@
     transform: translate(-50%, -50%);
     position: absolute;
     background-color: #1E1E1E;
-    border: 0.2rem solid #C5FF00;
+    border: 0.2rem solid #a7d900;
     border-radius: 1rem;
     width: 34rem;
     height: 10rem;
@@ -29,7 +29,7 @@
 
 /* Styling buttons */
 .popup .button {
-    background-color: #C5FF00;
+    background-color: #a7d900;
     color: #1E1E1E;
     font-size: x-large;
     width: 5rem;

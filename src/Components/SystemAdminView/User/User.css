@@ -1,8 +1,8 @@
 .manageUser {
     color: #1e1e1e;
-    border: 0.2rem solid #c5ff00;
+    border: 0.2rem solid #a7d900;
     border-radius: 1.5rem;
-    background-color: #c5ff00;
+    background-color: #a7d900;
     width: fit-content;
     justify-content: center;
     margin: auto;
@@ -35,7 +35,7 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: 1rem;
-  background-image: url("data:image/svg+xml,%3Csvg width='67' height='67' viewBox='0 0 67 67' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M33.5002 30.7083C35.7087 30.7083 37.8677 30.0534 39.704 28.8264C41.5404 27.5994 42.9716 25.8554 43.8168 23.815C44.662 21.7745 44.8831 19.5293 44.4523 17.3632C44.0214 15.197 42.9579 13.2073 41.3962 11.6456C39.8345 10.084 37.8448 9.02044 35.6787 8.58957C33.5125 8.1587 31.2673 8.37984 29.2269 9.22502C27.1864 10.0702 25.4424 11.5015 24.2154 13.3378C22.9884 15.1742 22.3335 17.3331 22.3335 19.5417C22.3335 22.5033 23.51 25.3435 25.6041 27.4377C27.6983 29.5319 30.5386 30.7083 33.5002 30.7083Z' fill='url(%23paint0_linear_107_153)'/%3E%3Cpath d='M50.2502 58.6248C50.9906 58.6248 51.7006 58.3307 52.2242 57.8072C52.7477 57.2836 53.0418 56.5736 53.0418 55.8332C53.0418 50.6504 50.983 45.6799 47.3182 42.0151C43.6534 38.3504 38.6829 36.2915 33.5002 36.2915C28.3174 36.2915 23.3469 38.3504 19.6821 42.0151C16.0173 45.6799 13.9585 50.6504 13.9585 55.8332C13.9585 56.5736 14.2526 57.2836 14.7762 57.8072C15.2997 58.3307 16.0098 58.6248 16.7502 58.6248H50.2502Z' fill='url(%23paint1_linear_107_153)'/%3E%3Cdefs%3E%3ClinearGradient id='paint0_linear_107_153' x1='33.5002' y1='8.375' x2='33.5002' y2='30.7083' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%23C5FF00'/%3E%3Cstop offset='1' stop-color='%23C5FF00'/%3E%3C/linearGradient%3E%3ClinearGradient id='paint1_linear_107_153' x1='33.5002' y1='36.2915' x2='33.5002' y2='58.6248' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%23C5FF00'/%3E%3Cstop offset='1' stop-color='%23C5FF00'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E%0A");
+  background-image: url("data:image/svg+xml,%3Csvg width='67' height='67' viewBox='0 0 67 67' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M33.5002 30.7083C35.7087 30.7083 37.8677 30.0534 39.704 28.8264C41.5404 27.5994 42.9716 25.8554 43.8168 23.815C44.662 21.7745 44.8831 19.5293 44.4523 17.3632C44.0214 15.197 42.9579 13.2073 41.3962 11.6456C39.8345 10.084 37.8448 9.02044 35.6787 8.58957C33.5125 8.1587 31.2673 8.37984 29.2269 9.22502C27.1864 10.0702 25.4424 11.5015 24.2154 13.3378C22.9884 15.1742 22.3335 17.3331 22.3335 19.5417C22.3335 22.5033 23.51 25.3435 25.6041 27.4377C27.6983 29.5319 30.5386 30.7083 33.5002 30.7083Z' fill='url(%23paint0_linear_107_153)'/%3E%3Cpath d='M50.2502 58.6248C50.9906 58.6248 51.7006 58.3307 52.2242 57.8072C52.7477 57.2836 53.0418 56.5736 53.0418 55.8332C53.0418 50.6504 50.983 45.6799 47.3182 42.0151C43.6534 38.3504 38.6829 36.2915 33.5002 36.2915C28.3174 36.2915 23.3469 38.3504 19.6821 42.0151C16.0173 45.6799 13.9585 50.6504 13.9585 55.8332C13.9585 56.5736 14.2526 57.2836 14.7762 57.8072C15.2997 58.3307 16.0098 58.6248 16.7502 58.6248H50.2502Z' fill='url(%23paint1_linear_107_153)'/%3E%3Cdefs%3E%3ClinearGradient id='paint0_linear_107_153' x1='33.5002' y1='8.375' x2='33.5002' y2='30.7083' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%23a7d900'/%3E%3Cstop offset='1' stop-color='%23a7d900'/%3E%3C/linearGradient%3E%3ClinearGradient id='paint1_linear_107_153' x1='33.5002' y1='36.2915' x2='33.5002' y2='58.6248' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%23a7d900'/%3E%3Cstop offset='1' stop-color='%23a7d900'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E%0A");
 }
 
 .manage-button {
@@ -48,7 +48,7 @@
   line-height: normal;
   margin-left: auto;
   margin-right: auto;
-  background-color: #c5ff00;
+  background-color: #a7d900;
   border-radius: 1.5rem;
   padding: 0.5rem;
 }

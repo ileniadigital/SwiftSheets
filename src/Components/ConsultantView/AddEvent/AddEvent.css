@@ -111,7 +111,7 @@
 .add-new-event .add-event-button {
   margin: auto;
   margin-top: 0.1rem;
-  background-color: #c5ff00;
+  background-color: #a7d900;
   color: #1e1e1e;
   width: 9rem;
   height: 2.5rem;
@@ -233,7 +233,7 @@ textarea {
 
 /* Displaying event */
 .event {
-  background-color: #c5ff00;
+  background-color: #a7d900;
   width: 100%;
   position: absolute;
 }
