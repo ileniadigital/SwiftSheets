@@ -9,6 +9,7 @@ import { ImBin } from "react-icons/im";
 // Importing useState
 import { useEffect, useState } from 'react';
 import getDate from '../getDate';
+import DeleteEventConfirmation from '../DeleteEventConfirmation/DeleteEventConfirmation';
 
 export default function AddEvent({componentCaller, addEventHandler, viewedWeek, event}) {
 
@@ -196,11 +197,23 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
                             // Check if event is in recurring events
                             let found = false
                             for (const r in recurringEvents) {
-                                if (recurringEvents[r].id === event1.id)
-                                found = true
-                                break
+                                if (recurringEvents[r].id === event1.id) {
+                                    found = true
+                                    break
+                                }
+                                // Event can be in recurring events if all the attributes (minus that date) are the same as an existing event
+                                else if (
+                                        events[e].startTime === event1.startTime && 
+                                        events[e].endTime === event1.endTime && 
+                                        events[e].name === event1.name && 
+                                        events[e].type === event1.type && 
+                                        events[e].category === event1.category && 
+                                        events[e].note === event1.note ) {
+                                        found = true
+                                        break
+                                }
                             }
-
+                            console.log("here")
                             // Add to recurring events if not in already
                             if (!found && isRecurring) {
                                 recurringEvents[event1.id] = event1
@@ -366,6 +379,7 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
     const deleteRecurringEvent = (id) => {
         const recurringEvents = JSON.parse(localStorage.getItem("recurringEvents"))
         delete recurringEvents[id]
+        // Update recurring value in normal db
         localStorage.setItem("recurringEvents", JSON.stringify(recurringEvents)); // Save the updated events back to localStorage
         setRecurringEvents(recurringEvents);
     }
@@ -380,6 +394,7 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
                     <div key={re} onClick={() => {
                         setMenuItem(recEvents[re].name); setOpenMenu(false); handleChange(recEvents[re].name)}}>
                         {recEvents[re].name}
+                        {/* Delete recurring event on click */}
                         <ImBin onClick={(event) => {
                             event.stopPropagation();
                             deleteRecurringEvent(re);
@@ -407,20 +422,27 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
         setEventEndTime(event1.endTime)
         setEventType(event1.type)
         setEventCategory(event1.category)
+        console.log(eventCategory, event1.category)
         setIsRecurring(event1.recurring)
         setEventNote(event1.note)
     }
 
     // Setting dropdown menu item
-    const [menuItem, setMenuItem] = useState('Set Recurring Event')
+    const [menuItem, setMenuItem] = useState('Recurring Event')
 
     // Keep track of whether to display dropdown menu
     const [openMenu, setOpenMenu] = useState(false)
 
+    // Track whether to show event deletion message
+    const [openPopup, setOpenPopup] = useState(false)
+
     return(
         <div className='add-event' onSubmit={handleSubmit}>
             <button className = "close-event" onClick={addEventHandler}><IoClose /></button>
-            <h1 className='log-event-heading'>Log Event</h1>
+            <h1 className='log-event-heading'>
+                { componentCaller === 'Hours1' ? ('Edit Event') : ('Log Event')}
+            </h1>
+
             {/* Creating a form that represents the Consultant logging an event */}
             <form action="" className = "add-new-event">
 
@@ -434,7 +456,7 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
                         <IoIosArrowDown/>
                         {openMenu && 
                         <div className='menu'>
-                            <div onClick={() => { setMenuItem('Set Recurring Event'); setOpenMenu(false)}}>None</div> {/* Default value */}
+                            <div onClick={() => { setMenuItem('Recurring Event'); setOpenMenu(false)}}>None</div> {/* Default value */}
                             {dropdown}
                         </div>
                         }
@@ -506,7 +528,13 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
                 {concurrentEvent && 
                 <p className='concur-error'>Event is Overlapping</p>}
                 {componentCaller === 'Hours1' ? (
-                <input type="submit" value={"Edit Event"} className='add-event-button'/> 
+                    <div id='hours1-submit'>
+                        <input type="submit" value={"Edit Event"} className='add-event-button'/> 
+                        <input value={"Delete Event"} className='add-event-button' id = 'add-delete'
+                        onClick={() => setOpenPopup(true)}/> 
+                        {/* Show deletion confirmation message */}
+                        {openPopup && <DeleteEventConfirmation event={event.id} setOpenPopup={setOpenPopup}/>}
+                    </div>
                 )
                 : (
                 <input type="submit" value={"Add Event"} className='add-event-button'/> ) }

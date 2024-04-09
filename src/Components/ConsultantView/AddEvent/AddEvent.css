@@ -14,6 +14,7 @@
   border-radius: 2rem;
   display: flex;
   flex-direction: column;
+  z-index: 2;
 }
 
 /* Styling button used to close event */
@@ -306,4 +307,21 @@ textarea {
 /* Setting hover colour */
 .menu svg:hover {
   fill: red;
+}
+
+#hours1-submit {
+  display: flex;
+  gap: 1rem;
+}
+
+#hours1-submit input {
+  width: 9rem;
+}
+
+#add-delete {
+  text-align: center;
+}
+
+#add-delete:hover {
+  background-color: red;
 }

@@ -6,7 +6,7 @@ import { FaCirclePlus } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
 
 // Importing useState
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 // Importing component to display event on click
 import DeleteEventConfirmation from '../DeleteEventConfirmation/DeleteEventConfirmation';
