@@ -43,7 +43,7 @@
 }
 
 /* Styling input/select boxes */
-.inputBox {
+#addUserMenu .inputBox {
   border: 0;
   width: 14rem;
   margin: auto;
