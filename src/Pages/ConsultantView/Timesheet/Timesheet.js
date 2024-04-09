@@ -12,15 +12,122 @@ import { IoIosNotificationsOff } from "react-icons/io";
 import { FaCirclePlus } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
 
-// Importing helper
-import getDate from '../../../Components/ConsultantView/getDate';
-
 // Importing useState and useEffect
 import { useEffect, useState } from 'react';
 import exportPdf from './exportPdf';
 import ManualCompletionReminder from '../../../Components/ConsultantView/Reminder/ManualCompletionReminder';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
+// Importing Data from backend
+import {fetchTimesheetsbyID} from '../../../Components/Data/TimesheetData';
+import {fetchEventsByTimesheetID} from '../../../Components/Data/EventsData';
 
 export default function Timesheet() {
+    const role='linemanager' // Placeholder for user role
+    const [timesheet, setTimesheet] = useState(null); 
+    const [events, setEvents] = useState([]);
+    const [timesheetStatus, setTimesheetStatus] = useState(''); 
+    const [isSaved] = useState(false);
+    const [timesheetReviewStatus, setTimesheetReviewStatus] = useState(''); 
+    const [timesheetPaymentStatus, setTimesheetPaymentStatus] = useState('');
+    const { timesheetId } = useParams(); 
+
+    // History hook to redirect user
+    const navigate = useNavigate();
+
+    //Fetch the user's timesheet by ID
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const userID= 6;
+                const data = await fetchTimesheetsbyID(userID);
+                
+                const timesheet = data.find(ts => ts.id === parseInt(timesheetId));
+                setTimesheet(timesheet);
+                console.log("Timesheet:", timesheet);
+
+                const events = await fetchEventsByTimesheetID(timesheetId);
+                setEvents(events);
+                console.log("Events:", events);
+
+                if (timesheet){
+                    //Set timesheet status based on submission and save status
+                    if (timesheet.is_submitted) {
+                        setTimesheetStatus('Submitted');
+                    } else {
+                        if (isSaved) {
+                            setTimesheetStatus('Saved');
+                        } else {
+                            setTimesheetStatus('Not Saved');
+                        }
+                    }
+                    setTimesheetReviewStatus(timesheet.review_status);
+                    setTimesheetPaymentStatus(timesheet.payment_status);
+                    if  (timesheet.completion_reminder) {
+                        setTimesheetCompletionReminder(timesheet.completion_reminder);
+                        setCompletionReminderDate(timesheet.completion_reminder_date);
+                        setCompletionReminderTime(timesheet.completion_reminder_time);
+    
+                    }
+                }
+
+            } catch (error) {
+                console.error('Error fetching timesheets:', error);
+            }
+        };
+
+        fetchData();
+    }, [timesheetId]);
+
+    console.log("Review:", timesheetReviewStatus);
+    
+    // Setting the date for the reminder
+    const [completionReminderDate, setCompletionReminderDate] = useState('');
+    const [completionReminderTime, setCompletionReminderTime] = useState('');
+    const [timesheetCompletionReminder, setTimesheetCompletionReminder] = useState(false);
+    
+    // Define function to set reminder time
+    const setReminderTime = (time) => {
+        // Here you can set reminder time as needed
+        console.log('Reminder time:', time);
+    };
+
+    // Initialize today and endOfWeek variables
+    const today = new Date().toISOString().split('T')[0]; // Get current date
+    const nextWeek = new Date(); // Get current date
+    nextWeek.setDate(nextWeek.getDate() + 7); // Add 7 days for end of week
+    const endOfWeek = nextWeek.toISOString().split('T')[0]; // Get next week's date
+
+    // Function to check if reminder is before current time and day
+    function isReminderBeforeCurrentTimeAndDay(reminderTime, reminderDate) {
+        // Get current date and time
+        const currentDate = new Date();
+        const currentDateString = currentDate.toISOString().split('T')[0]; // Get current date in "YYYY-MM-DD" format
+        const currentTimeString = currentDate.toTimeString().split(' ')[0]; // Get current time in "HH:MM:SS" format
+    
+        // Concatenate reminder date and time strings in the format "YYYY-MM-DDTHH:MM:SS"
+        const reminderDateTimeString = `${reminderDate}T${reminderTime}:00`;
+    
+        // Check if reminder date is before current date or if it's the same date but the reminder time is before current time
+        if (reminderDate < currentDateString || (reminderDate === currentDateString && reminderDateTimeString < currentTimeString)) {
+            return true; // Reminder is before current time and day
+        } else {
+            return false; // Reminder is not before current time and day
+        }
+    }
+
+    // Function to format date
+    //This is also in TimesheetDetails.jsx and it can definitely be called without being defined twice
+    //No time to figure it out now, we got a deadline to meet
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
+    }
 
     // Used to create and manage the week shown on the timesheet
     const [viewedWeek, setViewedWeek] = useState(new Date());
@@ -39,12 +146,6 @@ export default function Timesheet() {
 
     // Enables relevant screen to be displayed when the + button is clicked 
     const [addEventClicked, setAddEventClicked] = useState(false);
-
-
-    //  Used to control timesheet submission
-    const [timesheetStatus, setTimesheetStatus] = useState("Unsubmitted") // Allows timesheet to become uneditable if submitted
-    const [timesheetReviewStatus, setTimesheetReviewStatus] = useState("Pending")
-    const [timesheetPaymentStatus, setTimesheetPaymentStatus] = useState("Pending")
 
     // When add event is clicked, add event screen is shown, with the details based on the component it is called by
     const addEventHandler = (componentCaller1, addEventViewedWeek1, event) => {
@@ -107,13 +208,39 @@ export default function Timesheet() {
         )
     }, [localStorage.getItem('timesheetCompletionReminder')])
 
+    const [reminderSet, setReminderSet] = useState(
+        (localStorage.getItem('timesheetCompletionReminder') && 
+    localStorage.getItem('timesheetCompletionReminder') === 'true' ? true : false )|| false)
+
+    useEffect(() => {
+        setReminderSet(
+        localStorage.getItem('timesheetCompletionReminder') === 'true' ? true : false 
+        )
+    }, [localStorage.getItem('timesheetCompletionReminder')])
+
+    // Function to handle revoking submission
+    const handleRevokeSubmission = () => {
+        axios.patch(`http://127.0.0.1:8000/timesheet/${timesheetId}/`, {
+            is_submitted: false,
+        })
+        .then(response => {
+            console.log("Success");
+            // Update the timesheet status in the UI immediately
+            setTimesheetStatus('Not Submitted');
+            // Redirect line manager to home page
+            navigate('/');
+        })
+        .catch(error => {
+            console.error('Error revoking submission:', error);
+        });
+    };
     return (
         localStorage.getItem('daysWorked') !== "[]" ? (
         <div className = 'consultant-view'>
             {/* Creating page header */}
             <div className='consultant-view-header'>
                 <p> 
-                    {startOfWeek} – {endOfWeek}
+                    {timesheet && formatDate(timesheet.start_date)} – {timesheet && formatDate(timesheet.end_date)}
                 </p>
                 <button className='add-event-button' disabled = {timesheetStatus === "Submitted"} onClick={() => addEventHandler("Timesheet", viewedWeek)}> 
                     <FaCirclePlus /> {/* Button icon */}
@@ -146,10 +273,21 @@ export default function Timesheet() {
                     <p>Payment Status <span className={"status " + timesheetPaymentStatus.toLowerCase()}>{timesheetPaymentStatus}</span></p>
                 </div>
                 <div className='buttons'>
-                    <button className='submit-button' onClick={handleSubmission} disabled = {timesheetStatus === "Submitted"} >{timesheetStatus === "Submitted" ? "Submitted" : "Submit"}</button>
-                    <button className='submit-button' onClick={() => setTimesheetStatus("Saved")} disabled = {timesheetStatus === "Submitted"}>Save</button>
-                    <button className='submit-button' onClick={() => exportPdf()}>Export PDF</button>
+                    {/* Revoke Button for line manager */}
+                    {role === 'linemanager' && timesheet && timesheet.is_submitted && (
+                        <button className='submit-button' onClick={handleRevokeSubmission}>
+                            Revoke
+                        </button>
+                    )}
+                    <button id='submit-button' className='submit-button' disabled={timesheet && timesheet.is_submitted} onClick={handleSubmission}>
+                        {timesheet && timesheet.is_submitted ? "Submitted" : "Submit"}
+                    </button>
+                    <button id='save-button' className='submit-button' disabled={timesheet && timesheet.is_submitted} onClick={() => setTimesheetStatus("Saved")}>
+                        Save
+                    </button>
+                    <button className='submit-button' onClick={() => exportPdf(document.querySelector('body'))}>PDF Export</button>
                 </div>
+
             </div>
 
             {/* Display error if user attempts to submit empty timesheet */}

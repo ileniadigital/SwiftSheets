@@ -1,7 +1,7 @@
 # from django.contrib.auth.models import User
 # from tokenize import Comment
 from .models import SystemUser, Timesheet, Event, Comment, Notification
-from rest_framework import serializers
+from rest_framework import serializers  # type: ignore
 
 #SystemUsers
 #timesheets
