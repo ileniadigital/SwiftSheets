@@ -10,26 +10,34 @@ import FormList from "../../../Components/SystemAdminView/FormList/FormList"
 import ViewForm from "../../../Components/SystemAdminView/ViewForm/ViewForm"
 
 // Import useState
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function SystemAdminForm() {
     let dummyForms = [
         {
+            firstname: "Jane",
+            lastname: "Smith",
             type: "Bug",
             subject: "Problems with form page",
             text: "this is purely a test to see how the functionality works and whether it is functional"
         },
         {
+            firstname: "Jane",
+            lastname: "Smith2",
             type: "Bug",
             subject: "Problems with form page",
             text: "this is purely a test to see how the functionality works and whether it is functional"
         },
         {
+            firstname: "Jane",
+            lastname: "Smith3",
             type: "Request",
             subject: "Addition to form page",
             text: "this is purely a test to see how the functionality works and whether it is functional"
         },
         {
+            firstname: "Jane",
+            lastname: "Smith4",
             type: "Request",
             subject: "Addition to form page",
             text: "this is purely a test to see how the functionality works and whether it is functional"
@@ -49,6 +57,14 @@ export default function SystemAdminForm() {
         }
         return list
     });
+
+    useEffect(() => {
+        let list = JSON.parse(localStorage.getItem('forms'))
+        if (list === null) {
+            list = ''
+        }
+        setFormList(list)
+    }, [isBug,isRequest])
 
     const viewFormHandler = (formData) => {
         if (!viewFormClicked) {
