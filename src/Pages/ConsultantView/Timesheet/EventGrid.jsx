@@ -23,13 +23,16 @@ const EventGrid = ({ events }) => {
   const columnWidth = 100 / days.length; // Assuming each column takes up an equal width
   const left = `${columnWidth * dayIndex}%`;
 
+   // Adjust the right position to ensure the block does not exceed the day column width
+   const right = `${100 - (parseFloat(left) + columnWidth)}%`;
+
   // Return the style object with dynamic top and height properties
   return {
     top: top,
     height: height,
     left: left, // Align to the correct day column
-    right: `${100 - (left + columnWidth)}%`, // Ensure the block does not exceed the day column width
-    backgroundColor: 'green', // Example color, adjust as needed
+    right: right, // Ensure the block does not exceed the day column width
+    backgroundColor: '#afd900', // Example color, adjust as needed
     position: 'absolute'
   };
 };

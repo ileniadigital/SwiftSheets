@@ -15,6 +15,7 @@
 
 .grid-body {
   display: flex;
+  margin-left: 0;
 }
 
 .grid-column {
@@ -37,9 +38,13 @@
 
 .event-block {
   position: absolute;
-  width: calc(100% - 4px);
-  left: 2px;
-  right: 2px;
-  border: 0.2rem solid #1e1e1e;
-  /* top and height will be set in inline styles */
+  width: calc(100% - 0.25rem);
+  border: 0.2rem solid #afd900;
+  border-radius: 1.5rem;
+  box-sizing: border-box;
+}
+
+.event-block div {
+  left: unset;
+  right: unset;
 }
