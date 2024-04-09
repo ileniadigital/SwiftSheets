@@ -367,6 +367,7 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
         const recurringEvents = JSON.parse(localStorage.getItem("recurringEvents"))
         delete recurringEvents[id]
         localStorage.setItem("recurringEvents", JSON.stringify(recurringEvents)); // Save the updated events back to localStorage
+        setRecurringEvents(recurringEvents);
     }
 
     useEffect(() => {
@@ -381,7 +382,8 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
                         {recEvents[re].name}
                         <ImBin onClick={(event) => {
                             event.stopPropagation();
-                            deleteRecurringEvent(re)}}/>
+                            deleteRecurringEvent(re);
+                            }}/>
                     </div>
                 )
             }
