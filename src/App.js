@@ -13,14 +13,14 @@ import Login from './Pages/Login';
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'; // Import BrowserRouter
 
-
-
 // Main App component
 export default function App() {
   const [role, setRole] = useState('')
+
   useEffect(() => {
-    role = localStorage.getItem('role');
-    setRole(role);
+    const user = localStorage.getItem('role');
+    console.log('Role:', user);
+    setRole(user);
 
   }, []); // The empty array means this effect runs once on mount
   return (
@@ -31,10 +31,9 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home role={role} />} />
           <Route path="/Home" element={<Home role={role} />} />
-          {/* <Route path="/login" element={<Login />} /> */}
           <Route path="/Account" element={<Account />} />
           <Route path="/Settings" element={<Settings />} />
-          <Route path="/Login" element={<Login />} />
+          <Route path="/Login" element={<Login />} /> 
 
           {/* Route to a timesheet based on ID */}
           <Route path="/timesheet/:timesheetId" element={<Timesheet />} />

@@ -9,7 +9,7 @@ function Login() {
     const username = localStorage.getItem('username');
     const role = localStorage.getItem('role');
     console.log('Username:', username);
-    console.log('Username:', role);
+    console.log('role:', role);
 
   }, []); // The empty array means this effect runs once on mount
 
@@ -22,7 +22,8 @@ function Login() {
       localStorage.setItem('role', response.data.role);
 
       alert('Login successful');
-    } catch (error) {
+    } 
+    catch (error) {
       alert('Login failed');
     }
   };
