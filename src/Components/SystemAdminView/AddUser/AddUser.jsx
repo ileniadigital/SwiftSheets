@@ -135,7 +135,7 @@ export default function AddUser({ addUserMenuHandler, handleAddUserSubmit }) {
                             ? 'text'
                             : 'password'
                         } 
-                        placeholder="password"  
+                        placeholder="Password"  
                         name ='password' 
                         id='password' 
                         class='inputBox' 
