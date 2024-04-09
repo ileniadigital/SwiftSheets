@@ -118,8 +118,7 @@ td {
 /* Styling for all input boxes */
 #manageUser .inputBox {
   border: 0;
-  width: 15rem;
-  padding-right: 2rem; /* Password is otherwise covered by icon */
+  width: 16rem;
   padding-left: 0.5rem; 
   margin: 0;
   color: #1e1e1e;
@@ -128,6 +127,10 @@ td {
   font-family: Inter;
   font-size: 1.3rem;
   box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+#password {
+  padding-right: 2rem; /* Password is otherwise covered by icon */
 }
 
 /* Positioning for the visibility toggle */
