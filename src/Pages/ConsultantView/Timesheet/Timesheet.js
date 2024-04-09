@@ -2,7 +2,6 @@
 import './Timesheet.css';
 
 // Importing Components
-import Week from '../../../Components/ConsultantView/Week/Week';
 import EventGrid from './EventGrid';
 import AddEvent from '../../../Components/ConsultantView/AddEvent/AddEvent';
 import NoWorkingDaysError from '../../../Components/ConsultantView/NoWorkingDaysError/NoWorkingDaysError'
@@ -41,7 +40,7 @@ export default function Timesheet() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const userID= 6;
+                const userID= 1;
                 const data = await fetchTimesheetsbyID(userID);
                 
                 const timesheet = data.find(ts => ts.id === parseInt(timesheetId));
