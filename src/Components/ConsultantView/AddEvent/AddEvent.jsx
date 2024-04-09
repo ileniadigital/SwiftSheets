@@ -203,17 +203,16 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
                                 }
                                 // Event can be in recurring events if all the attributes (minus that date) are the same as an existing event
                                 else if (
-                                        events[e].startTime === event1.startTime && 
-                                        events[e].endTime === event1.endTime && 
-                                        events[e].name === event1.name && 
-                                        events[e].type === event1.type && 
-                                        events[e].category === event1.category && 
-                                        events[e].note === event1.note ) {
+                                        recurringEvents[r].startTime === event1.startTime && 
+                                        recurringEvents[r].endTime === event1.endTime && 
+                                        recurringEvents[r].name === event1.name && 
+                                        recurringEvents[r].type === event1.type && 
+                                        recurringEvents[r].category === event1.category && 
+                                        recurringEvents[r].note === event1.note ) {
                                         found = true
                                         break
                                 }
                             }
-                            console.log("here")
                             // Add to recurring events if not in already
                             if (!found && isRecurring) {
                                 recurringEvents[event1.id] = event1
@@ -257,6 +256,7 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
                 event.preventDefault() // Prevent addition of event
             }
         }
+        event.preventDefault() // Prevent addition of event
 
         // Values to be added to database
         //     eventName,
