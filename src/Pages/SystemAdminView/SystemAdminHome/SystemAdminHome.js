@@ -53,6 +53,7 @@ export default function SystemAdminView() {
     const removeUserHandler = (componentIndexParam, userListParam) => {
         userListParam.splice(componentIndexParam, 1)
         setUserList(userListParam)
+        localStorage.setItem('userList', JSON.stringify(userListParam))
         setManageUserClicked(!manageUserClicked)
     }
 
