@@ -139,7 +139,12 @@ class TimesheetViewSet(viewsets.ViewSet):
         timesheet = self.queryset.get(pk=pk)
         serializer = self.serializer_class(timesheet, data=request.data, partial=True)
         if serializer.is_valid():
-            serializer.save(submission_date=timezone.now().date(), submission_time=timezone.now())
+            if 'submission_status' in request.data and request.data['submission_status'] == 'submitted':
+                serializer.save(submission_date=timezone.now().date(), submission_time=timezone.now())
+            elif 'review_status' in request.data:
+                serializer.save(last_reviewed=timezone.now())
+            else:
+                serializer.save(last_edited=timezone.now())
             return Response(serializer.data)
         else:
             return Response(serializer.errors, status=400)
