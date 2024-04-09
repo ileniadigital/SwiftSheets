@@ -5,7 +5,7 @@ export const fetchEventsByTimesheetID = async (timesheetID) => {
   let url = 'http://localhost:8000/event/';
 
   if (timesheetID) {
-    url += `?timesheet=${timesheetID}`;
+    url += `?timesheet_id=${timesheetID}`;
   }
 
   try {
