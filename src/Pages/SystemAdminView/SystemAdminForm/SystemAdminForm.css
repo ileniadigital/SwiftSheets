@@ -19,26 +19,31 @@
     border-radius: 1.5rem;
     width: 76rem;
     margin-bottom: 2rem;
+    padding-top: 1rem;
 }
 
 /* Setting max height */
 .data {
-    max-height: 25rem;
-    overflow-y: auto;
-    margin-top: 1rem;
-    width: 71rem;
-  }
-  
-  /* Positioning header */
-  .dropdown-menu {
-    position: sticky;
-    top: 0;
-    display: flex;
-  }
-  
-  /* Styling container */
-  .container {
-    display: flex;
-    flex-direction: column;
-    width: 71rem;
-  }
+  max-height: 25rem;
+  overflow-y: auto;
+  margin-top: 1rem;
+  width: 71rem;
+}
+
+/* Positioning header */
+.dropdown-menu {
+  position: sticky;
+  top: 0;
+  display: flex;
+}
+
+/* Styling container */
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 71rem;
+}
+
+.submittedForms h1 {
+  font-size: 2rem;
+}
