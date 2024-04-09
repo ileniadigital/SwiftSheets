@@ -8,10 +8,6 @@ export default function FormEntry ({ formData, viewFormHandler }) {
         <div className="formEntryContainer">
             <div className='formEntry'>
                 <div>
-                    <p className='title'>Type</p>
-                    {type}
-                </div>
-                <div>
                     <p className='title'>Subject</p>
                     {subject}
                 </div>
