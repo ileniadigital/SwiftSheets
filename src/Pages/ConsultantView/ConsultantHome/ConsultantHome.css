@@ -27,7 +27,8 @@
 /* Setting layout */
 .current-timesheet {
   display: flex;
-  gap: 3rem;
+  flex-direction: column;
+  gap: 0.5rem;
   align-items: center;
   text-align: center;
 }
