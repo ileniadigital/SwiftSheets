@@ -259,7 +259,7 @@ export default function Timesheet() {
             {/* Shows add event screen, with the arguments based on the component that called the method 
                 Only allows logging events if timesheet has not been submitted */}
             <div className='timesheet-container'>
-                <EventGrid events={events} timesheet={timesheet} isAddEventOpen={isAddEventOpen} openAddEvent={openAddEvent} className='eventgrid'/>
+                <EventGrid events={events} openAddEvent={openAddEvent} timesheetStatus={timesheetStatus} className='eventgrid'/>
                 {isAddEventOpen && (
                     <div className='add-event-menu'>
                     <AddEvent onClose={closeAddEvent} timesheet={timesheet} />

@@ -3,7 +3,7 @@ import './EventGrid.css';
 
 import { FaCirclePlus } from "react-icons/fa6";
 
-const EventGrid = ({ events, openAddEvent }) => {
+const EventGrid = ({ events, openAddEvent, timesheetStatus }) => {
   const days = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
   const hours = [...Array(24).keys()]; 
 
@@ -58,7 +58,7 @@ const EventGrid = ({ events, openAddEvent }) => {
           <div key={day} className="grid-column">
             {hours.map(hour => (
                     <div key={`${day}-${hour}`} className="add-button" style={{ position: 'relative' }}>
-                    <button className="add-event-button" onClick={handleAddEventClick}>
+                    <button className="add-event-button" onClick={handleAddEventClick} disabled={timesheetStatus === 'Submitted'}>
                         <FaCirclePlus size={30} /> 
                     </button>
                     </div>

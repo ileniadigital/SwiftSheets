@@ -79,3 +79,8 @@
   background-color: transparent;
   border: none;
 }
+
+.add-event-button:disabled {
+  color: grey;
+  pointer-events: none;
+}
