@@ -3,7 +3,7 @@
   position: fixed;
   color: #f7f6f5;
   background-color: #1e1e1e;
-  border: 0.1rem solid #c5ff00;
+  border: 0.3rem solid #a7d900;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -43,7 +43,7 @@
 /* Styling log event heading */
 .manageUserHeading {
   margin: auto;
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
 }
 
 #col1 {
@@ -158,28 +158,24 @@ td {
 .buttonFlex {
   display: flex;
   width: 80%;
-  gap: 2.5rem;
-  align-items: center;
   color: #f7f6f5;
   margin: 1rem;
   flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
   margin-top: 0;
 }
 
 /* Styling for the updateUser button */
 .updateUserButton {
   margin: auto;
-  margin-top: 3rem;
-  background-color: #c5ff00;
+  margin-top: 1rem;
+  background-color: #a7d900;
   color: #1e1e1e;
   width: 12rem;
   height: 3rem;
   border-radius: 1.5rem;
   font-family: Inter;
   font-size: 1.5rem;
-  border: 0.2rem solid #c5ff00;
+  border: 0.2rem solid #a7d900;
 }
 
 /* Adding styling on hover */
