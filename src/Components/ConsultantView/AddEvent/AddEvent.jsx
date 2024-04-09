@@ -45,31 +45,50 @@ export default function AddEvent({onClose, timesheet}) {
     const [note, setNote] = useState('N/A');
     const [disableCategory, setDisableCategory] = useState(false);
 
+    // Calculate the duration of the event
+    const calculateDuration = (eventStartTime, eventEndTime) => {
+        // Split the time strings into hours and minutes
+        const [startHour, startMinute] = eventStartTime.split(":").map(Number);
+        const [endHour, endMinute] = eventEndTime.split(":").map(Number);
+
+        // Construct Date objects with a common reference date (e.g., today's date)
+        const startDate = new Date(0, 0, 0, startHour, startMinute); // January 1, 1900
+        const endDate = new Date(0, 0, 0, endHour, endMinute); // January 1, 1900
+
+        // Calculate the difference in milliseconds
+        let differenceMs = endDate - startDate;
+
+        // Convert milliseconds to hours (1 hour = 3600000 milliseconds)
+        const durationHours = differenceMs / 3600000;
+
+        console.log('Duration (hours):', durationHours);
+        return durationHours;
+    }
+
     const handleAddEvent = async (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         // Construct event object
         const startTime = new Date(`${eventDates}T${eventStartTime}`).toLocaleTimeString('en-US', { hour12: false });
         const endTime = new Date(`${eventDates}T${eventEndTime}`).toLocaleTimeString('en-US', { hour12: false });
 
-        // Calculate the difference in milliseconds
-        const differenceMs = endTime - startTime;
+
 
         // Convert the difference to hours
-        const duration = differenceMs / (1000 * 60 * 60);
+        const duration = calculateDuration(eventStartTime, eventEndTime);
         console.log('Duration:', duration);
 
-        const newEvent = JSON.stringify({
+        const newEvent = {
             date: eventDates,
             start_time: startTime,
             end_time: endTime,
-            duration: duration,
+            duration: 0.0,
             name: eventName,
             type: eventType,
             category: eventCategory,
             is_recurring: isRecurring,
             note: note,
             timesheet: timesheet.id
-        });
+        };
 
         try {
             // Call createEvents function to send data to the database
@@ -88,15 +107,15 @@ export default function AddEvent({onClose, timesheet}) {
             // Handle error appropriately (e.g., show error message to the user)
         }
 
-        // Retrieve existing events from local storage or initialize empty array
-        let existingEvents = JSON.parse(localStorage.getItem('events')) || [];
-        // Add new event to existing events
-        const updatedEvents = Array.isArray(existingEvents) ? [...existingEvents, newEvent] : [newEvent];
+        // // Retrieve existing events from local storage or initialize empty array
+        // let existingEvents = JSON.parse(localStorage.getItem('events')) || [];
+        // // Add new event to existing events
+        // const updatedEvents = Array.isArray(existingEvents) ? [...existingEvents, newEvent] : [newEvent];
 
-        // Store updated events back to local storage
-        localStorage.setItem('events', JSON.stringify(updatedEvents));
-        // Update the events state with the updated array
-        setEvents(updatedEvents);
+        // // Store updated events back to local storage
+        // localStorage.setItem('events', JSON.stringify(updatedEvents));
+        // // Update the events state with the updated array
+        // setEvents(updatedEvents);
 
         // Close the AddEvent component
         closeMenu();

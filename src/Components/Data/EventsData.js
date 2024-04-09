@@ -58,10 +58,10 @@ export const fetchEventsByTimesheetID = async (timesheetID) => {
 // };
 
 export const createEvents = async (timesheetID, eventData) => { // Accept event data as parameter
-  let url = 'http://localhost:8000/event/';
+  let url = 'http://localhost:8000/event';
 
   if (timesheetID) {
-    url += `?timesheet=${timesheetID}`;
+    url += `/?timesheet=${timesheetID}`;
   }
 
   try {
