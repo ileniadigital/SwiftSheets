@@ -17,7 +17,7 @@ export default function AddEvent({onClose, timesheet}) {
         setIsOpen(false);
         onClose();
     }
-    
+
     return(
         isOpen && (
             <div className='add-event'>
@@ -95,6 +95,7 @@ export default function AddEvent({onClose, timesheet}) {
                         <AddEvent />
                     </div> */}
 
+                    {/* <div className='input'
                     <input type="submit" value={"Add Event"} className='add-event-button'/> 
 
                     {/* <p className='concur-error'>Event is Overlapping</p> */}
@@ -103,6 +104,13 @@ export default function AddEvent({onClose, timesheet}) {
                     )
                     : (
                     <input type="submit" value={"Add Event"} className='add-event-button'/> ) } */}
+                    {/* CHANGE THIS SO IF EVENT ALREADY EXISTS THEN IT'S EDIT IF NOT IT'S ADD */}
+                    {timesheet.eventId ? (
+                        <input type="submit" value={"Edit Event"} className='add-event-button'/>
+                    ) : (
+                        <input type="submit" value={"Add Event"} className='add-event-button'/>
+                    )}
+                    
                 </form>
             </div>
         )

@@ -81,13 +81,6 @@ export default function Timesheet() {
         console.log("Fetched")
     }, [timesheetId]);
 
-    // State to store whether the add event screen is open
-    const [isAddEventOpen, setIsAddEventOpen] = useState(false);
-
-    const closeAddEvent = () => {
-        setIsAddEventOpen(false);
-    };
-
     // Setting the date for the reminder
     const [completionReminderDate, setCompletionReminderDate] = useState('');
     const [completionReminderTime, setCompletionReminderTime] = useState('');
@@ -133,6 +126,33 @@ export default function Timesheet() {
         return `${day}/${month}/${year}`;
     }
 
+    // Handle adding events
+    const [componentCaller, setComponentCaller] = useState(null)
+
+    const [event, setEvent] = useState(null)
+    
+    // State to store whether the add event screen is open
+    const [isAddEventOpen, setIsAddEventOpen] = useState(false);
+
+    const closeAddEvent = () => {
+        setIsAddEventOpen(false);
+    };
+
+
+    // Enables relevant screen to be displayed when the + button is clicked 
+    const [addEventClicked, setAddEventClicked] = useState(false);
+    // When add event is clicked, add event screen is shown, with the details based on the component it is called by
+    const addEventHandler = (componentCaller1, event) => {
+        // Won't open the Add Event box as the timesheet is submitted
+        if (timesheetStatus === "Submitted") {
+            return
+        }
+        if (!addEventClicked) {
+            setComponentCaller(componentCaller1)
+            setEvent(event)
+        }
+        setAddEventClicked(!addEventClicked)
+    }
 
     // Store whether timesheet completion reminder has been set
     const [reminder, setReminder] = useState(false);
@@ -249,6 +269,7 @@ export default function Timesheet() {
 
             {/* Shows add event screen, with the arguments based on the component that called the method 
                 Only allows logging events if timesheet has not been submitted */}
+                <Week timesheet={timesheet} addEventHandler={addEventHandler} timesheetStatus={timesheetStatus} />
             {isAddEventOpen && <AddEvent onClose={closeAddEvent} timesheet={timesheet} />}
         
 
