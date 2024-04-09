@@ -14,7 +14,7 @@
     justify-content: center;
     width: 60rem;
     height: 4.5rem;
-    border: 0.2rem solid #C5FF00;
+    border: 0.2rem solid #a7d900;
     border-radius: 1.5rem;
     margin-bottom: 1rem;
     margin-top: 1rem;
@@ -28,7 +28,7 @@
 
 /* Styling button */
 .click {
-    background-color: #C5FF00;
+    background-color: #a7d900;
     color: #1e1e1e;
     font-size: 1rem;
     padding: 0.5rem;

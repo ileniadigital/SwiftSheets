@@ -55,7 +55,7 @@ button {
 
 /* Styling submit button */
 .submit-button {
-    background-color: #C5FF00;
+    background-color: #a7d900;
     font: Inter;
     color: #1E1E1E;
     padding: 0;
@@ -86,14 +86,14 @@ button {
 }
 
 .status.saved { 
-    color: #C5FF00;
+    color: #a7d900;
 }
 
 /* Setting default button styling */
 .consultant-view-header svg {
     height: 3rem;
     width: auto;
-    fill: #C5FF00;
+    fill: #a7d900;
 }
 
 /* Setting button colour on hover */

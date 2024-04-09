@@ -43,7 +43,7 @@
 }
 
 .navbar-link:hover {
-  color: #c5ff00;
+  color: #a7d900;
 }
 
 /* Adding styling for 'Hi' message */
@@ -75,7 +75,7 @@
 }
 
 .language-select:hover {
-  color: #c5ff00;
+  color: #a7d900;
 }
 .language-select option {
   background-color: #1e1e1e;
