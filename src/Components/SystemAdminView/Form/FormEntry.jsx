@@ -2,7 +2,6 @@
 import './FormEntry.css'
 
 export default function FormEntry ({ formData, viewFormHandler }) {
-    let type = formData.type
     let subject = formData.subject
     let firstname = formData.firstname
     let lastname = formData.lastname
