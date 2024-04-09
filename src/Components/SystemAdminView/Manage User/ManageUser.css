@@ -36,13 +36,14 @@
 /* Styling button colour on close */
 .closeWindow svg:hover {
   background-color: #1e1e1e;
+  transform: scale(1.3);
   fill: red;
 }
 
 /* Styling log event heading */
 .manageUserHeading {
   margin: auto;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 }
 
 #col1 {

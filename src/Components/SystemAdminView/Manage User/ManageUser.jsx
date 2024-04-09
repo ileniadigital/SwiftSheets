@@ -67,13 +67,11 @@ export default function ManageUser ({ index, manageUserHandler, userList, remove
             <form action="" id='manageUserForm' onSubmit={handleSubmitValidation}>
                 <div className="manageUserInput">
                     <label class='label'>First Name</label>
-                    {/* <div>{user.firstname}</div> */}
-                    <div>Jane</div>
+                    <div>{user.firstname}</div>
                 </div>
                 <div className="manageUserInput">
                     <label class='label'>Last Name</label>
-                    {/* <div>{user.lastname}</div> */}
-                    <div>Smith</div>
+                    <div>{user.lastname}</div>
                 </div>
                 <div className="manageUserInput">
                     <label class='label'>Username</label>
