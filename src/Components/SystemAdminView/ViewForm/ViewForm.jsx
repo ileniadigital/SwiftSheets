@@ -17,7 +17,7 @@ export default function ViewForm ({ formData, viewFormHandler }) {
                 {/* Name text input*/}
                 <div className="input">
                     <label htmlFor="subject" className='label'>Subject</label>
-                    <input type="text" name="subject" id='subject' class='inputBox' value={formData.subject} disabled />
+                    <p id='subject'>{formData.subject}</p>
                 </div>
                 <div className='input'>
                     <textarea name="text" id='text' class='inputBox' value={formData.text} disabled />

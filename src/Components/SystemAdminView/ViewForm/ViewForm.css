@@ -63,4 +63,18 @@
     background-color: #f7f6f5;
 }
 
+#viewFormContent .input, #viewFormContent textarea {
+    font-size: 1.2rem;
+}
 
+#viewFormContent .input {
+    display: flex;
+    gap: 2rem;
+}
+
+#viewFormContent textarea {
+    max-height: 30rem;
+    overflow-y: auto;
+    width: 30rem;
+    border-radius: 1rem;
+}
