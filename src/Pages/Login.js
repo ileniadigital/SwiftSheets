@@ -41,30 +41,32 @@ const Login = () => {
       <div className="top-bar">
         <img src={logo} alt="Logo" className="top-logo" />
       </div>
-      <h1 className='welcome-text'>Welcome!</h1>
-      <div className="login-box">
-        {error && <div className="error-message">{error}</div>}
-        <input 
-          type="email" 
-          placeholder="Email" 
-          className="email-input"
-          value={email}
-          onChange={handleEmailChange}
-        />
-        <input 
-          type="password" 
-          placeholder="Password" 
-          className="password-input"
-          value={password}
-          onChange={handlePasswordChange}
-        />
-        <button 
-          className="login-button"
-          onClick={handleSubmit}
-        >
-          Login
-        </button>
-        <a href="#" className="forgot-password">Forgot Password?</a>
+      <div className='login-information'>
+        <h1 className='welcome-text'>Welcome!</h1>
+        <div className="login-box">
+          {error && <div className="error-message">{error}</div>}
+          <input 
+            type="email" 
+            placeholder="Email" 
+            className="email-input"
+            value={email}
+            onChange={handleEmailChange}
+          />
+          <input 
+            type="password" 
+            placeholder="Password" 
+            className="password-input"
+            value={password}
+            onChange={handlePasswordChange}
+          />
+          <button 
+            className="login-button"
+            onClick={handleSubmit}
+          >
+            Login
+          </button>
+          <a href="#" className="forgot-password">Forgot Password?</a>
+        </div>
       </div>
     </div>
   );
