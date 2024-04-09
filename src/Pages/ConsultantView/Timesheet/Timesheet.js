@@ -138,6 +138,11 @@ export default function Timesheet() {
         setIsAddEventOpen(false);
     };
 
+     // Function to open the AddEvent popup
+    const openAddEvent = () => {
+        setIsAddEventOpen(true);
+    };
+
     // Enables relevant screen to be displayed when the + button is clicked 
     // const [addEventClicked, setAddEventClicked] = useState(false);
     const [eventDate, setEventDate] = useState('');
@@ -252,7 +257,7 @@ export default function Timesheet() {
             {/* Shows add event screen, with the arguments based on the component that called the method 
                 Only allows logging events if timesheet has not been submitted */}
             <div className='timesheet-container'>
-                <EventGrid events={events}/>
+                <EventGrid events={events} timesheet={timesheet} isAddEventOpen={isAddEventOpen} openAddEvent={openAddEvent}/>
                 {isAddEventOpen && <AddEvent onClose={closeAddEvent} timesheet={timesheet} />}
             </div>
           
