@@ -42,7 +42,7 @@
 /* Styling log event heading */
 .manageUserHeading {
   margin: auto;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
 }
 
 #col1 {
@@ -68,16 +68,16 @@
   flex-direction: column;
   align-items: center;
   background: #1e1e1e;
-  gap: 1.6rem;
+  gap: 1.5rem;
 }
 
 .manageUserInput {
   display: flex;
   flex-shrink: 0;
   width: 80%;
-  gap: 2.5rem;
   align-items: center;
   color: #f7f6f5;
+  gap: 1.2rem;
   margin: 1rem;
   overflow: hidden;
 }
@@ -91,7 +91,7 @@ td {
 #manageUser .label {
   flex-shrink: 0;
   font-weight: bold;
-  width: 11.3rem;
+  width: 10rem;
   font-size: 1.5rem;
   text-align: left;
   color: #f7f6f5;
@@ -101,7 +101,7 @@ td {
 
 .formInputLabel {
   font-weight: bold;
-  width: 11.3rem;
+  width: 10rem;
   font-size: 1.5rem;
   text-align: left;
   color: #f7f6f5;
@@ -110,13 +110,15 @@ td {
 
 /* Styling for user details heading*/
 .detailsHeading {
-  margin-left: 1.25rem;
+  margin-left: 3.5rem;
+  margin-bottom: 1rem;
 }
 
 /* Styling for all input boxes */
-#manageUser .inputBox{
+#manageUser .inputBox {
   border: 0;
-  width: 14rem;
+  width: 15rem;
+  padding-right: 2rem; /* Password is otherwise covered by icon */
   margin: 0;
   color: #1e1e1e;
   height: 2rem;
@@ -162,6 +164,7 @@ td {
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
+  margin-top: 0;
 }
 
 /* Styling for the updateUser button */

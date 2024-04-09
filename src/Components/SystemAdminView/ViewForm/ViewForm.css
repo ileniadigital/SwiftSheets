@@ -48,7 +48,7 @@
     fill: red;
 }
 
-.inputBox {
+#viewFormMenu .inputBox {
     min-width: fit-content;
 }
 
