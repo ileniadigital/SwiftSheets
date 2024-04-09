@@ -138,7 +138,7 @@ export default function AddUser({ addUserMenuHandler, handleAddUserSubmit }) {
                         placeholder="Password"  
                         name ='password' 
                         id='password' 
-                        class='inputBox' 
+                        class='inputBox pass-input1' 
                         required onChange={validatePassword}
                     />
                     {/* Toggles icon and visibility status on click */}
