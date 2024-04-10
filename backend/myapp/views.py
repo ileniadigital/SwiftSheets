@@ -8,40 +8,12 @@ from rest_framework.response import Response  # type: ignore
 from rest_framework import generics, viewsets, permissions, status  # type: ignore
 from rest_framework.permissions import IsAuthenticated, AllowAny  # type: ignore
 from rest_framework.renderers import TemplateHTMLRenderer  # type: ignore
-from rest_framework.decorators import action, api_view  # type: ignore
+from rest_framework.decorators import action, api_view, permission_classes  # type: ignore
 # from rest_framework.decorators import action
 from rest_framework.views import APIView  # type: ignore
 from .models import SystemUser, Timesheet, Event, Comment, Notification
 from .serializers import SystemUserSerializer, TimesheetSerializer, EventSerializer, CommentSerializer, NotificationSerializer 
 from django.views.decorators.http import require_POST  # type: ignore
-
-
-@api_view(['POST'])
-def create_timesheet(request):
-    serializer = TimesheetSerializer(data=request.data)
-    if serializer.is_valid():
-        timesheet = serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-@api_view(['POST'])
-def create_events(request, timesheet_id):
-    try:
-        timesheet = Timesheet.objects.get(id=timesheet_id)
-    except Timesheet.DoesNotExist:
-        return Response({'error': 'Timesheet does not exist'}, status=status.HTTP_400_BAD_REQUEST)
-
-    events_data = request.data.get('events', [])
-    for event_data in events_data:
-        event_data['timesheet'] = timesheet_id  # Associate event with the specified timesheet
-        event_serializer = EventSerializer(data=event_data)
-        if event_serializer.is_valid():
-            event_serializer.save()
-        else:
-            return Response(event_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    return Response({'message': 'Events created successfully'}, status=status.HTTP_201_CREATED)
-
 
 # View to create a new user
 class CreateUserView(generics.CreateAPIView):
@@ -140,16 +112,12 @@ class TimesheetViewSet(viewsets.ViewSet):
         timesheet = self.queryset.get(pk=pk)
         serializer = self.serializer_class(timesheet, data=request.data, partial=True)
         if serializer.is_valid():
-            if 'submission_status' in request.data and request.data['submission_status'] == 'submitted':
-                serializer.save(submission_date=timezone.now().date(), submission_time=timezone.now())
-            elif 'review_status' in request.data:
-                serializer.save(last_reviewed=timezone.now())
-            else:
-                serializer.save(last_edited=timezone.now())
+            serializer.save()
             return Response(serializer.data)
         else:
             return Response(serializer.errors, status=400)
-        
+
+
     # Create a new timesheet
     def create(self, request):
         serializer = self.serializer_class(data=request.data)
@@ -160,17 +128,17 @@ class TimesheetViewSet(viewsets.ViewSet):
             return Response(serializer.errors, status=400)
 
     # Retrieve a specific timesheet
-    # def retrieve(self, request, pk=None):
-    #     timesheet = self.queryset.get(pk=pk)
-    #     serializer = self.serializer_class(timesheet)
-    #     return Response(serializer.data)
+    def retrieve(self, request, pk=None):
+        timesheet = self.queryset.get(pk=pk)
+        serializer = self.serializer_class(timesheet)
+        return Response(serializer.data)
     
-    # def get_queryset(self):
-    #     queryset = super().get_queryset()
-    #     user_email = self.request.query_params.get('user_email')
-    #     if user_email:
-    #         queryset = queryset.filter(user__email=user_email)
-    #     return queryset
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        user_email = self.request.query_params.get('user_email')
+        if user_email:
+            queryset = queryset.filter(user__email=user_email)
+        return queryset
 
     # Update a timesheet
     def update(self, request, pk=None):
@@ -228,29 +196,25 @@ class EventViewset(viewsets.ViewSet):
     
     # Create a new event
     def create(self, request):
-        # Extract timesheet_id from query parameters
-        timesheet_id = request.query_params.get('timesheet')
-
+        # Extract timesheet_id from request data
+        timesheet_id = request.data.get('timesheet_id')
+        
         # Check if the timesheet exists
         try:
             timesheet = Timesheet.objects.get(id=timesheet_id)
         except Timesheet.DoesNotExist:
             return Response({'error': 'Timesheet does not exist'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Associate the event with the timesheet
+        request.data['timesheet'] = timesheet_id
+        
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        events_data = request.data
-        created_events = []
-        for event_data in events_data:
-            event_data['timesheet'] = timesheet_id
-            serializer = self.serializer_class(data=event_data)
-            if serializer.is_valid():
-                serializer.save()
-                created_events.append(serializer.data)
-            else:
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-        return Response(created_events, status=status.HTTP_201_CREATED)
-    
-    
     # Retrieve a specific event
     def retrieve(self, request, pk=None):
         event = self.queryset.get(pk=pk)
@@ -266,22 +230,6 @@ class EventViewset(viewsets.ViewSet):
             return Response(serializer.data)
         else:
             return Response(serializer.errors, status=400)
-        
-    def delete_multiple_events(self, request):
-        event_ids = request.query_params.getlist('event_ids[]')  # Assuming event_ids are sent as an array in the URL
-        if not event_ids:
-            return Response({'error': 'No event IDs provided'}, status=status.HTTP_400_BAD_REQUEST)
-
-        try:
-            events_to_delete = self.queryset.filter(id__in=event_ids)
-        except Event.DoesNotExist:
-            return Response({'error': 'One or more events do not exist'}, status=status.HTTP_404_NOT_FOUND)
-
-        if not events_to_delete.exists():
-            return Response({'error': 'No events found with provided IDs'}, status=status.HTTP_404_NOT_FOUND)
-
-        events_to_delete.delete()
-        return Response({'message': 'Events deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
 
     # Delete an event
     def destroy(self, request, pk=None):
@@ -421,3 +369,17 @@ class UserTimesheetView(APIView):
         user = SystemUser.objects.get(pk=user_id)
         timesheets = user.timesheets.all()  # Retrieve all timesheets related to the selected user
         return render(request, 'user_timesheets.html', {'users': SystemUser.objects.all(), 'user': user, 'timesheets': timesheets})
+
+
+@api_view(['POST'])
+@permission_classes([permissions.AllowAny])
+def login(request):
+    print(request, request.data)
+    username = request.data.get('username')
+    password = request.data.get('password')
+    user = SystemUser.objects.filter(username=username, password=password).first()
+    print(user)
+    if user:
+        print({"username": user.username, 'role': user.user_type, 'id': user.id, 'name': str(user)})
+        return Response({"username": user.username, 'role': user.user_type, 'id': user.id, 'name': str(user)})
+    return Response({"error": "Invalid credentials"}, status=400)

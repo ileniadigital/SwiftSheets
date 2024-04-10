@@ -1,24 +1,35 @@
+// Importing CSS
 import './ConsultantHome.css'
-import { useNavigate } from 'react-router-dom';
+
+// Importing dropdown menu icons
 import { IoIosArrowDropupCircle } from "react-icons/io";
 import { IoIosArrowDropdownCircle } from "react-icons/io";
+
+// Importing Components
 import TimesheetDetails from '../../../Components/ConsultantView/TimesheetDetails/TimesheetDetails'
 import PastTimesheets from '../../../Components/ConsultantView/PastTimesheets/PastTimesheets'
-import { useState, useEffect } from 'react';
-import { fetchTimesheetsbyID, createTimesheet } from '../../../Components/Data/TimesheetData';
 
+// Importing useState and useEffect
+import { useState, useEffect } from 'react';
+import { fetchTimesheetsbyID} from '../../../Components/Data/TimesheetData';
+// Provides home page to user
 export default function ConsultantHome() {
+    //Retrieve timesheet data
     const id = 6; // Placeholder for user ID
     const [timesheets, setTimesheets] = useState([]);
     const [pastTimesheets, setPastTimesheets] = useState([]);
+
+    // Stores whether button has been clicked; determines whether to show timesheet data
     const [isCurrentTimesheetClicked, setIsCurrentTimesheetClicked] = useState(true)
     const [isPastTimesheetsClicked, setIsPastTimesheetsClicked] = useState(true)
-    const navigate = useNavigate();
-    
+
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const data = await fetchTimesheetsbyID(id);
+                //console.log("Data:", data);
+                
+                // Filter current and past timesheets based on end date and submission status
                 const currentDate = new Date();
                 const currentTimesheets = data.filter(ts => {
                     const endDate = new Date(ts.end_date);
@@ -26,44 +37,30 @@ export default function ConsultantHome() {
                     return endDate >= currentDate && !isSubmitted;
                 });
                 const pastTimesheets = data.filter(ts => !currentTimesheets.includes(ts));
+
                 setTimesheets(currentTimesheets);
                 setPastTimesheets(pastTimesheets);
             } catch (error) {
                 console.error('Error fetching timesheets:', error);
             }
         };
+
         fetchData();
     }, []);
 
-    const isCurrentWeek = (date) => {
-        const today = new Date();
-        const firstDayOfWeek = new Date(today.setDate(today.getDate() - today.getDay()));
-        const lastDayOfWeek = new Date(today.setDate(today.getDate() - today.getDay() + 6));
-        return date >= firstDayOfWeek && date <= lastDayOfWeek;
-    };
+    // Define currentTimesheets and pastTimesheets
+    const currentTimesheets = timesheets.filter(ts => ts.current);
+    //console.log("Current Timesheets:", currentTimesheets);
+    const pastTimesheetsFiltered = pastTimesheets.filter(ts => !ts.current);
+    //console.log("Past Timesheets:", pastTimesheetsFiltered);
 
-    const refreshPage = async (timesheetId) => {
-        try {
-            await createTimesheet(timesheetId);
-            const data = await fetchTimesheetsbyID(id);
-            const currentDate = new Date();
-            const currentTimesheets = data.filter(ts => {
-                const endDate = new Date(ts.end_date);
-                const isSubmitted = ts.is_submitted;
-                return endDate >= currentDate && !isSubmitted;
-            });
-            const pastTimesheets = data.filter(ts => !currentTimesheets.includes(ts));
-            setTimesheets(currentTimesheets);
-            setPastTimesheets(pastTimesheets);
-        } catch (error) {
-            console.error('Error refreshing timesheets:', error);
-        }
-        navigate('/home');
-    };
-
+    // console.log("Timesheets:", timesheets);
+    // timesheets.map(timesheet => console.log("Timesheet after fetching:", timesheet.id));
+    
     return (
         <div className='main-con-home'>
             <div className='consultant-home'>
+                {/* Displaying current week's timesheet based on whether dropdown is clicked */}
                 <div className='current-timesheet-container'>
                     <div className='dropdown-menu'>
                         <p>Current Timesheet</p>
@@ -76,23 +73,11 @@ export default function ConsultantHome() {
                             {timesheets.map((timesheet, index) => (
                                 <TimesheetDetails key={index} timesheet={timesheet} />
                             ))}
-                            {timesheets.length === 0 && 
-                                // Check if there's a submitted timesheet for the current week in past timesheets
-                                (pastTimesheets.some(timesheet => isCurrentWeek(new Date(timesheet.end_date)) && timesheet.is_submitted) ? 
-                                    // If there's a submitted timesheet, display it
-                                    pastTimesheets.filter(timesheet => isCurrentWeek(new Date(timesheet.end_date)) && timesheet.is_submitted)
-                                        .map((timesheet, index) => (
-                                            <TimesheetDetails key={index} timesheet={timesheet} />
-                                        ))
-                                    :
-                                    // If there's no submitted timesheet, display the button for creating a new timesheet
-                                    <button className='create-button' onClick={() => { refreshPage(id); }}>Create New Timesheet</button>
-                                )
-                            }
                         </div> 
                     }
                 </div>
 
+                {/* Displaying past timesheets based on whether dropdown is clicked */}
                 <div className='past-timesheets'>
                     <div className='dropdown-menu'>
                         <p>Past Timesheets</p>
@@ -101,7 +86,7 @@ export default function ConsultantHome() {
                         </button>
                     </div>
                     <div className='past-timesheet'>
-                        {isPastTimesheetsClicked && <PastTimesheets  pastTimesheets={pastTimesheets}/>}
+                        {isPastTimesheetsClicked && <PastTimesheets  pastTimesheets={pastTimesheetsFiltered}/>}
                     </div>
                 </div>
             </div>
