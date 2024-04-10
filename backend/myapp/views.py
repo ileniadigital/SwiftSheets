@@ -407,3 +407,21 @@ def login(request):
         print({"username": user.username, 'role': user.user_type, 'id': user.id, 'name': str(user)})
         return Response({"username": user.username, 'role': user.user_type, 'id': user.id, 'name': str(user)})
     return Response({"error": "Invalid credentials"}, status=400)
+
+
+@api_view(['POST'])
+@permission_classes([permissions.AllowAny])
+def update_password(request):
+    username = request.data.get('username')
+    current_password = request.data.get('current_password')
+    new_password = request.data.get('new_password')
+    print('213')
+    user = SystemUser.objects.filter(username=username, password=current_password).first()
+
+    if not user:
+        return Response({"error": "Current password is incorrect"}, status=400)
+
+    user.password = new_password
+    user.save()
+
+    return Response({"success": "Password changed successfully"})
