@@ -11,7 +11,7 @@ export default function DeleteEventConfirmation({event, eventToDelete, setOpenPo
     const deleteEvent = () => {
         setOpenPopup(false)
         destroyEvents(eventToDelete); // Delete event by ID
-        // window.location.reload(); // Reload screen to update events
+        window.location.reload(); // Reload screen to update events
     }
 
     return (

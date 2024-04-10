@@ -34,15 +34,35 @@ export const createEvents = async (timesheetID, eventData) => { // Accept event 
 };
 
 
+// // Destroy events by IDs
+// export const destroyEvents = async (eventIDToDelete) => {
+//   try {
+//     console.log("ID:", eventIDToDelete)
+//     let url = 'http://localhost:8000/event/';
+//     if (eventIDToDelete) {
+//       url += `${eventIDToDelete}/delete/`;
+//     }
+      
+//     console.log("URL:", url)  
+//     // Update the URL to match the new pattern
+//     const response = await Axios.delete(url);
+//     console.log("Deleted");
+//     return response.data;
+//   } catch (error) {
+//     console.error('Error destroying events:', error);
+//     throw error;
+//   }
+// };
+
 // Destroy events by IDs
 export const destroyEvents = async (eventIDToDelete) => {
   try {
     console.log("ID:", eventIDToDelete)
-    let url = 'http://localhost:8000/event/delete/';
+    let url = 'http://localhost:8000/event/';
     if (eventIDToDelete) {
-      url += `?id=${eventIDToDelete}`;
+      url += `${eventIDToDelete}/`; // Construct URL with event ID
     }
-     // Update the URL to match the new pattern
+    console.log("URL:", url)
     const response = await Axios.delete(url);
     console.log("Deleted");
     return response.data;
