@@ -21,7 +21,6 @@ const ResetPassword = () => {
         if (!/\S+@\S+\.\S+/.test(username)) {
             setError('Please enter a valid email address.');
         } else {
-            setMessage('A link to reset your password has been sent to your email.');
             setUsername('');
         }
 
