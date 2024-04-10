@@ -22,6 +22,7 @@ export default function App() {
 
     setRole(user_role);
     setLoggedin(loggedin); // Parse the string to boolean
+                   //comment
     
     console.log(user_role);
   }, []); // The empty array means this effect runs once on mount
