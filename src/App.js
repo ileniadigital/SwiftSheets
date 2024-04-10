@@ -5,6 +5,8 @@ import Timesheet from './Pages/ConsultantView/Timesheet/Timesheet';
 import Home from './Pages/Home';
 import Name from './Components/NavBar/Name';
 import Settings from './Pages/ConsultantView/ConsultantSettings/ConsultantSettings';
+import SystemAdminForm from './Pages/SystemAdminView/SystemAdminForm/SystemAdminForm';
+
 import Login from './Pages/Login';
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'; 
@@ -27,6 +29,7 @@ export default function App() {
   return (
     <React.Fragment>
       <NavBar view={role}/>
+      <NavBar view={role}/>
       <Name/>
       <BrowserRouter>
         <Routes>
@@ -37,6 +40,7 @@ export default function App() {
           <Route path="/Settings" element={<Settings />} />
           {/* Route to a timesheet based on ID */}
           <Route path="/timesheet/:timesheetId" element={<Timesheet />} />
+          <Route path="/systemadminform" element={<SystemAdminForm />} />
           <Route path="/systemadminform" element={<SystemAdminForm />} />
         </Routes>
       </BrowserRouter>
