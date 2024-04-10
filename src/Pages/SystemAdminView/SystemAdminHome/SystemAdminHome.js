@@ -73,6 +73,8 @@ export default function SystemAdminView() {
             lastname: lastname
         };
 
+        console.log(newUser);
+
         // Send via post request
         try {
             const response = await createUser([newUser]);
