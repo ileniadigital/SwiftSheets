@@ -7,7 +7,7 @@ import { IoClose } from "react-icons/io5";
 // Importing useState
 import { useEffect, useState } from 'react';
 import getDate from '../getDate';
-import AxiosInstance from "../../Axios";
+// import AxiosInstance from "../../Axios"; old code
 
 export default function AddEvent({componentCaller, addEventHandler, viewedWeek, event}) {
 
@@ -258,14 +258,15 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
         //     isRecurring,
         //     eventNote
 
-        AxiosInstance.post('event/', {
+        // Old code
+        /*AxiosInstance.post('event/', {
             date: eventDate,
             duration: 0.0,
             name: eventName,
             type: eventType,
             category: eventCategory,
             is_recurring: isRecurring
-        })
+        })*/
     }
 
     // Checking for when values change to let user know times overlap
