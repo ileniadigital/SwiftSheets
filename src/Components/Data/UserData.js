@@ -16,3 +16,28 @@ export const fetchUserDetails = async (userIds) => {
     return acc;
   }, {});
 };
+
+// Fetch users from the API
+export const fetchUsers = async (setUsers) => {
+    let url = 'http://localhost:8000/systemuser/';
+
+    try {
+        const response = await Axios.get(url);
+        setUsers(response.data);
+    } catch (error) {
+        console.error('Error fetching users:', error);
+    }
+}
+
+// Create user
+export const createUser = async (user) => {
+    let url = 'http://localhost:8000/systemuser/';
+
+    try {
+        const response = await Axios.post(url, user);
+        console.log("User created:", response.data)
+        return response.data;
+    } catch (error) {
+        console.error('Error creating user:', error);
+    }
+}
