@@ -6,7 +6,8 @@ import Home from './Pages/Home';
 import Name from './Components/NavBar/Name';
 import Settings from './Pages/ConsultantView/ConsultantSettings/ConsultantSettings';
 import SystemAdminForm from './Pages/SystemAdminView/SystemAdminForm/SystemAdminForm';
-
+import Dashboard from './Pages/ConsultantView/ConsultantDashboard/ConsultantDashboard';
+import LogOut from './Components/NavBar/LogOut';
 import Login from './Pages/Login';
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'; 
@@ -22,7 +23,6 @@ export default function App() {
 
     setRole(user_role);
     setLoggedin(loggedin); // Parse the string to boolean
-                   //comment
     
     console.log(user_role);
   }, []); // The empty array means this effect runs once on mount
@@ -33,15 +33,14 @@ export default function App() {
       <Name/>
       <BrowserRouter>
         <Routes>
-        <Route path="/" element={<Home role={role} />} />
           <Route path="/Home" element={<Home role={role} />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Account" element={<Account />} />
           <Route path="/Settings" element={<Settings />} />
-          {/* Route to a timesheet based on ID */}
+          <Route path="/LogOut" element={<LogOut />} />
+          <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/timesheet/:timesheetId" element={<Timesheet />} />
-          <Route path="/systemadminform" element={<SystemAdminForm />} />
-          <Route path="/systemadminform" element={<SystemAdminForm />} />
+          <Route path="/SystemAdminForm" element={<SystemAdminForm />} />
         </Routes>
       </BrowserRouter>
     </React.Fragment>

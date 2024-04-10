@@ -57,7 +57,7 @@
 }
 
 /* Styling input div */
-.add-event .input {
+.input {
   display: flex;
   gap: 2.5rem;
   align-items: center;
@@ -65,7 +65,7 @@
 }
 
 /* Setting label name */
-.add-event label {
+label {
   width: 11.3rem;
   font-size: 1.5rem;
   color: #1e1e1e;
@@ -111,7 +111,7 @@
 .add-new-event .add-event-button {
   margin: auto;
   margin-top: 0.1rem;
-  background-color: #a7d900;
+  background-color: #c5ff00;
   color: #1e1e1e;
   width: 9rem;
   height: 2.5rem;
@@ -233,7 +233,7 @@ textarea {
 
 /* Displaying event */
 .event {
-  background-color: #a7d900;
+  background-color: #c5ff00;
   width: 100%;
   position: absolute;
 }
@@ -264,19 +264,6 @@ textarea {
 /* Setting hover colour */
 .delete-event svg:hover {
   fill: red;
-}
-
-/* Adding underline to signify end of event */
-.end-event {
-}
-
-.complete-event {
-}
-
-.start-event {
-}
-
-.hours-event {
 }
 
 /* Styling error message */
