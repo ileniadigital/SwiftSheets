@@ -2,10 +2,12 @@
 #userContainer {
     display: flex;
     flex-flow : row wrap;
-    gap : 100px;
+    gap: 100px;
     justify-content: center;
-    width: 1200px;
-    height: 613.47px;
-    margin-left: auto;
-    margin-right: auto;
+    height: 600px;
+    margin: auto;
+    overflow-y: auto;
+    padding-bottom: 1rem;
+    margin-left: 4rem;
+    margin-right: 4rem;
 }

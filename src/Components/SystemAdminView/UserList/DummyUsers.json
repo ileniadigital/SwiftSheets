@@ -1,32 +1,44 @@
 [
     {
-        "name" : "Jane Smith",
+        "firstname" : "Jane",
+        "lastname" : "Smith",
         "username" : "janesmith@gmail.com",
-        "userType" : "Consultant"
+        "userType" : "Consultant",
+        "password" : "password"
     },
     {
-        "name" : "Jane Smith2",
+        "firstname" : "Jane",
+        "lastname" : "Smith2",
         "username" : "janesmith@gmail.com",
-        "userType" : "Consultant"
+        "userType" : "Consultant",
+        "password" : "password"
     },
     {
-        "name" : "Jane Smith3",
+        "firstname" : "Jane",
+        "lastname" : "Smith3",
         "username" : "janesmith@gmail.com",
-        "userType" : "Consultant"
+        "userType" : "Consultant",
+        "password" : "password"
     },
     {
-        "name" : "Jane Smith4",
+        "firstname" : "Jane",
+        "lastname" : "Smith4",
         "username" : "janesmith@gmail.com",
-        "userType" : "Consultant"
+        "userType" : "Consultant",
+        "password" : "password"
     },
     {
-        "name" : "Jane Smith5",
+        "firstname" : "Jane",
+        "lastname" : "Smith5",
         "username" : "janesmith@gmail.com",
-        "userType" : "Consultant"
+        "userType" : "Consultant",
+        "password" : "password"
     },
     {
-        "name" : "Jane Smith6",
+        "firstname" : "Jane",
+        "lastname" : "Smith6",
         "username" : "janesmith@gmail.com",
-        "userType" : "Consultant"
+        "userType" : "Consultant",
+        "password" : "password"
     }
 ]

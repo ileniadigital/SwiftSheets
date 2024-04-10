@@ -1,6 +1,7 @@
-from datetime import timedelta, timezone
-from django.utils import timezone
-from django.db import models
+from datetime import date, timedelta, timezone
+import datetime
+from django.utils import timezone # type: ignore
+from django.db import models # type: ignore
 # from django.contrib.auth.models import User
 
 class SystemUser(models.Model):
@@ -63,12 +64,15 @@ class Event(models.Model):
     ]
     #timesheet = models.ForeignKey(Timesheet, on_delete=models.CASCADE, related_name='events')
     date = models.CharField(max_length=30, default=timezone.now().date().strftime('%Y-%m-%d'))  # Default date
+    start_time = models.TimeField(default=timezone.now().time())  # Default start time
+    end_time = models.TimeField(default=timezone.now().time())  # Default end time
     duration = models.FloatField(default=0.0)  # Default duration
     name = models.CharField(max_length=255, default='Event')  # Default name
     type = models.CharField(max_length=20, choices=EVENT_TYPE_CHOICES, default='Normal')  # Default type
     category = models.CharField(max_length=20, choices=EVENT_CATEGORY_CHOICES, default='Planning')  # Default category
     is_recurring = models.BooleanField(default=False)
-    #note = models.TextField(blank=True, default='')  # Default note
+    timesheet = models.ForeignKey(Timesheet, on_delete=models.CASCADE, related_name='events')
+    note = models.TextField(blank=True, default='')  # Default note
 
     def __str__(self):
         return f"{self.id} - {self.name} - {self.type} - {self.duration}"

@@ -87,7 +87,7 @@ button {
 }
 
 .status.saved {
-  color: #c5ff00;
+  color: #a7d900;
 }
 
 /* Setting default button styling */
@@ -100,8 +100,8 @@ button {
 /* Setting button colour on hover */
 .consultant-view-header svg:hover {
   color: #1e1e1e;
-  background-color: #efecea;
-  border: 0.1 solid #efecea;
+  background-color: #f7f6f5;
+  border: 0.1 solid #f7f6f5;
 }
 
 /* Moving button closer to timesheet */
@@ -175,7 +175,7 @@ button {
 }
 
 .reminder-toggle {
-  background-color: #c5ff00;
+  background-color: #a7d900;
   font-size: large;
   border-radius: 1rem;
   padding: 0.5rem;
@@ -196,7 +196,7 @@ button {
 
 .turn-off:hover {
   background-color: rgba(255, 0, 0, 0.341);
-  color: #efecea;
+  color: #f7f6f5;
 }
 
 /* Styling error message */
@@ -224,8 +224,8 @@ button {
   background-color: #1e1e1e;
   width: 36rem;
   border-radius: 2rem;
-  border: 0.3rem solid #c5ff00;
-  fill: #efecea;
+  border: 0.3rem solid #a7d900;
+  fill: #f7f6f5;
   padding-bottom: 2rem;
   margin-top: 1rem;
   position: absolute;
@@ -246,14 +246,14 @@ button {
 }
 
 .empty-error svg:hover {
-  fill: #c5ff00;
+  fill: #a7d900;
 }
 
 /* Styling button */
 .empty-error svg {
   height: 2rem;
   width: 2rem;
-  fill: #efecea;
+  fill: #f7f6f5;
 }
 
 /* Styling container */
