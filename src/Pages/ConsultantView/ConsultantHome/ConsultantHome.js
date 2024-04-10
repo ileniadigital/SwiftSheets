@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 import { fetchTimesheetsbyID, createTimesheet } from '../../../Components/Data/TimesheetData';
 
 export default function ConsultantHome() {
-    const id = 6; // Placeholder for user ID
+    const id = localStorage.getItem('user_id');
     const [timesheets, setTimesheets] = useState([]);
     const [pastTimesheets, setPastTimesheets] = useState([]);
     const [isCurrentTimesheetClicked, setIsCurrentTimesheetClicked] = useState(true)
@@ -19,6 +19,8 @@ export default function ConsultantHome() {
         const fetchData = async () => {
             try {
                 const data = await fetchTimesheetsbyID(id);
+                console.log('id', id);
+                console.log('data', data);  
                 const currentDate = new Date();
                 const currentTimesheets = data.filter(ts => {
                     const endDate = new Date(ts.end_date);

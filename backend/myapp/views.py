@@ -91,6 +91,8 @@ class TimesheetViewSet(viewsets.ViewSet):
         # Check if the query parameter is for review_status or payment_status
         review_status = request.query_params.get('review_status')
         payment_status = request.query_params.get('payment_status')
+        user_id = request.query_params.get('user_id')  # Add this line to get the user_id parameter
+        print(user_id)
 
         if review_status:
             if review_status.lower() == 'all':
@@ -104,7 +106,10 @@ class TimesheetViewSet(viewsets.ViewSet):
                 queryset = Timesheet.objects.filter(payment_status=payment_status.capitalize())
         else:
             queryset = Timesheet.objects.all()
-        
+
+        if user_id:  # Add this condition to filter by user_id if it is provided
+            queryset = queryset.filter(user_id=user_id)
+
         serializer = self.serializer_class(queryset, many=True)
         return Response(serializer.data)
     
