@@ -77,7 +77,7 @@ export default function SystemAdminView() {
 
         // Send via post request
         try {
-            const response = await createUser([newUser]);
+            const response = await createUser(newUser);
             console.log("User created successfully:", response);
             console.log('User created:', newUser);
         } catch (error) {
