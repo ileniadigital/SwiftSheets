@@ -88,3 +88,18 @@
   color: grey;
   pointer-events: none;
 }
+
+/* Styling closing button */
+.delete-event {
+  color: #1e1e1e;
+  background-color: transparent;
+  margin-left: 10rem;
+}
+
+/* Styling button colour on close */
+.delete-event:hover {
+  color: red;
+  transform: scale(1.5);
+  border: none;
+  background-color: transparent;
+}

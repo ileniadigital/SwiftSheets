@@ -1,7 +1,10 @@
 import React from 'react';
 import './EventGrid.css'; //Import Styling
 
+// Importing icon
+import { IoClose } from "react-icons/io5";
 import { FaCirclePlus } from "react-icons/fa6";
+import DeleteEventConfirmation from '../DeleteEventConfirmation/DeleteEventConfirmation';
 
 const EventGrid = ({ events, openAddEvent, timesheetStatus }) => {
   const days = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
@@ -36,6 +39,12 @@ const EventGrid = ({ events, openAddEvent, timesheetStatus }) => {
     openAddEvent();
   };
 
+
+  //Open Delete Event Menu
+  const deleteEvent = (event) => {
+    <DeleteEventConfirmation/>
+  }
+
   return (
     <div className="event-grid">
       <div className="grid-header">
@@ -66,6 +75,7 @@ const EventGrid = ({ events, openAddEvent, timesheetStatus }) => {
             {events.filter(event => new Date(event.date).getDay() === (dayIndex + 1) % 7).map(event => (
               <div key={event.id} className="event-block" style={calculateEventBlockStyle(event, dayIndex)}>
                 {/* Event content */}
+                <button className ="delete-event" onClick={deleteEvent}><IoClose/></button>
               </div>
             ))}
           </div>

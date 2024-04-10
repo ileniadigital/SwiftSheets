@@ -117,6 +117,7 @@ export default function AddEvent({onClose, timesheet}) {
 
         // Close the AddEvent component
         closeMenu();
+        window.location.reload();
     }
 
     //Validate event name
