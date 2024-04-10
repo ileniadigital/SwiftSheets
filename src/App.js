@@ -30,7 +30,6 @@ export default function App() {
   return (
     <React.Fragment>
       <NavBar view={role}/>
-      <NavBar view={role}/>
       <Name/>
       <BrowserRouter>
         <Routes>
