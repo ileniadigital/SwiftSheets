@@ -17,6 +17,7 @@ export default function SystemAdminView() {
         const fetchData = async () => {
             try {
                 const users = await fetchUsers();
+                console.log(users);
                 setUserList(users);
             } catch (error) {
                 console.error('Error fetching users:', error);
@@ -57,8 +58,11 @@ export default function SystemAdminView() {
 
         try {
             await createUser(newUser);
+
             const updatedUsers = await fetchUsers();
             setUserList(updatedUsers);
+            console.log(updatedUsers);
+
         } catch (error) {
             console.error('Error creating user:', error);
         }

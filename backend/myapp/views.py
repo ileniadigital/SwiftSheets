@@ -21,36 +21,30 @@ class CreateUserView(generics.CreateAPIView):
     serializer_class = SystemUserSerializer
     permission_classes = [AllowAny]
 
-# ViewSet for managing system users
 class SystemUserViewSet(viewsets.ViewSet):
     permission_classes = [permissions.AllowAny]
-    queryset = SystemUser.objects.all()
     serializer_class = SystemUserSerializer
-
-    # Retrieve list of all users
-    # def list(self, request):
-    #     queryset = self.queryset
-    #     serializer = self.serializer_class(queryset, many=True)
-    #     return Response(serializer.data)
-
+ 
+    def get_queryset(self):
+        return SystemUser.objects.all()
+ 
     def partial_update(self, request, pk=None):
-        system_user = self.queryset.get(pk=pk)
+        system_user = self.get_queryset().get(pk=pk)
         serializer = self.serializer_class(system_user, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         else:
             return Response(serializer.errors, status=400)
-
+ 
     def list(self, request):
-        queryset = self.queryset
+        queryset = self.get_queryset()
         email = request.query_params.get('email')
         if email is not None:
             queryset = queryset.filter(username=email)
         serializer = self.serializer_class(queryset, many=True)
         return Response(serializer.data)
-
-    # Create a new user
+ 
     def create(self, request):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
@@ -58,29 +52,26 @@ class SystemUserViewSet(viewsets.ViewSet):
             return Response(serializer.data)
         else:
             return Response(serializer.errors, status=400)
-
-    # Retrieve a specific user
+ 
     def retrieve(self, request, pk=None):
-        system_user = self.queryset.get(pk=pk)
+        system_user = self.get_queryset().get(pk=pk)
         serializer = self.serializer_class(system_user)
         return Response(serializer.data)
     
-    # Update a user
     def update(self, request, pk=None):
-        system_user = self.queryset.get(pk=pk)
+        system_user = self.get_queryset().get(pk=pk)
         serializer = self.serializer_class(system_user, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         else:
             return Response(serializer.errors, status=400)
-
-    # Delete a user
+ 
     def destroy(self, request, pk=None):
-        system_user = self.queryset.get(pk=pk)
+        system_user = self.get_queryset().get(pk=pk)
         system_user.delete()
         return Response(status=204)
-    
+
 # ViewSet for managing timesheets
 class TimesheetViewSet(viewsets.ViewSet):
     permission_classes = [permissions.AllowAny]
