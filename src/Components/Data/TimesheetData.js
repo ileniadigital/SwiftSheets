@@ -64,3 +64,16 @@ export const createTimesheet = async (userId) => {
     console.error('Error creating timesheet:', error);
   }
 };
+
+// Function to delete a system user by ID from the backend
+export const deleteUserFromBackend = async (userId) => {
+  try {
+    const response = await Axios.delete(`http://localhost:8000/systemuser/${userId}/`);
+    console.log(`User with ID ${userId} deleted successfully`);
+    return response.data;
+  } 
+  catch (error) {
+    console.error(`Error deleting user with ID ${userId}:`, error);
+    throw error;
+  }
+};

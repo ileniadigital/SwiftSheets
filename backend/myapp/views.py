@@ -259,7 +259,7 @@ class EventViewset(viewsets.ViewSet):
 
         events_to_delete.delete()
         return Response({'message': 'Events deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
-
+#passphrase, new password, confrim password
     # Delete an event
     def destroy(self, request, pk=None):
         event = self.queryset.get(pk=pk)
