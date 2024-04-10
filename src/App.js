@@ -30,11 +30,14 @@ export default function App() {
       <Name/>
       <BrowserRouter>
         <Routes>
+        <Route path="/" element={<Home role={role} />} />
           <Route path="/Home" element={<Home role={role} />} />
+          {/* <Route path="/login" element={<Login />} /> */}
           <Route path="/Account" element={<Account />} />
           <Route path="/Settings" element={<Settings />} />
+          {/* Route to a timesheet based on ID */}
           <Route path="/timesheet/:timesheetId" element={<Timesheet />} />
-          <Route path="/Login" element={<Login />} />
+          <Route path="/systemadminform" element={<SystemAdminForm />} />
         </Routes>
       </BrowserRouter>
     </React.Fragment>
