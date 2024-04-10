@@ -6,16 +6,6 @@ export default function DeleteEventConfirmation({event, setOpenPopup}) {
 
     // Delete event
     const deleteEvent = () => {
-        // const events = JSON.parse(localStorage.getItem('events'))
-        // const newEvents = { ...events}; // Copying events
-        // delete newEvents[event]
-        // localStorage.setItem('events', JSON.stringify(newEvents))
-
-        // // Delete recurring event if it exists
-        // const recurringEvents = JSON.parse(localStorage.getItem('recurringEvents'))
-        // const newRecurringEvents = { ...recurringEvents}; // Copying events
-        // delete newRecurringEvents[event]
-        // localStorage.setItem('recurringEvents', JSON.stringify(newEvents))
 
         setOpenPopup(false)
         // window.location.reload(); // Reload screen to update events
