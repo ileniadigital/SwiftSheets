@@ -66,12 +66,11 @@ export default function AddEvent({onClose, timesheet}) {
     }
 
     const handleAddEvent = async (e) => {
-        // e.preventDefault();
+        e.preventDefault();
+    
         // Construct event object
         const startTime = new Date(`${eventDates}T${eventStartTime}`).toLocaleTimeString('en-US', { hour12: false });
         const endTime = new Date(`${eventDates}T${eventEndTime}`).toLocaleTimeString('en-US', { hour12: false });
-
-
 
         // Convert the difference to hours
         const duration = calculateDuration(eventStartTime, eventEndTime);
@@ -93,9 +92,9 @@ export default function AddEvent({onClose, timesheet}) {
         try {
             // Call createEvents function to send data to the database
             const response = await createEvents(timesheet.id, [newEvent]); // Assuming timesheet has an id field
-            console.log('Event created successfully:', response);
-            console.log('New event:', newEvent);
-            console.log(timesheet.id);
+            // console.log('Event created successfully:', response);
+            // console.log('New event:', newEvent);
+            // console.log(timesheet.id);
     
             // Close the AddEvent component
             closeMenu();
@@ -105,33 +104,16 @@ export default function AddEvent({onClose, timesheet}) {
             // Handle error appropriately (e.g., show error message to the user)
         }
 
-        // // Retrieve existing events from local storage or initialize empty array
-        // let existingEvents = JSON.parse(localStorage.getItem('events')) || [];
-        // // Add new event to existing events
-        // const updatedEvents = Array.isArray(existingEvents) ? [...existingEvents, newEvent] : [newEvent];
-
-        // // Store updated events back to local storage
-        // localStorage.setItem('events', JSON.stringify(updatedEvents));
-        // // Update the events state with the updated array
-        // setEvents(updatedEvents);
-
         // Close the AddEvent component
         closeMenu();
         window.location.reload(); // Reload screen to update events
     }
 
-    //Validate event name
-    // Ensuring empty string is not entered
-    const validateEventName = (event) =>  {
-        const eventName = event.target.value.trim(); 
-        if (eventName.trim() == "") {
-            // setEventName('')
-            event.target.setCustomValidity('Enter an event name');
-        } else {
-            // If value is valid, clear any existing error message and update value
-            event.target.setCustomValidity('');
-            setEventName(eventName)
+    const validateFields = () => {
+        if (!eventName.trim() || !eventDates || !eventStartTime || !eventEndTime || !eventType || !eventCategory) {
+            return false;
         }
+        return true;
     }
 
     /* Used to determining whether Category input is disabled - no need to enter category if a worker is sick */
@@ -242,8 +224,12 @@ export default function AddEvent({onClose, timesheet}) {
                         <input type="submit" value={"Edit Event"} className='add-event-button'/>
                     ) : ( */}
                     <input type="submit" value={"Add Event"} onClick={(event) => {
-                        validateEventName(event); 
-                        handleAddEvent(event); 
+                        // Check if all fields are filled in
+                        if (validateFields()) {
+                            handleAddEvent(event);
+                        } else {
+                            alert('Please fill in all fields.');
+                        }
                      }}  className='add-event-button'/>
                     
                 </form>
