@@ -40,7 +40,7 @@ export default function Timesheet() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const userID= 1;
+                const userID = localStorage.getItem('user_id');
                 const data = await fetchTimesheetsbyID(userID);
                 
                 const timesheet = data.find(ts => ts.id === parseInt(timesheetId));
