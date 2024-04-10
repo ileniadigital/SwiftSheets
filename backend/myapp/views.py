@@ -8,39 +8,12 @@ from rest_framework.response import Response  # type: ignore
 from rest_framework import generics, viewsets, permissions, status  # type: ignore
 from rest_framework.permissions import IsAuthenticated, AllowAny  # type: ignore
 from rest_framework.renderers import TemplateHTMLRenderer  # type: ignore
-from rest_framework.decorators import action, api_view  # type: ignore
+from rest_framework.decorators import action, api_view, permission_classes  # type: ignore
 # from rest_framework.decorators import action
 from rest_framework.views import APIView  # type: ignore
 from .models import SystemUser, Timesheet, Event, Comment, Notification
 from .serializers import SystemUserSerializer, TimesheetSerializer, EventSerializer, CommentSerializer, NotificationSerializer 
 from django.views.decorators.http import require_POST  # type: ignore
-
-@api_view(['POST'])
-def create_timesheet(request):
-    serializer = TimesheetSerializer(data=request.data)
-    if serializer.is_valid():
-        timesheet = serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-@api_view(['POST'])
-def create_events(request, timesheet_id):
-    try:
-        timesheet = Timesheet.objects.get(id=timesheet_id)
-    except Timesheet.DoesNotExist:
-        return Response({'error': 'Timesheet does not exist'}, status=status.HTTP_400_BAD_REQUEST)
-
-    events_data = request.data.get('events', [])
-    for event_data in events_data:
-        event_data['timesheet'] = timesheet_id  # Associate event with the specified timesheet
-        event_serializer = EventSerializer(data=event_data)
-        if event_serializer.is_valid():
-            event_serializer.save()
-        else:
-            return Response(event_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    return Response({'message': 'Events created successfully'}, status=status.HTTP_201_CREATED)
-
 
 # View to create a new user
 class CreateUserView(generics.CreateAPIView):
@@ -396,3 +369,17 @@ class UserTimesheetView(APIView):
         user = SystemUser.objects.get(pk=user_id)
         timesheets = user.timesheets.all()  # Retrieve all timesheets related to the selected user
         return render(request, 'user_timesheets.html', {'users': SystemUser.objects.all(), 'user': user, 'timesheets': timesheets})
+
+
+@api_view(['POST'])
+@permission_classes([permissions.AllowAny])
+def login(request):
+    print(request, request.data)
+    username = request.data.get('username')
+    password = request.data.get('password')
+    user = SystemUser.objects.filter(username=username, password=password).first()
+    print(user)
+    if user:
+        print({"username": user.username, 'role': user.user_type, 'id': user.id, 'name': str(user)})
+        return Response({"username": user.username, 'role': user.user_type, 'id': user.id, 'name': str(user)})
+    return Response({"error": "Invalid credentials"}, status=400)

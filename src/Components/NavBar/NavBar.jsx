@@ -7,6 +7,7 @@ import fdmIcon from './logo/fdm-new-logo.svg';
 //Import Link component
 import Link from './Link';
 import LanguageMenu from './LanguageMenu';
+import LogOut from './LogOut';
 
 //Navigation bar component
 export default function NavBar(props){
@@ -54,6 +55,7 @@ export default function NavBar(props){
                 </ul>
                 {/* Language menu */}
                 <LanguageMenu/>
+                <LogOut/>
             </nav>
         </div>
     
