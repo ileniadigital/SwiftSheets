@@ -36,7 +36,7 @@ export default function App() {
         <Routes>
         <Route path="/" element={<Home role={role} />} />
           <Route path="/Home" element={<Home role={role} />} />
-          {/* <Route path="/login" element={<Login />} /> */}
+          <Route path="/Login" element={<Login />} />
           <Route path="/Account" element={<Account />} />
           <Route path="/Settings" element={<Settings />} />
           {/* Route to a timesheet based on ID */}
