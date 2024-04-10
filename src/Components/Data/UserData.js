@@ -30,8 +30,13 @@ export const fetchUsers = async (setUsers) => {
 }
 
 // Create user
-export const createUser = async (user) => {
-    let url = 'http://localhost:8000/systemuser/';
+export const createUser = async (userID, user) => {
+    let url = 'http://localhost:8000/systemuser';
+
+    if (userID) {
+        url += `/?id=${userID}`;
+
+    }
 
     try {
         const response = await Axios.post(url, user);
@@ -40,4 +45,4 @@ export const createUser = async (user) => {
     } catch (error) {
         console.error('Error creating user:', error);
     }
-}
+};
