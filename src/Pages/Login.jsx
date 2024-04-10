@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const username = localStorage.getItem('username');
@@ -20,8 +23,7 @@ function Login() {
       const response = await axios.post('http://localhost:8000/login/', { username, password });
       localStorage.setItem('username', response.data.username);
       localStorage.setItem('role', response.data.role);
-
-      alert('Login successful');
+      navigate("/Home");
     } catch (error) {
       alert('Login failed');
     }

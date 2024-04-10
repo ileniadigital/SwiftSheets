@@ -17,11 +17,14 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'; // Import Brows
 
 // Main App component
 export default function App() {
-  const [role, setRole] = useState('')
+  const [username, setUsername] = useState('');
+  const [role, setRole] = useState('');
   useEffect(() => {
-    role = localStorage.getItem('role');
-    setRole(role);
-
+    const username_val = localStorage.getItem('username');
+    const user_role = localStorage.getItem('role');
+    setUsername(username_val);
+    setRole(user_role);
+    console.log(user_role);
   }, []); // The empty array means this effect runs once on mount
   return (
     <React.Fragment>
