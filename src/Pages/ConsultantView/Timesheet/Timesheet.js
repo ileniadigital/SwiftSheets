@@ -2,7 +2,7 @@
 import './Timesheet.css';
 
 // Importing Components
-import EventGrid from './EventGrid';
+import EventGrid from '../../../Components/ConsultantView/EventGrid/EventGrid';
 import AddEvent from '../../../Components/ConsultantView/AddEvent/AddEvent';
 import NoWorkingDaysError from '../../../Components/ConsultantView/NoWorkingDaysError/NoWorkingDaysError'
 

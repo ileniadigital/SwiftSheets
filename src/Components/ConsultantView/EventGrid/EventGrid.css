@@ -1,6 +1,8 @@
 * {
   box-sizing: border-box;
 }
+
+/* Styling for the hours grid */
 .event-grid {
   display: flex;
   flex-direction: column;
@@ -31,23 +33,25 @@
   width: 5rem;
 }
 
+/* Styling for each hour slot */
 .time-slot {
   box-sizing: border-box;
-  height: 3.2rem; /* height for each hour */
+  height: 3.2rem;
   border-bottom: 0.2rem solid #1e1e1e;
   position: relative;
   text-align: center;
 }
 
+/* Styling for each event */
 .event-block {
   position: absolute;
-  width: calc(100% - 0.4rem);
+  width: calc(100%);
   border-radius: 1rem;
   box-sizing: border-box;
   z-index: 1;
 }
 
-/* Styling add event button inside */
+/* Styling add event button inside hours */
 .add-button {
   justify-content: center;
   align-items: center;
@@ -77,9 +81,4 @@
 .add-event-button:disabled {
   color: grey;
   pointer-events: none;
-}
-
-.div {
-  left: 0;
-  right: 0;
 }

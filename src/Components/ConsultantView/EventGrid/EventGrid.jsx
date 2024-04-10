@@ -1,5 +1,5 @@
 import React from 'react';
-import './EventGrid.css';
+import './EventGrid.css'; //Import Styling
 
 import { FaCirclePlus } from "react-icons/fa6";
 
@@ -7,6 +7,7 @@ const EventGrid = ({ events, openAddEvent, timesheetStatus }) => {
   const days = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
   const hours = [...Array(24).keys()]; 
 
+  // Calculate the style of the event block based on the start and end times of the event
   const calculateEventBlockStyle = (event, dayIndex) => {
     // Calculate the start and end times of the event in minutes
     const startTime = parseInt(event.start_time.split(':')[0]) * 60 + parseInt(event.start_time.split(':')[1]);
@@ -21,10 +22,6 @@ const EventGrid = ({ events, openAddEvent, timesheetStatus }) => {
     // Calculate the height of the event block based on the duration
     const height = `${(duration / 60) * 3}rem`;
 
-    const columnWidth = 100 / days.length; 
-    const left = `${columnWidth * dayIndex}%`;
-    const right = `${100 - (parseFloat(left) + columnWidth)}%`;
-
     return {
       top: top,
       height: height,
@@ -33,6 +30,8 @@ const EventGrid = ({ events, openAddEvent, timesheetStatus }) => {
     };
   };
 
+
+  //Open Event Menu
   const handleAddEventClick = () => {
     openAddEvent();
   };
