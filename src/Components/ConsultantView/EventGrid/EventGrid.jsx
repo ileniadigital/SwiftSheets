@@ -12,6 +12,9 @@ const EventGrid = ({ events, openAddEvent, timesheetStatus }) => {
   const days = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
   const hours = [...Array(24).keys()]; 
 
+  //Track selected events for editing
+  const [selectedEvent, setSelectedEvent] = useState(null);
+
   // Calculate the style of the event block based on the start and end times of the event
   const calculateEventBlockStyle = (event, dayIndex) => {
     // Calculate the start and end times of the event in minutes
@@ -38,13 +41,21 @@ const EventGrid = ({ events, openAddEvent, timesheetStatus }) => {
 
   //Open Event Menu
   const handleAddEventClick = () => {
-    openAddEvent();
+    setSelectedEvent(null);
+    openAddEvent(true); 
   };
+
+  const handleEditEvent = (event) => {
+    setSelectedEvent(event);
+    openAddEvent(true);
+  }
+
 
 
   //Open Delete Event Menu
   const [deleteEventConfirmation, setDeleteEventConfirmation] = useState(false);
   const [eventIDDelete, setEventIDDelete] = useState(null);
+
   const deleteEvent = (event, eventID) => {
     setDeleteEventConfirmation(true);
     setEventIDDelete(eventID);
@@ -71,7 +82,7 @@ const EventGrid = ({ events, openAddEvent, timesheetStatus }) => {
           <div key={day} className="grid-column">
             {hours.map(hour => (
                     <div key={`${day}-${hour}`} className="add-button" style={{ position: 'relative' }}>
-                    <button className="add-event-button" onClick={handleAddEventClick} disabled={timesheetStatus === 'Submitted'}>
+                    <button className="add-event-button" onClick={() => handleAddEventClick(null)} disabled={timesheetStatus === 'Submitted'}>
                         <FaCirclePlus size={30} /> 
                     </button>
                     </div>
@@ -79,7 +90,8 @@ const EventGrid = ({ events, openAddEvent, timesheetStatus }) => {
 
             {events.filter(event => new Date(event.date).getDay() === (dayIndex + 1) % 7).map(event => (
               <div key={event.id} className="event-block" style={calculateEventBlockStyle(event, dayIndex)}>
-                {/* Delete Pop up */}
+                {/* Edit and Delete Pop Ups */}
+                <button className ="edit-event"  onClick={() => handleEditEvent(event)}>Edit Event</button>
                 <button className ="delete-event"  onClick={() => deleteEvent(event, event.id)}><IoClose/></button>
               </div>
             ))}

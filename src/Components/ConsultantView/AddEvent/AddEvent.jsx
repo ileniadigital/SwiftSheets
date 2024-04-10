@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 import {createEvents} from '../../Data/EventsData';
 
 //readd eventDate if it might
-export default function AddEvent({onClose, timesheet}) {
+export default function AddEvent({onClose, timesheet, selectedEvent}) {
 
     //Handle closing of add event pop up
     const [isOpen, setIsOpen] = useState(true);
@@ -33,8 +33,7 @@ export default function AddEvent({onClose, timesheet}) {
         }
     };
 
-    //Store events in local storage
-    const [events, setEvents] = useState([]);
+    //Event values
     const [eventName, setEventName] = useState('');
     const [eventDates, setEventDates] = useState('');
     const [eventStartTime, setEventStartTime] = useState('');
@@ -44,6 +43,21 @@ export default function AddEvent({onClose, timesheet}) {
     const [isRecurring, setIsRecurring] = useState(false);
     const [note, setNote] = useState('N/A');
     const [disableCategory, setDisableCategory] = useState(false);
+
+    //If editing, set values to event values
+    useEffect(() => {
+        if (selectedEvent) {
+          // Populate input fields with event details
+          setEventName(selectedEvent.name);
+          setEventDates(selectedEvent.date);
+          setEventStartTime(selectedEvent.start_time);
+          setEventEndTime(selectedEvent.end_time);
+          setEventType(selectedEvent.type);
+          setEventCategory(selectedEvent.category);
+          setIsRecurring(selectedEvent.is_recurring);
+          setNote(selectedEvent.note);
+        }
+      }, [selectedEvent]);
 
     // Calculate the duration of the event
     const calculateDuration = (eventStartTime, eventEndTime) => {
@@ -100,8 +114,6 @@ export default function AddEvent({onClose, timesheet}) {
             closeMenu();
         } catch (error) {
             console.error('Error creating event:', error);
-    
-            // Handle error appropriately (e.g., show error message to the user)
         }
 
         // Close the AddEvent component
@@ -148,7 +160,7 @@ export default function AddEvent({onClose, timesheet}) {
 
                     <div className="input event-name">
                         <label htmlFor="eventName">Name</label>
-                        <input type="text" name = "eventName" required onChange={(e) => setEventName(e.target.value)}/>
+                        <input type="text" name = "eventName" value={eventName} required onChange={(e) => setEventName(e.target.value)}/>
                     </div>
 
                     <div className="input">
@@ -159,12 +171,12 @@ export default function AddEvent({onClose, timesheet}) {
 
                     <div className="input">
                         <label htmlFor="eventStartTime">Start Time</label>
-                        <input type="time" className='datetime' name = "eventStartTime" required  onChange={(e) => setEventStartTime(e.target.value)}/>
+                        <input type="time" className='datetime' name = "eventStartTime" required value={eventStartTime} onChange={(e) => setEventStartTime(e.target.value)}/>
                     </div>
 
                     <div className="input">
                         <label htmlFor="eventEndTime">End Time</label>
-                        <input className='datetime' type="time" name = "eventEndTime" required onChange={(e) => setEventEndTime(e.target.value)}/>
+                        <input className='datetime' type="time" name = "eventEndTime" required value={eventEndTime} onChange={(e) => setEventEndTime(e.target.value)}/>
                     </div>
 
                     <div className="input">
