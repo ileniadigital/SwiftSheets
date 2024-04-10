@@ -28,15 +28,16 @@ export default function ConsultantTimesheet(props) {
           <GrView size={30} className="icon" />
         </Link>
         <ConsultantName name={name} />
+
         <Date dates={dates} />
         {/* Review status */}
         <Status
           status={reviewStatus}
-          editable={role === 'linemanager'}
+          editable={role === 'LineManager'}
           onUpdateStatus={handleStatusUpdate} // Pass the callback function
         />
         {/* Payment status */}
-        <Status status={paymentStatus} editable={role === 'financeteam'} onUpdateStatus={handleStatusUpdate} />
+        <Status status={paymentStatus} editable={role === 'FinanceTeamMember'} onUpdateStatus={handleStatusUpdate} />
       </div>
     );
   }

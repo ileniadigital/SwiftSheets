@@ -2,7 +2,7 @@
 import './Timesheet.css';
 
 // Importing Components
-import Week from '../../../Components/ConsultantView/Week/Week';
+import EventGrid from '../../../Components/ConsultantView/EventGrid/EventGrid';
 import AddEvent from '../../../Components/ConsultantView/AddEvent/AddEvent';
 import NoWorkingDaysError from '../../../Components/ConsultantView/NoWorkingDaysError/NoWorkingDaysError'
 
@@ -21,10 +21,10 @@ import { useNavigate } from 'react-router-dom';
 
 // Importing Data from backend
 import {fetchTimesheetsbyID} from '../../../Components/Data/TimesheetData';
-import {fetchEventsByTimesheetID} from '../../../Components/Data/EventsData';
+import {fetchEventsByTimesheetID, createEvents, destroyEvents} from '../../../Components/Data/EventsData';
 
 export default function Timesheet() {
-    const role='linemanager' // Placeholder for user role
+    const role = localStorage.getItem('role'); // Placeholder for user role, retrieved from local storage
     const [timesheet, setTimesheet] = useState(null); 
     const [events, setEvents] = useState([]);
     const [timesheetStatus, setTimesheetStatus] = useState(''); 
@@ -40,15 +40,14 @@ export default function Timesheet() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const userID= 6;
+                const userID= 1;
                 const data = await fetchTimesheetsbyID(userID);
                 
                 const timesheet = data.find(ts => ts.id === parseInt(timesheetId));
                 setTimesheet(timesheet);
-                console.log("Timesheet:", timesheet);
 
                 const events = await fetchEventsByTimesheetID(timesheetId);
-                setEvents(events);
+                setEvents(events || []);
                 console.log("Events:", events);
 
                 if (timesheet){
@@ -80,8 +79,6 @@ export default function Timesheet() {
         fetchData();
     }, [timesheetId]);
 
-    console.log("Review:", timesheetReviewStatus);
-    
     // Setting the date for the reminder
     const [completionReminderDate, setCompletionReminderDate] = useState('');
     const [completionReminderTime, setCompletionReminderTime] = useState('');
@@ -89,7 +86,6 @@ export default function Timesheet() {
     
     // Define function to set reminder time
     const setReminderTime = (time) => {
-        // Here you can set reminder time as needed
         console.log('Reminder time:', time);
     };
 
@@ -128,64 +124,66 @@ export default function Timesheet() {
         return `${day}/${month}/${year}`;
     }
 
-    // Used to create and manage the week shown on the timesheet
-    const [viewedWeek, setViewedWeek] = useState(new Date());
-
-    /* Created to keep track of the component that has called the addEvent Component
-       If the caller was the Hours component, the date for the add event input can be
-       predefined as hours fall within a particular day. If the Timesheet 
-       Component called AddEvent, this input field will not be prefilled as it is a 
-       general + icon that will be clicked, with no way of identifying the date of the
-       event*/
-
+    // Handle adding events
     const [componentCaller, setComponentCaller] = useState(null)
 
-    const [addEventViewedWeek, setAddEventViewedWeek] = useState(null)
     const [event, setEvent] = useState(null)
+    
+    // State to store whether the add event screen is open
+    const [isAddEventOpen, setIsAddEventOpen] = useState(false);
+
+    const closeAddEvent = () => {
+        setIsAddEventOpen(false);
+    };
+
+     // Function to open the AddEvent popup
+    const openAddEvent = () => {
+        setIsAddEventOpen(true);
+    };
 
     // Enables relevant screen to be displayed when the + button is clicked 
-    const [addEventClicked, setAddEventClicked] = useState(false);
-
+    // const [addEventClicked, setAddEventClicked] = useState(false);
+    const [eventDate, setEventDate] = useState('');
     // When add event is clicked, add event screen is shown, with the details based on the component it is called by
-    const addEventHandler = (componentCaller1, addEventViewedWeek1, event) => {
-        // Won't open the Add Event box as the timesheet is submitted
-        if (timesheetStatus === "Submitted") {
-            return
-        }
-        if (!addEventClicked) {
-            setComponentCaller(componentCaller1)
-            setAddEventViewedWeek(addEventViewedWeek1)
-            setEvent(event)
-        }
-        setAddEventClicked(!addEventClicked)
-    }
+    const addEventHandler = () => {
+        // Open the add event screen
+        setIsAddEventOpen(true);
+        // Pass the date to the AddEvent component
+        //setEventDate(date);
+    };
 
 
     // Store whether timesheet completion reminder has been set
     const [reminder, setReminder] = useState(false);
 
-
     const updateCompletionReminder = () => {
         setReminder(true)
     }
     
-   //  Initialising recurring events
-   if (!localStorage.getItem('recurringEvents')) {
-    localStorage.setItem('recurringEvents', JSON.stringify({}))
-   }
-
    const [emptyTimesheetError, setEmptyTimesheetError] = useState(false)
+
     // Function that handles timesheet submission
     const handleSubmission = () => {
-        // Include iteration that checks the length of the events; if theres more than 1 the timesheet can be submitted
-        const numberOfEvents = Object.keys(JSON.parse(localStorage.getItem('events'))).length > 0
-        if (numberOfEvents > 0 ) {
-            // Storing date and time of timesehet submission
-            const timesheetSubmissionDateandTime = new Date() 
-            setTimesheetStatus('Submitted')
-        } else {
-            setEmptyTimesheetError(true)
-        }
+        // Calculate submission time
+        const currentTime = new Date().toISOString();
+ 
+        axios.patch(`http://127.0.0.1:8000/timesheet/${timesheetId}/`, {
+            is_submitted: true
+        })
+        .then(response => {
+            console.log("Success");
+            // Update the timesheet status in the UI immediately
+            setTimesheetStatus('Submitted');
+            // Redirect consultant to home page
+            navigate('/Home');
+        })
+        .catch(error => {
+            console.error('Error revoking submission:', error);
+        });
+
+        // Call the create events function passing the timesheet id
+        // createEvents(timesheetId);
+        // destroyEvents();
     }
 
     // Function to handle revoking submission
@@ -212,7 +210,7 @@ export default function Timesheet() {
                 <p> 
                     {timesheet && formatDate(timesheet.start_date)} – {timesheet && formatDate(timesheet.end_date)}
                 </p>
-                <button className='add-event-button' disabled = {timesheetStatus === "Submitted"} onClick={() => addEventHandler("Timesheet", viewedWeek)}> 
+                <button className='add-event-button' disabled = {timesheetStatus === "Submitted"} onClick={addEventHandler}> 
                     <FaCirclePlus /> {/* Button icon */}
                 </button>
                 <button className='completion-reminder' disabled = {timesheetStatus === "Submitted"} onClick={updateCompletionReminder}>
@@ -257,19 +255,18 @@ export default function Timesheet() {
                 )}
             </div>
 
-            {/* Displays currently viewed week, along with hours */}
-            <Week viewedWeek = {viewedWeek} addEventHandler = {addEventHandler} timesheetStatus = {timesheetStatus}/>
 
             {/* Shows add event screen, with the arguments based on the component that called the method 
                 Only allows logging events if timesheet has not been submitted */}
-            {addEventClicked && timesheetStatus !== "Submitted" && (
-                    <AddEvent
-                        componentCaller={componentCaller}
-                        addEventHandler={addEventHandler} 
-                        viewedWeek={addEventViewedWeek}
-                        event={event}
-                    />
+            <div className='timesheet-container'>
+                <EventGrid events={events} openAddEvent={openAddEvent} timesheetStatus={timesheetStatus} className='eventgrid'/>
+                {isAddEventOpen && (
+                    <div className='add-event-menu'>
+                    <AddEvent onClose={closeAddEvent} timesheet={timesheet} />
+                    </div>
                 )}
+            </div>
+          
 
             {/* Used to display the different statuses of the timesheet */}
             <div className='status-container'>
@@ -280,7 +277,7 @@ export default function Timesheet() {
                 </div>
                 <div className='buttons'>
                     {/* Revoke Button for line manager */}
-                    {role === 'linemanager' && timesheet && timesheet.is_submitted && (
+                    {role === 'LineManager' && timesheet && timesheet.is_submitted && (
                         <button className='submit-button' onClick={handleRevokeSubmission}>
                             Revoke
                         </button>
