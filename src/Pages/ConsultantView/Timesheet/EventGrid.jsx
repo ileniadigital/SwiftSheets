@@ -28,8 +28,6 @@ const EventGrid = ({ events, openAddEvent, timesheetStatus }) => {
     return {
       top: top,
       height: height,
-      left: left, 
-      right: right, 
       backgroundColor: '#afd900', 
       position: 'absolute'
     };
