@@ -7,7 +7,8 @@ import AddUser from '../../../Components/SystemAdminView/AddUser/AddUser';
 import ManageUser from '../../../Components/SystemAdminView/Manage User/ManageUser'
 
 // Import useState
-import { useState } from 'react'
+import {useEffect, useState} from 'react'
+import {fetchUsers} from "../../../Components/Data/UserData";
 
 
 
@@ -23,6 +24,10 @@ export default function SystemAdminView() {
         }
         return list
     });
+
+    useEffect(() => {
+        fetchUsers(setUserList);
+    }, []);
     
     // Enables relevant screen to be displayed when the + button is clicked 
     const [manageUserClicked, setManageUserClicked] = useState(false);
