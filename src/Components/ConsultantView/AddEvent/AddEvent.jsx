@@ -39,8 +39,8 @@ export default function AddEvent({onClose, timesheet}) {
     const [eventDates, setEventDates] = useState('');
     const [eventStartTime, setEventStartTime] = useState('');
     const [eventEndTime, setEventEndTime] = useState('');
-    const [eventType, setEventType] = useState('Normal');
-    const [eventCategory, setEventCategory] = useState('Project');
+    const [eventType, setEventType] = useState("");
+    const [eventCategory, setEventCategory] = useState("");
     const [isRecurring, setIsRecurring] = useState(false);
     const [note, setNote] = useState('N/A');
     const [disableCategory, setDisableCategory] = useState(false);
@@ -81,7 +81,7 @@ export default function AddEvent({onClose, timesheet}) {
             date: eventDates,
             start_time: startTime,
             end_time: endTime,
-            duration: 0.0,
+            duration: duration,
             name: eventName,
             type: eventType,
             category: eventCategory,
@@ -101,8 +101,6 @@ export default function AddEvent({onClose, timesheet}) {
             closeMenu();
         } catch (error) {
             console.error('Error creating event:', error);
-            console.log('New event:', newEvent);
-            console.log(timesheet.id);
     
             // Handle error appropriately (e.g., show error message to the user)
         }
@@ -135,6 +133,18 @@ export default function AddEvent({onClose, timesheet}) {
         }
     }
 
+    /* Used to determining whether Category input is disabled - no need to enter category if a worker is sick */
+    function handleEventType(event) {
+        setEventType(event.target.value)
+
+        // Disabling category input
+        if ((event.target.value === "Sick") || (event.target.value === "Holiday")){
+            setEventCategory("None")
+            setDisableCategory(true)
+        } else {
+            setDisableCategory(false)
+        }
+    }
 
     return(
         isOpen && (
@@ -176,7 +186,7 @@ export default function AddEvent({onClose, timesheet}) {
 
                     <div className="input">
                         <label htmlFor="eventType">Type</label>
-                        <select name="eventType" required onChange={(e) => setEventType(e.target.value)}>
+                        <select name="eventType" required onChange={(e) => handleEventType(e)} value={eventType}>
                             <option value="" disabled hidden>Type</option> {/* Default value */}
                             <option value="Normal">Normal</option>
                             <option value="Overtime">Overtime</option>
@@ -188,19 +198,26 @@ export default function AddEvent({onClose, timesheet}) {
                     {/* No need to show category if work is not Normal or Overtime e.g. if Consultants are sick */}
                     <div className="input">
                         <label htmlFor="eventCategory">Category</label>
-                        <select name="eventCategory" required onChange={(e) => setEventCategory(e.target.value)}>
+                        <select name="eventCategory" value={eventCategory} required onChange={(e) => setEventCategory(e.target.value)}>
                             <option value="" disabled hidden>Category</option> {/* Default value */}
-                            <option value="Project">Project</option>
-                            <option value="Planning">Planning</option>
-                            <option value="Meeting">Meeting</option>
+                            {!disableCategory ? (
+                                <>
+                                    <option value="Project">Project</option>
+                                    <option value="Planning">Planning</option>
+                                    <option value="Meeting">Meeting</option>
+                                </>
+                            ) : (
+                                <option value="None" selected>None</option>
+                            )}
                         </select>
                     </div>
 
+
                     <div className="input checkbox-container">
                         <label htmlFor="isRecurring" className='checkbox-label'>Recurring </label>
-                        <input  type="checkbox" onChange={(e) => setIsRecurring(e.target.value)}/>
-                        {/* <input className = {`is-recurring ${isRecurring ? 'recur' : ''}`} type="checkbox" onChange={() => setIsRecurring(!isRecurring)}
-                        defaultValue={isRecurring}/> */}
+                        {/* <input  type="checkbox" onChange={(e) => setIsRecurring(e.target.value)}/> */}
+                        <input className = {`is-recurring ${isRecurring ? 'recur' : ''}`} type="checkbox" onChange={() => setIsRecurring(!isRecurring)}
+                        defaultValue={isRecurring}/>
                     </div>
 
                     <div className='note-container'>
@@ -208,10 +225,7 @@ export default function AddEvent({onClose, timesheet}) {
                         <textarea name="note" cols="30" rows="5" placeholder='Enter text'>
                         </textarea>
                     </div>
-                    
-                    {/* <div>
-                        <AddEvent />
-                    </div> */}
+
 
                     {/* <div className='input'
                     <input type="submit" value={"Add Event"} className='add-event-button'/> 
