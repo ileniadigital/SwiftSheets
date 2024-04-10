@@ -28,21 +28,20 @@
 }
 
 .hour-column {
-  /* Style the hour column */
-  width: 5rem; /* Adjust width as needed */
+  width: 5rem;
 }
 
 .time-slot {
-  height: 3rem; /* height for each hour */
-  /* border-bottom: 0.2rem solid #1e1e1e; */
+  box-sizing: border-box;
+  height: 3.2rem; /* height for each hour */
+  border-bottom: 0.2rem solid #1e1e1e;
   position: relative;
-  text-align: center; /* for absolute positioning of events */
+  text-align: center;
 }
 
 .event-block {
   position: absolute;
   width: calc(100% - 0.4rem);
-  border: 0.2rem solid #afd900;
   border-radius: 1rem;
   box-sizing: border-box;
   z-index: 1;
