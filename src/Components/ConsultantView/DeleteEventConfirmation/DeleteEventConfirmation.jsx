@@ -1,23 +1,16 @@
-// Importing CSS
-import './DeleteEventConfirmation.css'
+import './DeleteEventConfirmation.css' //Import Styling
+
+//Delete events function
+import {destroyEvents} from '../../Data/EventsData'
 
 // Displays pop-up to confirm that user wants to delete an event
-export default function DeleteEventConfirmation({event, setOpenPopup}) {
+export default function DeleteEventConfirmation({event, eventToDelete, setOpenPopup}) {
+    console.log("ID in pop up:", eventToDelete)
 
     // Delete event
     const deleteEvent = () => {
-        const events = JSON.parse(localStorage.getItem('events'))
-        const newEvents = { ...events}; // Copying events
-        delete newEvents[event]
-        localStorage.setItem('events', JSON.stringify(newEvents))
-
-        // Delete recurring event if it exists
-        const recurringEvents = JSON.parse(localStorage.getItem('recurringEvents'))
-        const newRecurringEvents = { ...recurringEvents}; // Copying events
-        delete newRecurringEvents[event]
-        localStorage.setItem('recurringEvents', JSON.stringify(newEvents))
-
         setOpenPopup(false)
+        destroyEvents(eventToDelete); // Delete event by ID
         window.location.reload(); // Reload screen to update events
     }
 

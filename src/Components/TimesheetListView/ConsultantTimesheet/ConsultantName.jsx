@@ -4,7 +4,7 @@ import './ConsultantTimesheet.css'; //Import styling
 //To display the name of the consultant
 export default function ConsultantName({ name }) { 
     if (name === null) {
-        console.log("Name is null");
+        name= "Consultant Name";
     } 
     return(
         <div className="consultantName-container">

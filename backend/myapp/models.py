@@ -61,6 +61,7 @@ class Event(models.Model):
         ('Planning', 'Planning'),
         ('Meeting', 'Meeting'),
         ('Project', 'Project'),
+        ('None', 'None'),
     ]
     #timesheet = models.ForeignKey(Timesheet, on_delete=models.CASCADE, related_name='events')
     date = models.CharField(max_length=30, default=timezone.now().date().strftime('%Y-%m-%d'))  # Default date

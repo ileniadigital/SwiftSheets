@@ -3,7 +3,7 @@
   position: fixed;
   color: #f7f6f5;
   background-color: #1e1e1e;
-  border: 0.3rem solid #a7d900;
+  border: 0.1rem solid #c5ff00;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -24,10 +24,6 @@
   font-size: 2rem;
 }
 
-.closeWindow:hover {
-  border: none;
-}
-
 .closeWindow svg {
   fill: #f7f6f5;
   background-color: #1e1e1e;
@@ -36,7 +32,6 @@
 /* Styling button colour on close */
 .closeWindow svg:hover {
   background-color: #1e1e1e;
-  transform: scale(1.3);
   fill: red;
 }
 
@@ -50,7 +45,6 @@
   margin-right: 2rem;
 }
 /* Styling for user details */
-/*
 .detailsTable {
     display: table;
     border-collapse: separate;
@@ -62,25 +56,6 @@
     font-size: 1.5rem;
     font-family: Inter;
     text-align: left;
-} */
-
-#manageUserForm {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: #1e1e1e;
-  gap: 1.5rem;
-}
-
-.manageUserInput {
-  display: flex;
-  flex-shrink: 0;
-  width: 80%;
-  align-items: center;
-  color: #f7f6f5;
-  gap: 1.2rem;
-  margin: 1rem;
-  overflow: hidden;
 }
 
 td {
@@ -88,49 +63,25 @@ td {
   font-size: 1.5rem;
 }
 
-/* Setting label name */
-#manageUser .label {
-  flex-shrink: 0;
+.label {
   font-weight: bold;
-  width: 10rem;
-  font-size: 1.5rem;
-  text-align: left;
-  color: #f7f6f5;
-  background-color: #1e1e1e;
-  margin-left: 0rem;
 }
-
-.formInputLabel {
-  font-weight: bold;
-  width: 10rem;
-  font-size: 1.5rem;
-  text-align: left;
-  color: #f7f6f5;
-  background-color: #1e1e1e;
-}
-
 /* Styling for user details heading*/
 .detailsHeading {
-  margin-left: 3.5rem;
-  margin-bottom: 1rem;
+  margin-left: 1.25rem;
 }
 
 /* Styling for all input boxes */
-#manageUser .inputBox {
+.inputBox{
   border: 0;
-  width: 16rem;
-  padding-left: 0.5rem; 
-  margin: 0;
+  width: 14rem;
+  margin: auto;
   color: #1e1e1e;
   height: 2rem;
   border-radius: 0.3rem;
   font-family: Inter;
   font-size: 1.3rem;
   box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
-}
-
-#password {
-  padding-right: 2rem; /* Password is otherwise covered by icon */
 }
 
 /* Positioning for the visibility toggle */
@@ -140,8 +91,8 @@ td {
  
 .icon {
   position: absolute;
-  top: 20%;
-  left: 90%;
+  top: 14%;
+  left: 80%;
   z-index: 1;
 }
 
@@ -155,31 +106,28 @@ td {
 }
 
 .eye:hover {
-  color: #a7d900;
+  color: #c5ff00;
 }
 
 /* Flexbox for the bottom row of buttons */
 .buttonFlex {
   display: flex;
-  width: 80%;
-  color: #f7f6f5;
-  margin: 1rem;
   flex-direction: row;
-  margin-top: 0;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 /* Styling for the updateUser button */
 .updateUserButton {
   margin: auto;
-  margin-top: 1rem;
-  background-color: #a7d900;
+  margin-top: 3rem;
+  background-color: #c5ff00;
   color: #1e1e1e;
   width: 10rem;
-  height: 2.5rem;
-  border-radius: 1.5rem;
+  border-radius: 1rem;
   font-family: Inter;
-  font-size: 1.2rem;
-  border: 0.2rem solid #a7d900;
+  font-size: 1rem;
+  border: 0.2rem solid #c5ff00;
 }
 
 /* Adding styling on hover */
@@ -194,7 +142,7 @@ td {
   position: relative;
   margin-inline: auto;
   left: 1.3rem;
-  color: #f7f6f5;
+  color: #efecea;
   background-color: red;
   padding: 0.4rem;
   border-radius: 1rem;

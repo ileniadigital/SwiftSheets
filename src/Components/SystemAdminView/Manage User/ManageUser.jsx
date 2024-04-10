@@ -63,56 +63,61 @@ export default function ManageUser ({ index, manageUserHandler, userList, remove
             <h1 className='manageUserHeading'>Manage User</h1>
             <h2 className ='detailsHeading'>Personal Details</h2>
             {/* Creates a 2 column table for the user data*/}
-            
             <form action="" id='manageUserForm' onSubmit={handleSubmitValidation}>
-                <div className="manageUserInput">
-                    <label class='label'>First Name</label>
-                    <div>{user.firstname}</div>
-                </div>
-                <div className="manageUserInput">
-                    <label class='label'>Last Name</label>
-                    <div>{user.lastname}</div>
-                </div>
-                <div className="manageUserInput">
-                    <label class='label'>Username</label>
-                    <div>{user.username}</div>
-                </div>
-                <div className="manageUserInput">
-                    <label htmlFor='userType' class='formInputLabel'>Role</label>
-                    <select name="userType" id='userType' defaultValue={user.userType} class='inputBox' required onChange={setType}>
-                        <option value="Consultant">Consultant</option>
-                        <option value="LineManager">Line Manager</option>
-                        <option value="FinanceTeamMember">Finance Team Member</option>
-                        <option value="Administrator">Administrator</option>
-                    </select>
-                </div>
-                <div className="manageUserInput">
-                    <label htmlFor='password' class='formInputLabel'>Password</label>
-                    <div id='passDiv'>
-                        {/* Switches between text field and password field to toggle visibility */}
-                        <input 
-                            type={
-                            showPassword
-                                ? 'text'
-                                : 'password'
-                            } 
-                            placeholder="password" 
-                            defaultValue={user.password} 
-                            name ='password' 
-                            id='password' 
-                            class='inputBox' 
-                            required onChange={validatePassword}
-                        />
-                        {/* Toggles icon and visibility status on click */}
-                        <div class='icon'>
-                            {showPassword ? (
-                                <FaRegEyeSlash class='eye' onClick={() => handleToggleVisibility()}/>
-                            ) : (
-                                <FaRegEye class='eye' onClick={() => handleToggleVisibility()} />
-                            )}   
-                        </div>
-                    </div>
-                </div>
+                <table className='detailsTable'>
+                    <colgroup>
+                        <col id='col1'></col>
+                        <col id='col2'></col>
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <td class='label'>Name</td>
+                            <td>{user.name}</td>
+                        </tr>
+                        <tr>
+                            <td class='label'>Username</td>
+                            <td>{user.username}</td>
+                        </tr>
+                        <tr>
+                            <td><label htmlFor='userType' class='label'>Role</label></td>
+                            <td>
+                            <select name="userType" id='userType' defaultValue={user.userType} class='inputBox' required onChange={setType}>
+                                <option value="Consultant">Consultant</option>
+                                <option value="LineManager">Line Manager</option>
+                                <option value="FinanceTeamMember">Finance Team Member</option>
+                                <option value="Administrator">Administrator</option>
+                            </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label htmlFor='password' class='label'>Password</label></td>
+                            <td id='passDiv'>
+                                {/* Switches between text field and password field to toggle visibility */}
+                                <input 
+                                    type={
+                                    showPassword
+                                        ? 'text'
+                                        : 'password'
+                                    } 
+                                    placeholder="password" 
+                                    defaultValue={user.password} 
+                                    name ='password' 
+                                    id='password' 
+                                    class='inputBox' 
+                                    required onChange={validatePassword}
+                                />
+                                {/* Toggles icon and visibility status on click */}
+                                <div class='icon'>
+                                    {showPassword ? (
+                                        <FaRegEyeSlash class='eye' onClick={() => handleToggleVisibility()}/>
+                                    ) : (
+                                        <FaRegEye class='eye' onClick={() => handleToggleVisibility()} />
+                                    )}   
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
                 { (errorMessage !== null) && <span className='errorMessage'>{errorMessage}</span> }
                 <div class='buttonFlex'>
                     <RemoveUser index={index} userList={userList} removeUserHandler={removeUserHandler} class='removeUserButton'/>

@@ -50,9 +50,9 @@
 /* Defining hover colour/background colour for selected day */
 .day-of-week:hover,
 .worked-day {
-  background: #a7d900;
+  background: #c5ff00;
   color: #1e1e1e;
-  border: 0.1rem solid #a7d900;
+  border: 0.1rem solid #c5ff00;
 }
 
 .worked-day:hover {
@@ -132,7 +132,7 @@
   box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
   cursor: pointer;
   border-radius: 0.2rem;
-  color: #a7d900;
+  color: #c5ff00;
   margin-left: 1rem;
 }
 

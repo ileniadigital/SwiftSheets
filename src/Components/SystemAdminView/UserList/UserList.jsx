@@ -2,7 +2,7 @@
 import './UserList.css';
 
 //Importing components
-import User from '../User/User'; 
+import User from './User'; 
 
 
 //need to figure out format of user information from django
