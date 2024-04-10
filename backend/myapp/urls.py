@@ -6,6 +6,5 @@ from .views import login
 
 urlpatterns = [
     path("myapp-auth/", include("rest_framework.urls")),
-
 ]
 
