@@ -147,10 +147,15 @@ export default function AddEvent({componentCaller, addEventHandler, viewedWeek, 
         event.target.setCustomValidity('');
     }
 
-    let event1 = event
     const [concurrentEvent, setConcurrentEvent] = useState(false)
 
-    // Handles validation after submit button has abeen pressed handleSubmit(event)
+    /* Add Event Validation: Iterate through all events and check:
+    - start and end time dont match that of existing events
+    - start and end time are not between that of an existing event
+    - start time not before event and end time within event
+    logic must hold for events that span over 2 days, or just 1 
+    (i think i had some code for it but it seems to have disappeared)
+    -  */
 
     return(
         <div className='add-event'>

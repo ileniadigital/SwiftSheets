@@ -1,0 +1,80 @@
+#viewFormMenu {
+    position: fixed;
+    background-color: #1e1e1e;
+    border: 0.3rem solid #a7d900;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 36rem;
+    padding-bottom: 2rem;
+    border-radius: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    color: #f7f6f5;
+}
+
+/* Styling log event heading */
+.viewFormHeading {
+    margin: auto;
+    margin-bottom: 0.5rem;
+    color: #f7f6f5;
+}
+
+#viewFormContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #1e1e1e;
+    gap: 1.6rem;
+}
+
+/* Styling button used to close event */
+.closeWindow {
+    fill: #f7f6f5;
+    margin-top: 1rem;
+    margin-left: auto;
+    margin-right: 1rem;
+    font-size: 2rem;
+}
+  
+.closeWindow svg {
+    fill: #f7f6f5;
+    background-color: #1e1e1e;
+}
+  
+  /* Styling button colour on close */
+.closeWindow svg:hover {
+    background-color: #1e1e1e;
+    fill: red;
+}
+
+#viewFormMenu .inputBox {
+    min-width: fit-content;
+}
+
+#text {
+    resize: none;
+    width: 35rem;
+    height: 20rem;
+}
+
+.inputBox:disabled {
+    background-color: #f7f6f5;
+}
+
+#viewFormContent .input, #viewFormContent textarea {
+    font-size: 1.2rem;
+}
+
+#viewFormContent .input {
+    display: flex;
+    gap: 2rem;
+}
+
+#viewFormContent textarea {
+    max-height: 30rem;
+    overflow-y: auto;
+    width: 30rem;
+    border-radius: 1rem;
+}
