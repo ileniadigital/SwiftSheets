@@ -44,8 +44,10 @@ const EventGrid = ({ events, openAddEvent, timesheetStatus }) => {
 
   //Open Delete Event Menu
   const [deleteEventConfirmation, setDeleteEventConfirmation] = useState(false);
-  const deleteEvent = (event) => {
-    setDeleteEventConfirmation(event);
+  const [eventIDDelete, setEventIDDelete] = useState(null);
+  const deleteEvent = (event, eventID) => {
+    setDeleteEventConfirmation(true);
+    setEventIDDelete(eventID);
   }
 
   return (
@@ -78,14 +80,14 @@ const EventGrid = ({ events, openAddEvent, timesheetStatus }) => {
             {events.filter(event => new Date(event.date).getDay() === (dayIndex + 1) % 7).map(event => (
               <div key={event.id} className="event-block" style={calculateEventBlockStyle(event, dayIndex)}>
                 {/* Delete Pop up */}
-                <button className ="delete-event"  onClick={() => deleteEvent(event)}><IoClose/></button>
+                <button className ="delete-event"  onClick={() => deleteEvent(event, event.id)}><IoClose/></button>
               </div>
             ))}
           </div>
         ))}
       </div>
        {/* Render delete event confirmation pop-up if deleteEventPopup is not null */}
-       {deleteEventConfirmation && <DeleteEventConfirmation event={deleteEventConfirmation} setOpenPopup={setDeleteEventConfirmation} />}
+       {deleteEventConfirmation && <DeleteEventConfirmation event={deleteEventConfirmation} eventToDelete={eventIDDelete} setOpenPopup={setDeleteEventConfirmation} />}
     </div>
   );
 };

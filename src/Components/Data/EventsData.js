@@ -35,11 +35,16 @@ export const createEvents = async (timesheetID, eventData) => { // Accept event 
 
 
 // Destroy events by IDs
-export const destroyEvents = async () => {
+export const destroyEvents = async (eventIDToDelete) => {
   try {
-    const eventIDsToDelete = [12, 13, 14, 15]; // Dummy array of event IDs to delete
-    const url = 'http://localhost:8000/event/delete/'; // Update the URL to match the new pattern
-    const response = await Axios.post(url, { event_ids: eventIDsToDelete });
+    console.log("ID:", eventIDToDelete)
+    const url = 'http://localhost:8000/event/delete/';
+    if (eventIDToDelete) {
+      url += `?id=${eventIDToDelete}`;
+    }
+     // Update the URL to match the new pattern
+    const response = await Axios.post(url, eventIDToDelete);
+    console.log("Deleted");
     return response.data;
   } catch (error) {
     console.error('Error destroying events:', error);
