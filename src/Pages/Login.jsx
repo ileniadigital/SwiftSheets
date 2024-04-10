@@ -48,7 +48,7 @@ function Login() {
       console.log(response.data.username);
       console.log(response.data.name);
 
-      navigate("/Home");
+      window.location.href="/Home";
     } 
     catch (error) {
       alert('Login failed');
