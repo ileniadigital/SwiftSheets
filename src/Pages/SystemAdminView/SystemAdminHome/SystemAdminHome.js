@@ -8,7 +8,7 @@ import ManageUser from '../../../Components/SystemAdminView/Manage User/ManageUs
 
 // Import useState
 import {useEffect, useState} from 'react'
-import {fetchUsers} from "../../../Components/Data/UserData";
+import {createUser, fetchUsers} from "../../../Components/Data/UserData";
 
 
 
@@ -63,13 +63,32 @@ export default function SystemAdminView() {
     }
 
     // Converts the given data into JSON and adds it to the user list (updates local storage)
-    const handleAddUserSubmit = (firstname, lastname, username, userType, password) => {
-        var newUserList = [...userList]
+    const handleAddUserSubmit = async (firstname, lastname, username, userType, password) => {
+        // Create user object
+        const newUser = {
+            username: username,
+            password: password,
+            user_type: userType,
+            firstname: firstname,
+            lastname: lastname
+        };
+
+        // Send via post request
+        try {
+            const response = await createUser([newUser]);
+            console.log("User created successfully:", response);
+            console.log('User created:', newUser);
+        } catch (error) {
+            // oops, something went wrong
+            console.error('Error creating user:', error);
+        }
+
+        /*var newUserList = [...userList]
         var newEntry = `{ "firstname":"${firstname}" , "lastname":"${lastname}" , "username":"${username}" , "userType":"${userType}", "password":"${password}" }`
         var jsonEntry = JSON.parse(newEntry)
         newUserList.push(jsonEntry)
         setUserList(newUserList)
-        localStorage.setItem('userList', JSON.stringify(newUserList))
+        localStorage.setItem('userList', JSON.stringify(newUserList))*/
         addUserMenuHandler()
     }
 
