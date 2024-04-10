@@ -171,7 +171,7 @@ export default function AddEvent({onClose, timesheet}) {
                     <div className="input">
                         <label htmlFor="eventDate">Date</label>
                             {/* // Limiting days to choose from as days in current week */}
-                            <input className = 'datetime' type="date" name = "eventDate" value={date} onChange={(e) => setEventDates(e.target.value)} required min={timesheet.start_date} max={timesheet.end_date}/>
+                            <input className = 'datetime' type="date" name = "eventDate" value={eventDates} onChange={(e) => setEventDates(e.target.value)} required min={timesheet.start_date} max={timesheet.end_date}/>
                     </div>
 
                     <div className="input">
