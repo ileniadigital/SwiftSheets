@@ -91,6 +91,7 @@ export default function SystemAdminView() {
         newUserList.push(jsonEntry)
         setUserList(newUserList)
         localStorage.setItem('userList', JSON.stringify(newUserList))*/
+        window.location.reload();
         addUserMenuHandler()
     }
 
