@@ -42,7 +42,6 @@ const EventGrid = ({ events, openAddEvent, timesheetStatus }) => {
 
   //Open Delete Event Menu
   const deleteEvent = (event) => {
-    <DeleteEventConfirmation/>
   }
 
   return (
