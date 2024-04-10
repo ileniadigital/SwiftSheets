@@ -30,9 +30,8 @@ urlpatterns = [
     path('myapp/timesheet-events/', views.TimesheetEventView.as_view(), name='timesheet_events'),
     path('myapp/user-timesheets/', UserTimesheetView.as_view(), name='user_timesheets'),
     path('login/', login, name='login'),
-    path('update_password/', update_password, name='update_password'),
     path('event/<int:pk>/', views.EventViewset.as_view({'delete': 'destroy'}), name='event-delete'),
-
+    path('update_password/', update_password, name='update_password'),
 ]
 
 router = DefaultRouter()
