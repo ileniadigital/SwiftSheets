@@ -38,12 +38,12 @@ export const createEvents = async (timesheetID, eventData) => { // Accept event 
 export const destroyEvents = async (eventIDToDelete) => {
   try {
     console.log("ID:", eventIDToDelete)
-    const url = 'http://localhost:8000/event/delete/';
+    let url = 'http://localhost:8000/event/delete/';
     if (eventIDToDelete) {
       url += `?id=${eventIDToDelete}`;
     }
      // Update the URL to match the new pattern
-    const response = await Axios.post(url, eventIDToDelete);
+    const response = await Axios.delete(url);
     console.log("Deleted");
     return response.data;
   } catch (error) {
