@@ -14,13 +14,12 @@ export default function App() {
   const [role, setRole] = useState('');
   const [loggedin, setLoggedin] = useState(false);
 
-  useEffect(() => {
+  useEffect(() => {;
     const user_role = localStorage.getItem('role');
-    // Correctly parse the 'loggedin' state as a boolean
-    const isLoggedin = localStorage.getItem('loggedin') === 'true';
+    const loggedin = localStorage.getItem('loggedin');
 
     setRole(user_role);
-    setLoggedin(isLoggedin);
+    setLoggedin(loggedin); // Parse the string to boolean
     
     console.log(user_role);
   }, []); // The empty array means this effect runs once on mount
@@ -31,15 +30,11 @@ export default function App() {
       <Name/>
       <BrowserRouter>
         <Routes>
-          {/* Redirect to Login if not logged in */}
-          <Route path="/" element={!loggedin ? <Navigate to="/Login" /> : <Navigate to="/Home" />} />
-          <Route path="/Home" element={loggedin ? <Home role={role} /> : <Navigate to="/Login" />} />
-          <Route path="/Account" element={loggedin ? <Account /> : <Navigate to="/Login" />} />
-          <Route path="/Settings" element={loggedin ? <Settings /> : <Navigate to="/Login" />} />
-          <Route path="/timesheet/:timesheetId" element={loggedin ? <Timesheet /> : <Navigate to="/Login" />} />
-
-          {/* Redirect to Home if already logged in and trying to access Login page */}
-          <Route path="/Login" element={!loggedin ? <Login /> : <Navigate to="/Home" />} />
+          <Route path="/Home" element={<Home role={role} />} />
+          <Route path="/Account" element={<Account />} />
+          <Route path="/Settings" element={<Settings />} />
+          <Route path="/timesheet/:timesheetId" element={<Timesheet />} />
+          <Route path="/Login" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </React.Fragment>
