@@ -266,19 +266,6 @@ textarea {
   fill: red;
 }
 
-/* Adding underline to signify end of event */
-.end-event {
-}
-
-.complete-event {
-}
-
-.start-event {
-}
-
-.hours-event {
-}
-
 /* Styling error message */
 .concur-error {
   color: red;
