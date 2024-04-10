@@ -34,7 +34,7 @@ SECRET_KEY = 'django-insecure-bs)myop02d=b(k+i*2jmzu-ujpug*$=xpk%sh$wnl+ckyt=sjz
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['*']
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
@@ -44,6 +44,7 @@ REST_FRAMEWORK = {
     ),
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
+        'rest_framework.permissions.IsAdminUser'
     ],
 }
 
@@ -63,6 +64,7 @@ INSTALLED_APPS = [
     'myapp.apps.MyappConfig', # added the my app
     'rest_framework',
     'corsheaders',
+    'django_extensions', # added for debugging
 ]
 
 MIDDLEWARE = [
@@ -160,7 +162,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = True
 # CORS_ALLOWS_CREDENTIALS = True
 # CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOWED_ORIGINS= [

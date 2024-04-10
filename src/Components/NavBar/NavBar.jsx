@@ -7,25 +7,14 @@ import fdmIcon from './logo/fdm-new-logo.svg';
 //Import Link component
 import Link from './Link';
 import LanguageMenu from './LanguageMenu';
+import LogOut from './LogOut';
 
 //Navigation bar component
 export default function NavBar(props){
-    // let view;
-    // switch (props.view) {
-    //     case 'consultant':
-    //         view = '/consultantsettings';
-    //         break;
-    //     default:
-    //         view = '/settings';
-    //         break;
-    // }
 
     {/* Changing FDM logo colour based on page theme */}
     let fdmLogo;
     switch (window.location.pathname) {
-        // case "/timesheet":
-        //     fdmLogo = fdmIconBlack;
-        //     break
         default:
             fdmLogo = fdmIcon;
             break
@@ -43,13 +32,18 @@ export default function NavBar(props){
                     <Link href='/Home' className='navbar-link'>Home</Link>
                     <Link href='/Account' className='navbar-link'>Account</Link>                   
                     <Link href='/Settings' className='navbar-link'>Settings</Link>
-                    {props.view === 'consultant' &&       
+                    {props.view === 'Consultant' &&       
                     <>         
-                     <Link href='/consultantdashboard' className='navbar-link'>Dashboard</Link>
+                     <Link href='/Dashboard' className='navbar-link'>Dashboard</Link>
+                     </>}
+                    {props.view === 'Administrator' &&       
+                    <>         
+                     <Link href='/SystemAdminForm' className='navbar-link'>Forms</Link>
                      </>}
                 </ul>
                 {/* Language menu */}
                 <LanguageMenu/>
+                <LogOut/>
             </nav>
         </div>
     

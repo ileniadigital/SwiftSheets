@@ -3,26 +3,25 @@ import React, { useState } from 'react';
 import '../Components/general.css'; //Import Styling
 
 //Import componentts
-import SystemAdminView from './SystemAdminView';
+import SystemAdminView from './SystemAdminView/SystemAdminHome/SystemAdminHome';
 import ConsultantHome from './ConsultantView/ConsultantHome/ConsultantHome';
 import TimesheetListView from './TimesheetListView';
 
 
 export default function Home(props) {
-    // const [view, setView] = useState('default');
     let view;
-    const role=props.view
-    switch (props.view) {
-        case 'consultant':
+    const role=props.role
+    switch (role) {
+        case 'Consultant':
             view = <ConsultantHome />;
             break;
-        case 'linemanager':
+        case 'LineManager':
             view = <TimesheetListView role={role} />;
             break;
-        case 'financeteam':
+        case 'FinanceTeamMember':
             view = <TimesheetListView role={role} />;
             break;
-        case 'systemadmin':
+        case 'Administrator':
             view = <SystemAdminView />;
             break;
     }

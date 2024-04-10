@@ -1,6 +1,4 @@
 /* Styling for Timesheet Component */
-
-/* Setting font family */
 .consultant-view {
   margin-bottom: 1rem;
 }
@@ -75,19 +73,23 @@ button {
 .status.pending,
 .status.unsubmitted {
   color: grey;
+  font-weight: 600;
 }
 
 .status.approved,
 .status.submitted {
-  color: green;
+  color: darkgreen;
+  font-weight: 600;
 }
 
 .status.rejected {
   color: red;
+  font-weight: 600;
 }
 
 .status.saved {
-  color: #c5ff00;
+  color: #7da00a;
+  font-weight: 600;
 }
 
 /* Setting default button styling */
@@ -259,4 +261,22 @@ button {
 /* Styling container */
 .empty-error button {
   margin-left: auto;
+}
+
+/* Styling timesheet container */
+.timesheet-container {
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 0;
+}
+
+.add-event-menu {
+  z-index: 3;
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  transform: scale(0.6);
 }
