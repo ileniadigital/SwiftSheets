@@ -7,64 +7,47 @@ import AddUser from '../../../Components/SystemAdminView/AddUser/AddUser';
 import ManageUser from '../../../Components/SystemAdminView/Manage User/ManageUser'
 
 // Import useState
-import {useEffect, useState} from 'react'
-import {createUser, fetchUsers} from "../../../Components/Data/UserData";
-
-
+import { useEffect, useState } from 'react'
+import { createUser, fetchUsers, deleteUserFromBackend, updateUserInBackend } from "../../../Components/Data/UserData";
 
 export default function SystemAdminView() {
-
-    // Get dummy list data from localStorage or file if not yet set
-    // To be changed to integrate backend
-    const [userList, setUserList] = useState(() => {
-        let list = JSON.parse(localStorage.getItem('userList'))
-        if (list === null) {
-            list = require('../../../Components/SystemAdminView/UserList/DummyUsers.json')
-            localStorage.setItem('userList', JSON.stringify(list))
-        }
-        return list
-    });
+    const [userList, setUserList] = useState([]);
 
     useEffect(() => {
-        fetchUsers(setUserList);
+        const fetchData = async () => {
+            try {
+                const users = await fetchUsers();
+                console.log(users);
+                setUserList(users);
+            } catch (error) {
+                console.error('Error fetching users:', error);
+            }
+        };
+
+        fetchData();
     }, []);
     
-    // Enables relevant screen to be displayed when the + button is clicked 
     const [manageUserClicked, setManageUserClicked] = useState(false);
     const [componentIndex, setComponentIndex] = useState(null);
     const [addUserMenuClicked, setAddUserMenuClicked] = useState(false);
 
-    // When Manage User is clicked, user management screen is shown, with the details based on the component it is called by
-    // The parameters are the userList array and the index of the component
     const manageUserHandler = (componentIndexParam, userListParam) => {
-        if(!addUserMenuClicked) {
+        if (!addUserMenuClicked) {
             if (!manageUserClicked) {
                 setComponentIndex(componentIndexParam)
                 setUserList(userListParam)
-                }
-                setManageUserClicked(!manageUserClicked)
+            }
+            setManageUserClicked(!manageUserClicked)
         }
-        
     }
 
-    // Toggles the add user menu
     const addUserMenuHandler = () => {
-        if (!manageUserClicked){
+        if (!manageUserClicked) {
             setAddUserMenuClicked(!addUserMenuClicked)
         }
     }
 
-    // Update User List (can't update dummy file from frontend)
-    const removeUserHandler = (componentIndexParam, userListParam) => {
-        userListParam.splice(componentIndexParam, 1)
-        setUserList(userListParam)
-        localStorage.setItem('userList', JSON.stringify(userListParam))
-        setManageUserClicked(!manageUserClicked)
-    }
-
-    // Converts the given data into JSON and adds it to the user list (updates local storage)
     const handleAddUserSubmit = async (firstname, lastname, username, userType, password) => {
-        // Create user object
         const newUser = {
             username: username,
             password: password,
@@ -73,44 +56,67 @@ export default function SystemAdminView() {
             lastname: lastname
         };
 
-        console.log(newUser);
-
-        // Send via post request
         try {
-            const response = await createUser(newUser);
-            console.log("User created successfully:", response);
-            console.log('User created:', newUser);
+            await createUser(newUser);
+
+            const updatedUsers = await fetchUsers();
+            setUserList(updatedUsers);
+            console.log(updatedUsers);
+
         } catch (error) {
-            // oops, something went wrong
             console.error('Error creating user:', error);
         }
 
-        /*var newUserList = [...userList]
-        var newEntry = `{ "firstname":"${firstname}" , "lastname":"${lastname}" , "username":"${username}" , "userType":"${userType}", "password":"${password}" }`
-        var jsonEntry = JSON.parse(newEntry)
-        newUserList.push(jsonEntry)
-        setUserList(newUserList)
-        localStorage.setItem('userList', JSON.stringify(newUserList))*/
         window.location.reload();
         addUserMenuHandler()
     }
 
-    // Changes the userType and password of the user of the given index and updates local storage
-    const handleUpdateUserSubmit = (index, userType, password) => {
-        var newUserList = [...userList]
-        if (userType != null) {
-            newUserList[index].userType = userType
+    const removeUserHandler = async (componentIndexParam, userListParam) => {
+        const deletedUserId = userListParam[componentIndexParam].id;
+
+        try {
+            await deleteUserFromBackend(deletedUserId);
+            const updatedUserList = userListParam.filter((user, index) => index !== componentIndexParam);
+            setUserList(updatedUserList);
+            setManageUserClicked(!manageUserClicked);
+        } catch (error) {
+            console.error('Error removing user:', error);
         }
-        if (password != null) {
-            newUserList[index].password = password
+    };
+
+    const removeAndCreateUser = async (componentIndexParam, userListParam, newUser) => {
+        const deletedUserId = userListParam[componentIndexParam].id;
+
+        try {
+            await deleteUserFromBackend(deletedUserId);
+            await createUser(newUser);
+            const updatedUsers = await fetchUsers();
+            setUserList(updatedUsers);
+        } catch (error) {
+            console.error('Error removing user or creating new user:', error);
+        }
+    };
+
+    const handleUpdateUserSubmit = async (index, userType, password) => {
+        const updatedUserList = [...userList];
+        if (userType !== null) {
+            updatedUserList[index].userType = userType;
+        }
+        if (password !== null) {
+            updatedUserList[index].password = password;
         }
 
-        setUserList(newUserList)
-        localStorage.setItem('userList', JSON.stringify(newUserList))
-        manageUserHandler(index, userList)
-    }
-    
-    return(
+        try {
+            const { firstname, lastname, username, userType, password } = updatedUserList[index];
+            const newUser = { firstname, lastname, username, userType, password };
+            removeAndCreateUser(index, userList, newUser);
+            setUserList(updatedUserList);
+        } catch (error) {
+            console.error('Error updating user:', error);
+        }
+    };
+
+    return (
         <div>
             {/*add user button*/}
             <div id='addUser' onClick={() => addUserMenuHandler(userList)}>
@@ -122,10 +128,12 @@ export default function SystemAdminView() {
                 <AddUser
                 addUserMenuHandler={addUserMenuHandler}
                 handleAddUserSubmit={handleAddUserSubmit}
-            />
+                />
             )}
             {/*users container*/}
-            <UserList userList={userList} manageUserHandler={manageUserHandler}/>
+            {userList && (
+                <UserList userList={userList} manageUserHandler={manageUserHandler} />
+            )}
             {/*only opens manage user menu if add user menu is closed*/}
             {manageUserClicked && 
             !addUserMenuClicked && (
@@ -135,7 +143,7 @@ export default function SystemAdminView() {
                 userList={userList}
                 removeUserHandler={removeUserHandler}
                 handleUpdateUserSubmit={handleUpdateUserSubmit}
-            />
+                />
             )}
         </div>
     );
