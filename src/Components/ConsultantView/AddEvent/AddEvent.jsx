@@ -6,114 +6,48 @@ import { IoClose } from "react-icons/io5";
 
 // Importing useState
 import { useEffect, useState } from 'react';
+import getDate from '../getDate';
 
-import {createEvents} from '../../Data/EventsData';
+export default function AddEvent({componentCaller, addEventHandler, viewedWeek, event}) {
 
-//readd eventDate if it might
-export default function AddEvent({onClose, timesheet}) {
+    /* Only needs to be rendered for Timesheet component caller as its viewedWeek
+    argument will be a Date, compared to Hours' string */
 
-    //Handle closing of add event pop up
-    const [isOpen, setIsOpen] = useState(true);
 
-    const closeMenu = () => {
-        setIsOpen(false);
-        onClose();
-    }
+    // Determinining date for start of week
+    const startDate = getDate(viewedWeek, 1)
+    // Converting into format for minimum date value
+    let startOfWeek = `${startDate[2]}-${startDate[1]}-${startDate[0]}`
 
-    // Handle change in date input
-    const [date, setDate] = useState('');
-    const handleDateChange = (e) => {
-        const selectedDate = e.target.value;
-        // Validate the selected date here
-        if (selectedDate < timesheet.start_date || selectedDate > timesheet.end_date) {
-            e.target.setCustomValidity(`Date must be between ${timesheet.start_date} and ${timesheet.end_date}`);
-        } else {
-            e.target.setCustomValidity('');
-            setDate(selectedDate);
-        }
-    };
+    // Determinining date for end of week
+    const endDate = getDate(viewedWeek, 7)
+    // Converting into format for maximum date value
+    let endOfWeek = `${endDate[2]}-${endDate[1]}-${endDate[0]}`
 
-    //Store events in local storage
+
+    // String all inputs
+    const [eventName, setEventName] = useState(componentCaller === 'Hours1' ? event.name : '')
+    const [eventDate, setEventDate] = useState(componentCaller === 'Hours1' ? event.date : componentCaller === 'Hours' ? viewedWeek : '') // Set default if an event is clicked, otherwise find it
+    const [eventStartTime, setEventStartTime] = useState(componentCaller === 'Hours1' ? event.startTime : '')
+    const [eventEndTime, setEventEndTime] = useState(componentCaller === 'Hours1' ? event.endTime : '')
+    const [eventCategory, setEventCategory] = useState(componentCaller === 'Hours1' ? event.category : '')
+    const [isRecurring, setIsRecurring] = useState(componentCaller === 'Hours1' ? event.recurring : false)
+    const [eventNote, setEventNote] = useState(componentCaller === 'Hours1' ? event.note : '')
     const [events, setEvents] = useState([]);
-    const [eventName, setEventName] = useState('');
-    const [eventDates, setEventDates] = useState('');
-    const [eventStartTime, setEventStartTime] = useState('');
-    const [eventEndTime, setEventEndTime] = useState('');
-    const [eventType, setEventType] = useState("");
-    const [eventCategory, setEventCategory] = useState("");
-    const [isRecurring, setIsRecurring] = useState(false);
-    const [note, setNote] = useState('N/A');
-    const [disableCategory, setDisableCategory] = useState(false);
+    const [eventType, setEventType] = useState(componentCaller === 'Hours1' ? event.type : '')
+    const [disableCategory, setDisableCategory] = useState(componentCaller === 'Hours1' && (eventType !== 'eventTypeNormal' && eventType !== 'eventTypeOvertime') ? true : false)
 
-    // Calculate the duration of the event
-    const calculateDuration = (eventStartTime, eventEndTime) => {
-        // Split the time strings into hours and minutes
-        const [startHour, startMinute] = eventStartTime.split(":").map(Number);
-        const [endHour, endMinute] = eventEndTime.split(":").map(Number);
-
-        // Construct Date objects with a common reference date (e.g., today's date)
-        const startDate = new Date(0, 0, 0, startHour, startMinute); // January 1, 1900
-        const endDate = new Date(0, 0, 0, endHour, endMinute); // January 1, 1900
-
-        // Calculate the difference in milliseconds
-        let differenceMs = endDate - startDate;
-
-        // Convert milliseconds to hours (1 hour = 3600000 milliseconds)
-        const durationHours = differenceMs / 3600000;
-
-        console.log('Duration (hours):', durationHours);
-        return durationHours;
-    }
-
-    const handleAddEvent = async (e) => {
-        e.preventDefault();
-    
-        // Construct event object
-        const startTime = new Date(`${eventDates}T${eventStartTime}`).toLocaleTimeString('en-US', { hour12: false });
-        const endTime = new Date(`${eventDates}T${eventEndTime}`).toLocaleTimeString('en-US', { hour12: false });
-
-        // Convert the difference to hours
-        const duration = calculateDuration(eventStartTime, eventEndTime);
-        console.log('Duration:', duration);
-
-        const newEvent = {
-            date: eventDates,
-            start_time: startTime,
-            end_time: endTime,
-            duration: duration,
-            name: eventName,
-            type: eventType,
-            category: eventCategory,
-            is_recurring: isRecurring,
-            note: note,
-            timesheet: timesheet.id
-        };
-
-        try {
-            // Call createEvents function to send data to the database
-            const response = await createEvents(timesheet.id, [newEvent]); // Assuming timesheet has an id field
-            // console.log('Event created successfully:', response);
-            // console.log('New event:', newEvent);
-            // console.log(timesheet.id);
-    
-            // Close the AddEvent component
-            closeMenu();
-        } catch (error) {
-            console.error('Error creating event:', error);
-    
-            // Handle error appropriately (e.g., show error message to the user)
+    // Ensuring empty string is not entered
+    const validateEventName = (event) =>  {
+        const eventName = event.target.value.trim(); 
+        if (eventName.trim() == "") {
+            // setEventName('')
+            event.target.setCustomValidity('Enter an event name');
+        } else {
+            // If value is valid, clear any existing error message and update value
+            event.target.setCustomValidity('');
+            setEventName(eventName)
         }
-
-        // Close the AddEvent component
-        closeMenu();
-        window.location.reload(); // Reload screen to update events
-    }
-
-    const validateFields = () => {
-        if (!eventName.trim() || !eventDates || !eventStartTime || !eventEndTime || !eventType || !eventCategory) {
-            return false;
-        }
-        return true;
     }
 
     /* Used to determining whether Category input is disabled - no need to enter category if a worker is sick */
@@ -121,119 +55,200 @@ export default function AddEvent({onClose, timesheet}) {
         setEventType(event.target.value)
 
         // Disabling category input
-        if ((event.target.value === "Sick") || (event.target.value === "Holiday")){
-            setEventCategory("None")
+        if ((event.target.value !== "eventTypeNormal") && (event.target.value !== "eventTypeOvertime")) {
+            setEventCategory('')
             setDisableCategory(true)
         } else {
             setDisableCategory(false)
         }
     }
 
-    return(
-        isOpen && (
-            <div className='add-event'>
-                <button className = "close-event" onClick={closeMenu}><IoClose /></button>
-                <h1 className='log-event-heading'>Log Event</h1>
-                {/* Creating a form that represents the Consultant logging an event */}
-                <form action="" className = "add-new-event">
+    // Retrieve start and end time from local storage
+    let startWorkHours = parseInt(localStorage.getItem('startWorkHours').slice(0,2))
+    let startWorkMins = parseInt(localStorage.getItem('startWorkHours').slice(3,5))
+    let endWorkHours = parseInt(localStorage.getItem('endWorkHours').slice(0,2))
+    let endWorkMins = parseInt(localStorage.getItem('endWorkHours').slice(3,5))
 
-                    {/* Show dropdown menu for recurring event upon selection */}
-                    <div className='input'>
-                        <label>Select Event</label>
-                        <select defaultValue={''}>
-                            <option value="" disabled hidden>Select Event</option> {/* Default value */}
-                        </select>
-                    </div>
+    // Providing whole day as time slots if working hours extend across multiple days
+    if (localStorage.getItem('24HoursWorked') === "true" || startWorkHours > endWorkHours || startWorkHours === endWorkHours && startWorkMins > endWorkMins) {
+        startWorkHours = 0
+        endWorkHours = 23
+    }
+
+    // No need to show hour block for hour that ends
+    if (endWorkMins == 0) {
+        endWorkHours-=1
+    }
+    
+    const validateStartTime = (event) =>  {
+        const startTime = event.target.value; 
+        setEventStartTime(startTime)
+ 
+        // Only perform comparison when both have values 
+        if (startTime !== '') {
+            const startTimeHours = parseInt(startTime.slice(0,2)); 
+            const startTimeMins = parseInt(startTime.slice(3,5)); 
+            if (startTimeHours < startWorkHours  || startTimeHours > endWorkHours) {
+                event.target.setCustomValidity('Start time must be within working hours');
+                return
+            }
+            if (eventEndTime !== '') {
+                const endTimeHours = parseInt(eventEndTime.slice(0,2)); 
+                const endTimeMins = parseInt(eventEndTime.slice(3,5)); 
+                if (localStorage.getItem('24HoursWorked') === 'false') {
+                    // Ensuring start time is not after end time
+                   
+                    if (startTimeHours === endTimeHours) {
+                        if (startTimeMins > endTimeMins) {
+                            event.target.setCustomValidity('Start time must not exceed end time');
+                            return
+                        } 
+                    } else if (startTimeHours > endTimeHours) {
+                        event.target.setCustomValidity('Start time must not exceed end time');
+                        return
+                    }
+                } 
+            }
+        }
+        // Erase error messages
+        event.target.setCustomValidity('');
+    }
+
+    const validateEndTime = (event) =>  {
+        const endTime = event.target.value; 
+        setEventEndTime(endTime)
+ 
+        // Only perform comparison when both have values 
+        if (endTime !== '') {
+            const endTimeHours = parseInt(endTime.slice(0,2)); 
+            const endTimeMins = parseInt(endTime.slice(3,5)); 
             
+            if (endTimeHours > endWorkHours || endTimeHours < startWorkHours) {
+                event.target.setCustomValidity('End time must be within working hours');
+                return
+            }
+            if (eventStartTime !== '') {
+                const startTimeHours = parseInt(eventStartTime.slice(0,2)); 
+                const startTimeMins = parseInt(eventStartTime.slice(3,5));
+                if (localStorage.getItem('24HoursWorked') === 'false') {
+                    // Ensuring end time is not before start time
+                    if (startTimeHours === endTimeHours) {
+                        if (startTimeMins > endTimeMins) {
+                            event.target.setCustomValidity('Start time must not exceed end time');
+                            return
+                        } 
+                    } else if (startTimeHours > endTimeHours) {
+                        event.target.setCustomValidity('Start time must not exceed end time');
+                        return
+                    }
+                } 
+            }
+        }
+        event.target.setCustomValidity('');
+    }
 
-                    <div className="input event-name">
-                        <label htmlFor="eventName">Name</label>
-                        <input type="text" name = "eventName" required onChange={(e) => setEventName(e.target.value)}/>
-                    </div>
+    const [concurrentEvent, setConcurrentEvent] = useState(false)
 
-                    <div className="input">
-                        <label htmlFor="eventDate">Date</label>
-                            {/* // Limiting days to choose from as days in current week */}
-                            <input className = 'datetime' type="date" name = "eventDate" value={eventDates} onChange={(e) => setEventDates(e.target.value)} required min={timesheet.start_date} max={timesheet.end_date}/>
-                    </div>
+    /* Add Event Validation: Iterate through all events and check:
+    - start and end time dont match that of existing events
+    - start and end time are not between that of an existing event
+    - start time not before event and end time within event
+    logic must hold for events that span over 2 days, or just 1 
+    (i think i had some code for it but it seems to have disappeared)
+    -  */
 
-                    <div className="input">
-                        <label htmlFor="eventStartTime">Start Time</label>
-                        <input type="time" className='datetime' name = "eventStartTime" required  onChange={(e) => setEventStartTime(e.target.value)}/>
-                    </div>
+    return(
+        <div className='add-event'>
+            <button className = "close-event" onClick={addEventHandler}><IoClose /></button>
+            <h1 className='log-event-heading'>Log Event</h1>
+            {/* Creating a form that represents the Consultant logging an event */}
+            <form action="" className = "add-new-event">
 
-                    <div className="input">
-                        <label htmlFor="eventEndTime">End Time</label>
-                        <input className='datetime' type="time" name = "eventEndTime" required onChange={(e) => setEventEndTime(e.target.value)}/>
-                    </div>
+                {/* Show dropdown menu for recurring event upon selection */}
+                {componentCaller !== 'Hours1' && 
+                
+                <div className='input'>
+                    <label>Select Event</label>
+                    <select defaultValue={''}>
+                        <option value="" disabled hidden>Select Event</option> {/* Default value */}
+                    </select>
+                </div>
+                }
 
-                    <div className="input">
-                        <label htmlFor="eventType">Type</label>
-                        <select name="eventType" required onChange={(e) => handleEventType(e)} value={eventType}>
-                            <option value="" disabled hidden>Type</option> {/* Default value */}
-                            <option value="Normal">Normal</option>
-                            <option value="Overtime">Overtime</option>
-                            <option value="Holiday">Holiday</option>
-                            <option value="Sick">Sick</option>
-                        </select>
-                    </div>
+                <div className="input event-name">
+                    <label htmlFor="eventName">Name</label>
+                    <input type="text" name = "eventName" required onChange={validateEventName}
+                    defaultValue={eventName}/>
+                </div>
 
-                    {/* No need to show category if work is not Normal or Overtime e.g. if Consultants are sick */}
-                    <div className="input">
-                        <label htmlFor="eventCategory">Category</label>
-                        <select name="eventCategory" value={eventCategory} required onChange={(e) => setEventCategory(e.target.value)}>
-                            <option value="" disabled hidden>Category</option> {/* Default value */}
-                            {!disableCategory ? (
-                                <>
-                                    <option value="Project">Project</option>
-                                    <option value="Planning">Planning</option>
-                                    <option value="Meeting">Meeting</option>
-                                </>
-                            ) : (
-                                <option value="None" selected>None</option>
-                            )}
-                        </select>
-                    </div>
+                <div className="input">
+                    <label htmlFor="eventDate">Date</label>
+                        {/* // Limiting days to choose from as days in current week */}
+                        <input className = 'datetime' type="date" name = "eventDate" defaultValue = {viewedWeek} min={startOfWeek} max={endOfWeek} onChange={(event) => setEventDate(event.target.value)} required/>
+                </div>
 
+                <div className="input">
+                    <label htmlFor="eventStartTime">Start Time</label>
+                    <input type="time" className='datetime' name = "eventStartTime" required onChange={validateStartTime}
+                    defaultValue={eventStartTime}/>
+                </div>
 
-                    <div className="input checkbox-container">
-                        <label htmlFor="isRecurring" className='checkbox-label'>Recurring </label>
-                        {/* <input  type="checkbox" onChange={(e) => setIsRecurring(e.target.value)}/> */}
-                        <input className = {`is-recurring ${isRecurring ? 'recur' : ''}`} type="checkbox" onChange={() => setIsRecurring(!isRecurring)}
-                        defaultValue={isRecurring}/>
-                    </div>
+                <div className="input">
+                    <label htmlFor="eventEndTime">End Time</label>
+                    <input className='datetime' type="time" name = "eventEndTime" required onChange={validateEndTime}
+                    defaultValue={eventEndTime}/>
+                </div>
 
-                    <div className='note-container'>
-                        <label htmlFor="note"> Note </label>
-                        <textarea name="note" cols="30" rows="5" placeholder='Enter text'>
-                        </textarea>
-                    </div>
+                <div className="input">
+                    <label htmlFor="eventType">Type</label>
+                    <select name="eventType" onChange={handleEventType} required
+                    value={eventType}>
+                        <option value="" disabled hidden>Type</option> {/* Default value */}
+                        <option value="eventTypeNormal">Normal</option>
+                        <option value="eventTypeOvertime">Overtime</option>
+                        <option value="eventTypeHoliday">Holiday</option>
+                        <option value="eventTypeSick">Sick</option>
+                    </select>
+                </div>
 
+                {/* No need to show category if work is not Normal or Overtime e.g. if Consultants are sick */}
+                <div className="input">
+                    <label htmlFor="eventCategory">Category</label>
+                    <select name="eventCategory" required onChange = {(event) => setEventCategory(event.target.value)} disabled = {disableCategory}
+                    value={eventCategory}>
+                        <option value="" disabled hidden>Category</option> {/* Default value */}
+                        <option value="Project">Project</option>
+                        <option value="eventCategoryPlanning">Planning</option>
+                        <option value="eventCategoryMeeting">Meeting</option>
+                    </select>
+                </div>
 
-                    {/* <div className='input'
-                    <input type="submit" value={"Add Event"} className='add-event-button'/> 
+                <div className="input checkbox-container">
+                    <label htmlFor="isRecurring" className='checkbox-label'>Recurring </label>
+                    <input className = {`is-recurring ${isRecurring ? 'recur' : ''}`} type="checkbox" onChange={() => setIsRecurring(!isRecurring)}
+                    defaultValue={isRecurring}/>
+                </div>
 
-                    {/* <p className='concur-error'>Event is Overlapping</p> */}
-                    {/* {componentCaller === 'Hours1' ? (
-                    <input type="submit" value={"Edit Event"} className='add-event-button'/> 
-                    )
-                    : (
-                    <input type="submit" value={"Add Event"} className='add-event-button'/> ) } */}
-                    {/* CHANGE THIS SO IF EVENT ALREADY EXISTS THEN IT'S EDIT IF NOT IT'S ADD */}
-                    {/* {timesheet.eventId ? (
-                        <input type="submit" value={"Edit Event"} className='add-event-button'/>
-                    ) : ( */}
-                    <input type="submit" value={"Add Event"} onClick={(event) => {
-                        // Check if all fields are filled in
-                        if (validateFields()) {
-                            handleAddEvent(event);
-                        } else {
-                            alert('Please fill in all fields.');
-                        }
-                     }}  className='add-event-button'/>
-                    
-                </form>
-            </div>
-        )
+                <div className='note-container'>
+                    <label htmlFor="note"> Note </label>
+                    <textarea name="note" cols="30" rows="5" placeholder='Enter text' onChange = {(event) => setEventNote(event.target.value.trim())}
+                    defaultValue={eventNote}>
+                    </textarea>
+                </div>
+                
+                <div>
+                    {/* Pass setEvents as a prop to AddEvent component */}
+                    <AddEvent setEvents={setEvents} />
+                </div>
+
+                {concurrentEvent && 
+                <p className='concur-error'>Event is Overlapping</p>}
+                {componentCaller === 'Hours1' ? (
+                <input type="submit" value={"Edit Event"} className='add-event-button'/> 
+                )
+                : (
+                <input type="submit" value={"Add Event"} className='add-event-button'/> ) }
+            </form>
+        </div>
     )
 }

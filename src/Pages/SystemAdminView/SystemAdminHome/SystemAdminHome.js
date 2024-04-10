@@ -1,13 +1,14 @@
 // Importing CSS
-import '../Components/SystemAdminView/SystemAdminView.css';
+import './SystemAdminHome.css';
 
 // Import Components
+import UserList from '../../../Components/SystemAdminView/UserList/UserList';
+import AddUser from '../../../Components/SystemAdminView/AddUser/AddUser';
+import ManageUser from '../../../Components/SystemAdminView/Manage User/ManageUser'
 
 // Import useState
 import { useState } from 'react'
-import UserList from '../Components/SystemAdminView/UserList/UserList';
-import AddUser from '../Components/SystemAdminView/AddUser/AddUser';
-import ManageUser from '../Components/SystemAdminView/Manage User/ManageUser'
+
 
 
 export default function SystemAdminView() {
@@ -17,7 +18,7 @@ export default function SystemAdminView() {
     const [userList, setUserList] = useState(() => {
         let list = JSON.parse(localStorage.getItem('userList'))
         if (list === null) {
-            list = require('../Components/SystemAdminView/UserList/DummyUsers.json')
+            list = require('../../../Components/SystemAdminView/UserList/DummyUsers.json')
             localStorage.setItem('userList', JSON.stringify(list))
         }
         return list
@@ -52,13 +53,14 @@ export default function SystemAdminView() {
     const removeUserHandler = (componentIndexParam, userListParam) => {
         userListParam.splice(componentIndexParam, 1)
         setUserList(userListParam)
+        localStorage.setItem('userList', JSON.stringify(userListParam))
         setManageUserClicked(!manageUserClicked)
     }
 
     // Converts the given data into JSON and adds it to the user list (updates local storage)
-    const handleAddUserSubmit = (name, username, userType) => {
+    const handleAddUserSubmit = (firstname, lastname, username, userType, password) => {
         var newUserList = [...userList]
-        var newEntry = `{ "name":"${name}" , "username":"${username}" , "userType":"${userType}" }`
+        var newEntry = `{ "firstname":"${firstname}" , "lastname":"${lastname}" , "username":"${username}" , "userType":"${userType}", "password":"${password}" }`
         var jsonEntry = JSON.parse(newEntry)
         newUserList.push(jsonEntry)
         setUserList(newUserList)

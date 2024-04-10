@@ -40,3 +40,8 @@ class NotificationSerializer(serializers.ModelSerializer):
         model = Notification
         fields = '__all__'
                     
+
+class SystemUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SystemUser
+        fields = ['username', 'password']  # Only expose necessary fields
