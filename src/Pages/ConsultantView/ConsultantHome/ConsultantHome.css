@@ -84,6 +84,11 @@
   border-radius: 1.5rem;
   background-color: #a7d900;
   color: #1e1e1e;
+  height: 3rem;
+  width: 15rem;
+  padding: 0.5rem;
+  font-weight: 600;
+  font-size: 1.15rem;
 }
 
 .create-button:hover {
