@@ -16,47 +16,6 @@ export const fetchEventsByTimesheetID = async (timesheetID) => {
   }
 };
 
-// //Create events
-// export const createEvents = async (timesheetID) => {
-//   const dummyEvents = [
-//     {
-//       date: "2024-04-09",
-//       start_time: "09:00:00",
-//       end_time: "11:00:00",
-//       duration: 2.0,
-//       name: "Dummy Event 1",
-//       type: "Normal",
-//       category: "Planning",
-//       is_recurring: false,
-//       note: "Dummy event for testing",
-//     },
-//     {
-//       date: "2024-04-10",
-//       start_time: "14:00:00",
-//       end_time: "16:00:00",
-//       duration: 2.0,
-//       name: "Dummy Event 2",
-//       type: "Normal",
-//       category: "Meeting",
-//       is_recurring: false,
-//       note: "Dummy event for testing",
-//     },
-//   ];
-
-//   let url = 'http://localhost:8000/event/';
-
-//   if (timesheetID) {
-//     url += `?timesheet=${timesheetID}`;
-//   }
-
-//   try {
-//     const response = await Axios.post(url, dummyEvents);
-//     return response.data;
-//   } catch (error) {
-//     console.error('Error creating events:', error);
-//   }
-// };
-
 export const createEvents = async (timesheetID, eventData) => { // Accept event data as parameter
   let url = 'http://localhost:8000/event';
 
