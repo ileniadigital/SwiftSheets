@@ -4,6 +4,7 @@ import './Timesheet.css';
 // Importing Components
 import EventGrid from '../../../Components/ConsultantView/EventGrid/EventGrid';
 import AddEvent from '../../../Components/ConsultantView/AddEvent/AddEvent';
+import EditEvent from '../../../Components/ConsultantView/EditEvent/EditEvent';
 import NoWorkingDaysError from '../../../Components/ConsultantView/NoWorkingDaysError/NoWorkingDaysError'
 
 // Importing icons
@@ -136,9 +137,18 @@ export default function Timesheet() {
         setIsAddEventOpen(false);
     };
 
-     // Function to open the AddEvent popup
     const openAddEvent = () => {
         setIsAddEventOpen(true);
+    };
+
+    // Function to open the EditEvent popup
+    const [isEditEventOpen, setIsEditEventOpen] = useState(false);
+    const closeEditEvent = () => {
+        setIsEditEventOpen(false);
+    };
+
+    const openEditEvent = () => {
+        setIsEditEventOpen(true);
     };
 
     // Enables relevant screen to be displayed when the + button is clicked 
@@ -259,7 +269,13 @@ export default function Timesheet() {
             {/* Shows add event screen, with the arguments based on the component that called the method 
                 Only allows logging events if timesheet has not been submitted */}
             <div className='timesheet-container'>
-                <EventGrid events={events} openAddEvent={openAddEvent} timesheetStatus={timesheetStatus} className='eventgrid'/>
+                <EventGrid events={events} openAddEvent={openAddEvent} openEditEvent={openEditEvent} timesheetStatus={timesheetStatus} className='eventgrid'/>
+                {isEditEventOpen &&(
+                    <div className='add-event-menu'>
+                        <EditEvent onClose={closeEditEvent} events={events} timesheet={timesheet} />
+                    </div>
+                
+                )}
                 {isAddEventOpen && (
                     <div className='add-event-menu'>
                     <AddEvent onClose={closeAddEvent} timesheet={timesheet} />

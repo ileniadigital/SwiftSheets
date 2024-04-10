@@ -44,10 +44,10 @@ const ResetPassword = () => {
     return (
         <div className="reset-container">
             {message && <div className="success-message">{message}</div>}
-            <div className="reset-box">
+            <div>
                 <h1 className='welcome-text'>Reset Password</h1>
                 {error && <div className="error-message">{error}</div>}
-                <div>
+                <div className='reset-box'>
                     <input 
                         type="email" 
                         placeholder="Username" 

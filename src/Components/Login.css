@@ -94,7 +94,6 @@ body {
 .reset-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   background-color: #1e1e1e;
   box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.1);
@@ -102,6 +101,12 @@ body {
   padding: 3rem;
   width: 50rem;
   border-radius: 1.5rem;
-  margin-left: 10rem;
+  margin-left: 20rem;
   margin-top: 5rem;
+}
+
+.reset-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }

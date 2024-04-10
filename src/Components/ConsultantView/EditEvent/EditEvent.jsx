@@ -1,16 +1,16 @@
 // Importing CSS
-import './AddEvent.css';
+import './EditEvent.css';
 
 // Importing icon
 import { IoClose } from "react-icons/io5";
 
-// Importing useState
-import { useEffect, useState } from 'react';
+// Importing useState and useEffect
+import { useState, useEffect } from 'react';
 
-import {createEvents} from '../../Data/EventsData';
+// Importing createEvents function
+import { createEvents } from '../../Data/EventsData';
 
-//readd eventDate if it might
-export default function AddEvent({onClose, timesheet}) {
+export default function EditEvent({ onClose, events, eventIDToEdit, timesheet }) {
 
     //Handle closing of add event pop up
     const [isOpen, setIsOpen] = useState(true);
@@ -20,29 +20,35 @@ export default function AddEvent({onClose, timesheet}) {
         onClose();
     }
 
-    // Handle change in date input
-    const [date, setDate] = useState('');
-    const handleDateChange = (e) => {
-        const selectedDate = e.target.value;
-        // Validate the selected date here
-        if (selectedDate < timesheet.start_date || selectedDate > timesheet.end_date) {
-            e.target.setCustomValidity(`Date must be between ${timesheet.start_date} and ${timesheet.end_date}`);
-        } else {
-            e.target.setCustomValidity('');
-            setDate(selectedDate);
-        }
-    };
-
-    //Event values
+    // Event values state
     const [eventName, setEventName] = useState('');
     const [eventDates, setEventDates] = useState('');
     const [eventStartTime, setEventStartTime] = useState('');
     const [eventEndTime, setEventEndTime] = useState('');
-    const [eventType, setEventType] = useState("");
-    const [eventCategory, setEventCategory] = useState("");
+    const [eventType, setEventType] = useState('');
+    const [eventCategory, setEventCategory] = useState('');
     const [isRecurring, setIsRecurring] = useState(false);
     const [note, setNote] = useState('N/A');
     const [disableCategory, setDisableCategory] = useState(false);
+    const [timesheetID, setTimesheetID] = useState(null); // Assuming timesheet has an id field
+
+    // Function to find the event with the specified eventId
+    useEffect(() => {
+        const eventToEdit = events.find(event => event.id === eventIDToEdit);
+        if (eventToEdit) {
+            setEventName(eventToEdit.name);
+            setEventDates(eventToEdit.date);
+            setEventStartTime(eventToEdit.start_time);
+            setEventEndTime(eventToEdit.end_time);
+            setEventType(eventToEdit.type);
+            setEventCategory(eventToEdit.category);
+            setIsRecurring(eventToEdit.is_recurring);
+            setNote(eventToEdit.note);
+            setTimesheetID(eventToEdit.timesheet); // Update timesheetID
+        }
+    }, [events, eventIDToEdit]);
+
+    console.log('Event to edit:', eventName);
 
     // Calculate the duration of the event
     const calculateDuration = (eventStartTime, eventEndTime) => {
@@ -64,9 +70,9 @@ export default function AddEvent({onClose, timesheet}) {
         return durationHours;
     }
 
-    const handleAddEvent = async (e) => {
+    const handleEditEvent = async (e) => {
         e.preventDefault();
-    
+
         // Construct event object
         const startTime = new Date(`${eventDates}T${eventStartTime}`).toLocaleTimeString('en-US', { hour12: false });
         const endTime = new Date(`${eventDates}T${eventEndTime}`).toLocaleTimeString('en-US', { hour12: false });
@@ -75,7 +81,8 @@ export default function AddEvent({onClose, timesheet}) {
         const duration = calculateDuration(eventStartTime, eventEndTime);
         console.log('Duration:', duration);
 
-        const newEvent = {
+        const editedEvent = {
+            id: eventIDToEdit,
             date: eventDates,
             start_time: startTime,
             end_time: endTime,
@@ -85,25 +92,18 @@ export default function AddEvent({onClose, timesheet}) {
             category: eventCategory,
             is_recurring: isRecurring,
             note: note,
-            timesheet: timesheet.id
+            timesheet: timesheetID
         };
 
         try {
             // Call createEvents function to send data to the database
-            const response = await createEvents(timesheet.id, [newEvent]); // Assuming timesheet has an id field
-            // console.log('Event created successfully:', response);
-            // console.log('New event:', newEvent);
-            // console.log(timesheet.id);
-    
-            // Close the AddEvent component
+            const response = await createEvents(timesheetID, [editedEvent]);
+            console.log('Event edited successfully:', response);
             closeMenu();
+            window.location.reload(); // Reload screen to update events
         } catch (error) {
-            console.error('Error creating event:', error);
+            console.error('Error editing event:', error);
         }
-
-        // Close the AddEvent component
-        closeMenu();
-        window.location.reload(); // Reload screen to update events
     }
 
     const validateFields = () => {
@@ -118,7 +118,7 @@ export default function AddEvent({onClose, timesheet}) {
         setEventType(event.target.value)
 
         // Disabling category input
-        if ((event.target.value === "Sick") || (event.target.value === "Holiday")){
+        if ((event.target.value === "Sick") || (event.target.value === "Holiday")) {
             setEventCategory("None")
             setDisableCategory(true)
         } else {
@@ -202,28 +202,15 @@ export default function AddEvent({onClose, timesheet}) {
 
                     <div className='note-container'>
                         <label htmlFor="note"> Note </label>
-                        <textarea name="note" cols="30" rows="5" placeholder='Enter text'>
+                        <textarea name="note" cols="30" rows="5" placeholder='Enter text' value={note} onChange={(e) => setNote(e.target.value)}>
                         </textarea>
                     </div>
 
 
-                    {/* <div className='input'
-                    <input type="submit" value={"Add Event"} className='add-event-button'/> 
-
-                    {/* <p className='concur-error'>Event is Overlapping</p> */}
-                    {/* {componentCaller === 'Hours1' ? (
-                    <input type="submit" value={"Edit Event"} className='add-event-button'/> 
-                    )
-                    : (
-                    <input type="submit" value={"Add Event"} className='add-event-button'/> ) } */}
-                    {/* CHANGE THIS SO IF EVENT ALREADY EXISTS THEN IT'S EDIT IF NOT IT'S ADD */}
-                    {/* {timesheet.eventId ? (
-                        <input type="submit" value={"Edit Event"} className='add-event-button'/>
-                    ) : ( */}
-                    <input type="submit" value={"Add Event"} onClick={(event) => {
+                    <input type="submit" value={"Edit Event"} onClick={(event) => {
                         // Check if all fields are filled in
                         if (validateFields()) {
-                            handleAddEvent(event);
+                            handleEditEvent(event);
                         } else {
                             alert('Please fill in all fields.');
                         }
