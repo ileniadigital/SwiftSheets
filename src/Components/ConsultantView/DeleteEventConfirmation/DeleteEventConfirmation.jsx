@@ -18,7 +18,7 @@ export default function DeleteEventConfirmation({event, setOpenPopup}) {
         // localStorage.setItem('recurringEvents', JSON.stringify(newEvents))
 
         setOpenPopup(false)
-        window.location.reload(); // Reload screen to update events
+        // window.location.reload(); // Reload screen to update events
     }
 
     return (

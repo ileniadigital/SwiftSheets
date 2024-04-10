@@ -175,7 +175,7 @@ export default function Timesheet() {
             // Update the timesheet status in the UI immediately
             setTimesheetStatus('Submitted');
             // Redirect consultant to home page
-            // navigate('/');
+            navigate('/Home');
         })
         .catch(error => {
             console.error('Error revoking submission:', error);
