@@ -10,6 +10,7 @@ import Dashboard from './Pages/ConsultantView/ConsultantDashboard/ConsultantDash
 import LogOut from './Components/NavBar/LogOut';
 import Login from './Pages/Login';
 import Form from './Pages/Form';
+import ResetPassword from './Pages/ResetPassword';
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'; 
 
@@ -43,6 +44,7 @@ export default function App() {
           <Route path="/timesheet/:timesheetId" element={<Timesheet />} />
           <Route path="/SystemAdminForm" element={<SystemAdminForm />} />
           <Route path="/Form" element={<Form/>} />
+          <Route path="/ResetPassword" element={<ResetPassword />} />
         </Routes>
       </BrowserRouter>
     </React.Fragment>

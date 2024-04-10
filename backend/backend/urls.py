@@ -18,7 +18,7 @@ from django.contrib import admin # type: ignore
 from django.urls import path, include # type: ignore
 # from backend.myapp import views
 from myapp import views  # Adjust the import path
-from myapp.views import SystemUserViewSet, TimesheetViewSet, EventViewset, CommentViewSet, NotificationViewSet, TimesheetEventView, UserTimesheetView, login, update_password
+from myapp.views import SystemUserViewSet, TimesheetViewSet, EventViewset, CommentViewSet, NotificationViewSet, TimesheetEventView, UserTimesheetView, login, update_password, change_password
 from rest_framework_simplejwt.views import TokenObtainPairView,  TokenRefreshView # type: ignore
 from rest_framework.routers import DefaultRouter# type: ignore
 from django.urls import reverse# type: ignore
@@ -32,6 +32,7 @@ urlpatterns = [
     path('login/', login, name='login'),
     path('event/<int:pk>/', views.EventViewset.as_view({'delete': 'destroy'}), name='event-delete'),
     path('update_password/', update_password, name='update_password'),
+    path('change_password/', change_password, name='change_password'),
 ]
 
 router = DefaultRouter()
