@@ -11,8 +11,15 @@ export default function Form() {
 
 
     // Handles submission of form
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
         // Add values to database: formType, subject, text
+        e.preventDefault();
+
+        // Perform validation
+        if (!formType || !subject || !text) {
+            alert('Please fill in all fields');
+            return;
+        }
 
         // Adding to local storage temporarily
         if (!localStorage.getItem("forms")) {
@@ -59,7 +66,7 @@ export default function Form() {
                     <label>Message</label>
                     <textarea cols="30" rows="10" placeholder='Enter Text Here' required onChange={(event) => setText(event.target.value)}></textarea>
                 </div>
-                <button onClick={handleSubmit}>Submit</button>
+                <button onClick={(e) => handleSubmit(e)}>Submit</button>
             </form>
         </div>
     )
