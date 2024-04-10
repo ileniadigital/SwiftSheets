@@ -13,12 +13,14 @@ const ResetPassword = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setError('');
+    setMessage('');
+
     if (!/\S+@\S+\.\S+/.test(email)) {
       setError('Please enter a valid email address.');
-      return;
+    } else {
+      setMessage('A link to reset your password has been sent to your email.');
+      setEmail('');
     }
-    // Email sending goes here
-    setMessage('A link to reset your password has been sent to your email.');
   };
 
   return (
