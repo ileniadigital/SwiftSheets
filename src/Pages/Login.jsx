@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
+import '../Components/Login.css'; // Import Styling 
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -56,11 +57,12 @@ function Login() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input type="name" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" />
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
-        <button type="submit">Login</button>
+    <div className='container'>
+      <form onSubmit={handleSubmit} className='login-container'>
+        <input className='email-input' type="name" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" />
+        <input className='password-input'type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
+        <Link to="/ResetPassword" className='forgot-password'>Forgot Password?</Link>
+        <button className='login-button' type="submit">Login</button>
       </form>
     </div>
   );
