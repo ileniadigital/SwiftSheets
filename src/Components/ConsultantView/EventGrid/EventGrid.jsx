@@ -1,9 +1,11 @@
 import React from 'react';
+import { useState } from 'react';
 import './EventGrid.css'; //Import Styling
 
 // Importing icon
 import { IoClose } from "react-icons/io5";
 import { FaCirclePlus } from "react-icons/fa6";
+
 import DeleteEventConfirmation from '../DeleteEventConfirmation/DeleteEventConfirmation';
 
 const EventGrid = ({ events, openAddEvent, timesheetStatus }) => {
@@ -41,8 +43,9 @@ const EventGrid = ({ events, openAddEvent, timesheetStatus }) => {
 
 
   //Open Delete Event Menu
+  const [deleteEventConfirmation, setDeleteEventConfirmation] = useState(false);
   const deleteEvent = (event) => {
-    <DeleteEventConfirmation/>
+    setDeleteEventConfirmation(event);
   }
 
   return (
@@ -74,13 +77,15 @@ const EventGrid = ({ events, openAddEvent, timesheetStatus }) => {
 
             {events.filter(event => new Date(event.date).getDay() === (dayIndex + 1) % 7).map(event => (
               <div key={event.id} className="event-block" style={calculateEventBlockStyle(event, dayIndex)}>
-                {/* Event content */}
-                <button className ="delete-event" onClick={deleteEvent}><IoClose/></button>
+                {/* Delete Pop up */}
+                <button className ="delete-event"  onClick={() => deleteEvent(event)}><IoClose/></button>
               </div>
             ))}
           </div>
         ))}
       </div>
+       {/* Render delete event confirmation pop-up if deleteEventPopup is not null */}
+       {deleteEventConfirmation && <DeleteEventConfirmation event={deleteEventConfirmation} setOpenPopup={setDeleteEventConfirmation} />}
     </div>
   );
 };
