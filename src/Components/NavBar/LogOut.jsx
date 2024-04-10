@@ -1,5 +1,6 @@
-// LogOut.js
 import React from 'react';
+
+import './NavBar.css'; // Import Styling
 
 const LogOut = () => {
 
@@ -14,7 +15,7 @@ const LogOut = () => {
   };
 
   return (
-    <div className='name-container'>
+    <div className='log-out'>
       <button onClick={clearData}>Log out</button>
     </div>
   );

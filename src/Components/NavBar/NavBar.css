@@ -100,3 +100,21 @@ select {
   color: #1e1e1e;
   font-size: 1.25rem;
 }
+
+/* Styling for log out button */
+.log-out button {
+  background-color: #1e1e1e;
+  color: #f7f6f5;
+  border-radius: 1.5rem;
+  height: 2.5rem;
+  width: 7rem;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-right: 1rem;
+}
+
+.log-out button:hover {
+  background-color: #a7d900;
+  color: #1e1e1e;
+  border: none;
+}
