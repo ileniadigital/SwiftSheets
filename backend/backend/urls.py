@@ -18,7 +18,7 @@ from django.contrib import admin # type: ignore
 from django.urls import path, include # type: ignore
 # from backend.myapp import views
 from myapp import views  # Adjust the import path
-from myapp.views import SystemUserViewSet, TimesheetViewSet, EventViewset, CommentViewSet, NotificationViewSet, TimesheetEventView, UserTimesheetView, login
+from myapp.views import SystemUserViewSet, TimesheetViewSet, EventViewset, CommentViewSet, NotificationViewSet, TimesheetEventView, UserTimesheetView, login, update_password
 from rest_framework_simplejwt.views import TokenObtainPairView,  TokenRefreshView # type: ignore
 from rest_framework.routers import DefaultRouter# type: ignore
 from django.urls import reverse# type: ignore
@@ -30,6 +30,8 @@ urlpatterns = [
     path('myapp/timesheet-events/', views.TimesheetEventView.as_view(), name='timesheet_events'),
     path('myapp/user-timesheets/', UserTimesheetView.as_view(), name='user_timesheets'),
     path('login/', login, name='login'),
+    path('update_password/', update_password, name='update_password'),
+
 ]
 
 router = DefaultRouter()
