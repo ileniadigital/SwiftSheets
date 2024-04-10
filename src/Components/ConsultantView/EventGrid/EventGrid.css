@@ -10,12 +10,14 @@
 
 .grid-header {
   display: flex;
+  margin-left: 5rem;
 }
 
 .grid-column-header {
-  flex: 1;
+  flex: 2;
   text-align: center;
   border-bottom: 0.2rem solid #1e1e1e;
+  font-weight: bold;
 }
 
 .grid-body {
@@ -35,11 +37,15 @@
 
 /* Styling for each hour slot */
 .time-slot {
-  box-sizing: border-box;
   height: 3.2rem;
   border-bottom: 0.2rem solid #1e1e1e;
+  border-right: 0.2rem solid #1e1e1e;
   position: relative;
+  display: flex;
   text-align: center;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
 }
 
 /* Styling for each event */

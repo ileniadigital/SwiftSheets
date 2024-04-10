@@ -39,12 +39,14 @@ const EventGrid = ({ events, openAddEvent, timesheetStatus }) => {
   return (
     <div className="event-grid">
       <div className="grid-header">
+        {/* Display the days */}
         {days.map(day => (
           <div key={day} className="grid-column-header">{day}</div>
         ))}
       </div>
       <div className="grid-body">
         <div className="hour-column">
+          {/* Display the hours */}
           {hours.map(hour => (
             <div key={hour} className="time-slot">
               {`${hour}:00`}
