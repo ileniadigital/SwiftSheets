@@ -41,7 +41,7 @@ class NotificationSerializer(serializers.ModelSerializer):
         fields = '__all__'
                     
 
-class SystemUserSerializer(serializers.ModelSerializer):
+class LoginSerializer(serializers.ModelSerializer):
     class Meta:
         model = SystemUser
         fields = ['username', 'password']  # Only expose necessary fields

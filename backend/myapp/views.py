@@ -12,7 +12,7 @@ from rest_framework.decorators import action, api_view, permission_classes  # ty
 # from rest_framework.decorators import action
 from rest_framework.views import APIView  # type: ignore
 from .models import SystemUser, Timesheet, Event, Comment, Notification
-from .serializers import SystemUserSerializer, TimesheetSerializer, EventSerializer, CommentSerializer, NotificationSerializer 
+from .serializers import SystemUserSerializer, TimesheetSerializer, EventSerializer, CommentSerializer, NotificationSerializer, LoginSerializer
 from django.views.decorators.http import require_POST  # type: ignore
 
 # View to create a new user
