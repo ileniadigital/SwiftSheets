@@ -11,6 +11,7 @@ import LogOut from './LogOut';
 
 //Navigation bar component
 export default function NavBar(props){
+    const role=localStorage.getItem('role');
 
     {/* Changing FDM logo colour based on page theme */}
     let fdmLogo;
@@ -32,16 +33,18 @@ export default function NavBar(props){
                     <Link href='/Home' className='navbar-link'>Home</Link>
                     <Link href='/Account' className='navbar-link'>Account</Link>                   
                     <Link href='/Settings' className='navbar-link'>Settings</Link>
-                    {props.view === 'Consultant' &&       
+                    <Link href='/Form' className='navbar-link'> Form</Link>
+                    {role=== 'Consultant' &&       
                     <>         
                      <Link href='/Dashboard' className='navbar-link'>Dashboard</Link>
                      </>}
-                    {props.view === 'Administrator' &&       
+                    {role === 'Administrator' &&       
                     <>         
-                     <Link href='/SystemAdminForm' className='navbar-link'>Forms</Link>
+                     <Link href='/SystemAdminForm' className='navbar-link'>Feedback</Link>
                      </>}
                 </ul>
                 {/* Language menu */}
+
                 <LanguageMenu/>
                 <LogOut/>
             </nav>

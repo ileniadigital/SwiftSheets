@@ -9,6 +9,7 @@ import SystemAdminForm from './Pages/SystemAdminView/SystemAdminForm/SystemAdmin
 import Dashboard from './Pages/ConsultantView/ConsultantDashboard/ConsultantDashboard';
 import LogOut from './Components/NavBar/LogOut';
 import Login from './Pages/Login';
+import Form from './Pages/Form';
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'; 
 
@@ -41,6 +42,7 @@ export default function App() {
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/timesheet/:timesheetId" element={<Timesheet />} />
           <Route path="/SystemAdminForm" element={<SystemAdminForm />} />
+          <Route path="/Form" element={<Form/>} />
         </Routes>
       </BrowserRouter>
     </React.Fragment>
