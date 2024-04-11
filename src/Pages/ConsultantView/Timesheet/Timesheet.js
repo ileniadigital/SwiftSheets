@@ -26,6 +26,7 @@ import {fetchEventsByTimesheetID, createEvents, destroyEvents} from '../../../Co
 
 export default function Timesheet() {
     const role = localStorage.getItem('role'); // Placeholder for user role, retrieved from local storage
+    console.log("Role:", role);
     const [timesheet, setTimesheet] = useState(null); 
     const [events, setEvents] = useState([]);
     const [timesheetStatus, setTimesheetStatus] = useState(''); 
@@ -293,7 +294,7 @@ export default function Timesheet() {
                 </div>
                 <div className='buttons'>
                     {/* Revoke Button for line manager */}
-                    {role === 'LineManager' && timesheet && timesheet.is_submitted && (
+                    {role === 'LineManager' && (
                         <button className='submit-button' onClick={handleRevokeSubmission}>
                             Revoke
                         </button>
