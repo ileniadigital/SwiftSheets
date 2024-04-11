@@ -1,18 +1,22 @@
-import React from 'react';
-import { useState } from 'react';
-import './EventGrid.css'; //Import Styling
+import React, { useState } from 'react';
+import './EventGrid.css';
+import { IoClose } from 'react-icons/io5';
+import { FaCirclePlus } from 'react-icons/fa6';
+import EditEvent from '../EditEvent/EditEvent'; // Import EditEvent component
+import DeleteEventConfirmation from '../DeleteEventConfirmation/DeleteEventConfirmation'; // Import DeleteEventConfirmation component
 
-// Importing icon
-import { IoClose } from "react-icons/io5";
-import { FaCirclePlus } from "react-icons/fa6";
-
-import DeleteEventConfirmation from '../DeleteEventConfirmation/DeleteEventConfirmation';
-
-const EventGrid = ({ events, openAddEvent, openEditEvent, timesheetStatus }) => {
+const EventGrid = ({ events, openAddEvent, timesheet, timesheetStatus }) => {
   const days = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
-  const hours = [...Array(24).keys()]; 
+  const hours = [...Array(24).keys()];
 
-  //Track selected events for editing
+  const [openEditEvent, setOpenEditEvent] = useState(false); // State for controlling edit event modal visibility
+  const [selectedEvent, setSelectedEvent] = useState(null); // State for storing the selected event details
+
+  // Function to handle edit event
+  const handleEditEvent = (event) => {
+    setSelectedEvent(event); // Set the selected event
+    setOpenEditEvent(true); // Open the edit event modal
+  };
 
   // Calculate the style of the event block based on the start and end times of the event
   const calculateEventBlockStyle = (event, dayIndex) => {
@@ -32,26 +36,15 @@ const EventGrid = ({ events, openAddEvent, openEditEvent, timesheetStatus }) => 
     return {
       top: top,
       height: height,
-      backgroundColor: '#afd900', 
-      position: 'absolute'
+      backgroundColor: '#afd900',
+      position: 'absolute',
     };
   };
 
-
   //Open Event Menu
   const handleAddEventClick = () => {
-    openAddEvent(true); 
+    openAddEvent(true);
   };
-
-  const [selectedEvent, setSelectedEvent] = useState(null);
-  const [eventIDToEdit, setEventIDToEdit] = useState(null);
-  const handleEditEvent = (event, eventIDToEdit) => {
-    setSelectedEvent(event);
-    openEditEvent(true);
-    setEventIDToEdit(event.id);
-  }
-
-
 
   //Open Delete Event Menu
   const [deleteEventConfirmation, setDeleteEventConfirmation] = useState(false);
@@ -60,20 +53,22 @@ const EventGrid = ({ events, openAddEvent, openEditEvent, timesheetStatus }) => 
   const deleteEvent = (event, eventID) => {
     setDeleteEventConfirmation(true);
     setEventIDDelete(eventID);
-  }
+  };
 
   return (
     <div className="event-grid">
       <div className="grid-header">
         {/* Display the days */}
-        {days.map(day => (
-          <div key={day} className="grid-column-header">{day}</div>
+        {days.map((day) => (
+          <div key={day} className="grid-column-header">
+            {day}
+          </div>
         ))}
       </div>
       <div className="grid-body">
         <div className="hour-column">
           {/* Display the hours */}
-          {hours.map(hour => (
+          {hours.map((hour) => (
             <div key={hour} className="time-slot">
               {`${hour}:00`}
             </div>
@@ -81,26 +76,48 @@ const EventGrid = ({ events, openAddEvent, openEditEvent, timesheetStatus }) => 
         </div>
         {days.map((day, dayIndex) => (
           <div key={day} className="grid-column">
-            {hours.map(hour => (
-                    <div key={`${day}-${hour}`} className="add-button" style={{ position: 'relative' }}>
-                    <button className="add-event-button" onClick={handleAddEventClick} disabled={timesheetStatus === 'Submitted'}>
-                        <FaCirclePlus size={30} /> 
-                    </button>
-                    </div>
-            ))}
-
-            {events.filter(event => new Date(event.date).getDay() === (dayIndex + 1) % 7).map(event => (
-              <div key={event.id} className="event-block" style={calculateEventBlockStyle(event, dayIndex)}>
-                {/* Edit and Delete Pop Ups */}
-                <button className ="edit-event"  onClick={() => handleEditEvent(event, event.id)}>Edit Event</button>
-                <button className ="delete-event"  onClick={() => deleteEvent(event, event.id)}><IoClose/></button>
+            {hours.map((hour) => (
+              <div key={`${day}-${hour}`} className="add-button" style={{ position: 'relative' }}>
+                <button className="add-event-button" onClick={handleAddEventClick} disabled={timesheetStatus === 'Submitted'}>
+                  <FaCirclePlus size={30} />
+                </button>
               </div>
             ))}
+            {events
+              .filter((event) => new Date(event.date).getDay() === (dayIndex + 1) % 7)
+              .map((event) => (
+                <div key={event.id} className="event-block" style={calculateEventBlockStyle(event, dayIndex)}>
+                  {/* Edit and Delete Pop Ups */}
+                  <button className="edit-event" onClick={() => handleEditEvent(event)}>
+                    Edit Event
+                  </button>
+                  <button className="delete-event" onClick={() => deleteEvent(event, event.id)}>
+                    <IoClose />
+                  </button>
+                </div>
+              ))}
           </div>
         ))}
       </div>
-       {/* Render delete event confirmation pop-up if deleteEventPopup is not null */}
-       {deleteEventConfirmation && <DeleteEventConfirmation event={deleteEventConfirmation} eventToDelete={eventIDDelete} setOpenPopup={setDeleteEventConfirmation} />}
+      {/* {openEditEvent && <EditEvent onClose={() => setOpenEditEvent(false)} eventToEdit={selectedEvent} timesheet={timesheet} />} */}
+      {openEditEvent && (
+        <EditEvent
+          onClose={() => setOpenEditEvent(false)}
+          events={events} // Pass events array
+          eventIDToEdit={selectedEvent.id} // Pass the ID of the selected event
+          timesheet={timesheet}
+        />
+      )}
+
+      {/* Render delete event confirmation pop-up if deleteEventPopup is not null */}
+      {/* {deleteEventConfirmation && <DeleteEventConfirmation event={deleteEventConfirmation} eventToDelete={eventIDDelete} setOpenPopup={setDeleteEventConfirmation} />} */}
+      {deleteEventConfirmation && (
+        <DeleteEventConfirmation
+          event={deleteEventConfirmation}
+          eventToDelete={eventIDDelete}
+          setOpenPopup={setDeleteEventConfirmation}
+        />
+      )}
     </div>
   );
 };

@@ -89,6 +89,26 @@
   pointer-events: none;
 }
 
+.edit-event {
+  margin: 0.4rem;
+  padding: 0.5rem;
+  position: absolute;
+  top: 0;
+  left: 50%; /* Move to the center horizontally */
+  transform: translateX(-50%); /* Center horizontally */
+  color: #1e1e1e;
+  background-color: transparent;
+  border: none;
+  font-weight: bold;
+}
+
+/* Styling button color on hover */
+.edit-event:hover {
+  color: #afd900;
+  border: none;
+  border-radius: 0.2rem;
+}
+
 /* Styling closing button */
 .delete-event {
   color: #1e1e1e;

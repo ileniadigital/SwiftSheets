@@ -2,18 +2,15 @@
 
 /* Styling which includes centering the component at the center of the page */
 .add-event {
-  position: fixed;
-  background-color: #f7f6f5;
-  border: 0.1rem solid #1e1e1e;
-  box-shadow: 3px 3px 5px 0 rgba(0, 0, 0, 0.2);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 36rem;
-  padding-bottom: 2rem;
-  border-radius: 2rem;
-  display: flex;
-  flex-direction: column;
+  position: absolute; /* Adjust as needed */
+  top: 50%; /* Adjust vertical position */
+  left: 50%; /* Adjust horizontal position */
+  transform: translate(-50%, -50%); /* Center the form */
+  background-color: #ffffff; /* Background color */
+  padding: 20px; /* Add padding */
+  border-radius: 8px; /* Add border radius */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box shadow */
+  z-index: 999; /* Ensure the form appears above other elements */
 }
 
 /* Styling button used to close event */

@@ -8,7 +8,7 @@ import { IoClose } from "react-icons/io5";
 import { useState, useEffect } from 'react';
 
 // Importing createEvents function
-import { createEvents } from '../../Data/EventsData';
+import { createEvents , destroyEvents } from '../../Data/EventsData';
 
 export default function EditEvent({ onClose, events, eventIDToEdit, timesheet }) {
 
@@ -32,9 +32,17 @@ export default function EditEvent({ onClose, events, eventIDToEdit, timesheet })
     const [disableCategory, setDisableCategory] = useState(false);
     const [timesheetID, setTimesheetID] = useState(null); // Assuming timesheet has an id field
 
-    // Function to find the event with the specified eventId
     useEffect(() => {
-        const eventToEdit = events.find(event => event.id === eventIDToEdit);
+        let eventToEdit;
+        if (events) {
+            for (let i = 0; i < events.length; i++) {
+            if (events[i].id === eventIDToEdit) {
+                eventToEdit = events[i];
+                break;
+            }
+            }
+        }
+
         if (eventToEdit) {
             setEventName(eventToEdit.name);
             setEventDates(eventToEdit.date);
@@ -45,10 +53,13 @@ export default function EditEvent({ onClose, events, eventIDToEdit, timesheet })
             setIsRecurring(eventToEdit.is_recurring);
             setNote(eventToEdit.note);
             setTimesheetID(eventToEdit.timesheet); // Update timesheetID
+    
+            // Log event details
+            //console.log('Event to edit:', eventToEdit);
         }
     }, [events, eventIDToEdit]);
 
-    console.log('Event to edit:', eventName);
+    //console.log('Event to edit:', eventName);
 
     // Calculate the duration of the event
     const calculateDuration = (eventStartTime, eventEndTime) => {
@@ -70,41 +81,74 @@ export default function EditEvent({ onClose, events, eventIDToEdit, timesheet })
         return durationHours;
     }
 
+    // const handleEditEvent = async (e) => {
+    //     e.preventDefault();
+
+    //     // Construct event object
+    //     const startTime = new Date(`${eventDates}T${eventStartTime}`).toLocaleTimeString('en-US', { hour12: false });
+    //     const endTime = new Date(`${eventDates}T${eventEndTime}`).toLocaleTimeString('en-US', { hour12: false });
+
+    //     // Convert the difference to hours
+    //     const duration = calculateDuration(eventStartTime, eventEndTime);
+    //     console.log('Duration:', duration);
+
+    //     const editedEvent = {
+    //         id: eventIDToEdit,
+    //         date: eventDates,
+    //         start_time: startTime,
+    //         end_time: endTime,
+    //         duration: duration,
+    //         name: eventName,
+    //         type: eventType,
+    //         category: eventCategory,
+    //         is_recurring: isRecurring,
+    //         note: note,
+    //         timesheet: timesheetID
+    //     };
+
+    //     try {
+    //         // Call createEvents function to send data to the database
+    //         const response = await createEvents(timesheetID, [editedEvent]);
+    //         console.log('Event edited successfully:', response);
+    //         closeMenu();
+    //         window.location.reload(); // Reload screen to update events
+    //     } catch (error) {
+    //         console.error('Error editing event:', error);
+    //     }
+    // }
+
     const handleEditEvent = async (e) => {
         e.preventDefault();
-
+    
         // Construct event object
-        const startTime = new Date(`${eventDates}T${eventStartTime}`).toLocaleTimeString('en-US', { hour12: false });
-        const endTime = new Date(`${eventDates}T${eventEndTime}`).toLocaleTimeString('en-US', { hour12: false });
-
-        // Convert the difference to hours
-        const duration = calculateDuration(eventStartTime, eventEndTime);
-        console.log('Duration:', duration);
-
         const editedEvent = {
-            id: eventIDToEdit,
-            date: eventDates,
-            start_time: startTime,
-            end_time: endTime,
-            duration: duration,
+            id: eventIDToEdit, // Keep the original event ID
             name: eventName,
+            date: eventDates,
+            start_time: eventStartTime,
+            end_time: eventEndTime,
             type: eventType,
             category: eventCategory,
             is_recurring: isRecurring,
             note: note,
             timesheet: timesheetID
         };
-
+    
         try {
-            // Call createEvents function to send data to the database
+            // Call createEvents function to update the event in the database
+            // Delete the existing event before creating the edited event
+            await destroyEvents(eventIDToEdit);
+            
+            // Call createEvents function to create the edited event in the database
             const response = await createEvents(timesheetID, [editedEvent]);
             console.log('Event edited successfully:', response);
-            closeMenu();
-            window.location.reload(); // Reload screen to update events
+            closeMenu(); // Close the edit event menu
+            window.location.reload(); // Reload screen to update events (you might want to use a more efficient method to update the UI)
         } catch (error) {
             console.error('Error editing event:', error);
         }
     }
+    
 
     const validateFields = () => {
         if (!eventName.trim() || !eventDates || !eventStartTime || !eventEndTime || !eventType || !eventCategory) {
@@ -150,8 +194,8 @@ export default function EditEvent({ onClose, events, eventIDToEdit, timesheet })
 
                     <div className="input">
                         <label htmlFor="eventDate">Date</label>
-                            {/* // Limiting days to choose from as days in current week */}
-                            <input className = 'datetime' type="date" name = "eventDate" value={eventDates} onChange={(e) => setEventDates(e.target.value)} required min={timesheet.start_date} max={timesheet.end_date}/>
+                        {/* // Limiting days to choose from as days in current week */}
+                        <input className = 'datetime' type="date" name = "eventDate" value={eventDates} onChange={(e) => setEventDates(e.target.value)} required min={timesheet?.start_date} max={timesheet?.end_date}/>
                     </div>
 
                     <div className="input">
