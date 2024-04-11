@@ -180,7 +180,7 @@ export default function EditEvent({ onClose, events, eventIDToEdit, timesheet })
 
                     {/* Show dropdown menu for recurring event upon selection */}
                     <div className='input'>
-                        <label>Select Event</label>
+                        <label>Recurring Event</label>
                         <select defaultValue={''}>
                             <option value="" disabled hidden>Select Event</option> {/* Default value */}
                         </select>

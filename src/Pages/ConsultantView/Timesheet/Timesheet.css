@@ -280,3 +280,11 @@ button {
   left: 50%;
   transform: scale(0.6);
 }
+
+.edit-event-menu {
+  z-index: 3;
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  transform: scale(0.2);
+}

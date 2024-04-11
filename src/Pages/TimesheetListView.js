@@ -9,7 +9,7 @@ import Filters from '../Components/TimesheetListView/Filters/Filters';
 import { fetchTimesheetsAndUsers } from '../Components/Data/TimesheetData';
 
 export default function TimesheetListView(props) {
-  const role = props.role;
+  const role = localStorage.getItem('role');
   const [timesheets, setTimesheets] = useState([]);
   const [users, setUsers] = useState({});
   const [filter, setFilter] = useState("pending");
