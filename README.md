@@ -14,6 +14,7 @@ This website is the prototype for the ECS506U Software Engineering Group Project
 - **GitHub** for file management and structure
   
 ### Collaborators
+@saisandeepvemula
 
 
 ### Features to complete and fix
