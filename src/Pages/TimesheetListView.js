@@ -9,7 +9,7 @@ import Filters from '../Components/TimesheetListView/Filters/Filters';
 import { fetchTimesheetsAndUsers } from '../Components/Data/TimesheetData';
 
 export default function TimesheetListView(props) {
-  const role = props.role;
+  const role = localStorage.getItem('role');
   const [timesheets, setTimesheets] = useState([]);
   const [users, setUsers] = useState({});
   const [filter, setFilter] = useState("pending");
@@ -35,7 +35,7 @@ export default function TimesheetListView(props) {
   const handleStatusUpdate = (id, newStatus) => {
     // Send an API request to update the status in the database
     let updateField;
-    if (role === 'linemanager') {
+    if (role === 'LineManager') {
       updateField = 'review_status';
     } else {
       updateField = 'payment_status';
