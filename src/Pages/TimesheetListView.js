@@ -35,7 +35,7 @@ export default function TimesheetListView(props) {
   const handleStatusUpdate = (id, newStatus) => {
     // Send an API request to update the status in the database
     let updateField;
-    if (role === 'linemanager') {
+    if (role === 'LineManager') {
       updateField = 'review_status';
     } else {
       updateField = 'payment_status';
