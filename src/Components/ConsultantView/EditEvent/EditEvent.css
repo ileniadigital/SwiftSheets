@@ -267,3 +267,19 @@ textarea {
 .concur-error {
   color: red;
 }
+
+/* Styling for edit event button */
+.edit-event {
+  background-color: #1e1e1e;
+  color: #f7f6f5;
+  border-radius: 1.5rem;
+  width: 6rem;
+  height: 2.5rem;
+}
+
+.edit-event:hover {
+  background-color: #f7f6f5;
+  color: #1e1e1e;
+  border: none;
+  border-radius: 1.5rem;
+}
