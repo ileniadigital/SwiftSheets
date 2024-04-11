@@ -271,7 +271,7 @@ export default function Timesheet() {
             <div className='timesheet-container'>
                 <EventGrid events={events} openAddEvent={openAddEvent} openEditEvent={openEditEvent} timesheetStatus={timesheetStatus} className='eventgrid'/>
                 {isEditEventOpen &&(
-                    <div className='add-event-menu'>
+                    <div className='edit-event-menu'>
                         <EditEvent onClose={closeEditEvent} events={events} timesheet={timesheet} />
                     </div>
                 
