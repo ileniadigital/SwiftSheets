@@ -19,15 +19,13 @@ export default function App() {
   const [role, setRole] = useState('');
   const [loggedin, setLoggedin] = useState(false);
 
-  useEffect(() => {;
+  useEffect(() => {
     const user_role = localStorage.getItem('role');
-    const loggedin = localStorage.getItem('loggedin');
+    const loggedin = localStorage.getItem('loggedin') === 'true';
 
     setRole(user_role);
-    setLoggedin(loggedin); // Parse the string to boolean
-    
-    console.log(user_role);
-  }, []); // The empty array means this effect runs once on mount
+    setLoggedin(loggedin);
+  }, []);
 
   return (
     <React.Fragment>
@@ -35,7 +33,7 @@ export default function App() {
       <Name/>
       <BrowserRouter>
         <Routes>
-          {!loggedin && <Route path="/Login" element={<Login />} />}
+          {!loggedin && <Route path="/*" element={<Login />} />}
           {loggedin && (
             <>
               <Route path="/Home" element={<Home role={role} />} />
@@ -49,10 +47,6 @@ export default function App() {
             </>
           )}
           <Route path="/Login" element={<Login />} />
-          <Route path="/Home" element={<Login />} />
-          <Route path="/Acount" element={<Login />} />
-          <Route path="/Settings" element={<Login />} />
-          <Route path="/Dashboard" element={<Login />} />
           <Route path="/ResetPassword" element={<ResetPassword />} />
         </Routes>
       </BrowserRouter>

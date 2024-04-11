@@ -10,6 +10,12 @@ const LogOut = () => {
     localStorage.setItem('user_id', '');
     localStorage.setItem('name', '');
     localStorage.setItem('loggedin', false);
+    console.log(localStorage.getItem('username'));
+    console.log(localStorage.getItem('role'));
+    console.log(localStorage.getItem('user_id'));
+    console.log(localStorage.getItem('name'));
+    console.log(localStorage.getItem('loggedin'));
+
 
     window.location.href = '/Login';
   };
