@@ -1,35 +1,27 @@
-// Importing CSS
+import React, { useEffect, useState } from 'react';
 import './SystemAdminHome.css';
-
-// Import Components
 import UserList from '../../../Components/SystemAdminView/UserList/UserList';
 import AddUser from '../../../Components/SystemAdminView/AddUser/AddUser';
-import ManageUser from '../../../Components/SystemAdminView/Manage User/ManageUser'
-
-// Import useState
-import { useEffect, useState } from 'react'
-import { createUser, fetchUsers, deleteUserFromBackend, updateUserInBackend } from "../../../Components/Data/UserData";
+import ManageUser from '../../../Components/SystemAdminView/Manage User/ManageUser';
+import { fetchUsers, createUser, deleteUserFromBackend, updateUserInBackend, updatePasswordInBackend } from "../../../Components/Data/UserData";
 
 export default function SystemAdminView() {
     const [userList, setUserList] = useState([]);
+    const [manageUserClicked, setManageUserClicked] = useState(false);
+    const [componentIndex, setComponentIndex] = useState(null);
+    const [addUserMenuClicked, setAddUserMenuClicked] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const users = await fetchUsers();
-                console.log(users);
                 setUserList(users);
             } catch (error) {
                 console.error('Error fetching users:', error);
             }
         };
-
         fetchData();
     }, []);
-    
-    const [manageUserClicked, setManageUserClicked] = useState(false);
-    const [componentIndex, setComponentIndex] = useState(null);
-    const [addUserMenuClicked, setAddUserMenuClicked] = useState(false);
 
     const manageUserHandler = (componentIndexParam, userListParam) => {
         if (!addUserMenuClicked) {
@@ -58,17 +50,12 @@ export default function SystemAdminView() {
 
         try {
             await createUser(newUser);
-
             const updatedUsers = await fetchUsers();
             setUserList(updatedUsers);
-            console.log(updatedUsers);
-
         } catch (error) {
             console.error('Error creating user:', error);
         }
-
-        window.location.reload();
-        addUserMenuHandler()
+        addUserMenuHandler();
     }
 
     const removeUserHandler = async (componentIndexParam, userListParam) => {
@@ -84,45 +71,31 @@ export default function SystemAdminView() {
         }
     };
 
-    const removeAndCreateUser = async (componentIndexParam, userListParam, newUser) => {
-        const deletedUserId = userListParam[componentIndexParam].id;
-
+    const handleUpdateUserSubmit = async (index, updatedUserDetails) => {
         try {
-            await deleteUserFromBackend(deletedUserId);
-            await createUser(newUser);
+            await updateUserInBackend(userList[index].id, updatedUserDetails);
             const updatedUsers = await fetchUsers();
             setUserList(updatedUsers);
-        } catch (error) {
-            console.error('Error removing user or creating new user:', error);
-        }
-    };
-
-    const handleUpdateUserSubmit = async (index, userType, password) => {
-        const updatedUserList = [...userList];
-        if (userType !== null) {
-            updatedUserList[index].userType = userType;
-        }
-        if (password !== null) {
-            updatedUserList[index].password = password;
-        }
-
-        try {
-            const { firstname, lastname, username, userType, password } = updatedUserList[index];
-            const newUser = { firstname, lastname, username, userType, password };
-            removeAndCreateUser(index, userList, newUser);
-            setUserList(updatedUserList);
         } catch (error) {
             console.error('Error updating user:', error);
         }
     };
 
+        const handleUpdateUserPassword = async (index, newPassword) => {
+        try {
+            await updatePasswordInBackend(userList[index].id, newPassword);
+            const updatedUsers = await fetchUsers();
+            setUserList(updatedUsers);
+        } catch (error) {
+            console.error('Error updating password:', error);
+        }
+    };
+
     return (
         <div>
-            {/*add user button*/}
             <div id='addUser' onClick={() => addUserMenuHandler(userList)}>
                 <p id='addUserStyle'>Add User</p>
             </div>
-            {/*only opens add user menu if manage user menu is closed*/}
             {addUserMenuClicked && 
             !manageUserClicked && (
                 <AddUser
@@ -130,19 +103,17 @@ export default function SystemAdminView() {
                 handleAddUserSubmit={handleAddUserSubmit}
                 />
             )}
-            {/*users container*/}
             {userList && (
                 <UserList userList={userList} manageUserHandler={manageUserHandler} />
             )}
-            {/*only opens manage user menu if add user menu is closed*/}
             {manageUserClicked && 
             !addUserMenuClicked && (
                 <ManageUser
-                index={componentIndex}
-                manageUserHandler={manageUserHandler} 
-                userList={userList}
-                removeUserHandler={removeUserHandler}
-                handleUpdateUserSubmit={handleUpdateUserSubmit}
+                    index={componentIndex}
+                    manageUserHandler={manageUserHandler} 
+                    userList={userList}
+                    removeUserHandler={removeUserHandler}
+                    handleUpdateUserSubmit={handleUpdateUserSubmit} // Pass the handleUpdateUserSubmit function
                 />
             )}
         </div>

@@ -12,6 +12,7 @@ export default function Account() {
     let email = localStorage.getItem('username');
     let password = localStorage.getItem('password');
     let role = localStorage.getItem('role');
+    console.log(name, email, password, role);
     return (
         <div className='account-container'>
             {/* Name of the user */}

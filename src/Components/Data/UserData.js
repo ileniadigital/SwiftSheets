@@ -55,17 +55,26 @@ export const deleteUserFromBackend = async (userId) => {
   }
 };
 
-// Update user in the backend
-export const updateUserInBackend = async (updatedUser) => {
-  const { id, ...userData } = updatedUser; // Extract user ID and other data
-  const url = `http://localhost:8000/systemuser/${id}/`; // Endpoint to update user
-
+export const updateUserInBackend = async (userId, updatedUserDetails) => {
+  const url = `http://localhost:8000/systemuser/${userId}/`;
   try {
-      const response = await Axios.put(url, userData);
+      const response = await Axios.put(url, updatedUserDetails);
       console.log('User updated successfully in the backend:', response.data);
-      return response.data; // Return updated user data
+      return response.data;
   } catch (error) {
       console.error('Error updating user in the backend:', error);
-      throw error; // Throw error for handling in calling function
+      throw error;
+  }
+};
+
+export const updatePasswordInBackend = async (userId, newPassword) => {
+  const url = `http://localhost:8000/systemuser/${userId}/update_password/`;
+  try {
+      const response = await Axios.patch(url, { password: newPassword });
+      console.log('Password updated successfully in the backend:', response.data);
+      return response.data;
+  } catch (error) {
+      console.error('Error updating password in the backend:', error);
+      throw error;
   }
 };

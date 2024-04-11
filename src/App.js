@@ -19,15 +19,13 @@ export default function App() {
   const [role, setRole] = useState('');
   const [loggedin, setLoggedin] = useState(false);
 
-  useEffect(() => {;
+  useEffect(() => {
     const user_role = localStorage.getItem('role');
-    const loggedin = localStorage.getItem('loggedin');
+    const loggedin = localStorage.getItem('loggedin') === 'true';
 
     setRole(user_role);
-    setLoggedin(loggedin); // Parse the string to boolean
-    
-    console.log(user_role);
-  }, []); // The empty array means this effect runs once on mount
+    setLoggedin(loggedin);
+  }, []);
 
   return (
     <React.Fragment>
@@ -35,15 +33,20 @@ export default function App() {
       <Name/>
       <BrowserRouter>
         <Routes>
-          <Route path="/Home" element={<Home role={role} />} />
+          {!loggedin && <Route path="/*" element={<Login />} />}
+          {loggedin && (
+            <>
+              <Route path="/Home" element={<Home role={role} />} />
+              <Route path="/Account" element={<Account />} />
+              <Route path="/Settings" element={<Settings />} />
+              <Route path="/Dashboard" element={<Dashboard />} />
+              <Route path="/timesheet/:timesheetId" element={<Timesheet />} />
+              <Route path="/SystemAdminForm" element={<SystemAdminForm />} />
+              <Route path="/LogOut" element={<LogOut />} />
+              <Route path="/Form" element={<Form/>} />
+            </>
+          )}
           <Route path="/Login" element={<Login />} />
-          <Route path="/Account" element={<Account />} />
-          <Route path="/Settings" element={<Settings />} />
-          <Route path="/LogOut" element={<LogOut />} />
-          <Route path="/Dashboard" element={<Dashboard />} />
-          <Route path="/timesheet/:timesheetId" element={<Timesheet />} />
-          <Route path="/SystemAdminForm" element={<SystemAdminForm />} />
-          <Route path="/Form" element={<Form/>} />
           <Route path="/ResetPassword" element={<ResetPassword />} />
         </Routes>
       </BrowserRouter>
